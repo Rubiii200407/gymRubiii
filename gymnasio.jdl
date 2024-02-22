@@ -1,0 +1,96 @@
+
+
+entity ClasesOnline {
+    nombreClase String
+    descripcion String
+    horario String
+    instructor String
+    capacidad String
+    participantesInscritos String
+}
+
+entity Deportes {
+    nombreDeporte String
+    descripcion String
+    horariosDisponibles String
+    participantesInscritos String
+}
+
+entity Incripciones {
+    nombreUsuario String
+    tipoEvento String
+    nombreEvento String
+    fechaInscripcion Instant
+}
+
+entity Nutricion {
+    nombrePlanNutricion String
+    descripcion String
+    tipoDieta String
+    alimentosRecomendados String
+    instrucciones String
+}
+
+entity PlanesEntrenamiento {
+    nombrePlan String
+    descripcion String
+    tipo String
+    duracion Long
+    instrucciones String
+}
+
+entity PlanesNutricion {
+        nombrePlan String
+    descripcion String
+    tipo String
+    duracion Long
+    instrucciones String
+}
+
+entity VideosClaseOnline {
+    tituloVideo String
+    descripcionVideo String
+    urlVideo String
+    duracion Long
+}
+
+entity VideosPlanEntrenamiento {
+    tituloVideo String
+    descripcionVideo String
+    urlVideo String
+    duracion Long
+    fechaPublicacion Instant
+}
+
+// Relaciones
+relationship ManyToOne {
+  Incripciones {claseOnline} to ClasesOnline
+}
+
+relationship ManyToOne {
+  Incripciones {deporte} to Deportes
+}
+
+
+
+relationship ManyToOne {
+  PlanesNutricion {planNutricion} to Nutricion
+}
+
+relationship ManyToOne {
+  PlanesNutricion {planEntrenamiento} to PlanesEntrenamiento
+}
+
+
+
+
+
+
+
+relationship ManyToOne {
+  VideosClaseOnline {claseOnline} to ClasesOnline
+}
+
+relationship ManyToOne {
+  VideosPlanEntrenamiento {planEntrenamiento} to PlanesEntrenamiento
+}
