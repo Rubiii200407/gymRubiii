@@ -1,0 +1,36 @@
+{
+  "applications": "*",
+  "changelogDate": "20240222120600",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "planes_entrenamiento",
+  "fields": [
+    {
+      "fieldName": "nombrePlan",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "descripcion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tipo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "duracion",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "instrucciones",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "PlanesEntrenamiento",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

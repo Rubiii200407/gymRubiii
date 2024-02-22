@@ -1,0 +1,28 @@
+{
+  "gymRubenApp": {
+    "nutricion": {
+      "home": {
+        "title": "Nutricions",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Nutricion",
+        "createOrEditLabel": "Crear o editar Nutricion",
+        "notFound": "Ningún Nutricions encontrado"
+      },
+      "created": "Un nuevo Nutricion ha sido creado con el identificador {{ param }}",
+      "updated": "Un Nutricion ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Nutricion ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Nutricion {{ id }}?"
+      },
+      "detail": {
+        "title": "Nutricion"
+      },
+      "id": "ID",
+      "nombrePlanNutricion": "Nombre Plan Nutricion",
+      "descripcion": "Descripcion",
+      "tipoDieta": "Tipo Dieta",
+      "alimentosRecomendados": "Alimentos Recomendados",
+      "instrucciones": "Instrucciones"
+    }
+  }
+}

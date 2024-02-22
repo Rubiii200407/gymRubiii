@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="videosPlanEntrenamiento">
+      <h2 data-cy="videosPlanEntrenamientoDetailsHeading">
+        <span jhiTranslate="gymRubenApp.videosPlanEntrenamiento.detail.title">Videos Plan Entrenamiento</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ videosPlanEntrenamiento.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.videosPlanEntrenamiento.tituloVideo">Titulo Video</span></dt>
+        <dd>
+          <span>{{ videosPlanEntrenamiento.tituloVideo }}</span>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.videosPlanEntrenamiento.descripcionVideo">Descripcion Video</span></dt>
+        <dd>
+          <span>{{ videosPlanEntrenamiento.descripcionVideo }}</span>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.videosPlanEntrenamiento.urlVideo">Url Video</span></dt>
+        <dd>
+          <span>{{ videosPlanEntrenamiento.urlVideo }}</span>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.videosPlanEntrenamiento.duracion">Duracion</span></dt>
+        <dd>
+          <span>{{ videosPlanEntrenamiento.duracion }}</span>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.videosPlanEntrenamiento.fechaPublicacion">Fecha Publicacion</span></dt>
+        <dd>
+          <span>{{ videosPlanEntrenamiento.fechaPublicacion | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.videosPlanEntrenamiento.planEntrenamiento">Plan Entrenamiento</span></dt>
+        <dd>
+          <div *ngIf="videosPlanEntrenamiento.planEntrenamiento">
+            <a [routerLink]="['/planes-entrenamiento', videosPlanEntrenamiento.planEntrenamiento.id, 'view']">{{
+              videosPlanEntrenamiento.planEntrenamiento.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Volver</span>
+      </button>
+
+      <button type="button" [routerLink]="['/videos-plan-entrenamiento', videosPlanEntrenamiento.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+      </button>
+    </div>
+  </div>
+</div>

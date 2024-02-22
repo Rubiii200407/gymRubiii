@@ -1,0 +1,123 @@
+<div>
+  <h2 id="page-heading" data-cy="ClasesOnlineHeading">
+    <span jhiTranslate="gymRubenApp.clasesOnline.home.title">Clases Onlines</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="gymRubenApp.clasesOnline.home.refreshListLabel">Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-clases-online"
+        [routerLink]="['/clases-online/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gymRubenApp.clasesOnline.home.createLabel"> Crear nuevo Clases Online </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="clasesOnlines?.length === 0">
+    <span jhiTranslate="gymRubenApp.clasesOnline.home.notFound">Ningún Clases Onlines encontrado</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="clasesOnlines && clasesOnlines.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nombreClase">
+            <div class="d-flex">
+              <span jhiTranslate="gymRubenApp.clasesOnline.nombreClase">Nombre Clase</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="descripcion">
+            <div class="d-flex">
+              <span jhiTranslate="gymRubenApp.clasesOnline.descripcion">Descripcion</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="horario">
+            <div class="d-flex">
+              <span jhiTranslate="gymRubenApp.clasesOnline.horario">Horario</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="instructor">
+            <div class="d-flex">
+              <span jhiTranslate="gymRubenApp.clasesOnline.instructor">Instructor</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="capacidad">
+            <div class="d-flex">
+              <span jhiTranslate="gymRubenApp.clasesOnline.capacidad">Capacidad</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="participantesInscritos">
+            <div class="d-flex">
+              <span jhiTranslate="gymRubenApp.clasesOnline.participantesInscritos">Participantes Inscritos</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let clasesOnline of clasesOnlines; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/clases-online', clasesOnline.id, 'view']">{{ clasesOnline.id }}</a>
+          </td>
+          <td>{{ clasesOnline.nombreClase }}</td>
+          <td>{{ clasesOnline.descripcion }}</td>
+          <td>{{ clasesOnline.horario }}</td>
+          <td>{{ clasesOnline.instructor }}</td>
+          <td>{{ clasesOnline.capacidad }}</td>
+          <td>{{ clasesOnline.participantesInscritos }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/clases-online', clasesOnline.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Vista</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/clases-online', clasesOnline.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+              </button>
+
+              <button type="submit" (click)="delete(clasesOnline)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Eliminar</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+{
+  "gymRubenApp": {
+    "clasesOnline": {
+      "home": {
+        "title": "Clases Onlines",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Clases Online",
+        "createOrEditLabel": "Crear o editar Clases Online",
+        "notFound": "Ningún Clases Onlines encontrado"
+      },
+      "created": "Un nuevo Clases Online ha sido creado con el identificador {{ param }}",
+      "updated": "Un Clases Online ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Clases Online ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Clases Online {{ id }}?"
+      },
+      "detail": {
+        "title": "Clases Online"
+      },
+      "id": "ID",
+      "nombreClase": "Nombre Clase",
+      "descripcion": "Descripcion",
+      "horario": "Horario",
+      "instructor": "Instructor",
+      "capacidad": "Capacidad",
+      "participantesInscritos": "Participantes Inscritos"
+    }
+  }
+}

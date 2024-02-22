@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity VideosPlanEntrenamiento.
+    -->
+    <changeSet id="20240222120603-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="plan_entrenamiento_id"
+                                 baseTableName="videos_plan_entrenamiento"
+                                 constraintName="fk_videos_plan_entrenamiento__plan_entrenamiento_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="planes_entrenamiento"/>
+    </changeSet>
+</databaseChangeLog>

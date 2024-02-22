@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="videosClaseOnline">
+      <h2 data-cy="videosClaseOnlineDetailsHeading">
+        <span jhiTranslate="gymRubenApp.videosClaseOnline.detail.title">Videos Clase Online</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ videosClaseOnline.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.videosClaseOnline.tituloVideo">Titulo Video</span></dt>
+        <dd>
+          <span>{{ videosClaseOnline.tituloVideo }}</span>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.videosClaseOnline.descripcionVideo">Descripcion Video</span></dt>
+        <dd>
+          <span>{{ videosClaseOnline.descripcionVideo }}</span>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.videosClaseOnline.urlVideo">Url Video</span></dt>
+        <dd>
+          <span>{{ videosClaseOnline.urlVideo }}</span>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.videosClaseOnline.duracion">Duracion</span></dt>
+        <dd>
+          <span>{{ videosClaseOnline.duracion }}</span>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.videosClaseOnline.claseOnline">Clase Online</span></dt>
+        <dd>
+          <div *ngIf="videosClaseOnline.claseOnline">
+            <a [routerLink]="['/clases-online', videosClaseOnline.claseOnline.id, 'view']">{{ videosClaseOnline.claseOnline.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Volver</span>
+      </button>
+
+      <button type="button" [routerLink]="['/videos-clase-online', videosClaseOnline.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+      </button>
+    </div>
+  </div>
+</div>

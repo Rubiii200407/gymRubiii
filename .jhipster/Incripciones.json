@@ -1,0 +1,43 @@
+{
+  "applications": "*",
+  "changelogDate": "20240222120558",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "incripciones",
+  "fields": [
+    {
+      "fieldName": "nombreUsuario",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tipoEvento",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nombreEvento",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fechaInscripcion",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Incripciones",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "clasesOnline",
+      "relationshipName": "claseOnline",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "deportes",
+      "relationshipName": "deporte",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

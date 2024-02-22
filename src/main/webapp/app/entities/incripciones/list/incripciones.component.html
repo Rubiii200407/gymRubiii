@@ -1,0 +1,131 @@
+<div>
+  <h2 id="page-heading" data-cy="IncripcionesHeading">
+    <span jhiTranslate="gymRubenApp.incripciones.home.title">Incripciones</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="gymRubenApp.incripciones.home.refreshListLabel">Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-incripciones"
+        [routerLink]="['/incripciones/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gymRubenApp.incripciones.home.createLabel"> Crear nuevo Incripciones </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="incripciones?.length === 0">
+    <span jhiTranslate="gymRubenApp.incripciones.home.notFound">Ningún Incripciones encontrado</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="incripciones && incripciones.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nombreUsuario">
+            <div class="d-flex">
+              <span jhiTranslate="gymRubenApp.incripciones.nombreUsuario">Nombre Usuario</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="tipoEvento">
+            <div class="d-flex">
+              <span jhiTranslate="gymRubenApp.incripciones.tipoEvento">Tipo Evento</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nombreEvento">
+            <div class="d-flex">
+              <span jhiTranslate="gymRubenApp.incripciones.nombreEvento">Nombre Evento</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="fechaInscripcion">
+            <div class="d-flex">
+              <span jhiTranslate="gymRubenApp.incripciones.fechaInscripcion">Fecha Inscripcion</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="claseOnline.id">
+            <div class="d-flex">
+              <span jhiTranslate="gymRubenApp.incripciones.claseOnline">Clase Online</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="deporte.id">
+            <div class="d-flex">
+              <span jhiTranslate="gymRubenApp.incripciones.deporte">Deporte</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let incripciones of incripciones; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/incripciones', incripciones.id, 'view']">{{ incripciones.id }}</a>
+          </td>
+          <td>{{ incripciones.nombreUsuario }}</td>
+          <td>{{ incripciones.tipoEvento }}</td>
+          <td>{{ incripciones.nombreEvento }}</td>
+          <td>{{ incripciones.fechaInscripcion | formatMediumDatetime }}</td>
+          <td>
+            <div *ngIf="incripciones.claseOnline">
+              <a [routerLink]="['/clases-online', incripciones.claseOnline.id, 'view']">{{ incripciones.claseOnline.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="incripciones.deporte">
+              <a [routerLink]="['/deportes', incripciones.deporte.id, 'view']">{{ incripciones.deporte.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/incripciones', incripciones.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Vista</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/incripciones', incripciones.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+              </button>
+
+              <button type="submit" (click)="delete(incripciones)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Eliminar</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

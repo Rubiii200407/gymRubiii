@@ -1,0 +1,38 @@
+{
+  "applications": "*",
+  "changelogDate": "20240222120602",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "videos_clase_online",
+  "fields": [
+    {
+      "fieldName": "tituloVideo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "descripcionVideo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "urlVideo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "duracion",
+      "fieldType": "Long"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "VideosClaseOnline",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "clasesOnline",
+      "relationshipName": "claseOnline",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

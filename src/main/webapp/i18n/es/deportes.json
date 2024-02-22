@@ -1,0 +1,27 @@
+{
+  "gymRubenApp": {
+    "deportes": {
+      "home": {
+        "title": "Deportes",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Deportes",
+        "createOrEditLabel": "Crear o editar Deportes",
+        "notFound": "Ningún Deportes encontrado"
+      },
+      "created": "Un nuevo Deportes ha sido creado con el identificador {{ param }}",
+      "updated": "Un Deportes ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Deportes ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Deportes {{ id }}?"
+      },
+      "detail": {
+        "title": "Deportes"
+      },
+      "id": "ID",
+      "nombreDeporte": "Nombre Deporte",
+      "descripcion": "Descripcion",
+      "horariosDisponibles": "Horarios Disponibles",
+      "participantesInscritos": "Participantes Inscritos"
+    }
+  }
+}

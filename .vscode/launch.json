@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-GymRubenApp<gym-ruben>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.gymruben.es.GymRubenApp",
+            "projectName": "gym-ruben",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="planesEntrenamiento">
+      <h2 data-cy="planesEntrenamientoDetailsHeading">
+        <span jhiTranslate="gymRubenApp.planesEntrenamiento.detail.title">Planes Entrenamiento</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ planesEntrenamiento.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.planesEntrenamiento.nombrePlan">Nombre Plan</span></dt>
+        <dd>
+          <span>{{ planesEntrenamiento.nombrePlan }}</span>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.planesEntrenamiento.descripcion">Descripcion</span></dt>
+        <dd>
+          <span>{{ planesEntrenamiento.descripcion }}</span>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.planesEntrenamiento.tipo">Tipo</span></dt>
+        <dd>
+          <span>{{ planesEntrenamiento.tipo }}</span>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.planesEntrenamiento.duracion">Duracion</span></dt>
+        <dd>
+          <span>{{ planesEntrenamiento.duracion }}</span>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.planesEntrenamiento.instrucciones">Instrucciones</span></dt>
+        <dd>
+          <span>{{ planesEntrenamiento.instrucciones }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Volver</span>
+      </button>
+
+      <button type="button" [routerLink]="['/planes-entrenamiento', planesEntrenamiento.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+      </button>
+    </div>
+  </div>
+</div>

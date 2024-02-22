@@ -1,0 +1,120 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-planes-nutricion-heading"
+        data-cy="PlanesNutricionCreateUpdateHeading"
+        jhiTranslate="gymRubenApp.planesNutricion.home.createOrEditLabel"
+      >
+        Crear o editar Planes Nutricion
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.nombrePlan" for="field_nombrePlan">Nombre Plan</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nombrePlan"
+            id="field_nombrePlan"
+            data-cy="nombrePlan"
+            formControlName="nombrePlan"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.descripcion" for="field_descripcion">Descripcion</label>
+          <input
+            type="text"
+            class="form-control"
+            name="descripcion"
+            id="field_descripcion"
+            data-cy="descripcion"
+            formControlName="descripcion"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.tipo" for="field_tipo">Tipo</label>
+          <input type="text" class="form-control" name="tipo" id="field_tipo" data-cy="tipo" formControlName="tipo" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.duracion" for="field_duracion">Duracion</label>
+          <input type="number" class="form-control" name="duracion" id="field_duracion" data-cy="duracion" formControlName="duracion" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.instrucciones" for="field_instrucciones">Instrucciones</label>
+          <input
+            type="text"
+            class="form-control"
+            name="instrucciones"
+            id="field_instrucciones"
+            data-cy="instrucciones"
+            formControlName="instrucciones"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.planNutricion" for="field_planNutricion"
+            >Plan Nutricion</label
+          >
+          <select
+            class="form-control"
+            id="field_planNutricion"
+            data-cy="planNutricion"
+            name="planNutricion"
+            formControlName="planNutricion"
+            [compareWith]="compareNutricion"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="nutricionOption" *ngFor="let nutricionOption of nutricionsSharedCollection">{{ nutricionOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.planEntrenamiento" for="field_planEntrenamiento"
+            >Plan Entrenamiento</label
+          >
+          <select
+            class="form-control"
+            id="field_planEntrenamiento"
+            data-cy="planEntrenamiento"
+            name="planEntrenamiento"
+            formControlName="planEntrenamiento"
+            [compareWith]="comparePlanesEntrenamiento"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="planesEntrenamientoOption" *ngFor="let planesEntrenamientoOption of planesEntrenamientosSharedCollection">
+              {{ planesEntrenamientoOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+{
+  "gymRubenApp": {
+    "videosPlanEntrenamiento": {
+      "home": {
+        "title": "Videos Plan Entrenamientos",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Videos Plan Entrenamiento",
+        "createOrEditLabel": "Crear o editar Videos Plan Entrenamiento",
+        "notFound": "Ningún Videos Plan Entrenamientos encontrado"
+      },
+      "created": "Un nuevo Videos Plan Entrenamiento ha sido creado con el identificador {{ param }}",
+      "updated": "Un Videos Plan Entrenamiento ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Videos Plan Entrenamiento ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Videos Plan Entrenamiento {{ id }}?"
+      },
+      "detail": {
+        "title": "Videos Plan Entrenamiento"
+      },
+      "id": "ID",
+      "tituloVideo": "Titulo Video",
+      "descripcionVideo": "Descripcion Video",
+      "urlVideo": "Url Video",
+      "duracion": "Duracion",
+      "fechaPublicacion": "Fecha Publicacion",
+      "planEntrenamiento": "Plan Entrenamiento"
+    }
+  }
+}

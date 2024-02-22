@@ -1,0 +1,28 @@
+{
+  "gymRubenApp": {
+    "planesEntrenamiento": {
+      "home": {
+        "title": "Planes Entrenamientos",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Planes Entrenamiento",
+        "createOrEditLabel": "Crear o editar Planes Entrenamiento",
+        "notFound": "Ningún Planes Entrenamientos encontrado"
+      },
+      "created": "Un nuevo Planes Entrenamiento ha sido creado con el identificador {{ param }}",
+      "updated": "Un Planes Entrenamiento ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Planes Entrenamiento ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Planes Entrenamiento {{ id }}?"
+      },
+      "detail": {
+        "title": "Planes Entrenamiento"
+      },
+      "id": "ID",
+      "nombrePlan": "Nombre Plan",
+      "descripcion": "Descripcion",
+      "tipo": "Tipo",
+      "duracion": "Duracion",
+      "instrucciones": "Instrucciones"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="planesNutricion">
+      <h2 data-cy="planesNutricionDetailsHeading"><span jhiTranslate="gymRubenApp.planesNutricion.detail.title">Planes Nutricion</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ planesNutricion.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.planesNutricion.nombrePlan">Nombre Plan</span></dt>
+        <dd>
+          <span>{{ planesNutricion.nombrePlan }}</span>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.planesNutricion.descripcion">Descripcion</span></dt>
+        <dd>
+          <span>{{ planesNutricion.descripcion }}</span>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.planesNutricion.tipo">Tipo</span></dt>
+        <dd>
+          <span>{{ planesNutricion.tipo }}</span>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.planesNutricion.duracion">Duracion</span></dt>
+        <dd>
+          <span>{{ planesNutricion.duracion }}</span>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.planesNutricion.instrucciones">Instrucciones</span></dt>
+        <dd>
+          <span>{{ planesNutricion.instrucciones }}</span>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.planesNutricion.planNutricion">Plan Nutricion</span></dt>
+        <dd>
+          <div *ngIf="planesNutricion.planNutricion">
+            <a [routerLink]="['/nutricion', planesNutricion.planNutricion.id, 'view']">{{ planesNutricion.planNutricion.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="gymRubenApp.planesNutricion.planEntrenamiento">Plan Entrenamiento</span></dt>
+        <dd>
+          <div *ngIf="planesNutricion.planEntrenamiento">
+            <a [routerLink]="['/planes-entrenamiento', planesNutricion.planEntrenamiento.id, 'view']">{{
+              planesNutricion.planEntrenamiento.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Volver</span>
+      </button>
+
+      <button type="button" [routerLink]="['/planes-nutricion', planesNutricion.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+{
+  "applications": "*",
+  "changelogDate": "20240222120559",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "nutricion",
+  "fields": [
+    {
+      "fieldName": "nombrePlanNutricion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "descripcion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tipoDieta",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "alimentosRecomendados",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "instrucciones",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Nutricion",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

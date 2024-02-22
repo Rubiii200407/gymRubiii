@@ -1,0 +1,28 @@
+{
+  "gymRubenApp": {
+    "videosClaseOnline": {
+      "home": {
+        "title": "Videos Clase Onlines",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Videos Clase Online",
+        "createOrEditLabel": "Crear o editar Videos Clase Online",
+        "notFound": "Ningún Videos Clase Onlines encontrado"
+      },
+      "created": "Un nuevo Videos Clase Online ha sido creado con el identificador {{ param }}",
+      "updated": "Un Videos Clase Online ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Videos Clase Online ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Videos Clase Online {{ id }}?"
+      },
+      "detail": {
+        "title": "Videos Clase Online"
+      },
+      "id": "ID",
+      "tituloVideo": "Titulo Video",
+      "descripcionVideo": "Descripcion Video",
+      "urlVideo": "Url Video",
+      "duracion": "Duracion",
+      "claseOnline": "Clase Online"
+    }
+  }
+}

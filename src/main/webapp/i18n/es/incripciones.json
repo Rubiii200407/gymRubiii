@@ -1,0 +1,29 @@
+{
+  "gymRubenApp": {
+    "incripciones": {
+      "home": {
+        "title": "Incripciones",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Incripciones",
+        "createOrEditLabel": "Crear o editar Incripciones",
+        "notFound": "Ningún Incripciones encontrado"
+      },
+      "created": "Un nuevo Incripciones ha sido creado con el identificador {{ param }}",
+      "updated": "Un Incripciones ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Incripciones ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Incripciones {{ id }}?"
+      },
+      "detail": {
+        "title": "Incripciones"
+      },
+      "id": "ID",
+      "nombreUsuario": "Nombre Usuario",
+      "tipoEvento": "Tipo Evento",
+      "nombreEvento": "Nombre Evento",
+      "fechaInscripcion": "Fecha Inscripcion",
+      "claseOnline": "Clase Online",
+      "deporte": "Deporte"
+    }
+  }
+}

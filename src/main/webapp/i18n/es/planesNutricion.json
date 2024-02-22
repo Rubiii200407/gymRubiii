@@ -1,0 +1,30 @@
+{
+  "gymRubenApp": {
+    "planesNutricion": {
+      "home": {
+        "title": "Planes Nutricions",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Planes Nutricion",
+        "createOrEditLabel": "Crear o editar Planes Nutricion",
+        "notFound": "Ningún Planes Nutricions encontrado"
+      },
+      "created": "Un nuevo Planes Nutricion ha sido creado con el identificador {{ param }}",
+      "updated": "Un Planes Nutricion ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Planes Nutricion ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Planes Nutricion {{ id }}?"
+      },
+      "detail": {
+        "title": "Planes Nutricion"
+      },
+      "id": "ID",
+      "nombrePlan": "Nombre Plan",
+      "descripcion": "Descripcion",
+      "tipo": "Tipo",
+      "duracion": "Duracion",
+      "instrucciones": "Instrucciones",
+      "planNutricion": "Plan Nutricion",
+      "planEntrenamiento": "Plan Entrenamiento"
+    }
+  }
+}

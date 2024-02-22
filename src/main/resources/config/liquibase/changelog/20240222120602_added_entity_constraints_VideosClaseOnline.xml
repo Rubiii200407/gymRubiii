@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity VideosClaseOnline.
+    -->
+    <changeSet id="20240222120602-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="clase_online_id"
+                                 baseTableName="videos_clase_online"
+                                 constraintName="fk_videos_clase_online__clase_online_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="clases_online"/>
+    </changeSet>
+</databaseChangeLog>

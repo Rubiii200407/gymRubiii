@@ -1,0 +1,47 @@
+{
+  "applications": "*",
+  "changelogDate": "20240222120601",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "planes_nutricion",
+  "fields": [
+    {
+      "fieldName": "nombrePlan",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "descripcion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tipo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "duracion",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "instrucciones",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "PlanesNutricion",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "nutricion",
+      "relationshipName": "planNutricion",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "planesEntrenamiento",
+      "relationshipName": "planEntrenamiento",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

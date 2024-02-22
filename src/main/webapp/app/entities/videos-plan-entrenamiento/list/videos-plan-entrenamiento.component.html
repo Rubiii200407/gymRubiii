@@ -1,0 +1,129 @@
+<div>
+  <h2 id="page-heading" data-cy="VideosPlanEntrenamientoHeading">
+    <span jhiTranslate="gymRubenApp.videosPlanEntrenamiento.home.title">Videos Plan Entrenamientos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="gymRubenApp.videosPlanEntrenamiento.home.refreshListLabel">Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-videos-plan-entrenamiento"
+        [routerLink]="['/videos-plan-entrenamiento/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gymRubenApp.videosPlanEntrenamiento.home.createLabel"> Crear nuevo Videos Plan Entrenamiento </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="videosPlanEntrenamientos?.length === 0">
+    <span jhiTranslate="gymRubenApp.videosPlanEntrenamiento.home.notFound">Ningún Videos Plan Entrenamientos encontrado</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="videosPlanEntrenamientos && videosPlanEntrenamientos.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="tituloVideo">
+            <div class="d-flex">
+              <span jhiTranslate="gymRubenApp.videosPlanEntrenamiento.tituloVideo">Titulo Video</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="descripcionVideo">
+            <div class="d-flex">
+              <span jhiTranslate="gymRubenApp.videosPlanEntrenamiento.descripcionVideo">Descripcion Video</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="urlVideo">
+            <div class="d-flex">
+              <span jhiTranslate="gymRubenApp.videosPlanEntrenamiento.urlVideo">Url Video</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="duracion">
+            <div class="d-flex">
+              <span jhiTranslate="gymRubenApp.videosPlanEntrenamiento.duracion">Duracion</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="fechaPublicacion">
+            <div class="d-flex">
+              <span jhiTranslate="gymRubenApp.videosPlanEntrenamiento.fechaPublicacion">Fecha Publicacion</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="planEntrenamiento.id">
+            <div class="d-flex">
+              <span jhiTranslate="gymRubenApp.videosPlanEntrenamiento.planEntrenamiento">Plan Entrenamiento</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let videosPlanEntrenamiento of videosPlanEntrenamientos; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/videos-plan-entrenamiento', videosPlanEntrenamiento.id, 'view']">{{ videosPlanEntrenamiento.id }}</a>
+          </td>
+          <td>{{ videosPlanEntrenamiento.tituloVideo }}</td>
+          <td>{{ videosPlanEntrenamiento.descripcionVideo }}</td>
+          <td>{{ videosPlanEntrenamiento.urlVideo }}</td>
+          <td>{{ videosPlanEntrenamiento.duracion }}</td>
+          <td>{{ videosPlanEntrenamiento.fechaPublicacion | formatMediumDatetime }}</td>
+          <td>
+            <div *ngIf="videosPlanEntrenamiento.planEntrenamiento">
+              <a [routerLink]="['/planes-entrenamiento', videosPlanEntrenamiento.planEntrenamiento.id, 'view']">{{
+                videosPlanEntrenamiento.planEntrenamiento.id
+              }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/videos-plan-entrenamiento', videosPlanEntrenamiento.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Vista</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/videos-plan-entrenamiento', videosPlanEntrenamiento.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+              </button>
+
+              <button type="submit" (click)="delete(videosPlanEntrenamiento)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Eliminar</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

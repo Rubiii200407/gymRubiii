@@ -7,6 +7,14 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entidades",
+        "clasesOnline": "Clases Online",
+        "deportes": "Deportes",
+        "incripciones": "Incripciones",
+        "nutricion": "Nutricion",
+        "planesEntrenamiento": "Planes Entrenamiento",
+        "planesNutricion": "Planes Nutricion",
+        "videosClaseOnline": "Videos Clase Online",
+        "videosPlanEntrenamiento": "Videos Plan Entrenamiento",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

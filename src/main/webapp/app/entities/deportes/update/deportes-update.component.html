@@ -1,0 +1,86 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-deportes-heading" data-cy="DeportesCreateUpdateHeading" jhiTranslate="gymRubenApp.deportes.home.createOrEditLabel">
+        Crear o editar Deportes
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gymRubenApp.deportes.nombreDeporte" for="field_nombreDeporte">Nombre Deporte</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nombreDeporte"
+            id="field_nombreDeporte"
+            data-cy="nombreDeporte"
+            formControlName="nombreDeporte"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gymRubenApp.deportes.descripcion" for="field_descripcion">Descripcion</label>
+          <input
+            type="text"
+            class="form-control"
+            name="descripcion"
+            id="field_descripcion"
+            data-cy="descripcion"
+            formControlName="descripcion"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gymRubenApp.deportes.horariosDisponibles" for="field_horariosDisponibles"
+            >Horarios Disponibles</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="horariosDisponibles"
+            id="field_horariosDisponibles"
+            data-cy="horariosDisponibles"
+            formControlName="horariosDisponibles"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gymRubenApp.deportes.participantesInscritos" for="field_participantesInscritos"
+            >Participantes Inscritos</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="participantesInscritos"
+            id="field_participantesInscritos"
+            data-cy="participantesInscritos"
+            formControlName="participantesInscritos"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

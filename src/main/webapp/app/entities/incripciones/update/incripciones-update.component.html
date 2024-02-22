@@ -1,0 +1,123 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-incripciones-heading"
+        data-cy="IncripcionesCreateUpdateHeading"
+        jhiTranslate="gymRubenApp.incripciones.home.createOrEditLabel"
+      >
+        Crear o editar Incripciones
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gymRubenApp.incripciones.nombreUsuario" for="field_nombreUsuario">Nombre Usuario</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nombreUsuario"
+            id="field_nombreUsuario"
+            data-cy="nombreUsuario"
+            formControlName="nombreUsuario"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gymRubenApp.incripciones.tipoEvento" for="field_tipoEvento">Tipo Evento</label>
+          <input
+            type="text"
+            class="form-control"
+            name="tipoEvento"
+            id="field_tipoEvento"
+            data-cy="tipoEvento"
+            formControlName="tipoEvento"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gymRubenApp.incripciones.nombreEvento" for="field_nombreEvento">Nombre Evento</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nombreEvento"
+            id="field_nombreEvento"
+            data-cy="nombreEvento"
+            formControlName="nombreEvento"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gymRubenApp.incripciones.fechaInscripcion" for="field_fechaInscripcion"
+            >Fecha Inscripcion</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_fechaInscripcion"
+              data-cy="fechaInscripcion"
+              type="datetime-local"
+              class="form-control"
+              name="fechaInscripcion"
+              formControlName="fechaInscripcion"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gymRubenApp.incripciones.claseOnline" for="field_claseOnline">Clase Online</label>
+          <select
+            class="form-control"
+            id="field_claseOnline"
+            data-cy="claseOnline"
+            name="claseOnline"
+            formControlName="claseOnline"
+            [compareWith]="compareClasesOnline"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="clasesOnlineOption" *ngFor="let clasesOnlineOption of clasesOnlinesSharedCollection">
+              {{ clasesOnlineOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gymRubenApp.incripciones.deporte" for="field_deporte">Deporte</label>
+          <select
+            class="form-control"
+            id="field_deporte"
+            data-cy="deporte"
+            name="deporte"
+            formControlName="deporte"
+            [compareWith]="compareDeportes"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="deportesOption" *ngFor="let deportesOption of deportesSharedCollection">{{ deportesOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

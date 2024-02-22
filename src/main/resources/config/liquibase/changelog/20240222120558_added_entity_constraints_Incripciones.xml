@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Incripciones.
+    -->
+    <changeSet id="20240222120558-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="clase_online_id"
+                                 baseTableName="incripciones"
+                                 constraintName="fk_incripciones__clase_online_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="clases_online"/>
+
+        <addForeignKeyConstraint baseColumnNames="deporte_id"
+                                 baseTableName="incripciones"
+                                 constraintName="fk_incripciones__deporte_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="deportes"/>
+    </changeSet>
+</databaseChangeLog>

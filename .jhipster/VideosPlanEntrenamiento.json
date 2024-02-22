@@ -1,0 +1,42 @@
+{
+  "applications": "*",
+  "changelogDate": "20240222120603",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "videos_plan_entrenamiento",
+  "fields": [
+    {
+      "fieldName": "tituloVideo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "descripcionVideo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "urlVideo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "duracion",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "fechaPublicacion",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "VideosPlanEntrenamiento",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "planesEntrenamiento",
+      "relationshipName": "planEntrenamiento",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

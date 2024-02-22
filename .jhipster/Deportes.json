@@ -1,0 +1,32 @@
+{
+  "applications": "*",
+  "changelogDate": "20240222120557",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "deportes",
+  "fields": [
+    {
+      "fieldName": "nombreDeporte",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "descripcion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "horariosDisponibles",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "participantesInscritos",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Deportes",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

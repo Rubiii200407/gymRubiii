@@ -1,0 +1,40 @@
+{
+  "applications": "*",
+  "changelogDate": "20240222120556",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "clases_online",
+  "fields": [
+    {
+      "fieldName": "nombreClase",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "descripcion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "horario",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "instructor",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "capacidad",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "participantesInscritos",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ClasesOnline",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}
