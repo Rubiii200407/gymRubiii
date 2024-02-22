@@ -1,18 +1,14 @@
 package com.gymruben.es.service;
 
-import com.gymruben.es.config.Constants;
-import com.gymruben.es.domain.Authority;
-import com.gymruben.es.domain.User;
-import com.gymruben.es.repository.AuthorityRepository;
-import com.gymruben.es.repository.UserRepository;
-import com.gymruben.es.security.AuthoritiesConstants;
-import com.gymruben.es.security.SecurityUtils;
-import com.gymruben.es.service.dto.AdminUserDTO;
-import com.gymruben.es.service.dto.UserDTO;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
@@ -22,6 +18,17 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.gymruben.es.config.Constants;
+import com.gymruben.es.domain.Authority;
+import com.gymruben.es.domain.User;
+import com.gymruben.es.repository.AuthorityRepository;
+import com.gymruben.es.repository.UserRepository;
+import com.gymruben.es.security.AuthoritiesConstants;
+import com.gymruben.es.security.SecurityUtils;
+import com.gymruben.es.service.dto.AdminUserDTO;
+import com.gymruben.es.service.dto.UserDTO;
+
 import tech.jhipster.security.RandomUtil;
 
 /**
@@ -123,7 +130,7 @@ public class UserService {
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
         // new user is not active
-        newUser.setActivated(false);
+        newUser.setActivated(true);
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
