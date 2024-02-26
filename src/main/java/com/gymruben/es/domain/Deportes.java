@@ -1,7 +1,13 @@
 package com.gymruben.es.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * A Deportes.
@@ -27,8 +33,8 @@ public class Deportes implements Serializable {
     @Column(name = "horarios_disponibles")
     private String horariosDisponibles;
 
-    @Column(name = "participantes_inscritos")
-    private String participantesInscritos;
+    @Column(name = "codigo")
+    private String codigo;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -84,17 +90,17 @@ public class Deportes implements Serializable {
         this.horariosDisponibles = horariosDisponibles;
     }
 
-    public String getParticipantesInscritos() {
-        return this.participantesInscritos;
+    public String getCodigo() {
+        return this.codigo;
     }
 
-    public Deportes participantesInscritos(String participantesInscritos) {
-        this.setParticipantesInscritos(participantesInscritos);
+    public Deportes codigo(String codigo) {
+        this.setCodigo(codigo);
         return this;
     }
 
-    public void setParticipantesInscritos(String participantesInscritos) {
-        this.participantesInscritos = participantesInscritos;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -124,7 +130,7 @@ public class Deportes implements Serializable {
             ", nombreDeporte='" + getNombreDeporte() + "'" +
             ", descripcion='" + getDescripcion() + "'" +
             ", horariosDisponibles='" + getHorariosDisponibles() + "'" +
-            ", participantesInscritos='" + getParticipantesInscritos() + "'" +
+            ", codigo='" + getCodigo() + "'" +
             "}";
     }
 }

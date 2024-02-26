@@ -1,17 +1,16 @@
 package com.gymruben.es.web.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
+import static org.assertj.core.api.Assertions.*;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.gymruben.es.IntegrationTest;
-import com.gymruben.es.domain.Deportes;
-import com.gymruben.es.repository.DeportesRepository;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+
 import javax.persistence.EntityManager;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,10 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.gymruben.es.IntegrationTest;
+import com.gymruben.es.domain.Deportes;
+import com.gymruben.es.repository.DeportesRepository;
 
 /**
  * Integration tests for the {@link DeportesResource} REST controller.
@@ -38,8 +41,8 @@ class DeportesResourceIT {
     private static final String DEFAULT_HORARIOS_DISPONIBLES = "AAAAAAAAAA";
     private static final String UPDATED_HORARIOS_DISPONIBLES = "BBBBBBBBBB";
 
-    private static final String DEFAULT_PARTICIPANTES_INSCRITOS = "AAAAAAAAAA";
-    private static final String UPDATED_PARTICIPANTES_INSCRITOS = "BBBBBBBBBB";
+    private static final String DEFAULT_CODIGO = "AAAAAAAAAA";
+    private static final String UPDATED_CODIGO = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/deportes";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -69,7 +72,7 @@ class DeportesResourceIT {
             .nombreDeporte(DEFAULT_NOMBRE_DEPORTE)
             .descripcion(DEFAULT_DESCRIPCION)
             .horariosDisponibles(DEFAULT_HORARIOS_DISPONIBLES)
-            .participantesInscritos(DEFAULT_PARTICIPANTES_INSCRITOS);
+            .codigo(DEFAULT_CODIGO);
         return deportes;
     }
 
@@ -84,7 +87,7 @@ class DeportesResourceIT {
             .nombreDeporte(UPDATED_NOMBRE_DEPORTE)
             .descripcion(UPDATED_DESCRIPCION)
             .horariosDisponibles(UPDATED_HORARIOS_DISPONIBLES)
-            .participantesInscritos(UPDATED_PARTICIPANTES_INSCRITOS);
+            .codigo(UPDATED_CODIGO);
         return deportes;
     }
 
@@ -109,7 +112,7 @@ class DeportesResourceIT {
         assertThat(testDeportes.getNombreDeporte()).isEqualTo(DEFAULT_NOMBRE_DEPORTE);
         assertThat(testDeportes.getDescripcion()).isEqualTo(DEFAULT_DESCRIPCION);
         assertThat(testDeportes.getHorariosDisponibles()).isEqualTo(DEFAULT_HORARIOS_DISPONIBLES);
-        assertThat(testDeportes.getParticipantesInscritos()).isEqualTo(DEFAULT_PARTICIPANTES_INSCRITOS);
+        assertThat(testDeportes.getCodigo()).isEqualTo(DEFAULT_CODIGO);
     }
 
     @Test
@@ -145,7 +148,7 @@ class DeportesResourceIT {
             .andExpect(jsonPath("$.[*].nombreDeporte").value(hasItem(DEFAULT_NOMBRE_DEPORTE)))
             .andExpect(jsonPath("$.[*].descripcion").value(hasItem(DEFAULT_DESCRIPCION)))
             .andExpect(jsonPath("$.[*].horariosDisponibles").value(hasItem(DEFAULT_HORARIOS_DISPONIBLES)))
-            .andExpect(jsonPath("$.[*].participantesInscritos").value(hasItem(DEFAULT_PARTICIPANTES_INSCRITOS)));
+            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO)));
     }
 
     @Test
@@ -163,7 +166,7 @@ class DeportesResourceIT {
             .andExpect(jsonPath("$.nombreDeporte").value(DEFAULT_NOMBRE_DEPORTE))
             .andExpect(jsonPath("$.descripcion").value(DEFAULT_DESCRIPCION))
             .andExpect(jsonPath("$.horariosDisponibles").value(DEFAULT_HORARIOS_DISPONIBLES))
-            .andExpect(jsonPath("$.participantesInscritos").value(DEFAULT_PARTICIPANTES_INSCRITOS));
+            .andExpect(jsonPath("$.codigo").value(DEFAULT_CODIGO));
     }
 
     @Test
@@ -189,7 +192,7 @@ class DeportesResourceIT {
             .nombreDeporte(UPDATED_NOMBRE_DEPORTE)
             .descripcion(UPDATED_DESCRIPCION)
             .horariosDisponibles(UPDATED_HORARIOS_DISPONIBLES)
-            .participantesInscritos(UPDATED_PARTICIPANTES_INSCRITOS);
+            .codigo(UPDATED_CODIGO);
 
         restDeportesMockMvc
             .perform(
@@ -206,7 +209,7 @@ class DeportesResourceIT {
         assertThat(testDeportes.getNombreDeporte()).isEqualTo(UPDATED_NOMBRE_DEPORTE);
         assertThat(testDeportes.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
         assertThat(testDeportes.getHorariosDisponibles()).isEqualTo(UPDATED_HORARIOS_DISPONIBLES);
-        assertThat(testDeportes.getParticipantesInscritos()).isEqualTo(UPDATED_PARTICIPANTES_INSCRITOS);
+        assertThat(testDeportes.getCodigo()).isEqualTo(UPDATED_CODIGO);
     }
 
     @Test
@@ -280,7 +283,7 @@ class DeportesResourceIT {
         partialUpdatedDeportes
             .nombreDeporte(UPDATED_NOMBRE_DEPORTE)
             .horariosDisponibles(UPDATED_HORARIOS_DISPONIBLES)
-            .participantesInscritos(UPDATED_PARTICIPANTES_INSCRITOS);
+            .codigo(UPDATED_CODIGO);
 
         restDeportesMockMvc
             .perform(
@@ -297,7 +300,7 @@ class DeportesResourceIT {
         assertThat(testDeportes.getNombreDeporte()).isEqualTo(UPDATED_NOMBRE_DEPORTE);
         assertThat(testDeportes.getDescripcion()).isEqualTo(DEFAULT_DESCRIPCION);
         assertThat(testDeportes.getHorariosDisponibles()).isEqualTo(UPDATED_HORARIOS_DISPONIBLES);
-        assertThat(testDeportes.getParticipantesInscritos()).isEqualTo(UPDATED_PARTICIPANTES_INSCRITOS);
+        assertThat(testDeportes.getCodigo()).isEqualTo(UPDATED_CODIGO);
     }
 
     @Test
@@ -316,7 +319,7 @@ class DeportesResourceIT {
             .nombreDeporte(UPDATED_NOMBRE_DEPORTE)
             .descripcion(UPDATED_DESCRIPCION)
             .horariosDisponibles(UPDATED_HORARIOS_DISPONIBLES)
-            .participantesInscritos(UPDATED_PARTICIPANTES_INSCRITOS);
+            .codigo(UPDATED_CODIGO);
 
         restDeportesMockMvc
             .perform(
@@ -333,7 +336,7 @@ class DeportesResourceIT {
         assertThat(testDeportes.getNombreDeporte()).isEqualTo(UPDATED_NOMBRE_DEPORTE);
         assertThat(testDeportes.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
         assertThat(testDeportes.getHorariosDisponibles()).isEqualTo(UPDATED_HORARIOS_DISPONIBLES);
-        assertThat(testDeportes.getParticipantesInscritos()).isEqualTo(UPDATED_PARTICIPANTES_INSCRITOS);
+        assertThat(testDeportes.getCodigo()).isEqualTo(UPDATED_CODIGO);
     }
 
     @Test

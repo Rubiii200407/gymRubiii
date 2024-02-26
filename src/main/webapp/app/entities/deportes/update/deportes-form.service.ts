@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IDeportes, NewDeportes } from '../deportes.model';
 
@@ -21,7 +21,7 @@ type DeportesFormGroupContent = {
   nombreDeporte: FormControl<IDeportes['nombreDeporte']>;
   descripcion: FormControl<IDeportes['descripcion']>;
   horariosDisponibles: FormControl<IDeportes['horariosDisponibles']>;
-  participantesInscritos: FormControl<IDeportes['participantesInscritos']>;
+  codigo: FormControl<IDeportes['codigo']>;
 };
 
 export type DeportesFormGroup = FormGroup<DeportesFormGroupContent>;
@@ -44,7 +44,7 @@ export class DeportesFormService {
       nombreDeporte: new FormControl(deportesRawValue.nombreDeporte),
       descripcion: new FormControl(deportesRawValue.descripcion),
       horariosDisponibles: new FormControl(deportesRawValue.horariosDisponibles),
-      participantesInscritos: new FormControl(deportesRawValue.participantesInscritos),
+      codigo: new FormControl(deportesRawValue.codigo),
     });
   }
 

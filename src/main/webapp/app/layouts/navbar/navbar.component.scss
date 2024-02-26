@@ -7,7 +7,7 @@ Navbar
 
 .navbar-version {
   font-size: 0.65em;
-  color: $navbar-dark-color;
+  color: #1B1919;
 }
 
 .profile-image {
@@ -16,7 +16,8 @@ Navbar
 }
 
 .navbar {
-  padding: 0.2rem 1rem;
+ margin-top: -25x;
+ height: 100px;
 
   a.nav-link {
     font-weight: 400;
@@ -26,11 +27,4 @@ Navbar
 /* ==========================================================================
 Logo styles
 ========================================================================== */
-.logo-img {
-  height: 90px;
-  width: 45px;
-  display: inline-block;
-  vertical-align: middle;
-  background: url('../../../content/logo.png') no-repeat center center;
-  background-size: contain;
-}
+

@@ -9,6 +9,94 @@ Main page styles
   background: url('../../content/images/jhipster_family_member_3.svg') no-repeat center top;
   background-size: contain;
 }
+.caja{
+  width: 50px;
+  height: 30px;
+  margin: 10px;
+  display: inline-block;
+  margin: 10px auto;
+  position: relative;
+}
+.contenedor{
+  text-align: center;
+}
+.texto {
+  color: rgb(43, 168, 162);
+  font-size: 30px; 
+  font-weight: bold;
+}
+.texto-caja{
+  color: rgb(22, 255, 224);
+}
+.conteiner{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.footer{
+  background-color: #24262B;
+  padding: 80px 0;
+}
+.footer-row{
+  display: flex;
+  flex-wrap: wrap;
+
+}
+.footer-link{
+  width: 25%;
+  padding: 0 15px;
+  margin: 20px;
+}
+.footer-link h4{
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 25px;
+  font-weight: 500;
+  border-bottom: 2px solid #00C3FF;
+  padding-bottom: 10px;
+  display: inline-block;
+}
+.footer-link ul{
+  margin-left: -30px;
+}
+.footer-link ul li {
+  font-size: 18px;
+  text-decoration: none;
+  color: #e9e3e3;
+  display: block;
+  width: 200px;
+  margin-bottom: 15px;
+  transition: all .3s ease;
+}
+
+.social-link {
+  display: flex;
+}
+
+.social-link a {
+  height: 30px; 
+  width: 180px;   
+  background-color: #00C3FF;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 50%;
+  color: #fff;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+
+}
+
+
+
+.social-link a:hover {
+  background-color: #008CBA; 
+}
+
+
+
+
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
 @media only screen and (-webkit-min-device-pixel-ratio: 2),

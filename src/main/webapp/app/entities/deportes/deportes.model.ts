@@ -3,7 +3,7 @@ export interface IDeportes {
   nombreDeporte?: string | null;
   descripcion?: string | null;
   horariosDisponibles?: string | null;
-  participantesInscritos?: string | null;
+  codigo?: string | null;
 }
 
 export type NewDeportes = Omit<IDeportes, 'id'> & { id: null };
