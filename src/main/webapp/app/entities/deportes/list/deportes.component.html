@@ -50,9 +50,15 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="horariosDisponibles">
+          <th scope="col" jhiSortBy="fechaDeporte">
             <div class="d-flex">
-              <span jhiTranslate="gymRubenApp.deportes.horariosDisponibles">Horarios Disponibles</span>
+              <span >Fecha Deporte</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="horaDeporte">
+            <div class="d-flex">
+              <span >Hora Deporte</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -72,8 +78,8 @@
           </td>
           <td>{{ deportes.nombreDeporte }}</td>
           <td>{{ deportes.descripcion }}</td>
-          <td>{{ deportes.horariosDisponibles }}</td>
-          <td>{{ deportes.codigo }}</td>
+          <td>{{ deportes.horaDeporte }}</td>
+          <td>{{ deportes.fechaDeporte }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button
@@ -97,7 +103,7 @@
               </button>
 
               <button type="submit" (click)="delete(deportes)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
+                <fa-icon></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Eliminar</span>
               </button>
             </div>

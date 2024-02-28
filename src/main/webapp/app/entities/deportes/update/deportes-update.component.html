@@ -67,30 +67,39 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" for="field_horariosDisponibles">Horarios Disponibles</label>
+          <label class="form-label" for="field_fechaDeporte">Fecha Deporte</label>
           <input
             type="date"
             class="form-control"
-            name="horariosDisponibles"
-            id="field_horariosDisponibles"
-            data-cy="horariosDisponibles"
-            formControlName="horariosDisponibles"
-            [ngModel]="fechaYHoraSeleccionada || ''"
+            name="fechaDeporte"
+            id="field_fechaDeporte"
+            data-cy="fechaDeporte"
+            formControlName="fechaDeporte"
             (change)="actualizarHorasDisponibles()"
           />
         </div>
-        <div *ngIf="horasDisponibles.length > 0">
-          <label>Horas Disponibles:</label>
-          <div *ngFor="let hora of horasDisponibles">
-            <label>
-              <input type="radio" name="horaDisponible" [value]="hora"  />
-              {{ hora }}
-            </label>
-          </div>
 
+        <div class="row mb-3">
+          <label class="form-label" for="field_horaDeporte">Hora Disponibles</label>
+          <input
+            type="hidden"
+            class="form-control"
+            name="horaDeporte"
+            id="field_horaDeporte"
+            data-cy="horaDeporte"
+            formControlName="horaDeporte"
+          />
         </div>
+        <div *ngIf="horasDisponibles.length > 0">
+  <div *ngFor="let hora of horasDisponibles">
+    <label>
+      <input type="radio" name="horaDisponible" [value]="hora" (change)="seleccionarHora(hora)" />
+      {{ hora }}
+    </label>
+  </div>
+</div>
       </div>
-
+      
        
 
       <div>

@@ -20,7 +20,8 @@ type DeportesFormGroupContent = {
   id: FormControl<IDeportes['id'] | NewDeportes['id']>;
   nombreDeporte: FormControl<IDeportes['nombreDeporte']>;
   descripcion: FormControl<IDeportes['descripcion']>;
-  horariosDisponibles: FormControl<IDeportes['horariosDisponibles']>;
+  fechaDeporte: FormControl<IDeportes['fechaDeporte']>;
+  horaDeporte: FormControl<IDeportes['horaDeporte']>;
   codigo: FormControl<IDeportes['codigo']>;
 };
 
@@ -43,7 +44,8 @@ export class DeportesFormService {
       ),
       nombreDeporte: new FormControl(deportesRawValue.nombreDeporte),
       descripcion: new FormControl(deportesRawValue.descripcion),
-      horariosDisponibles: new FormControl(deportesRawValue.horariosDisponibles),
+      fechaDeporte: new FormControl(deportesRawValue.fechaDeporte),
+      horaDeporte: new FormControl(deportesRawValue.horaDeporte),
       codigo: new FormControl(deportesRawValue.codigo),
     });
   }

@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
@@ -38,8 +39,11 @@ class DeportesResourceIT {
     private static final String DEFAULT_DESCRIPCION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPCION = "BBBBBBBBBB";
 
-    private static final String DEFAULT_HORARIOS_DISPONIBLES = "AAAAAAAAAA";
-    private static final String UPDATED_HORARIOS_DISPONIBLES = "BBBBBBBBBB";
+    private static final Date DEFAULT_FECHA_DEPORTE = new Date(0L);
+    private static final Date UPDATED_FECHA_DEPORTE = new Date();
+
+    private static final String DEFAULT_HORA_DEPORTE = "AAAAAAAAAA";
+    private static final String UPDATED_HORA_DEPORTE = "BBBBBBBBBB";
 
     private static final String DEFAULT_CODIGO = "AAAAAAAAAA";
     private static final String UPDATED_CODIGO = "BBBBBBBBBB";
@@ -71,7 +75,8 @@ class DeportesResourceIT {
         Deportes deportes = new Deportes()
             .nombreDeporte(DEFAULT_NOMBRE_DEPORTE)
             .descripcion(DEFAULT_DESCRIPCION)
-            .horariosDisponibles(DEFAULT_HORARIOS_DISPONIBLES)
+            .fechaDeporte(DEFAULT_FECHA_DEPORTE)
+            .horaDeporte(DEFAULT_HORA_DEPORTE)
             .codigo(DEFAULT_CODIGO);
         return deportes;
     }
@@ -86,7 +91,8 @@ class DeportesResourceIT {
         Deportes deportes = new Deportes()
             .nombreDeporte(UPDATED_NOMBRE_DEPORTE)
             .descripcion(UPDATED_DESCRIPCION)
-            .horariosDisponibles(UPDATED_HORARIOS_DISPONIBLES)
+            .fechaDeporte(UPDATED_FECHA_DEPORTE)
+            .horaDeporte(UPDATED_HORA_DEPORTE)
             .codigo(UPDATED_CODIGO);
         return deportes;
     }
@@ -111,7 +117,8 @@ class DeportesResourceIT {
         Deportes testDeportes = deportesList.get(deportesList.size() - 1);
         assertThat(testDeportes.getNombreDeporte()).isEqualTo(DEFAULT_NOMBRE_DEPORTE);
         assertThat(testDeportes.getDescripcion()).isEqualTo(DEFAULT_DESCRIPCION);
-        assertThat(testDeportes.getHorariosDisponibles()).isEqualTo(DEFAULT_HORARIOS_DISPONIBLES);
+        assertThat(testDeportes.getFechaDeporte()).isEqualTo(DEFAULT_FECHA_DEPORTE);
+        assertThat(testDeportes.getHoraDeporte()).isEqualTo(DEFAULT_HORA_DEPORTE);
         assertThat(testDeportes.getCodigo()).isEqualTo(DEFAULT_CODIGO);
     }
 
@@ -147,7 +154,8 @@ class DeportesResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(deportes.getId().intValue())))
             .andExpect(jsonPath("$.[*].nombreDeporte").value(hasItem(DEFAULT_NOMBRE_DEPORTE)))
             .andExpect(jsonPath("$.[*].descripcion").value(hasItem(DEFAULT_DESCRIPCION)))
-            .andExpect(jsonPath("$.[*].horariosDisponibles").value(hasItem(DEFAULT_HORARIOS_DISPONIBLES)))
+            .andExpect(jsonPath("$.[*].fechaDeporte").value(hasItem(DEFAULT_FECHA_DEPORTE)))
+            .andExpect(jsonPath("$.[*].horaDeporte").value(hasItem(DEFAULT_HORA_DEPORTE)))
             .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO)));
     }
 
@@ -165,7 +173,8 @@ class DeportesResourceIT {
             .andExpect(jsonPath("$.id").value(deportes.getId().intValue()))
             .andExpect(jsonPath("$.nombreDeporte").value(DEFAULT_NOMBRE_DEPORTE))
             .andExpect(jsonPath("$.descripcion").value(DEFAULT_DESCRIPCION))
-            .andExpect(jsonPath("$.horariosDisponibles").value(DEFAULT_HORARIOS_DISPONIBLES))
+            .andExpect(jsonPath("$.fechaDeporte").value(DEFAULT_FECHA_DEPORTE))
+            .andExpect(jsonPath("$.horaDeporte").value(DEFAULT_HORA_DEPORTE))
             .andExpect(jsonPath("$.codigo").value(DEFAULT_CODIGO));
     }
 
@@ -191,7 +200,8 @@ class DeportesResourceIT {
         updatedDeportes
             .nombreDeporte(UPDATED_NOMBRE_DEPORTE)
             .descripcion(UPDATED_DESCRIPCION)
-            .horariosDisponibles(UPDATED_HORARIOS_DISPONIBLES)
+            .fechaDeporte(UPDATED_FECHA_DEPORTE)
+            .horaDeporte(DEFAULT_HORA_DEPORTE)
             .codigo(UPDATED_CODIGO);
 
         restDeportesMockMvc
@@ -208,7 +218,8 @@ class DeportesResourceIT {
         Deportes testDeportes = deportesList.get(deportesList.size() - 1);
         assertThat(testDeportes.getNombreDeporte()).isEqualTo(UPDATED_NOMBRE_DEPORTE);
         assertThat(testDeportes.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
-        assertThat(testDeportes.getHorariosDisponibles()).isEqualTo(UPDATED_HORARIOS_DISPONIBLES);
+        assertThat(testDeportes.getFechaDeporte()).isEqualTo(UPDATED_FECHA_DEPORTE);
+        assertThat(testDeportes.getHoraDeporte()).isEqualTo(UPDATED_HORA_DEPORTE);
         assertThat(testDeportes.getCodigo()).isEqualTo(UPDATED_CODIGO);
     }
 
@@ -282,7 +293,8 @@ class DeportesResourceIT {
 
         partialUpdatedDeportes
             .nombreDeporte(UPDATED_NOMBRE_DEPORTE)
-            .horariosDisponibles(UPDATED_HORARIOS_DISPONIBLES)
+            .fechaDeporte(UPDATED_FECHA_DEPORTE)
+            .horaDeporte(UPDATED_HORA_DEPORTE)
             .codigo(UPDATED_CODIGO);
 
         restDeportesMockMvc
@@ -299,7 +311,8 @@ class DeportesResourceIT {
         Deportes testDeportes = deportesList.get(deportesList.size() - 1);
         assertThat(testDeportes.getNombreDeporte()).isEqualTo(UPDATED_NOMBRE_DEPORTE);
         assertThat(testDeportes.getDescripcion()).isEqualTo(DEFAULT_DESCRIPCION);
-        assertThat(testDeportes.getHorariosDisponibles()).isEqualTo(UPDATED_HORARIOS_DISPONIBLES);
+        assertThat(testDeportes.getFechaDeporte()).isEqualTo(UPDATED_FECHA_DEPORTE);
+        assertThat(testDeportes.getHoraDeporte()).isEqualTo(UPDATED_HORA_DEPORTE);
         assertThat(testDeportes.getCodigo()).isEqualTo(UPDATED_CODIGO);
     }
 
@@ -318,7 +331,8 @@ class DeportesResourceIT {
         partialUpdatedDeportes
             .nombreDeporte(UPDATED_NOMBRE_DEPORTE)
             .descripcion(UPDATED_DESCRIPCION)
-            .horariosDisponibles(UPDATED_HORARIOS_DISPONIBLES)
+            .fechaDeporte(UPDATED_FECHA_DEPORTE)
+            .horaDeporte(UPDATED_HORA_DEPORTE)
             .codigo(UPDATED_CODIGO);
 
         restDeportesMockMvc
@@ -335,7 +349,8 @@ class DeportesResourceIT {
         Deportes testDeportes = deportesList.get(deportesList.size() - 1);
         assertThat(testDeportes.getNombreDeporte()).isEqualTo(UPDATED_NOMBRE_DEPORTE);
         assertThat(testDeportes.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
-        assertThat(testDeportes.getHorariosDisponibles()).isEqualTo(UPDATED_HORARIOS_DISPONIBLES);
+        assertThat(testDeportes.getFechaDeporte()).isEqualTo(UPDATED_FECHA_DEPORTE);
+        assertThat(testDeportes.getHoraDeporte()).isEqualTo(UPDATED_HORA_DEPORTE);
         assertThat(testDeportes.getCodigo()).isEqualTo(UPDATED_CODIGO);
     }
 
