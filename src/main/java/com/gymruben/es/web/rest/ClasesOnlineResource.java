@@ -110,7 +110,7 @@ public class ClasesOnlineResource {
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, clasesOnline.getId().toString()))
             .body(result);
     }
-    @GetMapping("/clases-onlines/UUID/{codigoCreador}")
+    @GetMapping("/clases-onlines/UUID/{codigo}")
     public ResponseEntity<ClasesOnlineDTO> getClasesOnlineUUID(@PathVariable String codigo) {
         log.debug("REST request to get clasesOnline : {}", codigo);
         Optional<ClasesOnlineDTO> clasesOnline = clasesOnlineRepository
