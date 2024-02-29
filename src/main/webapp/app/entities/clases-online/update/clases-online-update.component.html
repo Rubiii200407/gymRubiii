@@ -1,5 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
+    <div *ngIf="!guardado; else elseBlockGuardado">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <h2
         id="jhi-clases-online-heading"
@@ -8,6 +9,17 @@
       >
         Crear o editar Clases Online
       </h2>
+      <div class="row g-2 align-items-center d-flex justify-content-end">
+        <div class="col-auto">
+          <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-dark btn-sm" [routerLink]="['/clases-online', uuid, 'acceder']">
+            <fa-icon icon="search"></fa-icon>&nbsp;
+            <span jhiTranslate="entity.action.search">Buscar</span>
+          </button>
+        </div>
+      </div>
 
       <div>
         <jhi-alert-error></jhi-alert-error>
@@ -20,14 +32,42 @@
         <div class="row mb-3">
           <label class="form-label" jhiTranslate="gymRubenApp.clasesOnline.nombreClase" for="field_nombreClase">Nombre Clase</label>
           <input
-            type="text"
+            type="hidden"
             class="form-control"
             name="nombreClase"
             id="field_nombreClase"
             data-cy="nombreClase"
             formControlName="nombreClase"
+            [(ngModel)]="claseSeleccionado"
           />
         </div>
+        <div style="display:flex;justify-content: space-around ; margin: 10px;">
+          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('EntrenamientoFuncional')" (click)="mostrarDetalles('EntrenamientoFuncional')" >
+          <img src="../../content/funcional.png" style="width:170px;height: 130px;">
+          <figcaption>Entrenamiento Funcional</figcaption>
+        </figure>
+        <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Yoga')" (click)="mostrarDetalles('Yoga')">
+          <img src="../../content/yoga.png" style="width:170px;height: 130px;">
+          <figcaption>Yoga</figcaption>
+        </figure>
+        <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('HIIT')" (click)="mostrarDetalles('HIIT')">
+          <img src="../../content/hiit.png" style="width:170px;height: 130px;">
+          <figcaption>HIIT</figcaption>
+        </figure>
+        <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('BaileCardiovascular')" (click)="mostrarDetalles('BaileCardiovascular')">
+          <img src="../../content/baile.png" style="width:170px;height: 130px;">
+          <figcaption> Baile Cardiovascular</figcaption>
+        </figure>
+          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Pilates')" (click)="mostrarDetalles('Pilates')">
+          <img src="../../content/pilates.png" style="width:170px;height: 130px;">
+          <figcaption>Pilates</figcaption>
+        </figure>
+        <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Boxeo')" (click)="mostrarDetalles('Boxeo')"> 
+          <img src="../../content/boxeo.png" style="width:170px;height: 130px;">
+          <figcaption>Boxeo</figcaption>
+        </figure>
+        </div>
+
 
         <div class="row mb-3">
           <label class="form-label" jhiTranslate="gymRubenApp.clasesOnline.descripcion" for="field_descripcion">Descripcion</label>
@@ -38,13 +78,22 @@
             id="field_descripcion"
             data-cy="descripcion"
             formControlName="descripcion"
+            [(ngModel)]="descripcionClase"
+          />
+        </div>
+        <div class="row mb-3">
+          <label class="form-label"  for="field_fechaClase">Fecha</label>
+          <input
+            type="date"
+            class="form-control"
+            name="fechaClase"
+            id="field_fechaClase"
+            data-cy="fechaClase"
+            formControlName="fechaClase"
+            (change)="actualizarHorasDisponibles()"
           />
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gymRubenApp.clasesOnline.horario" for="field_horario">Horario</label>
-          <input type="text" class="form-control" name="horario" id="field_horario" data-cy="horario" formControlName="horario" />
-        </div>
 
         <div class="row mb-3">
           <label class="form-label" jhiTranslate="gymRubenApp.clasesOnline.instructor" for="field_instructor">Instructor</label>
@@ -59,22 +108,25 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gymRubenApp.clasesOnline.capacidad" for="field_capacidad">Capacidad</label>
-          <input type="text" class="form-control" name="capacidad" id="field_capacidad" data-cy="capacidad" formControlName="capacidad" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gymRubenApp.clasesOnline.participantesInscritos" for="field_participantesInscritos"
-            >Participantes Inscritos</label
+          <label class="form-label" for="field_horaClase"
+            >Horas Disponibles</label
           >
           <input
             type="text"
             class="form-control"
-            name="participantesInscritos"
-            id="field_participantesInscritos"
-            data-cy="participantesInscritos"
-            formControlName="participantesInscritos"
+            name="horaClase"
+            id="field_horaClase"
+            data-cy="horaClase"
+            formControlName="horaClase"
           />
+        </div>
+        <div *ngIf="horasDisponibles.length > 0">
+          <div *ngFor="let hora of horasDisponibles">
+            <label>
+              <input type="radio" name="horaDisponible" [value]="hora" (change)="seleccionarHora(hora)" />
+              {{ hora }}
+            </label>
+          </div>
         </div>
       </div>
 
@@ -94,5 +146,26 @@
         </button>
       </div>
     </form>
+    <div *ngIf="!nuevaConsulta">
+      <span >Código de seguimiento: </span>
+      <input type="text" [(ngModel)]="codigoBusqueda" />
+      <button class="btn btn-secondary btn-sm"  (click)="buscarUUID()">
+        Buscar
+      </button>
+    </div>  
   </div>
+  <ng-template #elseBlockGuardado>
+    <div *ngIf="guardado" class="alert alert-success" role="alert">
+      <h4 class="alert-heading" jhiTranslate="gymRubenApp.clasesOnline.creacionSolicitud">
+        La solicitud ha sido procesada con éxito, código de seguimiento:
+      </h4>
+      <p>{{ codigo }}</p>
+      <hr />
+    </div>
+  </ng-template>
+  <ng-template #elseBlock>
+    <div class="alert alert-warning">
+      <span jhiTranslate="gestorDenunciasApp.empresaReferencia.home.notFound">Ningún Empresa Referencias encontrado</span>
+    </div>
+  </ng-template>
 </div>

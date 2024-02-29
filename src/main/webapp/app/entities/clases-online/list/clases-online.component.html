@@ -50,9 +50,9 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="horario">
+          <th scope="col" jhiSortBy="fechaClase">
             <div class="d-flex">
-              <span jhiTranslate="gymRubenApp.clasesOnline.horario">Horario</span>
+              <span >Fecha Clase</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -62,15 +62,10 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="capacidad">
+      
+          <th scope="col" jhiSortBy="horaClase">
             <div class="d-flex">
-              <span jhiTranslate="gymRubenApp.clasesOnline.capacidad">Capacidad</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="participantesInscritos">
-            <div class="d-flex">
-              <span jhiTranslate="gymRubenApp.clasesOnline.participantesInscritos">Participantes Inscritos</span>
+              <span >Hora Clase</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -84,10 +79,10 @@
           </td>
           <td>{{ clasesOnline.nombreClase }}</td>
           <td>{{ clasesOnline.descripcion }}</td>
-          <td>{{ clasesOnline.horario }}</td>
+          <td>{{ clasesOnline.fechaClase }}</td>
           <td>{{ clasesOnline.instructor }}</td>
-          <td>{{ clasesOnline.capacidad }}</td>
-          <td>{{ clasesOnline.participantesInscritos }}</td>
+          <td>{{ clasesOnline.horaClase }}</td>
+          <td>{{ clasesOnline.codigo }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../deportes.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../deportes.test-samples';
 
 import { DeportesFormService } from './deportes-form.service';
 
@@ -22,8 +22,9 @@ describe('Deportes Form Service', () => {
             id: expect.any(Object),
             nombreDeporte: expect.any(Object),
             descripcion: expect.any(Object),
-            horariosDisponibles: expect.any(Object),
-            participantesInscritos: expect.any(Object),
+            fechaDeporte: expect.any(Object),
+            horaDeporte: expect.any(Object),
+            codigo: expect.any(Object),
           })
         );
       });
@@ -36,8 +37,9 @@ describe('Deportes Form Service', () => {
             id: expect.any(Object),
             nombreDeporte: expect.any(Object),
             descripcion: expect.any(Object),
-            horariosDisponibles: expect.any(Object),
-            participantesInscritos: expect.any(Object),
+            fechaDeporte: expect.any(Object),
+            horaDeporte: expect.any(Object),
+            codigo: expect.any(Object),
           })
         );
       });

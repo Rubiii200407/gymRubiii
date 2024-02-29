@@ -6,7 +6,9 @@
         "refreshListLabel": "Refrescar lista",
         "createLabel": "Crear nuevo Deportes",
         "createOrEditLabel": "Crear o editar Deportes",
-        "notFound": "Ningún Deportes encontrado"
+        "notFound": "Ningún Deportes encontrado",
+        "introducirCodigo": "Código de seguimiento:",
+        "buscar": "Buscar"
       },
       "created": "Un nuevo Deportes ha sido creado con el identificador {{ param }}",
       "updated": "Un Deportes ha sido actualizado con el identificador {{ param }}",
@@ -21,7 +23,8 @@
       "nombreDeporte": "Nombre Deporte",
       "descripcion": "Descripcion",
       "horariosDisponibles": "Horarios Disponibles",
-      "participantesInscritos": "Participantes Inscritos"
+      "participantesInscritos": "Participantes Inscritos",
+      "creacionSolicitud": "La solicitud ha sido procesada con éxito, código de seguimiento:"
     }
   }
 }

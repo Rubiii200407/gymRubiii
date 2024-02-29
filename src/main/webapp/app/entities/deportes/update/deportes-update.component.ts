@@ -20,6 +20,13 @@ export class DeportesUpdateComponent implements OnInit {
   deporteSeleccionado?:string|null;
   horasDisponibles: string[] = [];
   horaDeporte: string = "";
+  codigo?: string;
+
+  uuid?:string
+  guardado=false;
+  codigoNoExiste = false;
+  codigoBusqueda = '';
+  deporteBuscada: IDeportes | null = null;
   editForm: DeportesFormGroup = this.deportesFormService.createDeportesFormGroup();
   detallesDeportes:Record<string,string>= {
     "Tenis": "El tenis es un deporte que se practica con raquetas y una pequeña pelota. Pueden jugarlo dos individuos (uno contra uno) o dos parejas (dos personas contra las otras dos). El objetivo es impactar la pelota para que pase por encima de la red que divide la cancha a la mitad, intentando que el rival no consiga devolverla",
@@ -71,6 +78,22 @@ export class DeportesUpdateComponent implements OnInit {
       'Zumba': ['08:00 AM', '10:30 AM', '20:00 PM'],
       'Padel': ['09:30 AM', '11:30 AM', '21:00 PM'],
     },
+    'Saturday': {
+      'Tenis': ['10:00 PM', '14:00 PM', '18:00 PM'],
+      'Baloncesto': ['9:00 PM', '15:30 PM', '19:00 PM'],
+      'Crosfit': ['08:30 AM', '11:00 AM', '17:00 PM'],
+      'Spinning': ['09:30 AM', '12:00 AM', '16:00 PM'],
+      'Zumba': ['10:30 AM', '14:30 AM', '20:00 PM'],
+      'Padel': ['11:30 AM', '11:30 AM', '18:00 PM'],
+    },
+    'Sunday': {
+      'Tenis': ['12:00 PM', '14:00 PM'],
+      'Baloncesto': ['10:00 PM'],
+      'Crosfit': ['08:30 AM', '13:00 AM'],
+      'Spinning': ['11:00 AM',],
+      'Zumba': ['08:00 AM', '10:30 AM', ],
+      'Padel': ['09:30 AM', '11:30 AM'],
+    },
   
   };
   descripcionDeporte :string=""
@@ -102,14 +125,34 @@ export class DeportesUpdateComponent implements OnInit {
   }
 
   save(): void {
+    this.guardado = true;
     this.isSaving = true;
     const deportes = this.deportesFormService.getDeportes(this.editForm);
+  
     if (deportes.id !== null) {
       this.subscribeToSaveResponse(this.deportesService.update(deportes));
     } else {
-      this.subscribeToSaveResponse(this.deportesService.create(deportes));
+      this.deportesService.create(deportes).subscribe(
+        (deporte) => {
+          this.codigo = deporte.body?.codigo ?? '';
+          this.descargarCodigo(this.codigo);
+        },
+      );
     }
+ 
+}
+  descargarCodigo(codigo: string): void {
+    const blob = new Blob([codigo], { type: 'text/plain' });
+    const data = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = data;
+    link.download = 'codigo_de_seguimiento';
+    link.click();
+    window.URL.revokeObjectURL(data);
   }
+  
+  
+
  
   seleccionarDeporte(deporte: string) {
     this.deporteSeleccionado = deporte;

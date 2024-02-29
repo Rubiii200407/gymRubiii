@@ -1,7 +1,14 @@
 package com.gymruben.es.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * A ClasesOnline.
@@ -24,17 +31,19 @@ public class ClasesOnline implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @Column(name = "horario")
-    private String horario;
+    @Column(name = "fecha_clase")
+    private Date fechaClase;
 
     @Column(name = "instructor")
     private String instructor;
 
-    @Column(name = "capacidad")
-    private String capacidad;
 
-    @Column(name = "participantes_inscritos")
-    private String participantesInscritos;
+    @Column(name = "hora_clase")
+    private String horaClase;
+
+    
+    @Column(name = "codigo")
+    private String codigo;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -77,17 +86,17 @@ public class ClasesOnline implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public String getHorario() {
-        return this.horario;
+    public Date getFechaClase() {
+        return this.fechaClase;
     }
 
-    public ClasesOnline horario(String horario) {
-        this.setHorario(horario);
+    public ClasesOnline fechaClase(Date fechaClase) {
+        this.setFechaClase(fechaClase);
         return this;
     }
 
-    public void setHorario(String horario) {
-        this.horario = horario;
+    public void setFechaClase(Date fechaClase) {
+        this.fechaClase = fechaClase;
     }
 
     public String getInstructor() {
@@ -103,30 +112,29 @@ public class ClasesOnline implements Serializable {
         this.instructor = instructor;
     }
 
-    public String getCapacidad() {
-        return this.capacidad;
+    public String getHoraClase() {
+        return this.horaClase;
     }
 
-    public ClasesOnline capacidad(String capacidad) {
-        this.setCapacidad(capacidad);
+    public ClasesOnline horaClase(String horaClase) {
+        this.setHoraClase(horaClase);
         return this;
     }
 
-    public void setCapacidad(String capacidad) {
-        this.capacidad = capacidad;
+    public void setHoraClase(String horaClase) {
+        this.horaClase = horaClase;
+    }
+    public String getCodigo() {
+        return this.codigo;
     }
 
-    public String getParticipantesInscritos() {
-        return this.participantesInscritos;
-    }
-
-    public ClasesOnline participantesInscritos(String participantesInscritos) {
-        this.setParticipantesInscritos(participantesInscritos);
+    public ClasesOnline codigo(String codigo) {
+        this.setCodigo(codigo);
         return this;
     }
 
-    public void setParticipantesInscritos(String participantesInscritos) {
-        this.participantesInscritos = participantesInscritos;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -155,10 +163,10 @@ public class ClasesOnline implements Serializable {
             "id=" + getId() +
             ", nombreClase='" + getNombreClase() + "'" +
             ", descripcion='" + getDescripcion() + "'" +
-            ", horario='" + getHorario() + "'" +
+            ", fechaClase='" + getFechaClase() + "'" +
             ", instructor='" + getInstructor() + "'" +
-            ", capacidad='" + getCapacidad() + "'" +
-            ", participantesInscritos='" + getParticipantesInscritos() + "'" +
+            ", horaClase='" + getHoraClase() + "'" +
+            ", codigo='" + getCodigo() + "'" +
             "}";
     }
 }

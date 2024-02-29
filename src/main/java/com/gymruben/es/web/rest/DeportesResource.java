@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,6 +63,8 @@ public class DeportesResource {
         if (deportes.getId() != null) {
             throw new BadRequestAlertException("A new deportes cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        String uuid = UUID.randomUUID().toString();
+        deportes.setCodigo(uuid);
         Deportes result = deportesRepository.save(deportes);
         return ResponseEntity
             .created(new URI("/api/deportes/" + result.getId()))

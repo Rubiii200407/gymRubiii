@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+  <changeSet id="20240222120556-5" author="jhipster">
+    <renameColumn
+        tableName="clases_online"
+        oldColumnName="horario"
+        newColumnName="fecha_clase"
+        columnDataType="date"/>
+    
+    <addColumn tableName="clases_online">
+        <column name="hora_clase" type="varchar(200)">
+            <constraints nullable="true"/>
+        </column>
+    </addColumn>
+     <addColumn tableName="clases_online">
+        <column name="codigo" type="varchar(200)">
+            <constraints nullable="true"/>
+        </column>
+    </addColumn>
+   <dropColumn tableName="clases_online" columnName="capacidad"/>
+   <dropColumn tableName="clases_online" columnName="participantes_inscritos"/>
+ 
+</changeSet>
+
+</databaseChangeLog>

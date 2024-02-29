@@ -1,5 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
+    <div *ngIf="!guardado; else elseBlockGuardado">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <h2 id="jhi-deportes-heading" data-cy="DeportesCreateUpdateHeading" >
         Deportes
@@ -117,6 +118,25 @@
           <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
         </button>
       </div>
+      
     </form>
+    <div >
+      <span jhiTranslate="gymRubenApp.deportes.introducirCodigo"><br />Código de seguimiento: </span>
+      <input type="text" [(ngModel)]="codigoBusqueda" />
+      <button class="btn btn-secondary btn-sm" jhiTranslate="gymRubenApp.deportes.home.buscar" >
+        Buscar
+      </button>
+    </div>
   </div>
+  <ng-template #elseBlockGuardado>
+    <div *ngIf="guardado" class="alert alert-success" role="alert">
+      <h4 class="alert-heading" jhiTranslate="gymRubenApp.deportes.creacionSolicitud">
+        La solicitud ha sido procesada con éxito, código de seguimiento:
+      </h4>
+      <p>{{ codigo }}</p>
+      <hr />
+    </div>
+  </ng-template>
+  
 </div>
+

@@ -1,17 +1,17 @@
 package com.gymruben.es.web.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
+import static org.assertj.core.api.Assertions.*;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.gymruben.es.IntegrationTest;
-import com.gymruben.es.domain.ClasesOnline;
-import com.gymruben.es.repository.ClasesOnlineRepository;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+
 import javax.persistence.EntityManager;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +20,10 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.gymruben.es.IntegrationTest;
+import com.gymruben.es.domain.ClasesOnline;
+import com.gymruben.es.repository.ClasesOnlineRepository;
 
 /**
  * Integration tests for the {@link ClasesOnlineResource} REST controller.
@@ -35,17 +39,17 @@ class ClasesOnlineResourceIT {
     private static final String DEFAULT_DESCRIPCION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPCION = "BBBBBBBBBB";
 
-    private static final String DEFAULT_HORARIO = "AAAAAAAAAA";
-    private static final String UPDATED_HORARIO = "BBBBBBBBBB";
+    private static final Date DEFAULT_FECHA_CLASE= new Date(0L);
+    private static final Date UPDATED_FECHA_CLASE =  new Date();
 
     private static final String DEFAULT_INSTRUCTOR = "AAAAAAAAAA";
     private static final String UPDATED_INSTRUCTOR = "BBBBBBBBBB";
 
-    private static final String DEFAULT_CAPACIDAD = "AAAAAAAAAA";
-    private static final String UPDATED_CAPACIDAD = "BBBBBBBBBB";
+    private static final String DEFAULT_HORA_CLASE = "AAAAAAAAAA";
+    private static final String UPDATED_HORA_CLASE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_PARTICIPANTES_INSCRITOS = "AAAAAAAAAA";
-    private static final String UPDATED_PARTICIPANTES_INSCRITOS = "BBBBBBBBBB";
+    private static final String DEFAULT_CODIGO = "AAAAAAAAAA";
+    private static final String UPDATED_CODIGO = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/clases-onlines";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -74,10 +78,10 @@ class ClasesOnlineResourceIT {
         ClasesOnline clasesOnline = new ClasesOnline()
             .nombreClase(DEFAULT_NOMBRE_CLASE)
             .descripcion(DEFAULT_DESCRIPCION)
-            .horario(DEFAULT_HORARIO)
+            .fechaClase(DEFAULT_FECHA_CLASE)
             .instructor(DEFAULT_INSTRUCTOR)
-            .capacidad(DEFAULT_CAPACIDAD)
-            .participantesInscritos(DEFAULT_PARTICIPANTES_INSCRITOS);
+            .horaClase(DEFAULT_HORA_CLASE)
+            .codigo(DEFAULT_CODIGO);
         return clasesOnline;
     }
 
@@ -91,10 +95,10 @@ class ClasesOnlineResourceIT {
         ClasesOnline clasesOnline = new ClasesOnline()
             .nombreClase(UPDATED_NOMBRE_CLASE)
             .descripcion(UPDATED_DESCRIPCION)
-            .horario(UPDATED_HORARIO)
+            .fechaClase(UPDATED_FECHA_CLASE)
             .instructor(UPDATED_INSTRUCTOR)
-            .capacidad(UPDATED_CAPACIDAD)
-            .participantesInscritos(UPDATED_PARTICIPANTES_INSCRITOS);
+            .horaClase(UPDATED_HORA_CLASE)
+            .codigo(UPDATED_CODIGO);
         return clasesOnline;
     }
 
@@ -118,10 +122,10 @@ class ClasesOnlineResourceIT {
         ClasesOnline testClasesOnline = clasesOnlineList.get(clasesOnlineList.size() - 1);
         assertThat(testClasesOnline.getNombreClase()).isEqualTo(DEFAULT_NOMBRE_CLASE);
         assertThat(testClasesOnline.getDescripcion()).isEqualTo(DEFAULT_DESCRIPCION);
-        assertThat(testClasesOnline.getHorario()).isEqualTo(DEFAULT_HORARIO);
+        assertThat(testClasesOnline.getFechaClase()).isEqualTo(DEFAULT_FECHA_CLASE);
         assertThat(testClasesOnline.getInstructor()).isEqualTo(DEFAULT_INSTRUCTOR);
-        assertThat(testClasesOnline.getCapacidad()).isEqualTo(DEFAULT_CAPACIDAD);
-        assertThat(testClasesOnline.getParticipantesInscritos()).isEqualTo(DEFAULT_PARTICIPANTES_INSCRITOS);
+        assertThat(testClasesOnline.getHoraClase()).isEqualTo(DEFAULT_HORA_CLASE);
+        assertThat(testClasesOnline.getCodigo()).isEqualTo(DEFAULT_CODIGO);
     }
 
     @Test
@@ -156,10 +160,10 @@ class ClasesOnlineResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(clasesOnline.getId().intValue())))
             .andExpect(jsonPath("$.[*].nombreClase").value(hasItem(DEFAULT_NOMBRE_CLASE)))
             .andExpect(jsonPath("$.[*].descripcion").value(hasItem(DEFAULT_DESCRIPCION)))
-            .andExpect(jsonPath("$.[*].horario").value(hasItem(DEFAULT_HORARIO)))
+            .andExpect(jsonPath("$.[*].fechaClase").value(hasItem(DEFAULT_FECHA_CLASE)))
             .andExpect(jsonPath("$.[*].instructor").value(hasItem(DEFAULT_INSTRUCTOR)))
-            .andExpect(jsonPath("$.[*].capacidad").value(hasItem(DEFAULT_CAPACIDAD)))
-            .andExpect(jsonPath("$.[*].participantesInscritos").value(hasItem(DEFAULT_PARTICIPANTES_INSCRITOS)));
+            .andExpect(jsonPath("$.[*].horaClase").value(hasItem(DEFAULT_HORA_CLASE)))
+            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO)));
     }
 
     @Test
@@ -176,10 +180,10 @@ class ClasesOnlineResourceIT {
             .andExpect(jsonPath("$.id").value(clasesOnline.getId().intValue()))
             .andExpect(jsonPath("$.nombreClase").value(DEFAULT_NOMBRE_CLASE))
             .andExpect(jsonPath("$.descripcion").value(DEFAULT_DESCRIPCION))
-            .andExpect(jsonPath("$.horario").value(DEFAULT_HORARIO))
+            .andExpect(jsonPath("$.fechaClase").value(DEFAULT_FECHA_CLASE))
             .andExpect(jsonPath("$.instructor").value(DEFAULT_INSTRUCTOR))
-            .andExpect(jsonPath("$.capacidad").value(DEFAULT_CAPACIDAD))
-            .andExpect(jsonPath("$.participantesInscritos").value(DEFAULT_PARTICIPANTES_INSCRITOS));
+            .andExpect(jsonPath("$.horaClase").value(DEFAULT_HORA_CLASE))
+            .andExpect(jsonPath("$.codigo").value(DEFAULT_CODIGO));
     }
 
     @Test
@@ -204,10 +208,10 @@ class ClasesOnlineResourceIT {
         updatedClasesOnline
             .nombreClase(UPDATED_NOMBRE_CLASE)
             .descripcion(UPDATED_DESCRIPCION)
-            .horario(UPDATED_HORARIO)
+            .fechaClase(UPDATED_FECHA_CLASE)
             .instructor(UPDATED_INSTRUCTOR)
-            .capacidad(UPDATED_CAPACIDAD)
-            .participantesInscritos(UPDATED_PARTICIPANTES_INSCRITOS);
+            .horaClase(UPDATED_HORA_CLASE)
+            .codigo(UPDATED_CODIGO);
 
         restClasesOnlineMockMvc
             .perform(
@@ -223,10 +227,10 @@ class ClasesOnlineResourceIT {
         ClasesOnline testClasesOnline = clasesOnlineList.get(clasesOnlineList.size() - 1);
         assertThat(testClasesOnline.getNombreClase()).isEqualTo(UPDATED_NOMBRE_CLASE);
         assertThat(testClasesOnline.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
-        assertThat(testClasesOnline.getHorario()).isEqualTo(UPDATED_HORARIO);
+        assertThat(testClasesOnline.getFechaClase()).isEqualTo(UPDATED_FECHA_CLASE);
         assertThat(testClasesOnline.getInstructor()).isEqualTo(UPDATED_INSTRUCTOR);
-        assertThat(testClasesOnline.getCapacidad()).isEqualTo(UPDATED_CAPACIDAD);
-        assertThat(testClasesOnline.getParticipantesInscritos()).isEqualTo(UPDATED_PARTICIPANTES_INSCRITOS);
+        assertThat(testClasesOnline.getHoraClase()).isEqualTo(UPDATED_HORA_CLASE);
+        assertThat(testClasesOnline.getCodigo()).isEqualTo(UPDATED_CODIGO);
     }
 
     @Test
@@ -299,8 +303,9 @@ class ClasesOnlineResourceIT {
 
         partialUpdatedClasesOnline
             .descripcion(UPDATED_DESCRIPCION)
-            .capacidad(UPDATED_CAPACIDAD)
-            .participantesInscritos(UPDATED_PARTICIPANTES_INSCRITOS);
+            .fechaClase(UPDATED_FECHA_CLASE)
+            .horaClase(UPDATED_HORA_CLASE)
+            .codigo(UPDATED_CODIGO);
 
         restClasesOnlineMockMvc
             .perform(
@@ -315,11 +320,11 @@ class ClasesOnlineResourceIT {
         assertThat(clasesOnlineList).hasSize(databaseSizeBeforeUpdate);
         ClasesOnline testClasesOnline = clasesOnlineList.get(clasesOnlineList.size() - 1);
         assertThat(testClasesOnline.getNombreClase()).isEqualTo(DEFAULT_NOMBRE_CLASE);
-        assertThat(testClasesOnline.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
-        assertThat(testClasesOnline.getHorario()).isEqualTo(DEFAULT_HORARIO);
+        assertThat(testClasesOnline.getDescripcion()).isEqualTo(DEFAULT_DESCRIPCION);
+        assertThat(testClasesOnline.getFechaClase()).isEqualTo(DEFAULT_FECHA_CLASE);
         assertThat(testClasesOnline.getInstructor()).isEqualTo(DEFAULT_INSTRUCTOR);
-        assertThat(testClasesOnline.getCapacidad()).isEqualTo(UPDATED_CAPACIDAD);
-        assertThat(testClasesOnline.getParticipantesInscritos()).isEqualTo(UPDATED_PARTICIPANTES_INSCRITOS);
+        assertThat(testClasesOnline.getHoraClase()).isEqualTo(DEFAULT_HORA_CLASE);
+        assertThat(testClasesOnline.getCodigo()).isEqualTo(DEFAULT_CODIGO);
     }
 
     @Test
@@ -337,10 +342,10 @@ class ClasesOnlineResourceIT {
         partialUpdatedClasesOnline
             .nombreClase(UPDATED_NOMBRE_CLASE)
             .descripcion(UPDATED_DESCRIPCION)
-            .horario(UPDATED_HORARIO)
+            .fechaClase(UPDATED_FECHA_CLASE)
             .instructor(UPDATED_INSTRUCTOR)
-            .capacidad(UPDATED_CAPACIDAD)
-            .participantesInscritos(UPDATED_PARTICIPANTES_INSCRITOS);
+            .horaClase(UPDATED_HORA_CLASE)
+            .codigo(UPDATED_CODIGO);
 
         restClasesOnlineMockMvc
             .perform(
@@ -355,11 +360,11 @@ class ClasesOnlineResourceIT {
         assertThat(clasesOnlineList).hasSize(databaseSizeBeforeUpdate);
         ClasesOnline testClasesOnline = clasesOnlineList.get(clasesOnlineList.size() - 1);
         assertThat(testClasesOnline.getNombreClase()).isEqualTo(UPDATED_NOMBRE_CLASE);
-        assertThat(testClasesOnline.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
-        assertThat(testClasesOnline.getHorario()).isEqualTo(UPDATED_HORARIO);
+        assertThat(testClasesOnline.getDescripcion()).isEqualTo(DEFAULT_DESCRIPCION);
+        assertThat(testClasesOnline.getFechaClase()).isEqualTo(UPDATED_FECHA_CLASE);
         assertThat(testClasesOnline.getInstructor()).isEqualTo(UPDATED_INSTRUCTOR);
-        assertThat(testClasesOnline.getCapacidad()).isEqualTo(UPDATED_CAPACIDAD);
-        assertThat(testClasesOnline.getParticipantesInscritos()).isEqualTo(UPDATED_PARTICIPANTES_INSCRITOS);
+        assertThat(testClasesOnline.getHoraClase()).isEqualTo(UPDATED_HORA_CLASE);
+        assertThat(testClasesOnline.getCodigo()).isEqualTo(UPDATED_CODIGO);
     }
 
     @Test
