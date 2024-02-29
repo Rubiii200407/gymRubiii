@@ -1,6 +1,7 @@
 package com.gymruben.es.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,8 +31,11 @@ public class Deportes implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @Column(name = "horarios_disponibles")
-    private String horariosDisponibles;
+    @Column(name = "fecha_deporte")
+    private Date fechaDeporte;
+
+    @Column(name = "hora_deporte")
+    private String horaDeporte;
 
     @Column(name = "codigo")
     private String codigo;
@@ -77,17 +81,29 @@ public class Deportes implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public String getHorariosDisponibles() {
-        return this.horariosDisponibles;
+    public Date getFechaDeporte() {
+        return this.fechaDeporte;
     }
 
-    public Deportes horariosDisponibles(String horariosDisponibles) {
-        this.setHorariosDisponibles(horariosDisponibles);
+    public Deportes fechaDeporte(Date fechaDeporte) {
+        this.setFechaDeporte(fechaDeporte);
         return this;
     }
 
-    public void setHorariosDisponibles(String horariosDisponibles) {
-        this.horariosDisponibles = horariosDisponibles;
+    public void setFechaDeporte(Date fechaDeporte) {
+        this.fechaDeporte = fechaDeporte;
+    }
+    public String getHoraDeporte() {
+        return this.horaDeporte;
+    }
+
+    public Deportes horaDeporte(String horaDeporte) {
+        this.setHoraDeporte(horaDeporte);
+        return this;
+    }
+
+    public void setHoraDeporte(String horaDeporte) {
+        this.horaDeporte = horaDeporte;
     }
 
     public String getCodigo() {
@@ -129,7 +145,8 @@ public class Deportes implements Serializable {
             "id=" + getId() +
             ", nombreDeporte='" + getNombreDeporte() + "'" +
             ", descripcion='" + getDescripcion() + "'" +
-            ", horariosDisponibles='" + getHorariosDisponibles() + "'" +
+            ", horaFecha='" + getFechaDeporte() + "'" +
+            ", horaDeporte='" + getHoraDeporte() + "'" +     
             ", codigo='" + getCodigo() + "'" +
             "}";
     }

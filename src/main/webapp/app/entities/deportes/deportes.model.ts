@@ -1,8 +1,10 @@
+
 export interface IDeportes {
   id: number;
   nombreDeporte?: string | null;
   descripcion?: string | null;
-  horariosDisponibles?: string | null;
+  fechaDeporte?: Date | null;
+  horaDeporte?: string| null;
   codigo?: string | null;
 }
 

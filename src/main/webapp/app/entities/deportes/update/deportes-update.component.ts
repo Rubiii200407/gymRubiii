@@ -15,16 +15,11 @@ import { DeportesFormGroup, DeportesFormService } from './deportes-form.service'
   styleUrls: ['./deportes-update.component.css'],
 })
 export class DeportesUpdateComponent implements OnInit {
-  isSaving = false;
-  turno?: string | null;
-  mañana?: string | null;
-  tarde?: string | null;
+  isSaving = false
   deportes: IDeportes | null = null;
   deporteSeleccionado?:string|null;
-  fechaYHoraSeleccionada: string | null = null;
-  fechaSeleccionada?: string | null = null;
-  horaSeleccionada: string | null = null;
   horasDisponibles: string[] = [];
+  horaDeporte: string = "";
   editForm: DeportesFormGroup = this.deportesFormService.createDeportesFormGroup();
   detallesDeportes:Record<string,string>= {
     "Tenis": "El tenis es un deporte que se practica con raquetas y una pequeña pelota. Pueden jugarlo dos individuos (uno contra uno) o dos parejas (dos personas contra las otras dos). El objetivo es impactar la pelota para que pase por encima de la red que divide la cancha a la mitad, intentando que el rival no consiga devolverla",
@@ -86,7 +81,7 @@ export class DeportesUpdateComponent implements OnInit {
     protected deportesService: DeportesService,
     protected deportesFormService: DeportesFormService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {
 
   }
@@ -127,17 +122,23 @@ export class DeportesUpdateComponent implements OnInit {
     this.descripcionDeporte=this.detallesDeportes[deportes];
 
   }
-  actualizarHorasDisponibles() {
-    const horariosDisponiblesControl = this.editForm.controls['horariosDisponibles'];
-    
-    if (horariosDisponiblesControl.value) {
-      const diaSeleccionado = this.obtenerDiaSemana(horariosDisponiblesControl.value);
-      
+  seleccionarHora(hora: string) {
+    this.editForm.get('horaDeporte')?.setValue(hora);
+  }
+ 
+  actualizarHorasDisponibles(): void {
+    const fechaSeleccionadaStr: Date | null = this.editForm.get('fechaDeporte')?.value || null;
+    const fechaSeleccionada: Date | null = fechaSeleccionadaStr ? new Date(fechaSeleccionadaStr) : null;
+  
+    if (fechaSeleccionada) {
+      const diaSeleccionado = this.obtenerDiaSemana(fechaSeleccionada);
+  
       if (diaSeleccionado && this.horariosPorDiaYDeporte[diaSeleccionado]) {
-        const horasDeporte = this.horariosPorDiaYDeporte[diaSeleccionado][this.deporteSeleccionado || ""];
-        
+        const horasDeporte = this.horariosPorDiaYDeporte[diaSeleccionado][this.deporteSeleccionado || ''];
+  
         if (horasDeporte) {
           this.horasDisponibles = horasDeporte;
+          console.log('Horas disponibles:', this.horasDisponibles);
         } else {
           this.horasDisponibles = [];
         }
@@ -148,30 +149,14 @@ export class DeportesUpdateComponent implements OnInit {
       this.horasDisponibles = [];
     }
   }
-  
-  
-  seleccionarHora(hora: string) {
-    this.horaSeleccionada = hora;
-    const horariosDisponiblesControl = this.editForm.controls['horariosDisponibles'];
-  
-    if (this.horaSeleccionada && horariosDisponiblesControl.valid) {
-      const fechaSeleccionada = horariosDisponiblesControl.value;
-      this.fechaYHoraSeleccionada = fechaSeleccionada + ' ' + this.horaSeleccionada;
-      horariosDisponiblesControl.setValue(this.fechaYHoraSeleccionada);
-    }
-  }
-  
-  
-  obtenerDiaSemana(fecha: string): string | null {
-    if (!fecha) {
+  obtenerDiaSemana(fecha: Date | null | undefined): string | null {
+    if (!fecha || !(fecha instanceof Date)) {
       return null;
     }
   
     const diasSemana = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const fechaObj = new Date(fecha);
-    return diasSemana[fechaObj.getDay()];
-  }
-  
+    return diasSemana[fecha.getDay()];
+  } 
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IDeportes>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
