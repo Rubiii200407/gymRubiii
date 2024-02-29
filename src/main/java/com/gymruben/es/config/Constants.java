@@ -1,4 +1,5 @@
 package com.gymruben.es.config;
+import org.hashids.Hashids;
 
 /**
  * Application constants.
@@ -10,6 +11,7 @@ public final class Constants {
 
     public static final String SYSTEM = "system";
     public static final String DEFAULT_LANGUAGE = "es";
+    public static final Hashids HASHIDS = new Hashids("Q80cxIawnQr2loMwHd1B", 6);
 
     private Constants() {}
 }

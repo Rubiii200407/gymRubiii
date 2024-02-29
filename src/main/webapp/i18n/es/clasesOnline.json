@@ -6,7 +6,9 @@
         "refreshListLabel": "Refrescar lista",
         "createLabel": "Crear nuevo Clases Online",
         "createOrEditLabel": "Crear o editar Clases Online",
-        "notFound": "Ningún Clases Onlines encontrado"
+        "notFound": "Ningún Clases Onlines encontrado",
+        "introducirCodigo": "Código de seguimiento:",
+        "buscar": "Buscar"
       },
       "created": "Un nuevo Clases Online ha sido creado con el identificador {{ param }}",
       "updated": "Un Clases Online ha sido actualizado con el identificador {{ param }}",
@@ -23,7 +25,8 @@
       "horario": "Horario",
       "instructor": "Instructor",
       "capacidad": "Capacidad",
-      "participantesInscritos": "Participantes Inscritos"
+      "participantesInscritos": "Participantes Inscritos",
+      "creacionSolicitud": "La solicitud ha sido procesada con éxito, código de seguimiento:"
     }
   }
 }

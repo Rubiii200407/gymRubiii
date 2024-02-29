@@ -2,10 +2,10 @@ export interface IClasesOnline {
   id: number;
   nombreClase?: string | null;
   descripcion?: string | null;
-  horario?: string | null;
+  fechaClase?: Date | null;
   instructor?: string | null;
-  capacidad?: string | null;
-  participantesInscritos?: string | null;
+  horaClase?: string | null;
+  codigo?:string|null;
 }
 
 export type NewClasesOnline = Omit<IClasesOnline, 'id'> & { id: null };

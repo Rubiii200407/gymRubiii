@@ -1,19 +1,33 @@
 package com.gymruben.es.web.rest;
 
-import com.gymruben.es.domain.ClasesOnline;
-import com.gymruben.es.repository.ClasesOnlineRepository;
-import com.gymruben.es.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.gymruben.es.domain.ClasesOnline;
+import com.gymruben.es.repository.ClasesOnlineRepository;
+import com.gymruben.es.service.dto.ClasesOnlineDTO;
+import com.gymruben.es.service.mapper.ClasesOnlineMapper;
+import com.gymruben.es.web.rest.errors.BadRequestAlertException;
+
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
@@ -34,8 +48,11 @@ public class ClasesOnlineResource {
 
     private final ClasesOnlineRepository clasesOnlineRepository;
 
-    public ClasesOnlineResource(ClasesOnlineRepository clasesOnlineRepository) {
+    private final ClasesOnlineMapper clasesOnlineMapper;
+
+    public ClasesOnlineResource(ClasesOnlineRepository clasesOnlineRepository,ClasesOnlineMapper clasesOnlineMapper) {
         this.clasesOnlineRepository = clasesOnlineRepository;
+        this.clasesOnlineMapper = clasesOnlineMapper;
     }
 
     /**
@@ -51,6 +68,8 @@ public class ClasesOnlineResource {
         if (clasesOnline.getId() != null) {
             throw new BadRequestAlertException("A new clasesOnline cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        String uuid = UUID.randomUUID().toString();
+        clasesOnline.setCodigo(uuid);
         ClasesOnline result = clasesOnlineRepository.save(clasesOnline);
         return ResponseEntity
             .created(new URI("/api/clases-onlines/" + result.getId()))
@@ -91,6 +110,14 @@ public class ClasesOnlineResource {
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, clasesOnline.getId().toString()))
             .body(result);
     }
+    @GetMapping("/clases-onlines/UUID/{codigoCreador}")
+    public ResponseEntity<ClasesOnlineDTO> getClasesOnlineUUID(@PathVariable String codigo) {
+        log.debug("REST request to get clasesOnline : {}", codigo);
+        Optional<ClasesOnlineDTO> clasesOnline = clasesOnlineRepository
+            .findByCodigo(codigo)
+            .map(clasesOnlineMapper::toDtoCodigo);
+        return ResponseUtil.wrapOrNotFound(clasesOnline);
+    }
 
     /**
      * {@code PATCH  /clases-onlines/:id} : Partial updates given fields of an existing clasesOnline, field will ignore if it is null
@@ -129,17 +156,17 @@ public class ClasesOnlineResource {
                 if (clasesOnline.getDescripcion() != null) {
                     existingClasesOnline.setDescripcion(clasesOnline.getDescripcion());
                 }
-                if (clasesOnline.getHorario() != null) {
-                    existingClasesOnline.setHorario(clasesOnline.getHorario());
+                if (clasesOnline.getFechaClase() != null) {
+                    existingClasesOnline.setFechaClase(clasesOnline.getFechaClase());
                 }
                 if (clasesOnline.getInstructor() != null) {
                     existingClasesOnline.setInstructor(clasesOnline.getInstructor());
                 }
-                if (clasesOnline.getCapacidad() != null) {
-                    existingClasesOnline.setCapacidad(clasesOnline.getCapacidad());
+                if (clasesOnline.getHoraClase() != null) {
+                    existingClasesOnline.setHoraClase(clasesOnline.getHoraClase());
                 }
-                if (clasesOnline.getParticipantesInscritos() != null) {
-                    existingClasesOnline.setParticipantesInscritos(clasesOnline.getParticipantesInscritos());
+                if (clasesOnline.getCodigo() != null) {
+                    existingClasesOnline.setCodigo(clasesOnline.getCodigo());
                 }
 
                 return existingClasesOnline;

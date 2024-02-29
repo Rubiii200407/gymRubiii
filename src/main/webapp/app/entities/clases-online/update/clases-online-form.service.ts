@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IClasesOnline, NewClasesOnline } from '../clases-online.model';
 
@@ -20,10 +20,9 @@ type ClasesOnlineFormGroupContent = {
   id: FormControl<IClasesOnline['id'] | NewClasesOnline['id']>;
   nombreClase: FormControl<IClasesOnline['nombreClase']>;
   descripcion: FormControl<IClasesOnline['descripcion']>;
-  horario: FormControl<IClasesOnline['horario']>;
+  fechaClase: FormControl<IClasesOnline['fechaClase']>;
   instructor: FormControl<IClasesOnline['instructor']>;
-  capacidad: FormControl<IClasesOnline['capacidad']>;
-  participantesInscritos: FormControl<IClasesOnline['participantesInscritos']>;
+  horaClase: FormControl<IClasesOnline['horaClase']>;
 };
 
 export type ClasesOnlineFormGroup = FormGroup<ClasesOnlineFormGroupContent>;
@@ -45,10 +44,9 @@ export class ClasesOnlineFormService {
       ),
       nombreClase: new FormControl(clasesOnlineRawValue.nombreClase),
       descripcion: new FormControl(clasesOnlineRawValue.descripcion),
-      horario: new FormControl(clasesOnlineRawValue.horario),
+      fechaClase: new FormControl(clasesOnlineRawValue.fechaClase),
       instructor: new FormControl(clasesOnlineRawValue.instructor),
-      capacidad: new FormControl(clasesOnlineRawValue.capacidad),
-      participantesInscritos: new FormControl(clasesOnlineRawValue.participantesInscritos),
+      horaClase: new FormControl(clasesOnlineRawValue.horaClase),
     });
   }
 

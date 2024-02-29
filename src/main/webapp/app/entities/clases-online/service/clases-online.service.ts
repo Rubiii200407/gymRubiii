@@ -1,16 +1,23 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable, map } from 'rxjs';
 
-import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
+import { isPresent } from 'app/core/util/operators';
 import { IClasesOnline, NewClasesOnline } from '../clases-online.model';
 
 export type PartialUpdateClasesOnline = Partial<IClasesOnline> & Pick<IClasesOnline, 'id'>;
+type RestOf<T extends IClasesOnline | NewClasesOnline> = Omit<T, '' | ''> & {
 
+};
 export type EntityResponseType = HttpResponse<IClasesOnline>;
 export type EntityArrayResponseType = HttpResponse<IClasesOnline[]>;
+export type RestClasesOnline = RestOf<IClasesOnline>;
+
+export type NewRestClasesOnline = RestOf<NewClasesOnline>;
+
+export type PartialUpdateRestClasesOnline = RestOf<PartialUpdateClasesOnline>;
 
 @Injectable({ providedIn: 'root' })
 export class ClasesOnlineService {
@@ -26,6 +33,11 @@ export class ClasesOnlineService {
     return this.http.put<IClasesOnline>(`${this.resourceUrl}/${this.getClasesOnlineIdentifier(clasesOnline)}`, clasesOnline, {
       observe: 'response',
     });
+  }
+  findUUID(codigo: string): Observable<EntityResponseType> {
+    return this.http
+      .get<RestClasesOnline>(`${this.resourceUrl + '/UUID'}/${codigo}`, { observe: 'response' })
+      .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(clasesOnline: PartialUpdateClasesOnline): Observable<EntityResponseType> {
@@ -50,6 +62,28 @@ export class ClasesOnlineService {
   getClasesOnlineIdentifier(clasesOnline: Pick<IClasesOnline, 'id'>): number {
     return clasesOnline.id;
   }
+  protected convertDateFromClient<T extends IClasesOnline | NewClasesOnline | PartialUpdateClasesOnline>(
+    clasesOnline: T
+  ): RestOf<T> {
+    return {
+      ...clasesOnline,
+   
+    };
+  }
+
+  protected convertDateFromServer(restClasesOnline: RestClasesOnline): IClasesOnline {
+    return {
+      ...restClasesOnline,
+     
+    };
+  }
+
+  protected convertResponseFromServer(res: HttpResponse<RestClasesOnline>): HttpResponse<IClasesOnline> {
+    return res.clone({
+      body: res.body ? this.convertDateFromServer(res.body) : null,
+    });
+  }
+
 
   compareClasesOnline(o1: Pick<IClasesOnline, 'id'> | null, o2: Pick<IClasesOnline, 'id'> | null): boolean {
     return o1 && o2 ? this.getClasesOnlineIdentifier(o1) === this.getClasesOnlineIdentifier(o2) : o1 === o2;
