@@ -62,6 +62,12 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="instructor">
+            <div class="d-flex">
+              <span >Instructor</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col" jhiSortBy="codigo">
             <div class="d-flex">
               <span >Codigo</span>
@@ -80,6 +86,7 @@
           <td>{{ deportes.descripcion }}</td>
           <td>{{ deportes.horaDeporte }}</td>
           <td>{{ deportes.fechaDeporte }}</td>
+          <td>{{ deportes.instructor }}</td>
           <td>{{ deportes.codigo?.slice(-6) }}</td>
           <td class="text-end">
             <div class="btn-group">

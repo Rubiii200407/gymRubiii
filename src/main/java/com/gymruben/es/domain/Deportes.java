@@ -40,6 +40,9 @@ public class Deportes implements Serializable {
     @Column(name = "codigo")
     private String codigo;
 
+    @Column(name = "instructor")
+    private String instructor;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -118,6 +121,18 @@ public class Deportes implements Serializable {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
+    public String getInstructor() {
+        return this.instructor;
+    }
+
+    public Deportes instructor(String instructor) {
+        this.setInstructor(instructor);
+        return this;
+    }
+
+    public void setInstructor(String instructor) {
+        this.instructor = instructor;
+    }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -148,6 +163,7 @@ public class Deportes implements Serializable {
             ", horaFecha='" + getFechaDeporte() + "'" +
             ", horaDeporte='" + getHoraDeporte() + "'" +     
             ", codigo='" + getCodigo() + "'" +
+            ", instructor='" + getInstructor() + "'" +
             "}";
     }
 }

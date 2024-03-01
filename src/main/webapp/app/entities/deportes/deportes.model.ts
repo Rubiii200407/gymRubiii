@@ -6,6 +6,7 @@ export interface IDeportes {
   fechaDeporte?: Date | null;
   horaDeporte?: string| null;
   codigo?: string | null;
+  instructor?:string|null;
 
 }
 

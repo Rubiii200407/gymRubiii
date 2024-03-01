@@ -21,6 +21,7 @@ export class DeportesUpdateComponent implements OnInit {
   horasDisponibles: string[] = [];
   horaDeporte: string = "";
   codigo?: string;
+  nuevaConsulta=true;
 
   uuid?:string
   guardado=false;
@@ -150,6 +151,24 @@ export class DeportesUpdateComponent implements OnInit {
     link.click();
     window.URL.revokeObjectURL(data);
   }
+  buscarUUID(): void {
+    this.deportesService.findUUID(this.codigoBusqueda).subscribe(
+      deporte => {
+        if (deporte !== null) {
+          this.deporteBuscada = deporte.body;
+          this.codigoNoExiste = false;
+        } else {
+          this.deporteBuscada = null;
+          this.codigoNoExiste = true;
+        }
+      },
+      error => {
+        this.deporteBuscada = null;
+        this.codigoNoExiste = true;
+      }
+    );
+  }
+
   
   
 

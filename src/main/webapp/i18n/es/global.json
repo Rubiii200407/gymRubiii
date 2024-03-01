@@ -106,7 +106,8 @@
       "open": "Abrir",
       "save": "Guardar",
       "view": "Vista",
-      "show": "Show {{otherEntity}}"
+      "show": "Show {{otherEntity}}",
+      "search": "Buscar"
     },
     "detail": {
       "field": "Campo",

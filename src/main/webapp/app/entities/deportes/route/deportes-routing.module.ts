@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { DeportesComponent } from '../list/deportes.component';
 import { DeportesDetailComponent } from '../detail/deportes-detail.component';
+import { DeportesDetailDeporteComponent } from '../detailDeporte/deportes-detailDeporte.component';
+import { DeportesComponent } from '../list/deportes.component';
 import { DeportesUpdateComponent } from '../update/deportes-update.component';
 import { DeportesRoutingResolveService } from './deportes-routing-resolve.service';
-import { ASC } from 'app/config/navigation.constants';
 
 const deportesRoute: Routes = [
   {
@@ -16,6 +17,10 @@ const deportesRoute: Routes = [
       defaultSort: 'id,' + ASC,
     },
     canActivate: [UserRouteAccessService],
+  },
+  {
+    path: ':uuid/deporte',
+    component: DeportesDetailDeporteComponent,
   },
   {
     path: ':id/view',
