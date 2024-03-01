@@ -10,7 +10,7 @@ import { ClasesOnlineService } from "../service/clases-online.service";
   })
 
   export class ClasesOnlineDetailOnlineComponent implements OnInit {
-    clasesOnline: IClasesOnline | null = null;
+    claseOnline: IClasesOnline | null = null;
     uuid?: string | null;
     borrar = false;
 
@@ -23,12 +23,13 @@ import { ClasesOnlineService } from "../service/clases-online.service";
   
     ngOnInit(): void {
       this.uuid = this.activatedRoute.snapshot.paramMap.get('uuid') ?? '';
+      this.cargaDatos();
     
     }
   
     delete(clasesOnline: IClasesOnline): void {
-      if (this.clasesOnline != null) {
-        this.clasesOnlineService.delete(this.clasesOnline?.id);
+      if (this.claseOnline != null) {
+        this.clasesOnlineService.delete(this.claseOnline?.id);
       }
       const modalRef = this.modalService.open(ClasesOnlineDetailOnlineComponent, { size: 'lg', backdrop: 'static' });
       modalRef.componentInstance.clasesOnline = clasesOnline;
@@ -39,6 +40,12 @@ import { ClasesOnlineService } from "../service/clases-online.service";
   
     previousState(): void {
       window.history.back();
+    }
+    cargaDatos(): void {
+      this.clasesOnlineService.findUUID(this.uuid ?? '').subscribe(clasesOnline => {
+        this.claseOnline = clasesOnline.body;
+      
+        });
     }
 }
   

@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gymruben.es.domain.Deportes;
 import com.gymruben.es.repository.DeportesRepository;
+import com.gymruben.es.service.dto.DeportesDTO;
+import com.gymruben.es.service.mapper.DeportesMapper;
 import com.gymruben.es.web.rest.errors.BadRequestAlertException;
 
 import tech.jhipster.web.util.HeaderUtil;
@@ -46,8 +48,11 @@ public class DeportesResource {
 
     private final DeportesRepository deportesRepository;
 
-    public DeportesResource(DeportesRepository deportesRepository) {
+    private final DeportesMapper deportesMapper;
+
+    public DeportesResource(DeportesRepository deportesRepository,DeportesMapper deportesMapper) {
         this.deportesRepository = deportesRepository;
+        this.deportesMapper = deportesMapper;
     }
 
     /**
@@ -71,6 +76,15 @@ public class DeportesResource {
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+    @GetMapping("/deportes/UUID/{codigo}")
+    public ResponseEntity<DeportesDTO> getDeportesUUID(@PathVariable String codigo) {
+        log.debug("REST request to get EmpresaDenuncia : {}", codigo);
+        Optional<DeportesDTO> deportes = deportesRepository
+            .findByCodigo(codigo)
+            .map(deportesMapper::toDtoCodigo);
+        return ResponseUtil.wrapOrNotFound(deportes);
+    }
+
 
     /**
      * {@code PUT  /deportes/:id} : Updates an existing deportes.

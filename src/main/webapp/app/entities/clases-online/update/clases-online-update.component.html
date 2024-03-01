@@ -1,29 +1,29 @@
 <div class="d-flex justify-content-center">
-  <div class="col-8">
-    <div *ngIf="!guardado; else elseBlockGuardado">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2
-        id="jhi-clases-online-heading"
-        data-cy="ClasesOnlineCreateUpdateHeading"
-        jhiTranslate="gymRubenApp.clasesOnline.home.createOrEditLabel"
-      >
-        Crear o editar Clases Online
-      </h2>
-      <div class="row g-2 align-items-center d-flex justify-content-end">
-        <div class="col-auto">
-          <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
-        </div>
-        <div class="col-auto">
-          <button type="button" class="btn btn-dark btn-sm" [routerLink]="['/clases-online', uuid, 'acceder']">
-            <fa-icon icon="search"></fa-icon>&nbsp;
-            <span jhiTranslate="entity.action.search">Buscar</span>
-          </button>
-        </div>
-      </div>
 
+  <div *ngIf="!guardado; else elseBlockGuardado">   
+    <h2 >Apuntate a las clases online</h2>
+    <div class="row g-2 align-items-center d-flex justify-content-end">
+      <div class="col-auto">
+        <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
+      </div>
+      <div class="col-auto">
+        <button type="button" class="btn btn-dark btn-sm" [routerLink]="['/clases-online', uuid, 'acceder']">
+          <fa-icon icon="search"></fa-icon>&nbsp;
+          <span jhiTranslate="entity.action.search">Buscar</span>
+        </button>
+      </div>
+    </div>
+    <form
+      name="editForm"
+      role="form"
+      novalidate
+      (ngSubmit)="save()"
+      [formGroup]="editForm"
+      id="formulario"
+      *ngIf="nuevaConsulta && !guardado"
+    >
       <div>
         <jhi-alert-error></jhi-alert-error>
-
         <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
           <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
@@ -130,11 +130,13 @@
         </div>
       </div>
 
-      <div>
+
+      
+       
+      <div class="mt-4">
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
           <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
         </button>
-
         <button
           type="submit"
           id="save-entity"
@@ -147,25 +149,21 @@
       </div>
     </form>
     <div *ngIf="!nuevaConsulta">
-      <span >Código de seguimiento: </span>
+      <span jhiTranslate="gestorDenunciasApp.clasesonline.home.introducirCodigo">Código de seguimiento: </span>
       <input type="text" [(ngModel)]="codigoBusqueda" />
-      <button class="btn btn-secondary btn-sm"  (click)="buscarUUID()">
+      <button class="btn btn-secondary btn-sm" jhiTranslate="gestorDenunciasApp.clasesonline.home.buscar" (click)="buscarUUID()">
         Buscar
       </button>
-    </div>  
+    </div>     
   </div>
   <ng-template #elseBlockGuardado>
     <div *ngIf="guardado" class="alert alert-success" role="alert">
-      <h4 class="alert-heading" jhiTranslate="gymRubenApp.clasesOnline.creacionSolicitud">
+      <h4 class="alert-heading" jhiTranslate="gymRubenApp.clasesonline.creacionSolicitud">
         La solicitud ha sido procesada con éxito, código de seguimiento:
       </h4>
       <p>{{ codigo }}</p>
       <hr />
     </div>
   </ng-template>
-  <ng-template #elseBlock>
-    <div class="alert alert-warning">
-      <span jhiTranslate="gestorDenunciasApp.empresaReferencia.home.notFound">Ningún Empresa Referencias encontrado</span>
-    </div>
-  </ng-template>
+
 </div>

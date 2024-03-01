@@ -1,142 +1,166 @@
 <div class="d-flex justify-content-center">
-  <div class="col-8">
-    <div *ngIf="!guardado; else elseBlockGuardado">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-deportes-heading" data-cy="DeportesCreateUpdateHeading" >
-        Deportes
-      </h2>
 
-      <div>
-        <jhi-alert-error></jhi-alert-error>
-
-        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+    <div *ngIf="!guardado; else elseBlockGuardado">   
+      <h2 jhiTranslate="gymRubenApp.deportes.home.createLabel">Denuncia</h2>
+      <div class="row g-2 align-items-center d-flex justify-content-end">
+        <div class="col-auto">
+          <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
         </div>
-
-        <div class="row mb-3">
-          <label class="form-label "for="field_nombreDeporte">Escoge el deporte q quieras</label>
-          <input
-            type="hidden"
-            class="form-control"
-            name="nombreDeporte"
-            id="field_nombreDeporte"
-            data-cy="nombreDeporte"
-            formControlName="nombreDeporte"
-            [(ngModel)]="deporteSeleccionado"
-            
-          />
+        <div class="col-auto">
+          <button type="button" class="btn btn-dark btn-sm" [routerLink]="['/deportes', uuid, 'deporte']">
+            <fa-icon icon="search"></fa-icon>&nbsp;
+            <span jhiTranslate="entity.action.search">Buscar</span>
+          </button>
         </div>
-        <div style="display:flex;justify-content: space-around ; margin: 10px;">
-          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Tenis')" (click)="mostrarDetalles('Tenis')" >
-          <img src="../../content/tenis.png" style="width:170px;height: 130px;">
-          <figcaption>Tenis</figcaption>
-        </figure>
-        <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Padel')" (click)="mostrarDetalles('Padel')">
-          <img src="../../content/padel.png" style="width:170px;height: 130px;">
-          <figcaption>Padel</figcaption>
-        </figure>
-        <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Baloncesto')" (click)="mostrarDetalles('Baloncesto')">
-          <img src="../../content/baloncesto.png" style="width:170px;height: 130px;">
-          <figcaption>Baloncesto</figcaption>
-        </figure>
-        <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Spinning')" (click)="mostrarDetalles('Spinning')">
-          <img src="../../content/bici.jpg" style="width:170px;height: 130px;">
-          <figcaption>Spinning</figcaption>
-        </figure>
-          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Crosfit')" (click)="mostrarDetalles('Crosfit')">
-          <img src="../../content/crosfit.jpg" style="width:170px;height: 130px;">
-          <figcaption>Crosfit</figcaption>
-        </figure>
-        <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Zumba')" (click)="mostrarDetalles('Zumba')"> 
-          <img src="../../content/zumba.png" style="width:170px;height: 130px;">
-          <figcaption>Zumba</figcaption>
-        </figure>
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gymRubenApp.deportes.descripcion" for="field_descripcion">Descripcion</label>
-          <input
-            type="text"
-            class="form-control"
-            name="descripcion"
-            id="field_descripcion"
-            data-cy="descripcion"
-            formControlName="descripcion"
-            [(ngModel)]="descripcionDeporte"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" for="field_fechaDeporte">Fecha Deporte</label>
-          <input
-            type="date"
-            class="form-control"
-            name="fechaDeporte"
-            id="field_fechaDeporte"
-            data-cy="fechaDeporte"
-            formControlName="fechaDeporte"
-            (change)="actualizarHorasDisponibles()"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" for="field_horaDeporte">Hora Disponibles</label>
-          <input
-            type="hidden"
-            class="form-control"
-            name="horaDeporte"
-            id="field_horaDeporte"
-            data-cy="horaDeporte"
-            formControlName="horaDeporte"
-          />
-        </div>
-        <div *ngIf="horasDisponibles.length > 0">
-  <div *ngFor="let hora of horasDisponibles">
-    <label>
-      <input type="radio" name="horaDisponible" [value]="hora" (change)="seleccionarHora(hora)" />
-      {{ hora }}
-    </label>
-  </div>
-</div>
       </div>
-      
-       
-
-      <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
-        </button>
-
-        <button
-          type="submit"
-          id="save-entity"
-          data-cy="entityCreateSaveButton"
-          [disabled]="editForm.invalid || isSaving"
-          class="btn btn-primary"
-        >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
-        </button>
-      </div>
-      
-    </form>
-    <div >
-      <span jhiTranslate="gymRubenApp.deportes.introducirCodigo"><br />Código de seguimiento: </span>
-      <input type="text" [(ngModel)]="codigoBusqueda" />
-      <button class="btn btn-secondary btn-sm" jhiTranslate="gymRubenApp.deportes.home.buscar" >
-        Buscar
-      </button>
+      <form
+        name="editForm"
+        role="form"
+        novalidate
+        (ngSubmit)="save()"
+        [formGroup]="editForm"
+        id="formulario"
+        *ngIf="nuevaConsulta && !guardado"
+      >
+        <div>
+          <jhi-alert-error></jhi-alert-error>
+          <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+  
+          <div class="row mb-3">
+            <label class="form-label "for="field_nombreDeporte">Escoge el deporte q quieras</label>
+            <input
+              type="hidden"
+              class="form-control"
+              name="nombreDeporte"
+              id="field_nombreDeporte"
+              data-cy="nombreDeporte"
+              formControlName="nombreDeporte"
+              [(ngModel)]="deporteSeleccionado"
+              
+            />
+          </div>
+          <div style="display:flex;justify-content: space-around ; margin: 10px;">
+            <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Tenis')" (click)="mostrarDetalles('Tenis')" >
+            <img src="../../content/tenis.png" style="width:170px;height: 130px;">
+            <figcaption>Tenis</figcaption>
+          </figure>
+          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Padel')" (click)="mostrarDetalles('Padel')">
+            <img src="../../content/padel.png" style="width:170px;height: 130px;">
+            <figcaption>Padel</figcaption>
+          </figure>
+          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Baloncesto')" (click)="mostrarDetalles('Baloncesto')">
+            <img src="../../content/baloncesto.png" style="width:170px;height: 130px;">
+            <figcaption>Baloncesto</figcaption>
+          </figure>
+          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Spinning')" (click)="mostrarDetalles('Spinning')">
+            <img src="../../content/bici.jpg" style="width:170px;height: 130px;">
+            <figcaption>Spinning</figcaption>
+          </figure>
+            <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Crosfit')" (click)="mostrarDetalles('Crosfit')">
+            <img src="../../content/crosfit.jpg" style="width:170px;height: 130px;">
+            <figcaption>Crosfit</figcaption>
+          </figure>
+          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Zumba')" (click)="mostrarDetalles('Zumba')"> 
+            <img src="../../content/zumba.png" style="width:170px;height: 130px;">
+            <figcaption>Zumba</figcaption>
+          </figure>
+          </div>
+  
+          <div class="row mb-3">
+            <label class="form-label" jhiTranslate="gymRubenApp.deportes.descripcion" for="field_descripcion">Descripcion</label>
+            <input
+              type="text"
+              class="form-control"
+              name="descripcion"
+              id="field_descripcion"
+              data-cy="descripcion"
+              formControlName="descripcion"
+              [(ngModel)]="descripcionDeporte"
+            />
+          </div>
+  
+          <div class="row mb-3">
+            <label class="form-label" for="field_fechaDeporte">Fecha Deporte</label>
+            <input
+              type="date"
+              class="form-control"
+              name="fechaDeporte"
+              id="field_fechaDeporte"
+              data-cy="fechaDeporte"
+              formControlName="fechaDeporte"
+              (change)="actualizarHorasDisponibles()"
+            />
+          </div>
+          <div class="row mb-3">
+            <label class="form-label" for="field_instructor">Instructor</label>
+            <input
+              type="text"
+              class="form-control"
+              name="instructor"
+              id="field_instructor"
+              data-cy="instructor"
+              formControlName="instructor"
+              
+            />
+          </div>
+  
+  
+          <div class="row mb-3">
+            <label class="form-label" for="field_horaDeporte">Hora Disponibles</label>
+            <input
+              type="hidden"
+              class="form-control"
+              name="horaDeporte"
+              id="field_horaDeporte"
+              data-cy="horaDeporte"
+              formControlName="horaDeporte"
+            />
+          </div>
+          <div *ngIf="horasDisponibles.length > 0">
+    <div *ngFor="let hora of horasDisponibles">
+      <label>
+        <input type="radio" name="horaDisponible" [value]="hora" (change)="seleccionarHora(hora)" />
+        {{ hora }}
+      </label>
     </div>
   </div>
-  <ng-template #elseBlockGuardado>
-    <div *ngIf="guardado" class="alert alert-success" role="alert">
-      <h4 class="alert-heading" jhiTranslate="gymRubenApp.deportes.creacionSolicitud">
-        La solicitud ha sido procesada con éxito, código de seguimiento:
-      </h4>
-      <p>{{ codigo }}</p>
-      <hr />
+        </div>
+        
+         
+        <div class="mt-4">
+          <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+          </button>
+          <button
+            type="submit"
+            id="save-entity"
+            data-cy="entityCreateSaveButton"
+            [disabled]="editForm.invalid || isSaving"
+            class="btn btn-primary"
+          >
+            <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
+          </button>
+        </div>
+      </form>
+      <div *ngIf="!nuevaConsulta">
+        <span jhiTranslate="gestorDenunciasApp.deportes.home.introducirCodigo">Código de seguimiento: </span>
+        <input type="text" [(ngModel)]="codigoBusqueda" />
+        <button class="btn btn-secondary btn-sm" jhiTranslate="gestorDenunciasApp.deportes.home.buscar" (click)="buscarUUID()">
+          Buscar
+        </button>
+      </div>     
     </div>
-  </ng-template>
+    <ng-template #elseBlockGuardado>
+      <div *ngIf="guardado" class="alert alert-success" role="alert">
+        <h4 class="alert-heading" jhiTranslate="gymRubenApp.deportes.creacionSolicitud">
+          La solicitud ha sido procesada con éxito, código de seguimiento:
+        </h4>
+        <p>{{ codigo }}</p>
+        <hr />
+      </div>
+    </ng-template>
   
 </div>
-

@@ -48,6 +48,9 @@ class DeportesResourceIT {
     private static final String DEFAULT_CODIGO = "AAAAAAAAAA";
     private static final String UPDATED_CODIGO = "BBBBBBBBBB";
 
+    private static final String DEFAULT_INSTRUCTOR = "AAAAAAAAAA";
+    private static final String UPDATED_INSTRUCTOR = "BBBBBBBBBB";
+
     private static final String ENTITY_API_URL = "/api/deportes";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -202,7 +205,8 @@ class DeportesResourceIT {
             .descripcion(UPDATED_DESCRIPCION)
             .fechaDeporte(UPDATED_FECHA_DEPORTE)
             .horaDeporte(DEFAULT_HORA_DEPORTE)
-            .codigo(UPDATED_CODIGO);
+            .codigo(UPDATED_CODIGO)
+            .instructor(UPDATED_INSTRUCTOR);
 
         restDeportesMockMvc
             .perform(
@@ -221,6 +225,7 @@ class DeportesResourceIT {
         assertThat(testDeportes.getFechaDeporte()).isEqualTo(UPDATED_FECHA_DEPORTE);
         assertThat(testDeportes.getHoraDeporte()).isEqualTo(UPDATED_HORA_DEPORTE);
         assertThat(testDeportes.getCodigo()).isEqualTo(UPDATED_CODIGO);
+        assertThat(testDeportes.getInstructor()).isEqualTo(UPDATED_INSTRUCTOR);
     }
 
     @Test
@@ -295,7 +300,8 @@ class DeportesResourceIT {
             .nombreDeporte(UPDATED_NOMBRE_DEPORTE)
             .fechaDeporte(UPDATED_FECHA_DEPORTE)
             .horaDeporte(UPDATED_HORA_DEPORTE)
-            .codigo(UPDATED_CODIGO);
+            .codigo(UPDATED_CODIGO)
+            .instructor(UPDATED_INSTRUCTOR);
 
         restDeportesMockMvc
             .perform(
@@ -314,6 +320,7 @@ class DeportesResourceIT {
         assertThat(testDeportes.getFechaDeporte()).isEqualTo(UPDATED_FECHA_DEPORTE);
         assertThat(testDeportes.getHoraDeporte()).isEqualTo(UPDATED_HORA_DEPORTE);
         assertThat(testDeportes.getCodigo()).isEqualTo(UPDATED_CODIGO);
+        assertThat(testDeportes.getInstructor()).isEqualTo(UPDATED_INSTRUCTOR);
     }
 
     @Test
@@ -333,7 +340,8 @@ class DeportesResourceIT {
             .descripcion(UPDATED_DESCRIPCION)
             .fechaDeporte(UPDATED_FECHA_DEPORTE)
             .horaDeporte(UPDATED_HORA_DEPORTE)
-            .codigo(UPDATED_CODIGO);
+            .codigo(UPDATED_CODIGO)
+            .instructor(UPDATED_INSTRUCTOR);
 
         restDeportesMockMvc
             .perform(
@@ -352,6 +360,7 @@ class DeportesResourceIT {
         assertThat(testDeportes.getFechaDeporte()).isEqualTo(UPDATED_FECHA_DEPORTE);
         assertThat(testDeportes.getHoraDeporte()).isEqualTo(UPDATED_HORA_DEPORTE);
         assertThat(testDeportes.getCodigo()).isEqualTo(UPDATED_CODIGO);
+        assertThat(testDeportes.getInstructor()).isEqualTo(UPDATED_INSTRUCTOR);
     }
 
     @Test
