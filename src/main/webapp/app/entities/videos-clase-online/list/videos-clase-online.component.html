@@ -44,24 +44,12 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="descripcionVideo">
-            <div class="d-flex">
-              <span jhiTranslate="gymRubenApp.videosClaseOnline.descripcionVideo">Descripcion Video</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th scope="col" jhiSortBy="urlVideo">
             <div class="d-flex">
               <span jhiTranslate="gymRubenApp.videosClaseOnline.urlVideo">Url Video</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
-          </th>
-          <th scope="col" jhiSortBy="duracion">
-            <div class="d-flex">
-              <span jhiTranslate="gymRubenApp.videosClaseOnline.duracion">Duracion</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
+          </th> 
           <th scope="col" jhiSortBy="claseOnline.id">
             <div class="d-flex">
               <span jhiTranslate="gymRubenApp.videosClaseOnline.claseOnline">Clase Online</span>
@@ -77,14 +65,7 @@
             <a [routerLink]="['/videos-clase-online', videosClaseOnline.id, 'view']">{{ videosClaseOnline.id }}</a>
           </td>
           <td>{{ videosClaseOnline.tituloVideo }}</td>
-          <td>{{ videosClaseOnline.descripcionVideo }}</td>
           <td>{{ videosClaseOnline.urlVideo }}</td>
-          <td>{{ videosClaseOnline.duracion }}</td>
-          <td>
-            <div *ngIf="videosClaseOnline.claseOnline">
-              <a [routerLink]="['/clases-online', videosClaseOnline.claseOnline.id, 'view']">{{ videosClaseOnline.claseOnline.id }}</a>
-            </div>
-          </td>
           <td class="text-end">
             <div class="btn-group">
               <button

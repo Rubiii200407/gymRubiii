@@ -1,19 +1,30 @@
 package com.gymruben.es.web.rest;
 
-import com.gymruben.es.domain.VideosClaseOnline;
-import com.gymruben.es.repository.VideosClaseOnlineRepository;
-import com.gymruben.es.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.gymruben.es.domain.VideosClaseOnline;
+import com.gymruben.es.repository.VideosClaseOnlineRepository;
+import com.gymruben.es.web.rest.errors.BadRequestAlertException;
+
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
@@ -127,15 +138,10 @@ public class VideosClaseOnlineResource {
                 if (videosClaseOnline.getTituloVideo() != null) {
                     existingVideosClaseOnline.setTituloVideo(videosClaseOnline.getTituloVideo());
                 }
-                if (videosClaseOnline.getDescripcionVideo() != null) {
-                    existingVideosClaseOnline.setDescripcionVideo(videosClaseOnline.getDescripcionVideo());
-                }
                 if (videosClaseOnline.getUrlVideo() != null) {
                     existingVideosClaseOnline.setUrlVideo(videosClaseOnline.getUrlVideo());
                 }
-                if (videosClaseOnline.getDuracion() != null) {
-                    existingVideosClaseOnline.setDuracion(videosClaseOnline.getDuracion());
-                }
+
 
                 return existingVideosClaseOnline;
             })

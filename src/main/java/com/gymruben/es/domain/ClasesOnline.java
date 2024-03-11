@@ -44,6 +44,8 @@ public class ClasesOnline implements Serializable {
     
     @Column(name = "codigo")
     private String codigo;
+    @Column(name = "video_id")
+    private String videoId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -136,7 +138,18 @@ public class ClasesOnline implements Serializable {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
+    public String getVideoId() {
+        return this.videoId;
+    }
 
+    public ClasesOnline videoId(String videoId) {
+        this.setVideoId(videoId);
+        return this;
+    }
+
+    public void setVideoId(String videoId) {
+        this.videoId = videoId;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -167,6 +180,7 @@ public class ClasesOnline implements Serializable {
             ", instructor='" + getInstructor() + "'" +
             ", horaClase='" + getHoraClase() + "'" +
             ", codigo='" + getCodigo() + "'" +
+            ", videoId='" + getVideoId() + "'" +
             "}";
     }
 }

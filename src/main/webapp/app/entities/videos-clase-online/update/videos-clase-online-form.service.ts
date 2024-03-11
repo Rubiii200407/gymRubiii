@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IVideosClaseOnline, NewVideosClaseOnline } from '../videos-clase-online.model';
 
@@ -19,10 +19,7 @@ type VideosClaseOnlineFormDefaults = Pick<NewVideosClaseOnline, 'id'>;
 type VideosClaseOnlineFormGroupContent = {
   id: FormControl<IVideosClaseOnline['id'] | NewVideosClaseOnline['id']>;
   tituloVideo: FormControl<IVideosClaseOnline['tituloVideo']>;
-  descripcionVideo: FormControl<IVideosClaseOnline['descripcionVideo']>;
   urlVideo: FormControl<IVideosClaseOnline['urlVideo']>;
-  duracion: FormControl<IVideosClaseOnline['duracion']>;
-  claseOnline: FormControl<IVideosClaseOnline['claseOnline']>;
 };
 
 export type VideosClaseOnlineFormGroup = FormGroup<VideosClaseOnlineFormGroupContent>;
@@ -43,10 +40,8 @@ export class VideosClaseOnlineFormService {
         }
       ),
       tituloVideo: new FormControl(videosClaseOnlineRawValue.tituloVideo),
-      descripcionVideo: new FormControl(videosClaseOnlineRawValue.descripcionVideo),
       urlVideo: new FormControl(videosClaseOnlineRawValue.urlVideo),
-      duracion: new FormControl(videosClaseOnlineRawValue.duracion),
-      claseOnline: new FormControl(videosClaseOnlineRawValue.claseOnline),
+
     });
   }
 

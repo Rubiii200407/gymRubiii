@@ -1,17 +1,16 @@
 package com.gymruben.es.web.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
+import static org.assertj.core.api.Assertions.*;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.gymruben.es.IntegrationTest;
-import com.gymruben.es.domain.VideosClaseOnline;
-import com.gymruben.es.repository.VideosClaseOnlineRepository;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+
 import javax.persistence.EntityManager;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,10 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.gymruben.es.IntegrationTest;
+import com.gymruben.es.domain.VideosClaseOnline;
+import com.gymruben.es.repository.VideosClaseOnlineRepository;
 
 /**
  * Integration tests for the {@link VideosClaseOnlineResource} REST controller.
@@ -32,14 +35,11 @@ class VideosClaseOnlineResourceIT {
     private static final String DEFAULT_TITULO_VIDEO = "AAAAAAAAAA";
     private static final String UPDATED_TITULO_VIDEO = "BBBBBBBBBB";
 
-    private static final String DEFAULT_DESCRIPCION_VIDEO = "AAAAAAAAAA";
-    private static final String UPDATED_DESCRIPCION_VIDEO = "BBBBBBBBBB";
+
 
     private static final String DEFAULT_URL_VIDEO = "AAAAAAAAAA";
     private static final String UPDATED_URL_VIDEO = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_DURACION = 1L;
-    private static final Long UPDATED_DURACION = 2L;
 
     private static final String ENTITY_API_URL = "/api/videos-clase-onlines";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -67,9 +67,8 @@ class VideosClaseOnlineResourceIT {
     public static VideosClaseOnline createEntity(EntityManager em) {
         VideosClaseOnline videosClaseOnline = new VideosClaseOnline()
             .tituloVideo(DEFAULT_TITULO_VIDEO)
-            .descripcionVideo(DEFAULT_DESCRIPCION_VIDEO)
-            .urlVideo(DEFAULT_URL_VIDEO)
-            .duracion(DEFAULT_DURACION);
+            .urlVideo(DEFAULT_URL_VIDEO);
+
         return videosClaseOnline;
     }
 
@@ -82,9 +81,7 @@ class VideosClaseOnlineResourceIT {
     public static VideosClaseOnline createUpdatedEntity(EntityManager em) {
         VideosClaseOnline videosClaseOnline = new VideosClaseOnline()
             .tituloVideo(UPDATED_TITULO_VIDEO)
-            .descripcionVideo(UPDATED_DESCRIPCION_VIDEO)
-            .urlVideo(UPDATED_URL_VIDEO)
-            .duracion(UPDATED_DURACION);
+            .urlVideo(UPDATED_URL_VIDEO);
         return videosClaseOnline;
     }
 
@@ -108,10 +105,9 @@ class VideosClaseOnlineResourceIT {
         List<VideosClaseOnline> videosClaseOnlineList = videosClaseOnlineRepository.findAll();
         assertThat(videosClaseOnlineList).hasSize(databaseSizeBeforeCreate + 1);
         VideosClaseOnline testVideosClaseOnline = videosClaseOnlineList.get(videosClaseOnlineList.size() - 1);
-        assertThat(testVideosClaseOnline.getTituloVideo()).isEqualTo(DEFAULT_TITULO_VIDEO);
-        assertThat(testVideosClaseOnline.getDescripcionVideo()).isEqualTo(DEFAULT_DESCRIPCION_VIDEO);
+        assertThat(testVideosClaseOnline.getTituloVideo()).isEqualTo(DEFAULT_TITULO_VIDEO); 
         assertThat(testVideosClaseOnline.getUrlVideo()).isEqualTo(DEFAULT_URL_VIDEO);
-        assertThat(testVideosClaseOnline.getDuracion()).isEqualTo(DEFAULT_DURACION);
+       
     }
 
     @Test
@@ -147,9 +143,8 @@ class VideosClaseOnlineResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(videosClaseOnline.getId().intValue())))
             .andExpect(jsonPath("$.[*].tituloVideo").value(hasItem(DEFAULT_TITULO_VIDEO)))
-            .andExpect(jsonPath("$.[*].descripcionVideo").value(hasItem(DEFAULT_DESCRIPCION_VIDEO)))
-            .andExpect(jsonPath("$.[*].urlVideo").value(hasItem(DEFAULT_URL_VIDEO)))
-            .andExpect(jsonPath("$.[*].duracion").value(hasItem(DEFAULT_DURACION.intValue())));
+            .andExpect(jsonPath("$.[*].urlVideo").value(hasItem(DEFAULT_URL_VIDEO)));
+
     }
 
     @Test
@@ -165,9 +160,7 @@ class VideosClaseOnlineResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(videosClaseOnline.getId().intValue()))
             .andExpect(jsonPath("$.tituloVideo").value(DEFAULT_TITULO_VIDEO))
-            .andExpect(jsonPath("$.descripcionVideo").value(DEFAULT_DESCRIPCION_VIDEO))
-            .andExpect(jsonPath("$.urlVideo").value(DEFAULT_URL_VIDEO))
-            .andExpect(jsonPath("$.duracion").value(DEFAULT_DURACION.intValue()));
+            .andExpect(jsonPath("$.urlVideo").value(DEFAULT_URL_VIDEO));
     }
 
     @Test
@@ -191,9 +184,7 @@ class VideosClaseOnlineResourceIT {
         em.detach(updatedVideosClaseOnline);
         updatedVideosClaseOnline
             .tituloVideo(UPDATED_TITULO_VIDEO)
-            .descripcionVideo(UPDATED_DESCRIPCION_VIDEO)
-            .urlVideo(UPDATED_URL_VIDEO)
-            .duracion(UPDATED_DURACION);
+            .urlVideo(UPDATED_URL_VIDEO);
 
         restVideosClaseOnlineMockMvc
             .perform(
@@ -208,9 +199,7 @@ class VideosClaseOnlineResourceIT {
         assertThat(videosClaseOnlineList).hasSize(databaseSizeBeforeUpdate);
         VideosClaseOnline testVideosClaseOnline = videosClaseOnlineList.get(videosClaseOnlineList.size() - 1);
         assertThat(testVideosClaseOnline.getTituloVideo()).isEqualTo(UPDATED_TITULO_VIDEO);
-        assertThat(testVideosClaseOnline.getDescripcionVideo()).isEqualTo(UPDATED_DESCRIPCION_VIDEO);
         assertThat(testVideosClaseOnline.getUrlVideo()).isEqualTo(UPDATED_URL_VIDEO);
-        assertThat(testVideosClaseOnline.getDuracion()).isEqualTo(UPDATED_DURACION);
     }
 
     @Test
@@ -283,7 +272,6 @@ class VideosClaseOnlineResourceIT {
         VideosClaseOnline partialUpdatedVideosClaseOnline = new VideosClaseOnline();
         partialUpdatedVideosClaseOnline.setId(videosClaseOnline.getId());
 
-        partialUpdatedVideosClaseOnline.descripcionVideo(UPDATED_DESCRIPCION_VIDEO).duracion(UPDATED_DURACION);
 
         restVideosClaseOnlineMockMvc
             .perform(
@@ -297,10 +285,9 @@ class VideosClaseOnlineResourceIT {
         List<VideosClaseOnline> videosClaseOnlineList = videosClaseOnlineRepository.findAll();
         assertThat(videosClaseOnlineList).hasSize(databaseSizeBeforeUpdate);
         VideosClaseOnline testVideosClaseOnline = videosClaseOnlineList.get(videosClaseOnlineList.size() - 1);
-        assertThat(testVideosClaseOnline.getTituloVideo()).isEqualTo(DEFAULT_TITULO_VIDEO);
-        assertThat(testVideosClaseOnline.getDescripcionVideo()).isEqualTo(UPDATED_DESCRIPCION_VIDEO);
+        assertThat(testVideosClaseOnline.getTituloVideo()).isEqualTo(DEFAULT_TITULO_VIDEO);      
         assertThat(testVideosClaseOnline.getUrlVideo()).isEqualTo(DEFAULT_URL_VIDEO);
-        assertThat(testVideosClaseOnline.getDuracion()).isEqualTo(UPDATED_DURACION);
+
     }
 
     @Test
@@ -317,9 +304,7 @@ class VideosClaseOnlineResourceIT {
 
         partialUpdatedVideosClaseOnline
             .tituloVideo(UPDATED_TITULO_VIDEO)
-            .descripcionVideo(UPDATED_DESCRIPCION_VIDEO)
-            .urlVideo(UPDATED_URL_VIDEO)
-            .duracion(UPDATED_DURACION);
+            .urlVideo(UPDATED_URL_VIDEO);
 
         restVideosClaseOnlineMockMvc
             .perform(
@@ -333,10 +318,8 @@ class VideosClaseOnlineResourceIT {
         List<VideosClaseOnline> videosClaseOnlineList = videosClaseOnlineRepository.findAll();
         assertThat(videosClaseOnlineList).hasSize(databaseSizeBeforeUpdate);
         VideosClaseOnline testVideosClaseOnline = videosClaseOnlineList.get(videosClaseOnlineList.size() - 1);
-        assertThat(testVideosClaseOnline.getTituloVideo()).isEqualTo(UPDATED_TITULO_VIDEO);
-        assertThat(testVideosClaseOnline.getDescripcionVideo()).isEqualTo(UPDATED_DESCRIPCION_VIDEO);
+        assertThat(testVideosClaseOnline.getTituloVideo()).isEqualTo(UPDATED_TITULO_VIDEO);    
         assertThat(testVideosClaseOnline.getUrlVideo()).isEqualTo(UPDATED_URL_VIDEO);
-        assertThat(testVideosClaseOnline.getDuracion()).isEqualTo(UPDATED_DURACION);
     }
 
     @Test

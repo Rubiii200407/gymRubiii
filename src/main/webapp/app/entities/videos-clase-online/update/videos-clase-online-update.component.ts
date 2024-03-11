@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 
-import { VideosClaseOnlineFormService, VideosClaseOnlineFormGroup } from './videos-clase-online-form.service';
-import { IVideosClaseOnline } from '../videos-clase-online.model';
-import { VideosClaseOnlineService } from '../service/videos-clase-online.service';
 import { IClasesOnline } from 'app/entities/clases-online/clases-online.model';
 import { ClasesOnlineService } from 'app/entities/clases-online/service/clases-online.service';
+import { VideosClaseOnlineService } from '../service/videos-clase-online.service';
+import { IVideosClaseOnline } from '../videos-clase-online.model';
+import { VideosClaseOnlineFormGroup, VideosClaseOnlineFormService } from './videos-clase-online-form.service';
 
 @Component({
   selector: 'jhi-videos-clase-online-update',
@@ -82,7 +82,6 @@ export class VideosClaseOnlineUpdateComponent implements OnInit {
 
     this.clasesOnlinesSharedCollection = this.clasesOnlineService.addClasesOnlineToCollectionIfMissing<IClasesOnline>(
       this.clasesOnlinesSharedCollection,
-      videosClaseOnline.claseOnline
     );
   }
 
@@ -92,7 +91,7 @@ export class VideosClaseOnlineUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IClasesOnline[]>) => res.body ?? []))
       .pipe(
         map((clasesOnlines: IClasesOnline[]) =>
-          this.clasesOnlineService.addClasesOnlineToCollectionIfMissing<IClasesOnline>(clasesOnlines, this.videosClaseOnline?.claseOnline)
+          this.clasesOnlineService.addClasesOnlineToCollectionIfMissing<IClasesOnline>(clasesOnlines)
         )
       )
       .subscribe((clasesOnlines: IClasesOnline[]) => (this.clasesOnlinesSharedCollection = clasesOnlines));

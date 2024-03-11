@@ -6,6 +6,8 @@ export interface IClasesOnline {
   instructor?: string | null;
   horaClase?: string | null;
   codigo?:string|null;
+  videoId?:string|null;
+
 }
 
 export type NewClasesOnline = Omit<IClasesOnline, 'id'> & { id: null };

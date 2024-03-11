@@ -43,10 +43,10 @@ export class DeportesFormService {
           validators: [Validators.required],
         }
       ),
-      nombreDeporte: new FormControl(deportesRawValue.nombreDeporte),
-      descripcion: new FormControl(deportesRawValue.descripcion),
-      fechaDeporte: new FormControl(deportesRawValue.fechaDeporte),
-      horaDeporte: new FormControl(deportesRawValue.horaDeporte),
+      nombreDeporte: new FormControl(deportesRawValue.nombreDeporte,[Validators.required],),
+      descripcion: new FormControl(deportesRawValue.descripcion,[Validators.required],),
+      fechaDeporte: new FormControl(deportesRawValue.fechaDeporte,[Validators.required],),
+      horaDeporte: new FormControl(deportesRawValue.horaDeporte,[Validators.required],),
       instructor: new FormControl(deportesRawValue.instructor),
       codigo: new FormControl(deportesRawValue.codigo),
     });

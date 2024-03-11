@@ -5,11 +5,11 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,6 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gymruben.es.domain.ClasesOnline;
 import com.gymruben.es.repository.ClasesOnlineRepository;
+import com.gymruben.es.repository.VideosClaseOnlineRepository;
+import com.gymruben.es.service.ClasesOnlineService;
+import com.gymruben.es.service.VideosClaseOnlineService;
 import com.gymruben.es.service.dto.ClasesOnlineDTO;
 import com.gymruben.es.service.mapper.ClasesOnlineMapper;
 import com.gymruben.es.web.rest.errors.BadRequestAlertException;
@@ -49,10 +52,16 @@ public class ClasesOnlineResource {
     private final ClasesOnlineRepository clasesOnlineRepository;
 
     private final ClasesOnlineMapper clasesOnlineMapper;
+    private final ClasesOnlineService clasesOnlineService;
+    private final VideosClaseOnlineService videosClaseOnlineService;
+    private final VideosClaseOnlineRepository videosClaseOnlineRepository;
 
-    public ClasesOnlineResource(ClasesOnlineRepository clasesOnlineRepository,ClasesOnlineMapper clasesOnlineMapper) {
+    public ClasesOnlineResource(ClasesOnlineRepository clasesOnlineRepository,ClasesOnlineMapper clasesOnlineMapper,ClasesOnlineService clasesOnlineService,VideosClaseOnlineService videosClaseOnlineService,VideosClaseOnlineRepository videosClaseOnlineRepository) {
         this.clasesOnlineRepository = clasesOnlineRepository;
         this.clasesOnlineMapper = clasesOnlineMapper;
+        this.clasesOnlineService = clasesOnlineService;
+        this.videosClaseOnlineService = videosClaseOnlineService;
+        this.videosClaseOnlineRepository = videosClaseOnlineRepository;
     }
 
     /**
@@ -61,21 +70,23 @@ public class ClasesOnlineResource {
      * @param clasesOnline the clasesOnline to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new clasesOnline, or with status {@code 400 (Bad Request)} if the clasesOnline has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
+     * @throws NotFoundException 
      */
     @PostMapping("/clases-onlines")
     public ResponseEntity<ClasesOnline> createClasesOnline(@RequestBody ClasesOnline clasesOnline) throws URISyntaxException {
-        log.debug("REST request to save ClasesOnline : {}", clasesOnline);
-        if (clasesOnline.getId() != null) {
-            throw new BadRequestAlertException("A new clasesOnline cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        String uuid = UUID.randomUUID().toString();
-        clasesOnline.setCodigo(uuid);
-        ClasesOnline result = clasesOnlineRepository.save(clasesOnline);
+        log.debug("REST request to save ClasesOnline: {}", clasesOnline);
+       
+        ClasesOnline result = clasesOnlineService.createClasesOnline(clasesOnline);
+
         return ResponseEntity
-            .created(new URI("/api/clases-onlines/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+                .created(new URI("/api/clases-onlines/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                .body(result);
     }
+
+    
+
+    
 
     /**
      * {@code PUT  /clases-onlines/:id} : Updates an existing clasesOnline.
@@ -167,6 +178,9 @@ public class ClasesOnlineResource {
                 }
                 if (clasesOnline.getCodigo() != null) {
                     existingClasesOnline.setCodigo(clasesOnline.getCodigo());
+                }
+                if (clasesOnline.getVideoId() != null) {
+                    existingClasesOnline.setVideoId(clasesOnline.getVideoId());
                 }
 
                 return existingClasesOnline;

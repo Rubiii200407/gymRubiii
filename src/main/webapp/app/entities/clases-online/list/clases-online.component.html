@@ -69,7 +69,20 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col"></th>
+
+          <th scope="col" jhiSortBy="codigo">
+            <div class="d-flex">
+              <span >Codigo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="">
+            <div class="d-flex">
+              <span >Video</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          
         </tr>
       </thead>
       <tbody>
@@ -82,7 +95,9 @@
           <td>{{ clasesOnline.fechaClase }}</td>
           <td>{{ clasesOnline.instructor }}</td>
           <td>{{ clasesOnline.horaClase }}</td>
-          <td>{{ clasesOnline.codigo }}</td>
+          <td>{{ clasesOnline.codigo?.slice(-6) }}</td>
+          <td>{{ clasesOnline.videoId }}</td>
+      
           <td class="text-end">
             <div class="btn-group">
               <button

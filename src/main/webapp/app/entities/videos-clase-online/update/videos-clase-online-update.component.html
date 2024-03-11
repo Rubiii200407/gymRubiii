@@ -28,46 +28,9 @@
             formControlName="tituloVideo"
           />
         </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gymRubenApp.videosClaseOnline.descripcionVideo" for="field_descripcionVideo"
-            >Descripcion Video</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            name="descripcionVideo"
-            id="field_descripcionVideo"
-            data-cy="descripcionVideo"
-            formControlName="descripcionVideo"
-          />
-        </div>
-
         <div class="row mb-3">
           <label class="form-label" jhiTranslate="gymRubenApp.videosClaseOnline.urlVideo" for="field_urlVideo">Url Video</label>
           <input type="text" class="form-control" name="urlVideo" id="field_urlVideo" data-cy="urlVideo" formControlName="urlVideo" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gymRubenApp.videosClaseOnline.duracion" for="field_duracion">Duracion</label>
-          <input type="number" class="form-control" name="duracion" id="field_duracion" data-cy="duracion" formControlName="duracion" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gymRubenApp.videosClaseOnline.claseOnline" for="field_claseOnline">Clase Online</label>
-          <select
-            class="form-control"
-            id="field_claseOnline"
-            data-cy="claseOnline"
-            name="claseOnline"
-            formControlName="claseOnline"
-            [compareWith]="compareClasesOnline"
-          >
-            <option [ngValue]="null"></option>
-            <option [ngValue]="clasesOnlineOption" *ngFor="let clasesOnlineOption of clasesOnlinesSharedCollection">
-              {{ clasesOnlineOption.id }}
-            </option>
-          </select>
         </div>
       </div>
 
