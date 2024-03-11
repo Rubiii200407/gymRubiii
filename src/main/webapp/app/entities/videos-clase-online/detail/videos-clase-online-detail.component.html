@@ -20,23 +20,9 @@
         <dd>
           <span>{{ videosClaseOnline.tituloVideo }}</span>
         </dd>
-        <dt><span jhiTranslate="gymRubenApp.videosClaseOnline.descripcionVideo">Descripcion Video</span></dt>
-        <dd>
-          <span>{{ videosClaseOnline.descripcionVideo }}</span>
-        </dd>
         <dt><span jhiTranslate="gymRubenApp.videosClaseOnline.urlVideo">Url Video</span></dt>
         <dd>
           <span>{{ videosClaseOnline.urlVideo }}</span>
-        </dd>
-        <dt><span jhiTranslate="gymRubenApp.videosClaseOnline.duracion">Duracion</span></dt>
-        <dd>
-          <span>{{ videosClaseOnline.duracion }}</span>
-        </dd>
-        <dt><span jhiTranslate="gymRubenApp.videosClaseOnline.claseOnline">Clase Online</span></dt>
-        <dd>
-          <div *ngIf="videosClaseOnline.claseOnline">
-            <a [routerLink]="['/clases-online', videosClaseOnline.claseOnline.id, 'view']">{{ videosClaseOnline.claseOnline.id }}</a>
-          </div>
         </dd>
       </dl>
 

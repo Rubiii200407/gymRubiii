@@ -23,6 +23,7 @@ type ClasesOnlineFormGroupContent = {
   fechaClase: FormControl<IClasesOnline['fechaClase']>;
   instructor: FormControl<IClasesOnline['instructor']>;
   horaClase: FormControl<IClasesOnline['horaClase']>;
+  videoId: FormControl<IClasesOnline['videoId']>;
 };
 
 export type ClasesOnlineFormGroup = FormGroup<ClasesOnlineFormGroupContent>;
@@ -42,11 +43,12 @@ export class ClasesOnlineFormService {
           validators: [Validators.required],
         }
       ),
-      nombreClase: new FormControl(clasesOnlineRawValue.nombreClase),
-      descripcion: new FormControl(clasesOnlineRawValue.descripcion),
-      fechaClase: new FormControl(clasesOnlineRawValue.fechaClase),
+      nombreClase: new FormControl(clasesOnlineRawValue.nombreClase,[Validators.required],),
+      descripcion: new FormControl(clasesOnlineRawValue.descripcion,[Validators.required],),
+      fechaClase: new FormControl(clasesOnlineRawValue.fechaClase,[Validators.required],),
       instructor: new FormControl(clasesOnlineRawValue.instructor),
-      horaClase: new FormControl(clasesOnlineRawValue.horaClase),
+      horaClase: new FormControl(clasesOnlineRawValue.horaClase,[Validators.required],),
+      videoId: new FormControl(clasesOnlineRawValue.videoId),
     });
   }
 

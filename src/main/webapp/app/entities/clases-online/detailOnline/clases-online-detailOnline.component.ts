@@ -11,7 +11,7 @@ import { ClasesOnlineService } from "../service/clases-online.service";
 
   export class ClasesOnlineDetailOnlineComponent implements OnInit {
     claseOnline: IClasesOnline | null = null;
-    uuid?: string | null;
+    uuid?: string | null |null;
     borrar = false;
 
   
@@ -42,10 +42,14 @@ import { ClasesOnlineService } from "../service/clases-online.service";
       window.history.back();
     }
     cargaDatos(): void {
-      this.clasesOnlineService.findUUID(this.uuid ?? '').subscribe(clasesOnline => {
-        this.claseOnline = clasesOnline.body;
-      
-        });
+      if (this.uuid) {
+        this.clasesOnlineService.findUUID(this.uuid).subscribe(
+          clasesOnline => {
+            this.claseOnline = clasesOnline.body;
+            
+          }
+        );
+        }        
     }
-}
+  }
   

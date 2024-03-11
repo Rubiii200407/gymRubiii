@@ -51,6 +51,9 @@ class ClasesOnlineResourceIT {
     private static final String DEFAULT_CODIGO = "AAAAAAAAAA";
     private static final String UPDATED_CODIGO = "BBBBBBBBBB";
 
+    private static final String DEFAULT_VIDEO_ID = "AAAAAAAAAA";
+    private static final String UPDATED_VIDEO_ID = "BBBBBBBBBB";
+
     private static final String ENTITY_API_URL = "/api/clases-onlines";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -81,7 +84,8 @@ class ClasesOnlineResourceIT {
             .fechaClase(DEFAULT_FECHA_CLASE)
             .instructor(DEFAULT_INSTRUCTOR)
             .horaClase(DEFAULT_HORA_CLASE)
-            .codigo(DEFAULT_CODIGO);
+            .codigo(DEFAULT_CODIGO)
+            .videoId(DEFAULT_VIDEO_ID);
         return clasesOnline;
     }
 
@@ -98,7 +102,8 @@ class ClasesOnlineResourceIT {
             .fechaClase(UPDATED_FECHA_CLASE)
             .instructor(UPDATED_INSTRUCTOR)
             .horaClase(UPDATED_HORA_CLASE)
-            .codigo(UPDATED_CODIGO);
+            .codigo(UPDATED_CODIGO)
+            .videoId(UPDATED_VIDEO_ID);
         return clasesOnline;
     }
 
@@ -126,6 +131,7 @@ class ClasesOnlineResourceIT {
         assertThat(testClasesOnline.getInstructor()).isEqualTo(DEFAULT_INSTRUCTOR);
         assertThat(testClasesOnline.getHoraClase()).isEqualTo(DEFAULT_HORA_CLASE);
         assertThat(testClasesOnline.getCodigo()).isEqualTo(DEFAULT_CODIGO);
+        assertThat(testClasesOnline.getVideoId()).isEqualTo(DEFAULT_VIDEO_ID);
     }
 
     @Test
@@ -163,7 +169,8 @@ class ClasesOnlineResourceIT {
             .andExpect(jsonPath("$.[*].fechaClase").value(hasItem(DEFAULT_FECHA_CLASE)))
             .andExpect(jsonPath("$.[*].instructor").value(hasItem(DEFAULT_INSTRUCTOR)))
             .andExpect(jsonPath("$.[*].horaClase").value(hasItem(DEFAULT_HORA_CLASE)))
-            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO)));
+            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO)))
+            .andExpect(jsonPath("$.[*].videoId").value(hasItem(DEFAULT_VIDEO_ID)));
     }
 
     @Test
@@ -183,7 +190,8 @@ class ClasesOnlineResourceIT {
             .andExpect(jsonPath("$.fechaClase").value(DEFAULT_FECHA_CLASE))
             .andExpect(jsonPath("$.instructor").value(DEFAULT_INSTRUCTOR))
             .andExpect(jsonPath("$.horaClase").value(DEFAULT_HORA_CLASE))
-            .andExpect(jsonPath("$.codigo").value(DEFAULT_CODIGO));
+            .andExpect(jsonPath("$.codigo").value(DEFAULT_CODIGO))
+            .andExpect(jsonPath("$.videoId").value(DEFAULT_VIDEO_ID));
     }
 
     @Test
@@ -211,7 +219,8 @@ class ClasesOnlineResourceIT {
             .fechaClase(UPDATED_FECHA_CLASE)
             .instructor(UPDATED_INSTRUCTOR)
             .horaClase(UPDATED_HORA_CLASE)
-            .codigo(UPDATED_CODIGO);
+            .codigo(UPDATED_CODIGO)
+            .videoId(UPDATED_VIDEO_ID);
 
         restClasesOnlineMockMvc
             .perform(
@@ -231,6 +240,7 @@ class ClasesOnlineResourceIT {
         assertThat(testClasesOnline.getInstructor()).isEqualTo(UPDATED_INSTRUCTOR);
         assertThat(testClasesOnline.getHoraClase()).isEqualTo(UPDATED_HORA_CLASE);
         assertThat(testClasesOnline.getCodigo()).isEqualTo(UPDATED_CODIGO);
+        assertThat(testClasesOnline.getVideoId()).isEqualTo(UPDATED_VIDEO_ID);
     }
 
     @Test
@@ -305,7 +315,8 @@ class ClasesOnlineResourceIT {
             .descripcion(UPDATED_DESCRIPCION)
             .fechaClase(UPDATED_FECHA_CLASE)
             .horaClase(UPDATED_HORA_CLASE)
-            .codigo(UPDATED_CODIGO);
+            .codigo(UPDATED_CODIGO)
+            .videoId(UPDATED_VIDEO_ID);
 
         restClasesOnlineMockMvc
             .perform(
@@ -325,6 +336,7 @@ class ClasesOnlineResourceIT {
         assertThat(testClasesOnline.getInstructor()).isEqualTo(DEFAULT_INSTRUCTOR);
         assertThat(testClasesOnline.getHoraClase()).isEqualTo(DEFAULT_HORA_CLASE);
         assertThat(testClasesOnline.getCodigo()).isEqualTo(DEFAULT_CODIGO);
+        assertThat(testClasesOnline.getVideoId()).isEqualTo(DEFAULT_VIDEO_ID);
     }
 
     @Test
@@ -345,7 +357,8 @@ class ClasesOnlineResourceIT {
             .fechaClase(UPDATED_FECHA_CLASE)
             .instructor(UPDATED_INSTRUCTOR)
             .horaClase(UPDATED_HORA_CLASE)
-            .codigo(UPDATED_CODIGO);
+            .codigo(UPDATED_CODIGO)
+            .videoId(UPDATED_VIDEO_ID);
 
         restClasesOnlineMockMvc
             .perform(
@@ -365,6 +378,7 @@ class ClasesOnlineResourceIT {
         assertThat(testClasesOnline.getInstructor()).isEqualTo(UPDATED_INSTRUCTOR);
         assertThat(testClasesOnline.getHoraClase()).isEqualTo(UPDATED_HORA_CLASE);
         assertThat(testClasesOnline.getCodigo()).isEqualTo(UPDATED_CODIGO);
+        assertThat(testClasesOnline.getCodigo()).isEqualTo(UPDATED_VIDEO_ID);
     }
 
     @Test
