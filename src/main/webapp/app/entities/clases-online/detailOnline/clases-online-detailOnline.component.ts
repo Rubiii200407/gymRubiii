@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { DomSanitizer } from "@angular/platform-browser";
 import { ActivatedRoute } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { IClasesOnline } from "../clases-online.model";
@@ -14,11 +15,13 @@ import { ClasesOnlineService } from "../service/clases-online.service";
     uuid?: string | null |null;
     borrar = false;
 
+
   
     constructor(
       protected activatedRoute: ActivatedRoute,
       protected clasesOnlineService: ClasesOnlineService,
-      protected modalService: NgbModal
+      protected modalService: NgbModal,
+      protected sanitizer:DomSanitizer
     ) {}
   
     ngOnInit(): void {
@@ -41,6 +44,18 @@ import { ClasesOnlineService } from "../service/clases-online.service";
     previousState(): void {
       window.history.back();
     }
+    getVideoIframe(url:string|null|undefined) {
+
+      if (!url) {
+          return this.sanitizer.bypassSecurityTrustResourceUrl("");
+      }
+      const results = url.match('[\\?&]v=([^&#]*)');
+      const videoId   = (results === null) ? url : results[1];
+   
+      return this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + videoId);   
+  }
+  
+  
     cargaDatos(): void {
       if (this.uuid) {
         this.clasesOnlineService.findUUID(this.uuid).subscribe(

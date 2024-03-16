@@ -1,0 +1,105 @@
+.conteiner-guardado{
+    background-color: #f0f4f4; 
+    width: 1500px;
+     margin-left: 0px; 
+     height: 300px; 
+     margin-top: 1%; 
+     border-radius: 25px 25px 0 0;
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      padding-left: 20px;
+  }
+  .conteiner-guardado-text{
+    margin-top: 15%;
+     margin-left: 30px;
+  
+  }
+  .conteiner-guardado strong{
+    font-size: 45px;
+  }
+  .button-section{
+    margin-top:-5%;
+     width: 60%; 
+     height: 20px;
+     margin-left: -140px;
+  }
+  .button-section button{
+    background-color: #037483;
+     border: 3px solid #037483; 
+     border-radius: 15px; 
+     color: #fff; 
+     font-size: 14px;
+  }
+  .button-section input{
+    border: none; 
+    border-radius: 15px 15px 15px 15px; 
+    font-size: 14px; 
+    width: 190px;
+    height: 23px; 
+    padding: 0 20px;
+    margin-left: -4px;
+  }
+  fa-icon.rotate-180 {
+    transform: rotate(20deg);
+    margin-left: 8px;
+    margin-right: 5px;
+  }
+  .confirmation-section{
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 30px;
+    
+  }
+
+  .confirmation-section h4{
+    margin: 70px;
+  }
+  .confirmation-section h5{
+    font-style: normal;   
+    font-weight: 400;  
+    font-size: 20px;  
+    margin-top: -30px;
+    line-height: 36px; 
+    color: #000000;
+  }
+  .confirmation-section strong{
+    color: #467F8E; 
+    font-style: normal;
+    font-weight: 600; 
+    font-size: 36px;
+    line-height: 54px;
+    margin-top: 100px;
+  }
+  .confirmation-section p{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 24px;
+    color: #000000;
+  }
+  .confirmation-section button{
+    margin-left:900px;
+    width: 170px;
+    height: 40px;
+    background: #467F8E;
+    border-radius: 7.44px;
+    color: white;
+  }
+  .circle-check {
+    margin: 50px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 50px;
+    position: relative;
+    border: 4px solid #467F8E;
+    overflow: hidden; 
+    margin-top: 50px;
+  }
+  
+ 
+    
+  

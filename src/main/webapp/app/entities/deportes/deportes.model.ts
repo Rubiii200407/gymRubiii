@@ -1,3 +1,4 @@
+import { IUser } from "../user/user.model";
 
 export interface IDeportes {
   id: number;
@@ -7,6 +8,7 @@ export interface IDeportes {
   horaDeporte?: string| null;
   codigo?: string | null;
   instructor?:string|null;
+  user?: Pick<IUser, 'id'> | null;
 
 }
 

@@ -3,8 +3,8 @@
     <div *ngIf="claseOnline">
      <h4>{{claseOnline.nombreClase}}</h4>
      <h4>{{claseOnline.descripcion}}</h4>
-     <h4>{{claseOnline.fechaClase}}</h4>
-     <h1>{{claseOnline.videoId}}</h1>
+      <iframe width="560" height="315" [src]="getVideoIframe(claseOnline.videoId)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
    
     </div>
     <div *ngIf="!claseOnline" class="alert alert-warning" id="no-result">

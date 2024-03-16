@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -42,6 +44,10 @@ public class Deportes implements Serializable {
 
     @Column(name = "instructor")
     private String instructor;
+    
+    @ManyToOne
+    @JoinColumn(name ="usuario_id",referencedColumnName = "id")
+    private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -133,6 +139,18 @@ public class Deportes implements Serializable {
     public void setInstructor(String instructor) {
         this.instructor = instructor;
     }
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Deportes user(User user) {
+        this.setUser(user);
+        return this;
+    }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -164,6 +182,7 @@ public class Deportes implements Serializable {
             ", horaDeporte='" + getHoraDeporte() + "'" +     
             ", codigo='" + getCodigo() + "'" +
             ", instructor='" + getInstructor() + "'" +
+            ", user='" + getUser() + "'" +
             "}";
     }
 }
