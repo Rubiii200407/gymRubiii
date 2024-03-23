@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -46,6 +48,10 @@ public class ClasesOnline implements Serializable {
     private String codigo;
     @Column(name = "video_id")
     private String videoId;
+
+    @ManyToOne
+    @JoinColumn(name ="usuario_id",referencedColumnName = "id")
+    private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -149,6 +155,18 @@ public class ClasesOnline implements Serializable {
 
     public void setVideoId(String videoId) {
         this.videoId = videoId;
+    }
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public ClasesOnline user(User user) {
+        this.setUser(user);
+        return this;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

@@ -11,6 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +26,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gymruben.es.domain.Deportes;
+import com.gymruben.es.domain.User;
 import com.gymruben.es.repository.DeportesRepository;
+import com.gymruben.es.repository.UserRepository;
 import com.gymruben.es.service.dto.DeportesDTO;
 import com.gymruben.es.service.mapper.DeportesMapper;
 import com.gymruben.es.web.rest.errors.BadRequestAlertException;
@@ -50,9 +55,12 @@ public class DeportesResource {
 
     private final DeportesMapper deportesMapper;
 
-    public DeportesResource(DeportesRepository deportesRepository,DeportesMapper deportesMapper) {
+    private final UserRepository userRepository;
+
+    public DeportesResource(DeportesRepository deportesRepository,DeportesMapper deportesMapper,UserRepository userRepository) {
         this.deportesRepository = deportesRepository;
         this.deportesMapper = deportesMapper;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -70,6 +78,10 @@ public class DeportesResource {
         }
         String uuid = UUID.randomUUID().toString();
         deportes.setCodigo(uuid);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username= authentication.getName();
+        User user= userRepository.findOneByLogin(username).orElseThrow(() ->new UsernameNotFoundException("username"));
+        deportes.setUser(user);
         Deportes result = deportesRepository.save(deportes);
         return ResponseEntity
             .created(new URI("/api/deportes/" + result.getId()))

@@ -6,6 +6,7 @@ public class DeportesDTO {
      private String id;
     private String codigo;
     private String codigoCompleto;
+    private UserDTO user;
 
     public String getId() {
         return this.id;
@@ -24,6 +25,13 @@ public class DeportesDTO {
     }
     public void setCodigoCompleto(String codigoCompleto) {
         this.codigoCompleto = codigoCompleto;
+    }
+    public UserDTO getUser() {
+        return this.user;
+    }
+
+    public void setUser(UserDTO userDTO) {
+        this.user = userDTO;
     }
     @Override
     public boolean equals(Object o) {
@@ -59,6 +67,8 @@ public class DeportesDTO {
             ", descripcion='" +
             getCodigoCompleto() +
             "" +
+            ", user='" +
+            getUser() +
             "}"
             );
         }

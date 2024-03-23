@@ -3,15 +3,6 @@
     <div *ngIf="!guardado; else elseBlockGuardado">   
       <h2 jhiTranslate="gymRubenApp.deportes.home.createLabel">Denuncia</h2>
       <div class="row g-2 align-items-center d-flex justify-content-end">
-        <div class="col-auto">
-          <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
-        </div>
-        <div class="col-auto">
-          <button type="button" class="btn btn-dark btn-sm" [routerLink]="['/deportes', uuid, 'deporte']">
-            <fa-icon icon="search"></fa-icon>&nbsp;
-            <span jhiTranslate="entity.action.search">Buscar</span>
-          </button>
-        </div>
       </div>
       <form
         name="editForm"
@@ -153,14 +144,33 @@
         </button>
       </div>     
     </div>
-    <ng-template #elseBlockGuardado>
-      <div *ngIf="guardado" class="alert alert-success" role="alert">
-        <h4 class="alert-heading" jhiTranslate="gymRubenApp.deportes.creacionSolicitud">
-          La solicitud ha sido procesada con éxito, código de seguimiento:
-        </h4>
-        <p>{{ codigo }}</p>
-        <hr />
+    <ng-template #elseBlockGuardado >
+
+      <div class="conteiner-guardado">  
+        <div class="conteiner-guardado-text">
+          <h1><strong>Deportes</strong></h1> 
       </div>
+        <div  class="button-section" >
+          <button type="button">
+            <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
+            <fa-icon [routerLink]="['/empresa-denuncia', uuid, 'viewDenunciante']"  icon="search"></fa-icon>
+            <span [routerLink]="['/empresa-denuncia', uuid, 'viewDenunciante']">Introduce tu denuncia</span>
+          </button>
+        </div>
+      </div>
+      <div *ngIf="guardado " class="confirmation-section" >
+        <div class="circle-check "></div>
+ 
+         <h4><strong>
+         Te has registrado Correctamente</strong></h4>
+          <h5>
+           El codigo es:</h5>
+         <p><strong >
+           {{ codigo }}</strong></p>
+         <button  (click)="pantallaCreacionDeportes()" >
+           Volver</button>
+       </div>     
+
     </ng-template>
-  
+    
 </div>

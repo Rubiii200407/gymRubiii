@@ -142,6 +142,11 @@ export class DeportesUpdateComponent implements OnInit {
     }
  
 }
+pantallaCreacionDeportes(): void {
+  this.guardado = false;
+  this.editForm.reset();
+  window.location.reload();
+}
   descargarCodigo(codigo: string): void {
     const blob = new Blob([codigo], { type: 'text/plain' });
     const data = window.URL.createObjectURL(blob);
