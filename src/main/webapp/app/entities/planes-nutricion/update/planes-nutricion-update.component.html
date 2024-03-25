@@ -41,15 +41,7 @@
           />
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.tipo" for="field_tipo">Tipo</label>
-          <input type="text" class="form-control" name="tipo" id="field_tipo" data-cy="tipo" formControlName="tipo" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.duracion" for="field_duracion">Duracion</label>
-          <input type="number" class="form-control" name="duracion" id="field_duracion" data-cy="duracion" formControlName="duracion" />
-        </div>
+      
 
         <div class="row mb-3">
           <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.instrucciones" for="field_instrucciones">Instrucciones</label>
@@ -62,42 +54,18 @@
             formControlName="instrucciones"
           />
         </div>
-
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.planNutricion" for="field_planNutricion"
-            >Plan Nutricion</label
-          >
-          <select
+          <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.alimentosRecomendados" for="field_instrucciones">Alimentos Recomendados</label>
+          <input
+            type="text"
             class="form-control"
-            id="field_planNutricion"
-            data-cy="planNutricion"
-            name="planNutricion"
-            formControlName="planNutricion"
-            [compareWith]="compareNutricion"
-          >
-            <option [ngValue]="null"></option>
-            <option [ngValue]="nutricionOption" *ngFor="let nutricionOption of nutricionsSharedCollection">{{ nutricionOption.id }}</option>
-          </select>
+            name="alimentosRecomendados"
+            id="field_alimentosRecomendados"
+            data-cy="alimentosRecomendados"
+            formControlName="alimentosRecomendados"
+          />
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.planEntrenamiento" for="field_planEntrenamiento"
-            >Plan Entrenamiento</label
-          >
-          <select
-            class="form-control"
-            id="field_planEntrenamiento"
-            data-cy="planEntrenamiento"
-            name="planEntrenamiento"
-            formControlName="planEntrenamiento"
-            [compareWith]="comparePlanesEntrenamiento"
-          >
-            <option [ngValue]="null"></option>
-            <option [ngValue]="planesEntrenamientoOption" *ngFor="let planesEntrenamientoOption of planesEntrenamientosSharedCollection">
-              {{ planesEntrenamientoOption.id }}
-            </option>
-          </select>
-        </div>
       </div>
 
       <div>
