@@ -1,17 +1,16 @@
 package com.gymruben.es.web.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
+import static org.assertj.core.api.Assertions.*;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.gymruben.es.IntegrationTest;
-import com.gymruben.es.domain.PlanesNutricion;
-import com.gymruben.es.repository.PlanesNutricionRepository;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+
 import javax.persistence.EntityManager;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,10 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.gymruben.es.IntegrationTest;
+import com.gymruben.es.domain.PlanesNutricion;
+import com.gymruben.es.repository.PlanesNutricionRepository;
 
 /**
  * Integration tests for the {@link PlanesNutricionResource} REST controller.
@@ -71,8 +74,6 @@ class PlanesNutricionResourceIT {
         PlanesNutricion planesNutricion = new PlanesNutricion()
             .nombrePlan(DEFAULT_NOMBRE_PLAN)
             .descripcion(DEFAULT_DESCRIPCION)
-            .tipo(DEFAULT_TIPO)
-            .duracion(DEFAULT_DURACION)
             .instrucciones(DEFAULT_INSTRUCCIONES);
         return planesNutricion;
     }
@@ -87,8 +88,6 @@ class PlanesNutricionResourceIT {
         PlanesNutricion planesNutricion = new PlanesNutricion()
             .nombrePlan(UPDATED_NOMBRE_PLAN)
             .descripcion(UPDATED_DESCRIPCION)
-            .tipo(UPDATED_TIPO)
-            .duracion(UPDATED_DURACION)
             .instrucciones(UPDATED_INSTRUCCIONES);
         return planesNutricion;
     }
@@ -115,8 +114,6 @@ class PlanesNutricionResourceIT {
         PlanesNutricion testPlanesNutricion = planesNutricionList.get(planesNutricionList.size() - 1);
         assertThat(testPlanesNutricion.getNombrePlan()).isEqualTo(DEFAULT_NOMBRE_PLAN);
         assertThat(testPlanesNutricion.getDescripcion()).isEqualTo(DEFAULT_DESCRIPCION);
-        assertThat(testPlanesNutricion.getTipo()).isEqualTo(DEFAULT_TIPO);
-        assertThat(testPlanesNutricion.getDuracion()).isEqualTo(DEFAULT_DURACION);
         assertThat(testPlanesNutricion.getInstrucciones()).isEqualTo(DEFAULT_INSTRUCCIONES);
     }
 
@@ -200,8 +197,6 @@ class PlanesNutricionResourceIT {
         updatedPlanesNutricion
             .nombrePlan(UPDATED_NOMBRE_PLAN)
             .descripcion(UPDATED_DESCRIPCION)
-            .tipo(UPDATED_TIPO)
-            .duracion(UPDATED_DURACION)
             .instrucciones(UPDATED_INSTRUCCIONES);
 
         restPlanesNutricionMockMvc
@@ -218,8 +213,6 @@ class PlanesNutricionResourceIT {
         PlanesNutricion testPlanesNutricion = planesNutricionList.get(planesNutricionList.size() - 1);
         assertThat(testPlanesNutricion.getNombrePlan()).isEqualTo(UPDATED_NOMBRE_PLAN);
         assertThat(testPlanesNutricion.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
-        assertThat(testPlanesNutricion.getTipo()).isEqualTo(UPDATED_TIPO);
-        assertThat(testPlanesNutricion.getDuracion()).isEqualTo(UPDATED_DURACION);
         assertThat(testPlanesNutricion.getInstrucciones()).isEqualTo(UPDATED_INSTRUCCIONES);
     }
 
@@ -293,7 +286,6 @@ class PlanesNutricionResourceIT {
         PlanesNutricion partialUpdatedPlanesNutricion = new PlanesNutricion();
         partialUpdatedPlanesNutricion.setId(planesNutricion.getId());
 
-        partialUpdatedPlanesNutricion.nombrePlan(UPDATED_NOMBRE_PLAN).tipo(UPDATED_TIPO).instrucciones(UPDATED_INSTRUCCIONES);
 
         restPlanesNutricionMockMvc
             .perform(
@@ -309,8 +301,6 @@ class PlanesNutricionResourceIT {
         PlanesNutricion testPlanesNutricion = planesNutricionList.get(planesNutricionList.size() - 1);
         assertThat(testPlanesNutricion.getNombrePlan()).isEqualTo(UPDATED_NOMBRE_PLAN);
         assertThat(testPlanesNutricion.getDescripcion()).isEqualTo(DEFAULT_DESCRIPCION);
-        assertThat(testPlanesNutricion.getTipo()).isEqualTo(UPDATED_TIPO);
-        assertThat(testPlanesNutricion.getDuracion()).isEqualTo(DEFAULT_DURACION);
         assertThat(testPlanesNutricion.getInstrucciones()).isEqualTo(UPDATED_INSTRUCCIONES);
     }
 
@@ -329,8 +319,6 @@ class PlanesNutricionResourceIT {
         partialUpdatedPlanesNutricion
             .nombrePlan(UPDATED_NOMBRE_PLAN)
             .descripcion(UPDATED_DESCRIPCION)
-            .tipo(UPDATED_TIPO)
-            .duracion(UPDATED_DURACION)
             .instrucciones(UPDATED_INSTRUCCIONES);
 
         restPlanesNutricionMockMvc
@@ -347,8 +335,6 @@ class PlanesNutricionResourceIT {
         PlanesNutricion testPlanesNutricion = planesNutricionList.get(planesNutricionList.size() - 1);
         assertThat(testPlanesNutricion.getNombrePlan()).isEqualTo(UPDATED_NOMBRE_PLAN);
         assertThat(testPlanesNutricion.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
-        assertThat(testPlanesNutricion.getTipo()).isEqualTo(UPDATED_TIPO);
-        assertThat(testPlanesNutricion.getDuracion()).isEqualTo(UPDATED_DURACION);
         assertThat(testPlanesNutricion.getInstrucciones()).isEqualTo(UPDATED_INSTRUCCIONES);
     }
 

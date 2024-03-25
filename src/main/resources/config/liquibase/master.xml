@@ -33,6 +33,10 @@
     <include file="config/liquibase/changelog/20240222120602_added_delete2_entity_VideosClaseOnline.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240222120557_added_clave_entity_Deportes.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240222120556_added_clave_entity_ClasesOnline.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240222120601_added_entity_delete_constraints_PlanesNutricion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240222120559_added_delete_entity_Nutricion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240222120601_added_entity_delete2_constraints_PlanesNutricion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240222120558_added_entity_delete_constraints_Incripciones.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

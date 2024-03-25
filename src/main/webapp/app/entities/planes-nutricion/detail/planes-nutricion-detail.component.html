@@ -22,32 +22,16 @@
         <dd>
           <span>{{ planesNutricion.descripcion }}</span>
         </dd>
-        <dt><span jhiTranslate="gymRubenApp.planesNutricion.tipo">Tipo</span></dt>
-        <dd>
-          <span>{{ planesNutricion.tipo }}</span>
-        </dd>
-        <dt><span jhiTranslate="gymRubenApp.planesNutricion.duracion">Duracion</span></dt>
-        <dd>
-          <span>{{ planesNutricion.duracion }}</span>
-        </dd>
+  
         <dt><span jhiTranslate="gymRubenApp.planesNutricion.instrucciones">Instrucciones</span></dt>
         <dd>
           <span>{{ planesNutricion.instrucciones }}</span>
         </dd>
-        <dt><span jhiTranslate="gymRubenApp.planesNutricion.planNutricion">Plan Nutricion</span></dt>
+        <dt><span jhiTranslate="gymRubenApp.planesNutricion.instrucciones">alimentos Recomendad</span></dt>
         <dd>
-          <div *ngIf="planesNutricion.planNutricion">
-            <a [routerLink]="['/nutricion', planesNutricion.planNutricion.id, 'view']">{{ planesNutricion.planNutricion.id }}</a>
-          </div>
+          <span>{{ planesNutricion.alimentosRecomendados }}</span>
         </dd>
-        <dt><span jhiTranslate="gymRubenApp.planesNutricion.planEntrenamiento">Plan Entrenamiento</span></dt>
-        <dd>
-          <div *ngIf="planesNutricion.planEntrenamiento">
-            <a [routerLink]="['/planes-entrenamiento', planesNutricion.planEntrenamiento.id, 'view']">{{
-              planesNutricion.planEntrenamiento.id
-            }}</a>
-          </div>
-        </dd>
+      
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

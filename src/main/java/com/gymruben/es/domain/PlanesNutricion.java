@@ -1,7 +1,14 @@
 package com.gymruben.es.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * A PlanesNutricion.
@@ -24,17 +31,11 @@ public class PlanesNutricion implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @Column(name = "tipo")
-    private String tipo;
-
-    @Column(name = "duracion")
-    private Long duracion;
-
     @Column(name = "instrucciones")
     private String instrucciones;
 
-    @ManyToOne
-    private Nutricion planNutricion;
+    @Column(name = "alimentos_recomendados")
+    private String alimentosRecomendados;
 
     @ManyToOne
     private PlanesEntrenamiento planEntrenamiento;
@@ -80,32 +81,6 @@ public class PlanesNutricion implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public String getTipo() {
-        return this.tipo;
-    }
-
-    public PlanesNutricion tipo(String tipo) {
-        this.setTipo(tipo);
-        return this;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public Long getDuracion() {
-        return this.duracion;
-    }
-
-    public PlanesNutricion duracion(Long duracion) {
-        this.setDuracion(duracion);
-        return this;
-    }
-
-    public void setDuracion(Long duracion) {
-        this.duracion = duracion;
-    }
-
     public String getInstrucciones() {
         return this.instrucciones;
     }
@@ -118,32 +93,20 @@ public class PlanesNutricion implements Serializable {
     public void setInstrucciones(String instrucciones) {
         this.instrucciones = instrucciones;
     }
-
-    public Nutricion getPlanNutricion() {
-        return this.planNutricion;
+    public String getAlimentosRecomendados() {
+        return this.alimentosRecomendados;
     }
 
-    public void setPlanNutricion(Nutricion nutricion) {
-        this.planNutricion = nutricion;
-    }
-
-    public PlanesNutricion planNutricion(Nutricion nutricion) {
-        this.setPlanNutricion(nutricion);
+    public PlanesNutricion alimentosRecomendados(String alimentosRecomendados) {
+        this.setAlimentosRecomendados(alimentosRecomendados);
         return this;
     }
 
-    public PlanesEntrenamiento getPlanEntrenamiento() {
-        return this.planEntrenamiento;
+    public void setAlimentosRecomendados(String alimentosRecomendados) {
+        this.alimentosRecomendados = alimentosRecomendados;
     }
 
-    public void setPlanEntrenamiento(PlanesEntrenamiento planesEntrenamiento) {
-        this.planEntrenamiento = planesEntrenamiento;
-    }
-
-    public PlanesNutricion planEntrenamiento(PlanesEntrenamiento planesEntrenamiento) {
-        this.setPlanEntrenamiento(planesEntrenamiento);
-        return this;
-    }
+    
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -171,9 +134,8 @@ public class PlanesNutricion implements Serializable {
             "id=" + getId() +
             ", nombrePlan='" + getNombrePlan() + "'" +
             ", descripcion='" + getDescripcion() + "'" +
-            ", tipo='" + getTipo() + "'" +
-            ", duracion=" + getDuracion() +
             ", instrucciones='" + getInstrucciones() + "'" +
+            ", alimentosRecomendados='" + getAlimentosRecomendados() + "'" +
             "}";
     }
 }
