@@ -47,7 +47,7 @@ class PlanesNutricionResourceIT {
     private static final String DEFAULT_INSTRUCCIONES = "AAAAAAAAAA";
     private static final String UPDATED_INSTRUCCIONES = "BBBBBBBBBB";
 
-    private static final String ENTITY_API_URL = "/api/planes-nutricions";
+    private static final String ENTITY_API_URL = "/api/";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();

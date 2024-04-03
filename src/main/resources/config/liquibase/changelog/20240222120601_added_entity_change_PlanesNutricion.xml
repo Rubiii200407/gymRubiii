@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity PlanesNutricion.
+    -->
+    <changeSet id="20240222120601-8" author="jhipster">
+
+          <addColumn tableName="planes_nutricion">
+        <column name="codigo" type="varchar(400)">
+            <constraints nullable="true"/>
+        </column>
+    </addColumn>
+       <addColumn tableName="planes_nutricion">
+        <column name="usuario_id" type="bigint">
+            <constraints nullable="true"/>
+        </column>
+    </addColumn>
+      <addForeignKeyConstraint baseColumnNames="usuario_id"
+                                 baseTableName="planes_nutricion"
+                                 constraintName="fk_planes_nutricion__usuario_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+    </changeSet>
+</databaseChangeLog>

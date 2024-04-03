@@ -14,16 +14,10 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'gymRubenApp.deportes.home.title' },
         loadChildren: () => import('./deportes/deportes.module').then(m => m.DeportesModule),
       },
-      {
-        path: 'incripciones',
-        data: { pageTitle: 'gymRubenApp.incripciones.home.title' },
-        loadChildren: () => import('./incripciones/incripciones.module').then(m => m.IncripcionesModule),
-      },
-      {
-        path: 'nutricion',
-        data: { pageTitle: 'gymRubenApp.nutricion.home.title' },
-        loadChildren: () => import('./nutricion/nutricion.module').then(m => m.NutricionModule),
-      },
+    
+  
+      
+
       {
         path: 'planes-entrenamiento',
         data: { pageTitle: 'gymRubenApp.planesEntrenamiento.home.title' },
