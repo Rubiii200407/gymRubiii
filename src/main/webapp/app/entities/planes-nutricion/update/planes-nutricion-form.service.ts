@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IPlanesNutricion, NewPlanesNutricion } from '../planes-nutricion.model';
 
@@ -20,11 +20,9 @@ type PlanesNutricionFormGroupContent = {
   id: FormControl<IPlanesNutricion['id'] | NewPlanesNutricion['id']>;
   nombrePlan: FormControl<IPlanesNutricion['nombrePlan']>;
   descripcion: FormControl<IPlanesNutricion['descripcion']>;
-  tipo: FormControl<IPlanesNutricion['tipo']>;
-  duracion: FormControl<IPlanesNutricion['duracion']>;
   instrucciones: FormControl<IPlanesNutricion['instrucciones']>;
-  planNutricion: FormControl<IPlanesNutricion['planNutricion']>;
-  planEntrenamiento: FormControl<IPlanesNutricion['planEntrenamiento']>;
+  alimentosRecomendados: FormControl<IPlanesNutricion['alimentosRecomendados']>;
+
 };
 
 export type PlanesNutricionFormGroup = FormGroup<PlanesNutricionFormGroupContent>;
@@ -46,11 +44,8 @@ export class PlanesNutricionFormService {
       ),
       nombrePlan: new FormControl(planesNutricionRawValue.nombrePlan),
       descripcion: new FormControl(planesNutricionRawValue.descripcion),
-      tipo: new FormControl(planesNutricionRawValue.tipo),
-      duracion: new FormControl(planesNutricionRawValue.duracion),
       instrucciones: new FormControl(planesNutricionRawValue.instrucciones),
-      planNutricion: new FormControl(planesNutricionRawValue.planNutricion),
-      planEntrenamiento: new FormControl(planesNutricionRawValue.planEntrenamiento),
+      alimentosRecomendados: new FormControl(planesNutricionRawValue.alimentosRecomendados),
     });
   }
 

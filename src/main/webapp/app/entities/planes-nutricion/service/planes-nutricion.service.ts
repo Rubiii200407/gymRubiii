@@ -1,25 +1,35 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable, map } from 'rxjs';
 
-import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
+import { isPresent } from 'app/core/util/operators';
 import { IPlanesNutricion, NewPlanesNutricion } from '../planes-nutricion.model';
 
 export type PartialUpdatePlanesNutricion = Partial<IPlanesNutricion> & Pick<IPlanesNutricion, 'id'>;
+type RestOf<T extends IPlanesNutricion | NewPlanesNutricion> = Omit<T, 'fechaEstado' | 'fechaCreacion'> & {
 
+};
 export type EntityResponseType = HttpResponse<IPlanesNutricion>;
 export type EntityArrayResponseType = HttpResponse<IPlanesNutricion[]>;
+export type RestPlanesNutricion = RestOf<IPlanesNutricion>;
+export type NewRestPlanesNutricion = RestOf<NewPlanesNutricion>;
+
 
 @Injectable({ providedIn: 'root' })
 export class PlanesNutricionService {
-  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/planes-nutricions');
+  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/planes-nutricion');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
   create(planesNutricion: NewPlanesNutricion): Observable<EntityResponseType> {
     return this.http.post<IPlanesNutricion>(this.resourceUrl, planesNutricion, { observe: 'response' });
+  }
+  findUUID(codigo: string): Observable<EntityResponseType> {
+    return this.http
+      .get<RestPlanesNutricion>(`${this.resourceUrl + '/UUID'}/${codigo}`, { observe: 'response' })
+      .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   update(planesNutricion: IPlanesNutricion): Observable<EntityResponseType> {
@@ -53,6 +63,18 @@ export class PlanesNutricionService {
 
   comparePlanesNutricion(o1: Pick<IPlanesNutricion, 'id'> | null, o2: Pick<IPlanesNutricion, 'id'> | null): boolean {
     return o1 && o2 ? this.getPlanesNutricionIdentifier(o1) === this.getPlanesNutricionIdentifier(o2) : o1 === o2;
+  }
+  protected convertDateFromServer(restPlanesNutricion: RestPlanesNutricion): IPlanesNutricion {
+    return {
+      ...restPlanesNutricion,
+     
+    };
+  }
+
+  protected convertResponseFromServer(res: HttpResponse<RestPlanesNutricion>): HttpResponse<IPlanesNutricion> {
+    return res.clone({
+      body: res.body ? this.convertDateFromServer(res.body) : null,
+    });
   }
 
   addPlanesNutricionToCollectionIfMissing<Type extends Pick<IPlanesNutricion, 'id'>>(

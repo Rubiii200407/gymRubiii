@@ -1,78 +1,151 @@
 <div class="d-flex justify-content-center">
-  <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2
-        id="jhi-planes-nutricion-heading"
-        data-cy="PlanesNutricionCreateUpdateHeading"
-        jhiTranslate="gymRubenApp.planesNutricion.home.createOrEditLabel"
-      >
-        Crear o editar Planes Nutricion
-      </h2>
 
-      <div>
-        <jhi-alert-error></jhi-alert-error>
-
-        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.nombrePlan" for="field_nombrePlan">Nombre Plan</label>
-          <input
-            type="text"
-            class="form-control"
-            name="nombrePlan"
-            id="field_nombrePlan"
-            data-cy="nombrePlan"
-            formControlName="nombrePlan"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.descripcion" for="field_descripcion">Descripcion</label>
-          <input
-            type="text"
-            class="form-control"
-            name="descripcion"
-            id="field_descripcion"
-            data-cy="descripcion"
-            formControlName="descripcion"
-          />
-        </div>
-
-      
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.instrucciones" for="field_instrucciones">Instrucciones</label>
-          <input
-            type="text"
-            class="form-control"
-            name="instrucciones"
-            id="field_instrucciones"
-            data-cy="instrucciones"
-            formControlName="instrucciones"
-          />
-        </div>
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.alimentosRecomendados" for="field_instrucciones">Alimentos Recomendados</label>
-          <input
-            type="text"
-            class="form-control"
-            name="alimentosRecomendados"
-            id="field_alimentosRecomendados"
-            data-cy="alimentosRecomendados"
-            formControlName="alimentosRecomendados"
-          />
-        </div>
-
+  <div *ngIf="!guardado; else elseBlockGuardado">   
+    <h2 >Apuntate a los planes de nutricion</h2>
+    <div class="row g-2 align-items-center d-flex justify-content-end">
+      <div class="col-auto">
+        <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
       </div>
+      <div class="col-auto">
+        <button type="button" class="btn btn-dark btn-sm" [routerLink]="['/clases-online', uuid, 'acceder']">
+          <fa-icon icon="search"></fa-icon>&nbsp;
+          <span jhiTranslate="entity.action.search">Buscar</span>
+        </button>
+      </div>
+    </div>
+    <form
+      name="editForm"
+      role="form"
+      novalidate
+      (ngSubmit)="save()"
+      [formGroup]="editForm"
+      id="formulario"
+      *ngIf="nuevaConsulta && !guardado"
+    >
+    <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+      <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+      <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+    </div>
 
-      <div>
+    <div class="row mb-3">
+      <label class="form-label" for="field_nombrePlan">¿Cual es tu objetivo?</label>
+      <input
+        type="hidden"
+        class="form-control"
+        name="nombrePlan"
+        id="field_nombrePlan"
+        data-cy="nombrePlan"
+        formControlName="nombrePlan"
+        [(ngModel)]="planSeleccionado"
+      />
+    </div>
+    <div style="display:flex;justify-content: space-around ; margin: 10px;">
+      <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarPlan('perdidapeso')" (click)="mostrarDetalles('PerderGrasa')" >
+      <img src="../../content/perderpeso.png" style="width:170px;height: 130px;">
+      <figcaption>Perder Grasa</figcaption>
+    </figure>
+    <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarPlan('mantenimiento')" (click)="mostrarDetalles('Forma')">
+      <img src="../../content/forma.jpg" style="width:170px;height: 130px;">
+      <figcaption>Estar en forma</figcaption>
+    </figure>
+    <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarPlan('ganarpeso')" (click)="mostrarDetalles('GanarPeso')">
+      <img src="../../content/ganarpeso.png" style="width:170px;height: 130px;">
+      <figcaption>Ganar Peso</figcaption>
+    </figure>
+    </div>
+
+    <div class="row mb-3">
+      <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.descripcion" for="field_descripcion">Descripcion</label>
+      <input
+        type="text"
+        class="form-control"
+        name="descripcion"
+        id="field_descripcion"
+        data-cy="descripcion"
+        formControlName="descripcion"
+        [(ngModel)]="descripcionPlan"
+      />
+    </div>
+    <form (ngSubmit)="calcularCalorias()"class="form">
+      <div class="form-group">
+        <label for="sexo">Sexo:</label>
+        <select id="sexo" name="sexo" [(ngModel)]="sexo" class="form-control">
+        <option value="masculino">Maculino</option>
+        <option value="femenino">Femenino</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" name="edad" [(ngModel)]="edad" class="form-group">
+      </div>
+      <div class="form-group">
+        <label for="peso">Peso(kg)</label>
+        <input type="number" id="peso" name="peso" [(ngModel)]="peso" class="form-group">
+      </div>
+      <div class="form-group">
+        <label for="altura">Altura(cm)</label>
+        <input type="number" id="altura" name="altura" [(ngModel)]="altura" class="form-group">
+      </div>
+      <div class="form-group">
+        <label for="actividadFisica">Actividad Fisica:</label>
+        <select id="actividadFisica" name="actividadFisica" [(ngModel)]="actividadFisica" class="form-control">
+        <option value="1-2Dias">1 a 2 dias por semana</option>
+        <option value="3-5Dias">3 a 5 dias por semana</option>
+        <option value="6-7Dias">6 a 7 dias por semana</option>
+        </select>
+      </div>
+      <button type="submit" class="btn-primary">Calcular Calorias</button>
+    </form>
+    <div *ngIf="calorias!==undefined" class="result">
+    <p>El numero de calorias requeridas que debes consumir es:{{calorias!= null?(calorias|number:'1.0-0'):'no'}}</p>
+
+
+  
+
+    <div class="row mb-3">
+      <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.instrucciones" for="field_instrucciones">Instrucciones</label>
+      <input
+      *ngIf="planSeleccionado!=null && planSeleccionado !==undefined && instruccionesPlan[planSeleccionado]"
+        type="text"
+        class="form-control"
+        name="instrucciones"
+        id="field_instrucciones"
+        data-cy="instrucciones"
+        formControlName="instrucciones"
+        [(ngModel)]="instruccionesPlan[planSeleccionado]"
+      />
+    </div>
+    <div class="row mb-3">
+      <label class="form-label" for="field_instrucciones">Alimentos Recomendados</label>
+      <input
+        *ngIf="planSeleccionado!=null && planSeleccionado !==undefined && alimentosPlan[planSeleccionado]"
+        type="text"
+        class="form-control"
+        name="alimentosRecomendados"
+        id="field_alimentosRecomendados"
+        data-cy="alimentosRecomendados"
+        formControlName="alimentosRecomendados"
+        [(ngModel)]="alimentosPlan[planSeleccionado]"
+        readonly="true"
+      />
+    </div>
+    <div *ngIf="planSeleccionado=='perdidapeso'">
+    <button (click)="Enlaces('clases-online/new')">Apuntate a las clases online</button>
+    <button (click)="Enlaces('deportes/new')">Apuntate a lasdeportes</button>
+    <button (click)="Enlaces('planes-entrenamiento/new')">Apuntate a los planes entrenamiento</button>
+    </div>
+    <div *ngIf="planSeleccionado=='mantenimiento'">
+      <button (click)="Enlaces('clases-online/new')">Apuntate a las clases online</button>
+      <button (click)="Enlaces('deportes/new')">Apuntate a lasdeportes</button>
+      <button (click)="Enlaces('planes-entrenamiento/new')">Apuntate a los planes entrenamiento</button>
+      </div>
+      <div *ngIf="planSeleccionado=='ganarpeso'">
+        <button (click)="Enlaces('planes-entrenamiento/new')">Apuntate a los planes entrenamiento</button>
+        </div>
+      <div class="mt-4">
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
           <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
         </button>
-
         <button
           type="submit"
           id="save-entity"
@@ -83,6 +156,24 @@
           <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
         </button>
       </div>
+    </div>
     </form>
+    <div *ngIf="!nuevaConsulta">
+      <span jhiTranslate="gestorDenunciasApp.clasesonline.home.introducirCodigo">Código de seguimiento: </span>
+      <input type="text" [(ngModel)]="codigoBusqueda" />
+      <button class="btn btn-secondary btn-sm" jhiTranslate="gestorDenunciasApp.clasesonline.home.buscar" (click)="buscarUUID()">
+        Buscar
+      </button>
+    </div>     
   </div>
+  <ng-template #elseBlockGuardado>
+    <div *ngIf="guardado" class="alert alert-success" role="alert">
+      <h4 class="alert-heading" jhiTranslate="gymRubenApp.clasesonline.creacionSolicitud">
+        La solicitud ha sido procesada con éxito, código de seguimiento:
+      </h4>
+      <p>{{ codigo }}</p>
+      <hr />
+    </div>
+  </ng-template>
+
 </div>

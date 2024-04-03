@@ -1,12 +1,19 @@
 package com.gymruben.es.repository;
 
-import com.gymruben.es.domain.PlanesNutricion;
-import org.springframework.data.jpa.repository.*;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import com.gymruben.es.domain.PlanesNutricion;
 
 /**
  * Spring Data JPA repository for the PlanesNutricion entity.
  */
 @SuppressWarnings("unused")
 @Repository
-public interface PlanesNutricionRepository extends JpaRepository<PlanesNutricion, Long> {}
+public interface PlanesNutricionRepository extends JpaRepository<PlanesNutricion, Long> {
+    @Query("SELECT e FROM PlanesNutricion e WHERE e.codigo = ?1")
+    Optional<PlanesNutricion>findByCodigo(String codigo);
+}

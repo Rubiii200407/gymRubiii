@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -37,8 +38,14 @@ public class PlanesNutricion implements Serializable {
     @Column(name = "alimentos_recomendados")
     private String alimentosRecomendados;
 
+    
+    @Column(name = "codigo")
+    private String codigo;
+
     @ManyToOne
-    private PlanesEntrenamiento planEntrenamiento;
+    @JoinColumn(name ="usuario_id",referencedColumnName = "id")
+    private User user;
+
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -106,6 +113,32 @@ public class PlanesNutricion implements Serializable {
         this.alimentosRecomendados = alimentosRecomendados;
     }
 
+    public String getCodigo() {
+        return this.codigo;
+    }
+
+    public PlanesNutricion codigo(String codigo) {
+        this.setCodigo(codigo);
+        return this;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public PlanesNutricion user(User user) {
+        this.setUser(user);
+        return this;
+    }
+
     
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -136,6 +169,8 @@ public class PlanesNutricion implements Serializable {
             ", descripcion='" + getDescripcion() + "'" +
             ", instrucciones='" + getInstrucciones() + "'" +
             ", alimentosRecomendados='" + getAlimentosRecomendados() + "'" +
+            ", codigo='" + getCodigo() + "'" +
+            ", user='" + getUser() + "'" +
             "}";
     }
 }

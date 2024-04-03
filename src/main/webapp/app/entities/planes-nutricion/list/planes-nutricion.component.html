@@ -1,6 +1,6 @@
 <div>
   <h2 id="page-heading" data-cy="PlanesNutricionHeading">
-    <span jhiTranslate="gymRubenApp.planesNutricion.home.title">Planes Nutricions</span>
+    <span jhiTranslate="gymRubenApp.planesNutricion.home.title">Planes Nutricion</span>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
@@ -72,7 +72,7 @@
             <a [routerLink]="['/planes-nutricion', planesNutricion.id, 'view']">{{ planesNutricion.id }}</a>
           </td>
           <td>{{ planesNutricion.nombrePlan }}</td>
-          <td>{{ planesNutricion.descripcion }}</td>>
+          <td>{{ planesNutricion.descripcion }}</td>
           <td>{{ planesNutricion.instrucciones }}</td>
           <td>{{ planesNutricion.alimentosRecomendados }}</td>
   

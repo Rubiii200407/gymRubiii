@@ -24,6 +24,7 @@ type DeportesFormGroupContent = {
   horaDeporte: FormControl<IDeportes['horaDeporte']>;
   instructor: FormControl<IDeportes['instructor']>;
   codigo: FormControl<IDeportes['codigo']>;
+  user: FormControl<IDeportes['user']>;
 };
 
 export type DeportesFormGroup = FormGroup<DeportesFormGroupContent>;
@@ -49,6 +50,7 @@ export class DeportesFormService {
       horaDeporte: new FormControl(deportesRawValue.horaDeporte,[Validators.required],),
       instructor: new FormControl(deportesRawValue.instructor),
       codigo: new FormControl(deportesRawValue.codigo),
+      user: new FormControl(deportesRawValue.user),
     });
   }
 

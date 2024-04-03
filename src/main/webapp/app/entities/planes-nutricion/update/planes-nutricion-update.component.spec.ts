@@ -1,18 +1,18 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpResponse } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { of, Subject, from } from 'rxjs';
+import { Subject, from, of } from 'rxjs';
 
-import { PlanesNutricionFormService } from './planes-nutricion-form.service';
-import { PlanesNutricionService } from '../service/planes-nutricion.service';
-import { IPlanesNutricion } from '../planes-nutricion.model';
 import { INutricion } from 'app/entities/nutricion/nutricion.model';
 import { NutricionService } from 'app/entities/nutricion/service/nutricion.service';
 import { IPlanesEntrenamiento } from 'app/entities/planes-entrenamiento/planes-entrenamiento.model';
 import { PlanesEntrenamientoService } from 'app/entities/planes-entrenamiento/service/planes-entrenamiento.service';
+import { IPlanesNutricion } from '../planes-nutricion.model';
+import { PlanesNutricionService } from '../service/planes-nutricion.service';
+import { PlanesNutricionFormService } from './planes-nutricion-form.service';
 
 import { PlanesNutricionUpdateComponent } from './planes-nutricion-update.component';
 
