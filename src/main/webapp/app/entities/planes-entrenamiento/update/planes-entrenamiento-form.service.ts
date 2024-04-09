@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IPlanesEntrenamiento, NewPlanesEntrenamiento } from '../planes-entrenamiento.model';
 
@@ -20,9 +20,9 @@ type PlanesEntrenamientoFormGroupContent = {
   id: FormControl<IPlanesEntrenamiento['id'] | NewPlanesEntrenamiento['id']>;
   nombrePlan: FormControl<IPlanesEntrenamiento['nombrePlan']>;
   descripcion: FormControl<IPlanesEntrenamiento['descripcion']>;
-  tipo: FormControl<IPlanesEntrenamiento['tipo']>;
-  duracion: FormControl<IPlanesEntrenamiento['duracion']>;
   instrucciones: FormControl<IPlanesEntrenamiento['instrucciones']>;
+  codigo: FormControl<IPlanesEntrenamiento['codigo']>;
+  videoId: FormControl<IPlanesEntrenamiento['videoId']>;
 };
 
 export type PlanesEntrenamientoFormGroup = FormGroup<PlanesEntrenamientoFormGroupContent>;
@@ -44,9 +44,10 @@ export class PlanesEntrenamientoFormService {
       ),
       nombrePlan: new FormControl(planesEntrenamientoRawValue.nombrePlan),
       descripcion: new FormControl(planesEntrenamientoRawValue.descripcion),
-      tipo: new FormControl(planesEntrenamientoRawValue.tipo),
-      duracion: new FormControl(planesEntrenamientoRawValue.duracion),
       instrucciones: new FormControl(planesEntrenamientoRawValue.instrucciones),
+      codigo: new FormControl(planesEntrenamientoRawValue.codigo),
+      videoId: new FormControl(planesEntrenamientoRawValue.videoId),
+
     });
   }
 

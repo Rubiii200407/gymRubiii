@@ -1,76 +1,110 @@
 <div class="d-flex justify-content-center">
-  <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2
-        id="jhi-planes-entrenamiento-heading"
-        data-cy="PlanesEntrenamientoCreateUpdateHeading"
-        jhiTranslate="gymRubenApp.planesEntrenamiento.home.createOrEditLabel"
-      >
-        Crear o editar Planes Entrenamiento
-      </h2>
 
-      <div>
-        <jhi-alert-error></jhi-alert-error>
+  <div *ngIf="!guardado; else elseBlockGuardado">   
+    <h2 >Apuntate a los planes de entrenamiento</h2>
+    <div class="row g-2 align-items-center d-flex justify-content-end">
+      <div class="col-auto">
+        <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
+      </div>
+      <div class="col-auto">
+        <button type="button" class="btn btn-dark btn-sm" [routerLink]="['/planes-entrenamiento', uuid, 'acceder']">
+          <fa-icon icon="search"></fa-icon>&nbsp;
+          <span jhiTranslate="entity.action.search">Buscar</span>
+        </button>
+      </div>
+    </div>
+    <form
+      name="editForm"
+      role="form"
+      novalidate
+      (ngSubmit)="save()"
+      [formGroup]="editForm"
+      id="formulario"
+      *ngIf="nuevaConsulta && !guardado"
+    >
+    <div>
+      <jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
+      <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+        <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+        <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+      </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gymRubenApp.planesEntrenamiento.nombrePlan" for="field_nombrePlan">Nombre Plan</label>
-          <input
-            type="text"
-            class="form-control"
-            name="nombrePlan"
-            id="field_nombrePlan"
-            data-cy="nombrePlan"
-            formControlName="nombrePlan"
-          />
-        </div>
+      <div class="row mb-3">
+        <label class="form-label" jhiTranslate="gymRubenApp.planesEntrenamiento.nombrePlan" for="field_nombrePlan">Nombre Plan</label>
+        <input
+          type="hidden"
+          class="form-control"
+          name="nombrePlan"
+          id="field_nombrePlan"
+          data-cy="nombrePlan"
+          formControlName="nombrePlan"
+          [(ngModel)]="planSeleccionado"
+        />
+      </div>
+      <div style="display:flex;justify-content: space-around ; margin: 10px;">
+        <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarPlan('Definicion')" (click)="mostrarDetalles('Definicion')"  (click)="mostrarDetallesIntrucciones('Definicion')"  >
+        <img src="../../content/definicion.png" style="width:170px;height: 130px;">
+        <figcaption>Definicion</figcaption>
+      </figure>
+      <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarPlan('RecomposicionCorporal')" (click)="mostrarDetalles('RecomposicionCorporal')" (click)="mostrarDetallesIntrucciones('RecomposicionCorporal')">
+        <img src="../../content/corporal.png" style="width:170px;height: 130px;">
+        <figcaption>RecomposicionCorporal</figcaption>
+      </figure>
+      <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarPlan('Volumen')" (click)="mostrarDetalles('Volumen')"(click)="mostrarDetallesIntrucciones('Volumen')">
+        <img src="../../content/volumen.png" style="width:170px;height: 130px;">
+        <figcaption>Volumen</figcaption>
+      </figure>
+      </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gymRubenApp.planesEntrenamiento.descripcion" for="field_descripcion">Descripcion</label>
-          <input
-            type="text"
-            class="form-control"
-            name="descripcion"
-            id="field_descripcion"
-            data-cy="descripcion"
-            formControlName="descripcion"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gymRubenApp.planesEntrenamiento.tipo" for="field_tipo">Tipo</label>
-          <input type="text" class="form-control" name="tipo" id="field_tipo" data-cy="tipo" formControlName="tipo" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gymRubenApp.planesEntrenamiento.duracion" for="field_duracion">Duracion</label>
-          <input type="number" class="form-control" name="duracion" id="field_duracion" data-cy="duracion" formControlName="duracion" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gymRubenApp.planesEntrenamiento.instrucciones" for="field_instrucciones"
-            >Instrucciones</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            name="instrucciones"
-            id="field_instrucciones"
-            data-cy="instrucciones"
-            formControlName="instrucciones"
-          />
+      <div class="row mb-3">
+        <label class="form-label" jhiTranslate="gymRubenApp.planesEntrenamiento.descripcion" for="field_descripcion">Descripcion</label>
+        <input
+          type="text"
+          class="form-control"
+          name="descripcion"
+          id="field_descripcion"
+          data-cy="descripcion"
+          formControlName="descripcion"
+          [(ngModel)]="descripcionPlan"
+        />
+      </div>
+      <div class="row mb-3">
+        <label class="form-label" jhiTranslate="gymRubenApp.planesEntrenamiento.instrucciones" for="field_instrucciones"
+          >Instrucciones</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          name="instrucciones"
+          id="field_instrucciones"
+          data-cy="instrucciones"
+          formControlName="instrucciones"
+          [(ngModel)]="descripcionInstruccion"
+        />
+      </div>
+      <div class="row">
+        <div class="col-8">
+          <div class="fondo-gris">
+            <h5><strong>Comentarios</strong></h5>
+            <div class="chat"  *ngIf="planNutricionEntrenamiento && planNutricionEntrenamientos.length > 0">
+              <div
+                *ngFor="let planNutricionEntrenamiento of planNutricionEntrenamientos"
+                [ngClass]="{ 'mb-3': planNutricionEntrenamiento.instrucciones|| planNutricionEntrenamiento.video!.length > 0 }"
+              >
+               
+                 
+              </div> 
+            </div>
+          </div>
         </div>
       </div>
 
-      <div>
+
+      <div class="mt-4">
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
           <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
         </button>
-
         <button
           type="submit"
           id="save-entity"
@@ -81,6 +115,24 @@
           <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
         </button>
       </div>
+    </div>
     </form>
+    <div *ngIf="!nuevaConsulta">
+      <span jhiTranslate="gestorDenunciasApp.clasesonline.home.introducirCodigo">Código de seguimiento: </span>
+      <input type="text" [(ngModel)]="codigoBusqueda" />
+      <button class="btn btn-secondary btn-sm" jhiTranslate="gestorDenunciasApp.clasesonline.home.buscar" (click)="buscarUUID()">
+        Buscar
+      </button>
+    </div>     
   </div>
+  <ng-template #elseBlockGuardado>
+    <div *ngIf="guardado" class="alert alert-success" role="alert">
+      <h4 class="alert-heading">
+        La solicitud ha sido procesada con éxito, código de seguimiento:
+      </h4>
+      <p>{{ codigo }}</p>
+      <hr />
+    </div>
+  </ng-template>
+
 </div>

@@ -34,6 +34,11 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./videos-clase-online/videos-clase-online.module').then(m => m.VideosClaseOnlineModule),
       },
       {
+        path: 'plan-nutricion-entrenamiento',
+        data: { pageTitle: 'gymRubenApp.planNutricionEntrenamiento.home.title' },
+        loadChildren: () => import('./plan-nutricion-entrenamiento/plan-nutricion-entrenamiento.module').then(m => m.PlanNutricionEntrenamientoModule),
+      },
+      {
         path: 'videos-plan-entrenamiento',
         data: { pageTitle: 'gymRubenApp.videosPlanEntrenamiento.home.title' },
         loadChildren: () =>

@@ -144,6 +144,18 @@
                 <span jhiTranslate="global.menu.entities.videosPlanEntrenamiento">Videos Plan Entrenamiento</span>
               </a>
             </li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="plan-nutricion-entrenamiento"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="collapseNavbar()"
+              >
+                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <span>Plan Nutricion Entrenamiento</span>
+              </a>
+            </li>
             <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
           </ul>
         </li>

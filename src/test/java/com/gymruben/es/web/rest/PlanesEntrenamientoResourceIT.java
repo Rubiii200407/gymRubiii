@@ -1,17 +1,16 @@
 package com.gymruben.es.web.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
+import static org.assertj.core.api.Assertions.*;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.gymruben.es.IntegrationTest;
-import com.gymruben.es.domain.PlanesEntrenamiento;
-import com.gymruben.es.repository.PlanesEntrenamientoRepository;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+
 import javax.persistence.EntityManager;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,10 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.gymruben.es.IntegrationTest;
+import com.gymruben.es.domain.PlanesEntrenamiento;
+import com.gymruben.es.repository.PlanesEntrenamientoRepository;
 
 /**
  * Integration tests for the {@link PlanesEntrenamientoResource} REST controller.
@@ -71,8 +74,6 @@ class PlanesEntrenamientoResourceIT {
         PlanesEntrenamiento planesEntrenamiento = new PlanesEntrenamiento()
             .nombrePlan(DEFAULT_NOMBRE_PLAN)
             .descripcion(DEFAULT_DESCRIPCION)
-            .tipo(DEFAULT_TIPO)
-            .duracion(DEFAULT_DURACION)
             .instrucciones(DEFAULT_INSTRUCCIONES);
         return planesEntrenamiento;
     }
@@ -87,8 +88,6 @@ class PlanesEntrenamientoResourceIT {
         PlanesEntrenamiento planesEntrenamiento = new PlanesEntrenamiento()
             .nombrePlan(UPDATED_NOMBRE_PLAN)
             .descripcion(UPDATED_DESCRIPCION)
-            .tipo(UPDATED_TIPO)
-            .duracion(UPDATED_DURACION)
             .instrucciones(UPDATED_INSTRUCCIONES);
         return planesEntrenamiento;
     }
@@ -115,8 +114,6 @@ class PlanesEntrenamientoResourceIT {
         PlanesEntrenamiento testPlanesEntrenamiento = planesEntrenamientoList.get(planesEntrenamientoList.size() - 1);
         assertThat(testPlanesEntrenamiento.getNombrePlan()).isEqualTo(DEFAULT_NOMBRE_PLAN);
         assertThat(testPlanesEntrenamiento.getDescripcion()).isEqualTo(DEFAULT_DESCRIPCION);
-        assertThat(testPlanesEntrenamiento.getTipo()).isEqualTo(DEFAULT_TIPO);
-        assertThat(testPlanesEntrenamiento.getDuracion()).isEqualTo(DEFAULT_DURACION);
         assertThat(testPlanesEntrenamiento.getInstrucciones()).isEqualTo(DEFAULT_INSTRUCCIONES);
     }
 
@@ -200,8 +197,6 @@ class PlanesEntrenamientoResourceIT {
         updatedPlanesEntrenamiento
             .nombrePlan(UPDATED_NOMBRE_PLAN)
             .descripcion(UPDATED_DESCRIPCION)
-            .tipo(UPDATED_TIPO)
-            .duracion(UPDATED_DURACION)
             .instrucciones(UPDATED_INSTRUCCIONES);
 
         restPlanesEntrenamientoMockMvc
@@ -218,8 +213,6 @@ class PlanesEntrenamientoResourceIT {
         PlanesEntrenamiento testPlanesEntrenamiento = planesEntrenamientoList.get(planesEntrenamientoList.size() - 1);
         assertThat(testPlanesEntrenamiento.getNombrePlan()).isEqualTo(UPDATED_NOMBRE_PLAN);
         assertThat(testPlanesEntrenamiento.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
-        assertThat(testPlanesEntrenamiento.getTipo()).isEqualTo(UPDATED_TIPO);
-        assertThat(testPlanesEntrenamiento.getDuracion()).isEqualTo(UPDATED_DURACION);
         assertThat(testPlanesEntrenamiento.getInstrucciones()).isEqualTo(UPDATED_INSTRUCCIONES);
     }
 
@@ -309,8 +302,6 @@ class PlanesEntrenamientoResourceIT {
         PlanesEntrenamiento testPlanesEntrenamiento = planesEntrenamientoList.get(planesEntrenamientoList.size() - 1);
         assertThat(testPlanesEntrenamiento.getNombrePlan()).isEqualTo(UPDATED_NOMBRE_PLAN);
         assertThat(testPlanesEntrenamiento.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
-        assertThat(testPlanesEntrenamiento.getTipo()).isEqualTo(DEFAULT_TIPO);
-        assertThat(testPlanesEntrenamiento.getDuracion()).isEqualTo(DEFAULT_DURACION);
         assertThat(testPlanesEntrenamiento.getInstrucciones()).isEqualTo(DEFAULT_INSTRUCCIONES);
     }
 
@@ -329,8 +320,6 @@ class PlanesEntrenamientoResourceIT {
         partialUpdatedPlanesEntrenamiento
             .nombrePlan(UPDATED_NOMBRE_PLAN)
             .descripcion(UPDATED_DESCRIPCION)
-            .tipo(UPDATED_TIPO)
-            .duracion(UPDATED_DURACION)
             .instrucciones(UPDATED_INSTRUCCIONES);
 
         restPlanesEntrenamientoMockMvc
@@ -347,8 +336,6 @@ class PlanesEntrenamientoResourceIT {
         PlanesEntrenamiento testPlanesEntrenamiento = planesEntrenamientoList.get(planesEntrenamientoList.size() - 1);
         assertThat(testPlanesEntrenamiento.getNombrePlan()).isEqualTo(UPDATED_NOMBRE_PLAN);
         assertThat(testPlanesEntrenamiento.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
-        assertThat(testPlanesEntrenamiento.getTipo()).isEqualTo(UPDATED_TIPO);
-        assertThat(testPlanesEntrenamiento.getDuracion()).isEqualTo(UPDATED_DURACION);
         assertThat(testPlanesEntrenamiento.getInstrucciones()).isEqualTo(UPDATED_INSTRUCCIONES);
     }
 

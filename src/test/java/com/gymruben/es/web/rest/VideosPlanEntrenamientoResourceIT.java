@@ -1,19 +1,18 @@
 package com.gymruben.es.web.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
+import static org.assertj.core.api.Assertions.*;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.gymruben.es.IntegrationTest;
-import com.gymruben.es.domain.VideosPlanEntrenamiento;
-import com.gymruben.es.repository.VideosPlanEntrenamientoRepository;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+
 import javax.persistence.EntityManager;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +21,10 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.gymruben.es.IntegrationTest;
+import com.gymruben.es.domain.VideosPlanEntrenamiento;
+import com.gymruben.es.repository.VideosPlanEntrenamientoRepository;
 
 /**
  * Integration tests for the {@link VideosPlanEntrenamientoResource} REST controller.
@@ -72,10 +75,8 @@ class VideosPlanEntrenamientoResourceIT {
     public static VideosPlanEntrenamiento createEntity(EntityManager em) {
         VideosPlanEntrenamiento videosPlanEntrenamiento = new VideosPlanEntrenamiento()
             .tituloVideo(DEFAULT_TITULO_VIDEO)
-            .descripcionVideo(DEFAULT_DESCRIPCION_VIDEO)
-            .urlVideo(DEFAULT_URL_VIDEO)
-            .duracion(DEFAULT_DURACION)
-            .fechaPublicacion(DEFAULT_FECHA_PUBLICACION);
+            .urlVideo(DEFAULT_URL_VIDEO);
+
         return videosPlanEntrenamiento;
     }
 
@@ -88,10 +89,8 @@ class VideosPlanEntrenamientoResourceIT {
     public static VideosPlanEntrenamiento createUpdatedEntity(EntityManager em) {
         VideosPlanEntrenamiento videosPlanEntrenamiento = new VideosPlanEntrenamiento()
             .tituloVideo(UPDATED_TITULO_VIDEO)
-            .descripcionVideo(UPDATED_DESCRIPCION_VIDEO)
-            .urlVideo(UPDATED_URL_VIDEO)
-            .duracion(UPDATED_DURACION)
-            .fechaPublicacion(UPDATED_FECHA_PUBLICACION);
+            .urlVideo(UPDATED_URL_VIDEO);
+
         return videosPlanEntrenamiento;
     }
 
@@ -118,10 +117,8 @@ class VideosPlanEntrenamientoResourceIT {
         assertThat(videosPlanEntrenamientoList).hasSize(databaseSizeBeforeCreate + 1);
         VideosPlanEntrenamiento testVideosPlanEntrenamiento = videosPlanEntrenamientoList.get(videosPlanEntrenamientoList.size() - 1);
         assertThat(testVideosPlanEntrenamiento.getTituloVideo()).isEqualTo(DEFAULT_TITULO_VIDEO);
-        assertThat(testVideosPlanEntrenamiento.getDescripcionVideo()).isEqualTo(DEFAULT_DESCRIPCION_VIDEO);
         assertThat(testVideosPlanEntrenamiento.getUrlVideo()).isEqualTo(DEFAULT_URL_VIDEO);
-        assertThat(testVideosPlanEntrenamiento.getDuracion()).isEqualTo(DEFAULT_DURACION);
-        assertThat(testVideosPlanEntrenamiento.getFechaPublicacion()).isEqualTo(DEFAULT_FECHA_PUBLICACION);
+
     }
 
     @Test
@@ -207,10 +204,7 @@ class VideosPlanEntrenamientoResourceIT {
         em.detach(updatedVideosPlanEntrenamiento);
         updatedVideosPlanEntrenamiento
             .tituloVideo(UPDATED_TITULO_VIDEO)
-            .descripcionVideo(UPDATED_DESCRIPCION_VIDEO)
-            .urlVideo(UPDATED_URL_VIDEO)
-            .duracion(UPDATED_DURACION)
-            .fechaPublicacion(UPDATED_FECHA_PUBLICACION);
+            .urlVideo(UPDATED_URL_VIDEO);
 
         restVideosPlanEntrenamientoMockMvc
             .perform(
@@ -225,10 +219,8 @@ class VideosPlanEntrenamientoResourceIT {
         assertThat(videosPlanEntrenamientoList).hasSize(databaseSizeBeforeUpdate);
         VideosPlanEntrenamiento testVideosPlanEntrenamiento = videosPlanEntrenamientoList.get(videosPlanEntrenamientoList.size() - 1);
         assertThat(testVideosPlanEntrenamiento.getTituloVideo()).isEqualTo(UPDATED_TITULO_VIDEO);
-        assertThat(testVideosPlanEntrenamiento.getDescripcionVideo()).isEqualTo(UPDATED_DESCRIPCION_VIDEO);
         assertThat(testVideosPlanEntrenamiento.getUrlVideo()).isEqualTo(UPDATED_URL_VIDEO);
-        assertThat(testVideosPlanEntrenamiento.getDuracion()).isEqualTo(UPDATED_DURACION);
-        assertThat(testVideosPlanEntrenamiento.getFechaPublicacion()).isEqualTo(UPDATED_FECHA_PUBLICACION);
+
     }
 
     @Test
@@ -303,7 +295,6 @@ class VideosPlanEntrenamientoResourceIT {
         VideosPlanEntrenamiento partialUpdatedVideosPlanEntrenamiento = new VideosPlanEntrenamiento();
         partialUpdatedVideosPlanEntrenamiento.setId(videosPlanEntrenamiento.getId());
 
-        partialUpdatedVideosPlanEntrenamiento.urlVideo(UPDATED_URL_VIDEO).fechaPublicacion(UPDATED_FECHA_PUBLICACION);
 
         restVideosPlanEntrenamientoMockMvc
             .perform(
@@ -318,10 +309,8 @@ class VideosPlanEntrenamientoResourceIT {
         assertThat(videosPlanEntrenamientoList).hasSize(databaseSizeBeforeUpdate);
         VideosPlanEntrenamiento testVideosPlanEntrenamiento = videosPlanEntrenamientoList.get(videosPlanEntrenamientoList.size() - 1);
         assertThat(testVideosPlanEntrenamiento.getTituloVideo()).isEqualTo(DEFAULT_TITULO_VIDEO);
-        assertThat(testVideosPlanEntrenamiento.getDescripcionVideo()).isEqualTo(DEFAULT_DESCRIPCION_VIDEO);
         assertThat(testVideosPlanEntrenamiento.getUrlVideo()).isEqualTo(UPDATED_URL_VIDEO);
-        assertThat(testVideosPlanEntrenamiento.getDuracion()).isEqualTo(DEFAULT_DURACION);
-        assertThat(testVideosPlanEntrenamiento.getFechaPublicacion()).isEqualTo(UPDATED_FECHA_PUBLICACION);
+
     }
 
     @Test
@@ -338,10 +327,7 @@ class VideosPlanEntrenamientoResourceIT {
 
         partialUpdatedVideosPlanEntrenamiento
             .tituloVideo(UPDATED_TITULO_VIDEO)
-            .descripcionVideo(UPDATED_DESCRIPCION_VIDEO)
-            .urlVideo(UPDATED_URL_VIDEO)
-            .duracion(UPDATED_DURACION)
-            .fechaPublicacion(UPDATED_FECHA_PUBLICACION);
+            .urlVideo(UPDATED_URL_VIDEO);
 
         restVideosPlanEntrenamientoMockMvc
             .perform(
@@ -356,10 +342,8 @@ class VideosPlanEntrenamientoResourceIT {
         assertThat(videosPlanEntrenamientoList).hasSize(databaseSizeBeforeUpdate);
         VideosPlanEntrenamiento testVideosPlanEntrenamiento = videosPlanEntrenamientoList.get(videosPlanEntrenamientoList.size() - 1);
         assertThat(testVideosPlanEntrenamiento.getTituloVideo()).isEqualTo(UPDATED_TITULO_VIDEO);
-        assertThat(testVideosPlanEntrenamiento.getDescripcionVideo()).isEqualTo(UPDATED_DESCRIPCION_VIDEO);
         assertThat(testVideosPlanEntrenamiento.getUrlVideo()).isEqualTo(UPDATED_URL_VIDEO);
-        assertThat(testVideosPlanEntrenamiento.getDuracion()).isEqualTo(UPDATED_DURACION);
-        assertThat(testVideosPlanEntrenamiento.getFechaPublicacion()).isEqualTo(UPDATED_FECHA_PUBLICACION);
+
     }
 
     @Test

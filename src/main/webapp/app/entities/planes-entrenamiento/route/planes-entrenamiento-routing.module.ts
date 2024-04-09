@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { PlanesEntrenamientoComponent } from '../list/planes-entrenamiento.component';
 import { PlanesEntrenamientoDetailComponent } from '../detail/planes-entrenamiento-detail.component';
+import { PlanesEntrenamientoDetailPlanComponent } from '../detailPlan/planes-entrenamiento-detailPlan.component';
+import { PlanesEntrenamientoComponent } from '../list/planes-entrenamiento.component';
 import { PlanesEntrenamientoUpdateComponent } from '../update/planes-entrenamiento-update.component';
 import { PlanesEntrenamientoRoutingResolveService } from './planes-entrenamiento-routing-resolve.service';
-import { ASC } from 'app/config/navigation.constants';
 
 const planesEntrenamientoRoute: Routes = [
   {
@@ -16,6 +17,10 @@ const planesEntrenamientoRoute: Routes = [
       defaultSort: 'id,' + ASC,
     },
     canActivate: [UserRouteAccessService],
+  },
+  {
+    path: ':uuid/acceder',
+    component: PlanesEntrenamientoDetailPlanComponent,
   },
   {
     path: ':id/view',

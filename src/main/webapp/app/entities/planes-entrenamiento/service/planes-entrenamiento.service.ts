@@ -1,12 +1,18 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable, map } from 'rxjs';
 
-import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
+import { isPresent } from 'app/core/util/operators';
 import { IPlanesEntrenamiento, NewPlanesEntrenamiento } from '../planes-entrenamiento.model';
 
+type RestOf<T extends IPlanesEntrenamiento | NewPlanesEntrenamiento> = Omit<T, 'fechaEstado' | 'fechaCreacion'> & {
+
+};
+
+export type RestPlanesEntrenamiento = RestOf<IPlanesEntrenamiento>;
+export type NewRestPlanesNutricion = RestOf<NewPlanesEntrenamiento>;
 export type PartialUpdatePlanesEntrenamiento = Partial<IPlanesEntrenamiento> & Pick<IPlanesEntrenamiento, 'id'>;
 
 export type EntityResponseType = HttpResponse<IPlanesEntrenamiento>;
@@ -41,6 +47,11 @@ export class PlanesEntrenamientoService {
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<IPlanesEntrenamiento>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
+  findUUID(codigo: string): Observable<EntityResponseType> {
+    return this.http
+      .get<RestPlanesEntrenamiento>(`${this.resourceUrl + '/UUID'}/${codigo}`, { observe: 'response' })
+      .pipe(map(res => this.convertResponseFromServer(res)));
+  }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
@@ -58,6 +69,19 @@ export class PlanesEntrenamientoService {
   comparePlanesEntrenamiento(o1: Pick<IPlanesEntrenamiento, 'id'> | null, o2: Pick<IPlanesEntrenamiento, 'id'> | null): boolean {
     return o1 && o2 ? this.getPlanesEntrenamientoIdentifier(o1) === this.getPlanesEntrenamientoIdentifier(o2) : o1 === o2;
   }
+  protected convertDateFromServer(restPlanesEntrenamiento: RestPlanesEntrenamiento): IPlanesEntrenamiento {
+    return {
+      ...restPlanesEntrenamiento,
+     
+    };
+  }
+
+  protected convertResponseFromServer(res: HttpResponse<RestPlanesEntrenamiento>): HttpResponse<IPlanesEntrenamiento> {
+    return res.clone({
+      body: res.body ? this.convertDateFromServer(res.body) : null,
+    });
+  }
+
 
   addPlanesEntrenamientoToCollectionIfMissing<Type extends Pick<IPlanesEntrenamiento, 'id'>>(
     planesEntrenamientoCollection: Type[],

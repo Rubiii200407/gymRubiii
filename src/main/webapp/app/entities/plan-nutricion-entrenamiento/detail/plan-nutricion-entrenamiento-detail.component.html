@@ -1,0 +1,45 @@
+
+
+<div class="d-flex justify-content-center">
+    <div class="col-8">
+      <div *ngIf="planNutricionEntrenamiento">
+        <h2 data-cy="planNutricionEntrenamientoDetailsHeading">
+          <span jhiTranslate="gymRubenApp.planNutricionEntrenamiento.detail.title">planNutricionEntrenamiento</span>
+        </h2>
+  
+        <hr />
+  
+        <jhi-alert-error></jhi-alert-error>
+  
+        <jhi-alert></jhi-alert>
+  
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ planNutricionEntrenamiento.id }}</span>
+          </dd>
+          <dt><span >Titulo Video</span></dt>
+          <dd>
+            <span>{{ planNutricionEntrenamiento.nombrePlan }}</span>
+          </dd>
+          <dt><span>instrucciones</span></dt>
+          <dd>
+            <span>{{ planNutricionEntrenamiento.instrucciones }}</span>
+          </dd>
+          <dt><span>Video</span></dt>
+          <dd>
+            <span>{{ planNutricionEntrenamiento.video }}</span>
+          </dd>
+        </dl>
+  
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Volver</span>
+        </button>
+  
+        <button type="button" [routerLink]="['/plan-nutricion-entrenamiento', planNutricionEntrenamiento.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  

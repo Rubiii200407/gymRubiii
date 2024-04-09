@@ -1,0 +1,16 @@
+<div class="d-flex justify-content-center">
+    <div class="col-8">
+      <div *ngIf="planesEntrenamiento">
+       <h4>{{planesEntrenamiento.nombrePlan}}</h4>
+       <h4>{{planesEntrenamiento.descripcion}}</h4>
+       <h4>{{planesEntrenamiento.codigo}}</h4>
+        <iframe width="560" height="315" [src]="getVideoIframe(planesEntrenamiento.videoId)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  
+     
+      </div>
+      <div *ngIf="!planesEntrenamiento" class="alert alert-warning" id="no-result">
+        <span >Ningún Empresa Denuncias encontrado</span>
+      </div>
+    </div>
+  </div>
+  

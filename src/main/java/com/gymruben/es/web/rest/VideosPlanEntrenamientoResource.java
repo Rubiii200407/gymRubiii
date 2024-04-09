@@ -1,19 +1,30 @@
 package com.gymruben.es.web.rest;
 
-import com.gymruben.es.domain.VideosPlanEntrenamiento;
-import com.gymruben.es.repository.VideosPlanEntrenamientoRepository;
-import com.gymruben.es.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.gymruben.es.domain.VideosPlanEntrenamiento;
+import com.gymruben.es.repository.VideosPlanEntrenamientoRepository;
+import com.gymruben.es.web.rest.errors.BadRequestAlertException;
+
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
@@ -128,18 +139,10 @@ public class VideosPlanEntrenamientoResource {
                 if (videosPlanEntrenamiento.getTituloVideo() != null) {
                     existingVideosPlanEntrenamiento.setTituloVideo(videosPlanEntrenamiento.getTituloVideo());
                 }
-                if (videosPlanEntrenamiento.getDescripcionVideo() != null) {
-                    existingVideosPlanEntrenamiento.setDescripcionVideo(videosPlanEntrenamiento.getDescripcionVideo());
-                }
                 if (videosPlanEntrenamiento.getUrlVideo() != null) {
                     existingVideosPlanEntrenamiento.setUrlVideo(videosPlanEntrenamiento.getUrlVideo());
                 }
-                if (videosPlanEntrenamiento.getDuracion() != null) {
-                    existingVideosPlanEntrenamiento.setDuracion(videosPlanEntrenamiento.getDuracion());
-                }
-                if (videosPlanEntrenamiento.getFechaPublicacion() != null) {
-                    existingVideosPlanEntrenamiento.setFechaPublicacion(videosPlanEntrenamiento.getFechaPublicacion());
-                }
+            
 
                 return existingVideosPlanEntrenamiento;
             })
