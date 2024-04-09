@@ -2,15 +2,25 @@ package com.gymruben.es.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.hashids.Hashids;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,16 +34,22 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.gymruben.es.config.Constants;
 import com.gymruben.es.domain.PlanesNutricion;
 import com.gymruben.es.domain.User;
 import com.gymruben.es.repository.PlanesNutricionRepository;
 import com.gymruben.es.repository.UserRepository;
+import com.gymruben.es.security.AuthoritiesConstants;
+import com.gymruben.es.service.PlanesNutricionService;
 import com.gymruben.es.service.dto.PlanesNutricionDTO;
+import com.gymruben.es.service.helper.FilterHelper;
 import com.gymruben.es.service.mapper.PlanesNutricionMapper;
 import com.gymruben.es.web.rest.errors.BadRequestAlertException;
 
 import tech.jhipster.web.util.HeaderUtil;
+import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 /**
@@ -47,19 +63,30 @@ public class PlanesNutricionResource {
     private final Logger log = LoggerFactory.getLogger(PlanesNutricionResource.class);
 
     private static final String ENTITY_NAME = "planesNutricion";
-
+    private static final List<String> ALLOWED_ORDERED_PROPERTIES = Collections.unmodifiableList(
+        Arrays.asList(
+            "id",
+            "codigo",
+            "nombre",
+            "descripcion",
+            "instructor"
+         
+        )
+    );
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
+    private final Hashids hashids = Constants.HASHIDS;
 
     private final PlanesNutricionRepository planesNutricionRepository;
-
+    private final PlanesNutricionService planesNutricionService;
     private final UserRepository userRepository;
     private final PlanesNutricionMapper planesNutricionMapper;
 
-    public PlanesNutricionResource(PlanesNutricionRepository planesNutricionRepository,UserRepository userRepository,PlanesNutricionMapper planesNutricionMapper) {
+    public PlanesNutricionResource(PlanesNutricionRepository planesNutricionRepository,UserRepository userRepository,PlanesNutricionMapper planesNutricionMapper,PlanesNutricionService planesNutricionService) {
         this.planesNutricionRepository = planesNutricionRepository;
         this.userRepository=userRepository;
         this.planesNutricionMapper=planesNutricionMapper;
+        this.planesNutricionService=planesNutricionService;
     }
 
     /**
@@ -190,10 +217,23 @@ public class PlanesNutricionResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of planesNutricions in body.
      */
     @GetMapping("/planes-nutricion")
-    public List<PlanesNutricion> getAllPlanesNutricions() {
-        log.debug("REST request to get all PlanesNutricions");
-        return planesNutricionRepository.findAll();
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
+    public ResponseEntity<List<PlanesNutricionDTO>> getAllPlanesNutricion(@ParameterObject Pageable pageable, FilterHelper filterHelper) {
+        log.debug("REST request to get all EmpresaDenuncia for an admin");
+        if (!onlyContainsAllowedProperties(pageable)) {
+            return ResponseEntity.badRequest().build();
+        }
+        final Page<PlanesNutricionDTO> page = planesNutricionService
+            .findAll(pageable, filterHelper)
+            .map(planesNutricionMapper::toDtoCodigo);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    private boolean onlyContainsAllowedProperties(Pageable pageable) {
+        return pageable.getSort().stream().map(Sort.Order::getProperty).allMatch(ALLOWED_ORDERED_PROPERTIES::contains);
+    }
+
+    
 
     /**
      * {@code GET  /planes-nutricion/:id} : get the "id" planesNutricion.
@@ -202,9 +242,10 @@ public class PlanesNutricionResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the planesNutricion, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/planes-nutricion/{id}")
-    public ResponseEntity<PlanesNutricion> getPlanesNutricion(@PathVariable Long id) {
+    public ResponseEntity<PlanesNutricionDTO> getPlanesNutricion(@PathVariable String id) {
         log.debug("REST request to get PlanesNutricion : {}", id);
-        Optional<PlanesNutricion> planesNutricion = planesNutricionRepository.findById(id);
+        Long idDecodificado = hashids.decode(id)[0];
+        Optional<PlanesNutricionDTO> planesNutricion = planesNutricionRepository.findById(idDecodificado).map(planesNutricionMapper::toDto);
         return ResponseUtil.wrapOrNotFound(planesNutricion);
     }
 
@@ -215,9 +256,10 @@ public class PlanesNutricionResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/planes-nutricion/{id}")
-    public ResponseEntity<Void> deletePlanesNutricion(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePlanesNutricion(@PathVariable String id) {
         log.debug("REST request to delete PlanesNutricion : {}", id);
-        planesNutricionRepository.deleteById(id);
+        Long idDecodificado = hashids.decode(id)[0];
+        planesNutricionRepository.deleteById(idDecodificado);
         return ResponseEntity
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))

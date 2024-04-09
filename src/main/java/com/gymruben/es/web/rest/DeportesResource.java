@@ -2,15 +2,25 @@ package com.gymruben.es.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.hashids.Hashids;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,16 +34,22 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.gymruben.es.config.Constants;
 import com.gymruben.es.domain.Deportes;
 import com.gymruben.es.domain.User;
 import com.gymruben.es.repository.DeportesRepository;
 import com.gymruben.es.repository.UserRepository;
+import com.gymruben.es.security.AuthoritiesConstants;
+import com.gymruben.es.service.DeportesService;
 import com.gymruben.es.service.dto.DeportesDTO;
+import com.gymruben.es.service.helper.FilterHelper;
 import com.gymruben.es.service.mapper.DeportesMapper;
 import com.gymruben.es.web.rest.errors.BadRequestAlertException;
 
 import tech.jhipster.web.util.HeaderUtil;
+import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 /**
@@ -45,22 +61,38 @@ import tech.jhipster.web.util.ResponseUtil;
 public class DeportesResource {
 
     private final Logger log = LoggerFactory.getLogger(DeportesResource.class);
+    private static final List<String> ALLOWED_ORDERED_PROPERTIES = Collections.unmodifiableList(
+        Arrays.asList(
+            "id",
+            "codigo",
+            "nombre",
+            "descripcion",
+            "fechaDeporte",
+            "horaDeporte",
+            "instructor"
+         
+        )
+    );
+
 
     private static final String ENTITY_NAME = "deportes";
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
+    private final Hashids hashids = Constants.HASHIDS;
     private final DeportesRepository deportesRepository;
 
     private final DeportesMapper deportesMapper;
 
+    private final DeportesService deportesService;
+
     private final UserRepository userRepository;
 
-    public DeportesResource(DeportesRepository deportesRepository,DeportesMapper deportesMapper,UserRepository userRepository) {
+    public DeportesResource(DeportesRepository deportesRepository,DeportesMapper deportesMapper,UserRepository userRepository,DeportesService deportesService) {
         this.deportesRepository = deportesRepository;
         this.deportesMapper = deportesMapper;
         this.userRepository = userRepository;
+        this.deportesService = deportesService;
     }
 
     /**
@@ -195,9 +227,20 @@ public class DeportesResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of deportes in body.
      */
     @GetMapping("/deportes")
-    public List<Deportes> getAllDeportes() {
-        log.debug("REST request to get all Deportes");
-        return deportesRepository.findAll();
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
+    public ResponseEntity<List<DeportesDTO>> getAllDeportes(@ParameterObject Pageable pageable, FilterHelper filterHelper) {
+        log.debug("REST request to get all EmpresaDenuncia for an admin");
+        if (!onlyContainsAllowedProperties(pageable)) {
+            return ResponseEntity.badRequest().build();
+        }
+        final Page<DeportesDTO> page = deportesService
+            .findAll(pageable, filterHelper)
+            .map(deportesMapper::toDtoCodigo);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    private boolean onlyContainsAllowedProperties(Pageable pageable) {
+        return pageable.getSort().stream().map(Sort.Order::getProperty).allMatch(ALLOWED_ORDERED_PROPERTIES::contains);
     }
 
     /**
@@ -207,9 +250,10 @@ public class DeportesResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the deportes, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/deportes/{id}")
-    public ResponseEntity<Deportes> getDeportes(@PathVariable Long id) {
+    public ResponseEntity<DeportesDTO> getDeportes(@PathVariable String id) {
         log.debug("REST request to get Deportes : {}", id);
-        Optional<Deportes> deportes = deportesRepository.findById(id);
+        Long idDecodificado = hashids.decode(id)[0];
+        Optional<DeportesDTO> deportes = deportesRepository.findById(idDecodificado).map(deportesMapper::toDto);
         return ResponseUtil.wrapOrNotFound(deportes);
     }
 
@@ -220,12 +264,15 @@ public class DeportesResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/deportes/{id}")
-    public ResponseEntity<Void> deleteDeportes(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteDeportes(@PathVariable String id) {
         log.debug("REST request to delete Deportes : {}", id);
-        deportesRepository.deleteById(id);
+        Long idDecodificado = hashids.decode(id)[0];
+        deportesRepository.deleteById(idDecodificado);
         return ResponseEntity
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+
+            
     }
 }

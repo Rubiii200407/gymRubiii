@@ -39,7 +39,13 @@ export class ClasesOnlineService {
       .get<RestClasesOnline>(`${this.resourceUrl + '/UUID'}/${codigo}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
-
+  queryWithPagination(params?: any): Observable<HttpResponse<IClasesOnline[]>> {
+    const options = createRequestOption(params);
+    return this.http.get<IClasesOnline[]>(this.resourceUrl, {
+      params: options,
+      observe: 'response',
+    });
+  }
   partialUpdate(clasesOnline: PartialUpdateClasesOnline): Observable<EntityResponseType> {
     return this.http.patch<IClasesOnline>(`${this.resourceUrl}/${this.getClasesOnlineIdentifier(clasesOnline)}`, clasesOnline, {
       observe: 'response',

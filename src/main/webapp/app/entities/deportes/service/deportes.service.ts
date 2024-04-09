@@ -41,6 +41,13 @@ export class DeportesService {
       .get<RestDeportes>(`${this.resourceUrl + '/UUID'}/${codigo}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
+  queryWithPagination(params?: any): Observable<HttpResponse<IDeportes[]>> {
+    const options = createRequestOption(params);
+    return this.http.get<IDeportes[]>(this.resourceUrl, {
+      params: options,
+      observe: 'response',
+    });
+  }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<IDeportes>(`${this.resourceUrl}/${id}`, { observe: 'response' });

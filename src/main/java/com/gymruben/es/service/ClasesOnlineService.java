@@ -4,6 +4,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,6 +17,8 @@ import com.gymruben.es.domain.VideosClaseOnline;
 import com.gymruben.es.repository.ClasesOnlineRepository;
 import com.gymruben.es.repository.UserRepository;
 import com.gymruben.es.repository.VideosClaseOnlineRepository;
+import com.gymruben.es.repository.specification.ClasesOnlineSpecification;
+import com.gymruben.es.service.helper.FilterHelper;
 import com.gymruben.es.service.mapper.ClasesOnlineMapper;
 
 @Service
@@ -37,6 +41,9 @@ public class ClasesOnlineService {
         this.clasesOnlineRepository = clasesOnlineRepository;
         this.videosClaseOnlineRepository = videosClaseOnlineRepository;
         this.userRepository = userRepository;
+    }
+    public Page<ClasesOnline> findAll(Pageable pageable, FilterHelper filterHelper) {
+        return clasesOnlineRepository.findAll(ClasesOnlineSpecification.busquedaClasesOnline(filterHelper), pageable);
     }
 
      public ClasesOnline createClasesOnline(ClasesOnline clasesOnline){

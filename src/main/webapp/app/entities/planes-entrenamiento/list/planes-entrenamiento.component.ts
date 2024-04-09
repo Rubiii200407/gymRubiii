@@ -1,24 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
-import { combineLatest, filter, Observable, switchMap, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable, combineLatest, filter, switchMap, tap } from 'rxjs';
 
-import { IPlanesEntrenamiento } from '../planes-entrenamiento.model';
-import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/config/navigation.constants';
-import { EntityArrayResponseType, PlanesEntrenamientoService } from '../service/planes-entrenamiento.service';
-import { PlanesEntrenamientoDeleteDialogComponent } from '../delete/planes-entrenamiento-delete-dialog.component';
+import { HttpHeaders, HttpResponse } from '@angular/common/http';
+import { ASC, DEFAULT_SORT_DATA, DESC, ITEM_DELETED_EVENT, SORT } from 'app/config/navigation.constants';
+import { FilterHelper } from 'app/core/util/filter-helper.model';
 import { SortService } from 'app/shared/sort/sort.service';
+import { PlanesEntrenamientoDeleteDialogComponent } from '../delete/planes-entrenamiento-delete-dialog.component';
+import { IPlanesEntrenamiento } from '../planes-entrenamiento.model';
+import { EntityArrayResponseType, PlanesEntrenamientoService } from '../service/planes-entrenamiento.service';
 
 @Component({
   selector: 'jhi-planes-entrenamiento',
   templateUrl: './planes-entrenamiento.component.html',
+  styleUrls: ['./planes-entrenamiento.component.css'],
 })
 export class PlanesEntrenamientoComponent implements OnInit {
   planesEntrenamientos?: IPlanesEntrenamiento[];
   isLoading = false;
-
+  totalItems = 0;
+  page!: number;
+  itemsPerPageOptions = [10, 20, 50, 100];
   predicate = 'id';
   ascending = true;
+  filter: FilterHelper = {
+    nombre: null,
+    codigo: null,
+
+   
+  };
+  private _itemsPerPage = 10;
 
   constructor(
     protected planesEntrenamientoService: PlanesEntrenamientoService,
@@ -31,7 +43,10 @@ export class PlanesEntrenamientoComponent implements OnInit {
   trackId = (_index: number, item: IPlanesEntrenamiento): number => this.planesEntrenamientoService.getPlanesEntrenamientoIdentifier(item);
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.page = params['page'] || 1;
     this.load();
+  });
   }
 
   delete(planesEntrenamiento: IPlanesEntrenamiento): void {
@@ -51,11 +66,28 @@ export class PlanesEntrenamientoComponent implements OnInit {
   }
 
   load(): void {
-    this.loadFromBackendWithRouteInformations().subscribe({
-      next: (res: EntityArrayResponseType) => {
-        this.onResponseSuccess(res);
-      },
-    });
+    this.isLoading = true;
+    this.planesEntrenamientoService
+      .queryWithPagination({
+        page: this.page - 1,
+        size: this.itemsPerPage,
+        sort: this.sort(),
+        ...this.filter,
+      })
+      .subscribe((res: HttpResponse<IPlanesEntrenamiento[]>) => {
+        this.isLoading = false;
+        this.onSuccess(res.body, res.headers);
+        this.totalItems = Number(res.headers.get('X-Total-Count'));
+      });
+  }
+  set itemsPerPage(value: number) {
+    if (value !== this._itemsPerPage) {
+      this._itemsPerPage = value;
+      this.load();
+    }
+  }
+  get itemsPerPage(): number {
+    return this._itemsPerPage;
   }
 
   navigateToWithComponentValues(): void {
@@ -113,6 +145,21 @@ export class PlanesEntrenamientoComponent implements OnInit {
       return [];
     } else {
       return [predicate + ',' + ascendingQueryParam];
+    }
+  }
+  private sort(): any {
+    const result = [];
+    if (this.predicate) {
+      result.push(`${this.predicate},${this.ascending ? 'asc' : 'desc'}`);
+    }
+
+    return result;
+  }
+  private onSuccess(body: IPlanesEntrenamiento[] | null, headers: HttpHeaders): void {
+    if (body) {
+      const totalCountHeader = headers.get('X-Total-Count');
+      this.totalItems = totalCountHeader ? Number(totalCountHeader) : 0;
+      this.planesEntrenamientos = body;
     }
   }
 }

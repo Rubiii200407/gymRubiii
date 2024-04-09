@@ -2,14 +2,24 @@ package com.gymruben.es.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import org.hashids.Hashids;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,16 +30,21 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.gymruben.es.config.Constants;
 import com.gymruben.es.domain.PlanesEntrenamiento;
 import com.gymruben.es.repository.PlanesEntrenamientoRepository;
 import com.gymruben.es.repository.UserRepository;
+import com.gymruben.es.security.AuthoritiesConstants;
 import com.gymruben.es.service.PlanesEntrenamientoService;
 import com.gymruben.es.service.dto.PlanesEntrenamientoDTO;
+import com.gymruben.es.service.helper.FilterHelper;
 import com.gymruben.es.service.mapper.PlanesEntrenamientoMapper;
 import com.gymruben.es.web.rest.errors.BadRequestAlertException;
 
 import tech.jhipster.web.util.HeaderUtil;
+import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 /**
@@ -43,9 +58,21 @@ public class PlanesEntrenamientoResource {
     private final Logger log = LoggerFactory.getLogger(PlanesEntrenamientoResource.class);
 
     private static final String ENTITY_NAME = "planesEntrenamiento";
+    private static final List<String> ALLOWED_ORDERED_PROPERTIES = Collections.unmodifiableList(
+        Arrays.asList(
+            "id",
+            "codigo",
+            "nombre",
+            "descripcion",
+            "instructor"
+         
+        )
+    );
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
+
+    private final Hashids hashids = Constants.HASHIDS;
 
     private final PlanesEntrenamientoRepository planesEntrenamientoRepository;
     private final UserRepository userRepository;
@@ -184,10 +211,24 @@ public class PlanesEntrenamientoResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of planesEntrenamientos in body.
      */
     @GetMapping("/planes-entrenamientos")
-    public List<PlanesEntrenamiento> getAllPlanesEntrenamientos() {
-        log.debug("REST request to get all PlanesEntrenamientos");
-        return planesEntrenamientoRepository.findAll();
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
+    public ResponseEntity<List<PlanesEntrenamientoDTO>> getAllPlanesEntrenamiento(@ParameterObject Pageable pageable, FilterHelper filterHelper) {
+        log.debug("REST request to get all EmpresaDenuncia for an admin");
+        if (!onlyContainsAllowedProperties(pageable)) {
+            return ResponseEntity.badRequest().build();
+        }
+        final Page<PlanesEntrenamientoDTO> page = planesEntrenamientoService
+            .findAll(pageable, filterHelper)
+            .map(planesEntrenamientoMapper::toDtoCodigo);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    private boolean onlyContainsAllowedProperties(Pageable pageable) {
+        return pageable.getSort().stream().map(Sort.Order::getProperty).allMatch(ALLOWED_ORDERED_PROPERTIES::contains);
+    }
+
+    
+    
 
     /**
      * {@code GET  /planes-entrenamientos/:id} : get the "id" planesEntrenamiento.
@@ -196,9 +237,10 @@ public class PlanesEntrenamientoResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the planesEntrenamiento, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/planes-entrenamientos/{id}")
-    public ResponseEntity<PlanesEntrenamiento> getPlanesEntrenamiento(@PathVariable Long id) {
+    public ResponseEntity<PlanesEntrenamientoDTO> getPlanesEntrenamiento(@PathVariable String id) {
         log.debug("REST request to get PlanesEntrenamiento : {}", id);
-        Optional<PlanesEntrenamiento> planesEntrenamiento = planesEntrenamientoRepository.findById(id);
+        Long idDecodificado = hashids.decode(id)[0];
+        Optional<PlanesEntrenamientoDTO> planesEntrenamiento = planesEntrenamientoRepository.findById(idDecodificado).map(planesEntrenamientoMapper::toDto);
         return ResponseUtil.wrapOrNotFound(planesEntrenamiento);
     }
 
@@ -209,9 +251,10 @@ public class PlanesEntrenamientoResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/planes-entrenamientos/{id}")
-    public ResponseEntity<Void> deletePlanesEntrenamiento(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePlanesEntrenamiento(@PathVariable String id) {
         log.debug("REST request to delete PlanesEntrenamiento : {}", id);
-        planesEntrenamientoRepository.deleteById(id);
+        Long idDecodificado = hashids.decode(id)[0];
+        planesEntrenamientoRepository.deleteById(idDecodificado);
         return ResponseEntity
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))

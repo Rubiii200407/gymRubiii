@@ -1,28 +1,55 @@
 <div>
   <h2 id="page-heading" data-cy="ClasesOnlineHeading">
     <span jhiTranslate="gymRubenApp.clasesOnline.home.title">Clases Onlines</span>
-
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span jhiTranslate="gymRubenApp.clasesOnline.home.refreshListLabel">Refrescar lista</span>
-      </button>
-
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-clases-online"
-        [routerLink]="['/clases-online/new']"
-      >
-        <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="gymRubenApp.clasesOnline.home.createLabel"> Crear nuevo Clases Online </span>
-      </button>
-    </div>
   </h2>
 
   <jhi-alert-error></jhi-alert-error>
 
   <jhi-alert></jhi-alert>
+  <div class="d-flex">
+    <div style="margin-left: 32px">
+      <div>
+        <label for="itemsPerPage" style="font-weight: bold">Mostrar: </label>
+        <select id="itemsPerPage" [(ngModel)]="itemsPerPage" style="background-color: transparent; border: none; font-weight: bold">
+          <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+        </select>
+        <span style="font-weight: bold"> registros</span>
+      </div>
+    </div>
+    <div class="d-flex ml-auto">
+      <div>
+        <div style="margin-right: 20px">
+          <input
+            style="height: 28px; width: 85%"
+            type="text"
+            placeholder="Buscar por nombre"
+            [(ngModel)]="filter.nombre"
+            (keyup)="load()"
+          />
+        </div>
+      </div>
+      <div>
+        <div style="margin-right: 20px">
+          <input
+            style="height: 28px; width: 85%"
+            type="text"
+            placeholder="Buscar por codigo"
+            [(ngModel)]="filter.codigo"
+            (keyup)="load()"
+          />
+        </div>
+      </div>
+       <div>
+        <input type="date" id="fechaInicio" name="fechaInicio" (change)="setFechaInicio($event)" />
+      </div>
+      <div>
+        <div style="height: 30px; width: 2px; background-color: #414141; margin: 0 10px; transform: rotate(20deg)"></div>
+      </div>
+      <div style="margin-right: 18px">
+        <input type="date" id="fechaFin" name="fechaFin" (change)="setFechaFin($event)" />
+      </div>
+    </div>
+  </div>
 
   <div class="alert alert-warning" id="no-result" *ngIf="clasesOnlines?.length === 0">
     <span jhiTranslate="gymRubenApp.clasesOnline.home.notFound">Ningún Clases Onlines encontrado</span>
@@ -129,5 +156,23 @@
         </tr>
       </tbody>
     </table>
+  </div>
+  <div class="d-flex justify-content-between">
+    <div class="d-flex">
+      <div style="margin-left: 30px">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }" class="bold-text"></jhi-item-count>
+      </div>
+    </div>
+    <div class="modern-pagination">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="load()"
+      ></ngb-pagination>
+    </div>
   </div>
 </div>

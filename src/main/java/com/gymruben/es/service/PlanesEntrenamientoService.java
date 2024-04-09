@@ -4,6 +4,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,6 +17,8 @@ import com.gymruben.es.domain.VideosPlanEntrenamiento;
 import com.gymruben.es.repository.PlanesEntrenamientoRepository;
 import com.gymruben.es.repository.UserRepository;
 import com.gymruben.es.repository.VideosPlanEntrenamientoRepository;
+import com.gymruben.es.repository.specification.PlanesEntrenamientoSpecification;
+import com.gymruben.es.service.helper.FilterHelper;
 import com.gymruben.es.service.mapper.PlanesEntrenamientoMapper;
 
 @Service
@@ -37,6 +41,9 @@ public class PlanesEntrenamientoService {
         this.planesEntrenamientoRepository = planesEntrenamientoRepository;
         this.videosPlanEntrenamientoRepository = videosPlanEntrenamientoRepository;
         this.userRepository = userRepository;
+    }
+    public Page<PlanesEntrenamiento> findAll(Pageable pageable, FilterHelper filterHelper) {
+        return planesEntrenamientoRepository.findAll(PlanesEntrenamientoSpecification.busquedaPlanesEntrenamiento(filterHelper), pageable);
     }
 
      public PlanesEntrenamiento createPlanesEntrenamiento(PlanesEntrenamiento planesEntrenamiento){

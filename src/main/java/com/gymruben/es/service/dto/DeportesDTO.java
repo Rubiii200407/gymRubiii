@@ -1,10 +1,16 @@
 package com.gymruben.es.service.dto;
 
+import java.time.Instant;
 import java.util.Objects;
 
 public class DeportesDTO {
-     private String id;
+    private String id;
     private String codigo;
+    private String nombreDeporte;
+    private String descripcion;
+    private Instant fechaDeporte;
+    private String horaDeporte;
+    private String instructor;
     private String codigoCompleto;
     private UserDTO user;
 
@@ -14,7 +20,8 @@ public class DeportesDTO {
     public void setId(String id) {
         this.id = id;
 
-    } public String getCodigo() {
+    } 
+    public String getCodigo() {
         return this.codigo;
     }
     public void setCodigo(String codigo) {
@@ -33,6 +40,37 @@ public class DeportesDTO {
     public void setUser(UserDTO userDTO) {
         this.user = userDTO;
     }
+    public String getNombreDeporte() {
+        return this.nombreDeporte;
+    }
+    public void setNombreDeporte(String nombreDeporte) {
+        this.nombreDeporte = nombreDeporte;
+    }
+    public String getDescripcion() {
+        return this.descripcion;
+    }
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    public String getHoraDeporte() {
+        return this.horaDeporte;
+    }
+    public void setHoraDeporte(String horaDeporte) {
+        this.horaDeporte = horaDeporte;
+    }
+    public String getInstructor() {
+        return this.instructor;
+    }
+    public void setInstructor(String instructor) {
+        this.instructor = instructor;
+    }
+    public Instant getFechaDeporte() {
+        return this.fechaDeporte;
+    }
+    public void setFechaDeporte(Instant fechaDeporte) {
+        this.fechaDeporte = fechaDeporte;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -60,14 +98,23 @@ public class DeportesDTO {
             "id=" +
             getId() +
             "'" +
-    
             ", titulo='" +
             getCodigo() +
             "'" +
             ", descripcion='" +
             getCodigoCompleto() +
             "" +
-            ", user='" +
+            ", nombreDeporte='" +
+            getNombreDeporte() +
+            ", fechaDeporte='" +
+            getFechaDeporte() +
+            ", instructor='" +
+            getInstructor() +
+            ", horaDeporte='" +
+            getHoraDeporte() +
+            ", descripcion='" +
+            getDescripcion() +
+            ", userDto='" +
             getUser() +
             "}"
             );
