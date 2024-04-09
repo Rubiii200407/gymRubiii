@@ -47,6 +47,13 @@ export class PlanesNutricionService {
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<IPlanesNutricion>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
+  queryWithPagination(params?: any): Observable<HttpResponse<IPlanesNutricion[]>> {
+    const options = createRequestOption(params);
+    return this.http.get<IPlanesNutricion[]>(this.resourceUrl, {
+      params: options,
+      observe: 'response',
+    });
+  }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);

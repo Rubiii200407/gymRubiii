@@ -1,0 +1,38 @@
+
+
+  
+
+
+  .bold-text {
+    font-weight: bold;
+    font-size: 14px;
+  }
+  .modern-pagination ::ng-deep .page-link {
+    background-color: transparent;
+    border: none;
+    color: rgb(109, 108, 108);
+    border-radius: 60%;
+  }
+  
+  .modern-pagination ::ng-deep .page-item {
+    margin: 0;
+  }
+  
+  .modern-pagination ::ng-deep .page-item.active .page-link {
+    background-color: #e2dfdf;
+    border: none;
+  }
+  
+  .modern-pagination ::ng-deep .page-item.disabled .page-link {
+    color: #bebebe;
+  }
+
+  .d-flex {
+    display: flex;
+  }
+  .ml-auto {
+    margin-left: auto;
+  }
+
+  
+

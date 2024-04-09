@@ -48,7 +48,7 @@ public class PlanesNutricionDTO {
     public String getAlimentosRecomendados() {
         return this.alimentosRecomendados;
     }
-    public void setAlimentosRecomendados(String hoalimentosRecomendadosraClase) {
+    public void setAlimentosRecomendados(String alimentosRecomendados) {
         this.alimentosRecomendados = alimentosRecomendados;
     }
 

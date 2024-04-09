@@ -52,6 +52,13 @@ export class PlanesEntrenamientoService {
       .get<RestPlanesEntrenamiento>(`${this.resourceUrl + '/UUID'}/${codigo}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
+  queryWithPagination(params?: any): Observable<HttpResponse<IPlanesEntrenamiento[]>> {
+    const options = createRequestOption(params);
+    return this.http.get<IPlanesEntrenamiento[]>(this.resourceUrl, {
+      params: options,
+      observe: 'response',
+    });
+  }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
