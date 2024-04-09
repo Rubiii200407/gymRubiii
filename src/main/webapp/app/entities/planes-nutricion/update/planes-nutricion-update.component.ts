@@ -26,8 +26,6 @@ export class PlanesNutricionUpdateComponent implements OnInit {
   neat?:number;
   planesNutricion: IPlanesNutricion | null = null;
   planSeleccionado?:string|null;
-  horasDisponibles: string[] = [];
-  horaClase: string = ""
   codigo?: string;
   nuevaConsulta = true;
   uuid?:string

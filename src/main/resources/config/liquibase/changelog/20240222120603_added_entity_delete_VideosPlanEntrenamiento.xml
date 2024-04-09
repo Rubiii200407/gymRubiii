@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity VideosPlanEntrenamiento.
+    -->
+    <changeSet id="20240222120603-6" author="jhipster">
+     <dropForeignKeyConstraint baseTableName="videos_plan_entrenamiento"
+                               constraintName="fk_videos_plan_entrenamiento__plan_entrenamiento_id"/>
+ <dropColumn tableName="videos_plan_entrenamiento" columnName="descripcion_video"/>
+ <dropColumn tableName="videos_plan_entrenamiento" columnName="duracion"/>
+  <dropColumn tableName="videos_plan_entrenamiento" columnName="fecha_publicacion"/>
+   <dropColumn tableName="videos_plan_entrenamiento" columnName="plan_entrenamiento_id"/>
+   
+    </changeSet>
+</databaseChangeLog>

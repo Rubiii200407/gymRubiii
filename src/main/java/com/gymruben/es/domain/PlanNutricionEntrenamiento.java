@@ -7,17 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * A PlanesEntrenamiento.
+ * A VideosPlanEntrenamiento.
  */
 @Entity
-@Table(name = "planes_entrenamiento")
+@Table(name = "plan_nutricion_entrenamiento")
 @SuppressWarnings("common-java:DuplicatedBlocks")
-public class PlanesEntrenamiento implements Serializable {
+public class PlanNutricionEntrenamiento implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,20 +27,12 @@ public class PlanesEntrenamiento implements Serializable {
     @Column(name = "nombre_plan")
     private String nombrePlan;
 
-    @Column(name = "descripcion")
-    private String descripcion;
-
     @Column(name = "instrucciones")
     private String instrucciones;
 
-    @Column(name = "codigo")
-    private String codigo;
-    @Column(name = "video_id")
-    private String videoId;
+    @Column(name = "video")
+    private String video;
 
-    @ManyToOne
-    @JoinColumn(name ="usuario_id",referencedColumnName = "id")
-    private User user;
 
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -51,7 +41,7 @@ public class PlanesEntrenamiento implements Serializable {
         return this.id;
     }
 
-    public PlanesEntrenamiento id(Long id) {
+    public PlanNutricionEntrenamiento id(Long id) {
         this.setId(id);
         return this;
     }
@@ -64,7 +54,7 @@ public class PlanesEntrenamiento implements Serializable {
         return this.nombrePlan;
     }
 
-    public PlanesEntrenamiento nombrePlan(String nombrePlan) {
+    public PlanNutricionEntrenamiento nombrePlan(String nombrePlan) {
         this.setNombrePlan(nombrePlan);
         return this;
     }
@@ -73,24 +63,13 @@ public class PlanesEntrenamiento implements Serializable {
         this.nombrePlan = nombrePlan;
     }
 
-    public String getDescripcion() {
-        return this.descripcion;
-    }
-
-    public PlanesEntrenamiento descripcion(String descripcion) {
-        this.setDescripcion(descripcion);
-        return this;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+   
 
     public String getInstrucciones() {
         return this.instrucciones;
     }
 
-    public PlanesEntrenamiento instrucciones(String instrucciones) {
+    public PlanNutricionEntrenamiento instrucciones(String instrucciones) {
         this.setInstrucciones(instrucciones);
         return this;
     }
@@ -98,47 +77,20 @@ public class PlanesEntrenamiento implements Serializable {
     public void setInstrucciones(String instrucciones) {
         this.instrucciones = instrucciones;
     }
-
-    public String getCodigo() {
-        return this.codigo;
+    public String getVideo() {
+        return this.video;
     }
 
-    public PlanesEntrenamiento codigo(String codigo) {
-        this.setCodigo(codigo);
+    public PlanNutricionEntrenamiento video(String video) {
+        this.setVideo(video);
         return this;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setVideo(String video) {
+        this.video = video;
     }
+   
 
-    public User getUser() {
-        return this.user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public PlanesEntrenamiento user(User user) {
-        this.setUser(user);
-        return this;
-    }
-
-    public String getVideoId() {
-        return this.videoId;
-    }
-
-    public PlanesEntrenamiento videoId(String videoId) {
-        this.setVideoId(videoId);
-        return this;
-    }
-
-    public void setVideoId(String videoId) {
-        this.videoId = videoId;
-    }
-
-    
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -147,10 +99,10 @@ public class PlanesEntrenamiento implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof PlanesEntrenamiento)) {
+        if (!(o instanceof PlanNutricionEntrenamiento)) {
             return false;
         }
-        return id != null && id.equals(((PlanesEntrenamiento) o).id);
+        return id != null && id.equals(((PlanNutricionEntrenamiento) o).id);
     }
 
     @Override
@@ -162,15 +114,12 @@ public class PlanesEntrenamiento implements Serializable {
     // prettier-ignore
     @Override
     public String toString() {
-        return "PlanesEntrenamiento{" +
+        return "PlanNutricionEntrenamiento{" +
             "id=" + getId() +
             ", nombrePlan='" + getNombrePlan() + "'" +
-            ", descripcion='" + getDescripcion() + "'" +
             ", instrucciones='" + getInstrucciones() + "'" +
-            ", codigo='" + getCodigo() + "'" +
-            ", videoId='" + getVideoId() + "'" +
-            ", user='" + getUser() + "'" +
+            ", video='" + getVideo() + "'" +
+  
             "}";
     }
 }
-

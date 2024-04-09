@@ -1,8 +1,13 @@
 package com.gymruben.es.domain;
 
 import java.io.Serializable;
-import java.time.Instant;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * A VideosPlanEntrenamiento.
@@ -22,20 +27,10 @@ public class VideosPlanEntrenamiento implements Serializable {
     @Column(name = "titulo_video")
     private String tituloVideo;
 
-    @Column(name = "descripcion_video")
-    private String descripcionVideo;
-
     @Column(name = "url_video")
     private String urlVideo;
 
-    @Column(name = "duracion")
-    private Long duracion;
 
-    @Column(name = "fecha_publicacion")
-    private Instant fechaPublicacion;
-
-    @ManyToOne
-    private PlanesEntrenamiento planEntrenamiento;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -65,18 +60,7 @@ public class VideosPlanEntrenamiento implements Serializable {
         this.tituloVideo = tituloVideo;
     }
 
-    public String getDescripcionVideo() {
-        return this.descripcionVideo;
-    }
-
-    public VideosPlanEntrenamiento descripcionVideo(String descripcionVideo) {
-        this.setDescripcionVideo(descripcionVideo);
-        return this;
-    }
-
-    public void setDescripcionVideo(String descripcionVideo) {
-        this.descripcionVideo = descripcionVideo;
-    }
+   
 
     public String getUrlVideo() {
         return this.urlVideo;
@@ -90,45 +74,8 @@ public class VideosPlanEntrenamiento implements Serializable {
     public void setUrlVideo(String urlVideo) {
         this.urlVideo = urlVideo;
     }
+   
 
-    public Long getDuracion() {
-        return this.duracion;
-    }
-
-    public VideosPlanEntrenamiento duracion(Long duracion) {
-        this.setDuracion(duracion);
-        return this;
-    }
-
-    public void setDuracion(Long duracion) {
-        this.duracion = duracion;
-    }
-
-    public Instant getFechaPublicacion() {
-        return this.fechaPublicacion;
-    }
-
-    public VideosPlanEntrenamiento fechaPublicacion(Instant fechaPublicacion) {
-        this.setFechaPublicacion(fechaPublicacion);
-        return this;
-    }
-
-    public void setFechaPublicacion(Instant fechaPublicacion) {
-        this.fechaPublicacion = fechaPublicacion;
-    }
-
-    public PlanesEntrenamiento getPlanEntrenamiento() {
-        return this.planEntrenamiento;
-    }
-
-    public void setPlanEntrenamiento(PlanesEntrenamiento planesEntrenamiento) {
-        this.planEntrenamiento = planesEntrenamiento;
-    }
-
-    public VideosPlanEntrenamiento planEntrenamiento(PlanesEntrenamiento planesEntrenamiento) {
-        this.setPlanEntrenamiento(planesEntrenamiento);
-        return this;
-    }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -155,10 +102,8 @@ public class VideosPlanEntrenamiento implements Serializable {
         return "VideosPlanEntrenamiento{" +
             "id=" + getId() +
             ", tituloVideo='" + getTituloVideo() + "'" +
-            ", descripcionVideo='" + getDescripcionVideo() + "'" +
             ", urlVideo='" + getUrlVideo() + "'" +
-            ", duracion=" + getDuracion() +
-            ", fechaPublicacion='" + getFechaPublicacion() + "'" +
+  
             "}";
     }
 }

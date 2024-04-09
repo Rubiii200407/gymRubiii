@@ -2,13 +2,14 @@ package com.gymruben.es.service.dto;
 
 import java.util.Objects;
 
-public class PlanesNutricionDTO {
+public class PlanesEntrenamientoDTO {
      private String id;
     private String codigo;
     private String nombrePlan;
     private String descripcion;
     private String instrucciones;
-    private String alimentosRecomendados;
+    private String videoId;
+
 
 
 
@@ -45,27 +46,26 @@ public class PlanesNutricionDTO {
     public void setInstrucciones(String instrucciones) {
         this.instrucciones = instrucciones;
     }
-    public String getAlimentosRecomendados() {
-        return this.alimentosRecomendados;
+    public String getVideoId() {
+        return this.videoId;
     }
-    public void setAlimentosRecomendados(String hoalimentosRecomendadosraClase) {
-        this.alimentosRecomendados = alimentosRecomendados;
+    public void setVideoId(String videoId) {
+        this.videoId = videoId;
     }
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof PlanesNutricionDTO)) {
+        if (!(o instanceof PlanesEntrenamientoDTO)) {
             return false;
         }
-        PlanesNutricionDTO planesNutricionDTO = (PlanesNutricionDTO) o;
+        PlanesEntrenamientoDTO planesEntrenamientoDTO = (PlanesEntrenamientoDTO) o;
         if (this.id == null) {
             return false;
         }
-        return Objects.equals(this.id, planesNutricionDTO.id);
+        return Objects.equals(this.id, planesEntrenamientoDTO.id);
     }
 
     @Override
@@ -76,7 +76,7 @@ public class PlanesNutricionDTO {
     @Override
     public String toString() {
         return (
-            "PlanesNutricionDTO{" +
+            "PlanesEntrenamientonDTO{" +
             "id=" +
             getId() +
             "'" +
@@ -92,13 +92,11 @@ public class PlanesNutricionDTO {
             ", instrucciones='" +
             getInstrucciones() +
             "" +
-            ", alimentosRecomendados='" +
-            getAlimentosRecomendados() +
+            ", videoId='" +
+            getVideoId() +
             "" +
-      
             "}"
             );
         }
 }
-    
 

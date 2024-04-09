@@ -1,19 +1,34 @@
 package com.gymruben.es.web.rest;
 
-import com.gymruben.es.domain.PlanesEntrenamiento;
-import com.gymruben.es.repository.PlanesEntrenamientoRepository;
-import com.gymruben.es.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.gymruben.es.domain.PlanesEntrenamiento;
+import com.gymruben.es.repository.PlanesEntrenamientoRepository;
+import com.gymruben.es.repository.UserRepository;
+import com.gymruben.es.service.PlanesEntrenamientoService;
+import com.gymruben.es.service.dto.PlanesEntrenamientoDTO;
+import com.gymruben.es.service.mapper.PlanesEntrenamientoMapper;
+import com.gymruben.es.web.rest.errors.BadRequestAlertException;
+
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
@@ -33,9 +48,15 @@ public class PlanesEntrenamientoResource {
     private String applicationName;
 
     private final PlanesEntrenamientoRepository planesEntrenamientoRepository;
+    private final UserRepository userRepository;
+    private final PlanesEntrenamientoMapper planesEntrenamientoMapper;
+    private final PlanesEntrenamientoService planesEntrenamientoService;
 
-    public PlanesEntrenamientoResource(PlanesEntrenamientoRepository planesEntrenamientoRepository) {
+    public PlanesEntrenamientoResource(PlanesEntrenamientoRepository planesEntrenamientoRepository,UserRepository userRepository,PlanesEntrenamientoMapper planesEntrenamientoMapper,PlanesEntrenamientoService planesEntrenamientoService) {
         this.planesEntrenamientoRepository = planesEntrenamientoRepository;
+        this.userRepository = userRepository;
+        this.planesEntrenamientoMapper = planesEntrenamientoMapper;
+        this.planesEntrenamientoService = planesEntrenamientoService;
     }
 
     /**
@@ -52,11 +73,21 @@ public class PlanesEntrenamientoResource {
         if (planesEntrenamiento.getId() != null) {
             throw new BadRequestAlertException("A new planesEntrenamiento cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        PlanesEntrenamiento result = planesEntrenamientoRepository.save(planesEntrenamiento);
+        PlanesEntrenamiento result = planesEntrenamientoService.createPlanesEntrenamiento(planesEntrenamiento);
+
         return ResponseEntity
-            .created(new URI("/api/planes-entrenamientos/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+                .created(new URI("/api/clases-onlines/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                .body(result);
+    }
+
+      @GetMapping("/planes-entrenamientos/UUID/{codigo}")
+    public ResponseEntity<PlanesEntrenamientoDTO> getPlanesEntrenamientoUUID(@PathVariable String codigo) {
+        log.debug("REST request to get EmpresaDenuncia : {}", codigo);
+        Optional<PlanesEntrenamientoDTO> planesEntrenamiento = planesEntrenamientoRepository
+            .findByCodigo(codigo)
+            .map(planesEntrenamientoMapper::toDtoCodigo);
+        return ResponseUtil.wrapOrNotFound(planesEntrenamiento);
     }
 
     /**
@@ -130,14 +161,11 @@ public class PlanesEntrenamientoResource {
                 if (planesEntrenamiento.getDescripcion() != null) {
                     existingPlanesEntrenamiento.setDescripcion(planesEntrenamiento.getDescripcion());
                 }
-                if (planesEntrenamiento.getTipo() != null) {
-                    existingPlanesEntrenamiento.setTipo(planesEntrenamiento.getTipo());
-                }
-                if (planesEntrenamiento.getDuracion() != null) {
-                    existingPlanesEntrenamiento.setDuracion(planesEntrenamiento.getDuracion());
-                }
                 if (planesEntrenamiento.getInstrucciones() != null) {
                     existingPlanesEntrenamiento.setInstrucciones(planesEntrenamiento.getInstrucciones());
+                }
+                if (planesEntrenamiento.getVideoId() != null) {
+                    existingPlanesEntrenamiento.setVideoId(planesEntrenamiento.getVideoId());
                 }
 
                 return existingPlanesEntrenamiento;
