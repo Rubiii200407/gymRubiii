@@ -49,8 +49,10 @@ export class DeportesService {
     });
   }
 
-  find(id: number): Observable<EntityResponseType> {
-    return this.http.get<IDeportes>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  find(id: string): Observable<EntityResponseType> {
+    return this.http
+      .get<RestDeportes>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+      .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

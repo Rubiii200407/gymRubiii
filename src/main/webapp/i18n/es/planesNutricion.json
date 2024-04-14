@@ -2,11 +2,11 @@
   "gymRubenApp": {
     "planesNutricion": {
       "home": {
-        "title": "Planes Nutricions",
+        "title": "Planes Nutricion",
         "refreshListLabel": "Refrescar lista",
         "createLabel": "Crear nuevo Planes Nutricion",
         "createOrEditLabel": "Crear o editar Planes Nutricion",
-        "notFound": "Ningún Planes Nutricions encontrado"
+        "notFound": "Ningún Planes Nutricion encontrado"
       },
       "created": "Un nuevo Planes Nutricion ha sido creado con el identificador {{ param }}",
       "updated": "Un Planes Nutricion ha sido actualizado con el identificador {{ param }}",

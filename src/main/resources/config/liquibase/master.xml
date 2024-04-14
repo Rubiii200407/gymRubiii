@@ -41,6 +41,9 @@
     <include file="config/liquibase/changelog/20240222120600_added_entity_change_PlanesEntrenamiento.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240222120603_added_entity_delete_VideosPlanEntrenamiento.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240222120604_added_entity_PlanNutricionEntrenamiento.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240222120605_added_entity_Comentario.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240222120605_added_entity_constraints_Comentario.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240222120605_added_entity_constraints2_Comentario.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

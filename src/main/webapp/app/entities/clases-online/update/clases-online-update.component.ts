@@ -142,9 +142,9 @@ descargarCodigo(codigo: string): void {
 }
 buscarUUID(): void {
     this.clasesOnlineService.findUUID(this.codigoBusqueda).subscribe(
-      clase => {
-        if (clase !== null) {
-          this.claseBuscada = clase.body;
+      clasesOnline => {
+        if (clasesOnline !== null) {
+          this.claseBuscada = clasesOnline.body;
           this.codigoNoExiste = false;
         } else {
           this.claseBuscada = null;

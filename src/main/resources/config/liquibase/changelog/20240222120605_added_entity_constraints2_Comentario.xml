@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Venta.
+    -->
+    <changeSet id="20240222120605-3" author="jhipster">
+      <addColumn tableName="comentario">
+        <column name="clases_online_id" type="bigint">
+            <constraints nullable="true"/>
+        </column>
+        </addColumn>
+        <addColumn tableName="comentario">
+         <column name="planes_nutricion_id" type="bigint">
+            <constraints nullable="true"/>
+        </column>
+        </addColumn>
+         <addColumn tableName="comentario">
+         <column name="planes_entrenamiento_id" type="bigint">
+            <constraints nullable="true"/>
+        </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="clases_online_id"
+                                 baseTableName="comentario"
+                                 constraintName="fk_comentario__clases_online_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="clases_online"/>
+
+        <addForeignKeyConstraint baseColumnNames="planes_nutricion_id"
+                                 baseTableName="comentario"
+                                 constraintName="fk_comentario__planes_nutricion_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="planes_nutricion"/>
+
+         <addForeignKeyConstraint baseColumnNames="planes_entrenamiento_id"
+                                 baseTableName="comentario"
+                                 constraintName="fk_comentario__planes_entrenamiento_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="planes_entrenamiento"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -19,8 +19,16 @@ const deportesRoute: Routes = [
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':uuid/deporte',
+    path: ':uuid/acceder',
     component: DeportesDetailDeporteComponent,
+  },
+  {
+    path: 'view',
+    component: DeportesDetailComponent,
+    resolve: {
+      deportes: DeportesRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',

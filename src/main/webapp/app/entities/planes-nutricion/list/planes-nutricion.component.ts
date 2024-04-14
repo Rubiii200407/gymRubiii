@@ -50,8 +50,11 @@ export class PlanesNutricionComponent implements OnInit {
     this.load();
   });
   }
+  verNutricion(id: number) {
+    this.router.navigate(['/planes-nutricion/view'], { queryParams: { id: id } });
+  }
 
-  delete(planesNutricion: IPlanesNutricion): void {
+  delete(planesNutricion: IPlanesNutricion,event:MouseEvent): void {
     const modalRef = this.modalService.open(PlanesNutricionDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.planesNutricion = planesNutricion;
     // unsubscribe not needed because closed completes on modal close
@@ -65,6 +68,7 @@ export class PlanesNutricionComponent implements OnInit {
           this.onResponseSuccess(res);
         },
       });
+      event?.stopPropagation();
   }
 
    load(): void {

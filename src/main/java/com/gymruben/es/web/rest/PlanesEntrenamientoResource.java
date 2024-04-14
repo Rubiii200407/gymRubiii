@@ -87,13 +87,13 @@ public class PlanesEntrenamientoResource {
     }
 
     /**
-     * {@code POST  /planes-entrenamientos} : Create a new planesEntrenamiento.
+     * {@code POST  /planes-entrenamiento} : Create a new planesEntrenamiento.
      *
      * @param planesEntrenamiento the planesEntrenamiento to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new planesEntrenamiento, or with status {@code 400 (Bad Request)} if the planesEntrenamiento has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PostMapping("/planes-entrenamientos")
+    @PostMapping("/planes-entrenamiento")
     public ResponseEntity<PlanesEntrenamiento> createPlanesEntrenamiento(@RequestBody PlanesEntrenamiento planesEntrenamiento)
         throws URISyntaxException {
         log.debug("REST request to save PlanesEntrenamiento : {}", planesEntrenamiento);
@@ -103,12 +103,12 @@ public class PlanesEntrenamientoResource {
         PlanesEntrenamiento result = planesEntrenamientoService.createPlanesEntrenamiento(planesEntrenamiento);
 
         return ResponseEntity
-                .created(new URI("/api/clases-onlines/" + result.getId()))
+                .created(new URI("/api/planes-entrenamiento/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
                 .body(result);
     }
 
-      @GetMapping("/planes-entrenamientos/UUID/{codigo}")
+      @GetMapping("/planes-entrenamiento/UUID/{codigo}")
     public ResponseEntity<PlanesEntrenamientoDTO> getPlanesEntrenamientoUUID(@PathVariable String codigo) {
         log.debug("REST request to get EmpresaDenuncia : {}", codigo);
         Optional<PlanesEntrenamientoDTO> planesEntrenamiento = planesEntrenamientoRepository
@@ -118,7 +118,7 @@ public class PlanesEntrenamientoResource {
     }
 
     /**
-     * {@code PUT  /planes-entrenamientos/:id} : Updates an existing planesEntrenamiento.
+     * {@code PUT  /planes-entrenamiento/:id} : Updates an existing planesEntrenamiento.
      *
      * @param id the id of the planesEntrenamiento to save.
      * @param planesEntrenamiento the planesEntrenamiento to update.
@@ -127,7 +127,7 @@ public class PlanesEntrenamientoResource {
      * or with status {@code 500 (Internal Server Error)} if the planesEntrenamiento couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PutMapping("/planes-entrenamientos/{id}")
+    @PutMapping("/planes-entrenamiento/{id}")
     public ResponseEntity<PlanesEntrenamiento> updatePlanesEntrenamiento(
         @PathVariable(value = "id", required = false) final Long id,
         @RequestBody PlanesEntrenamiento planesEntrenamiento
@@ -152,7 +152,7 @@ public class PlanesEntrenamientoResource {
     }
 
     /**
-     * {@code PATCH  /planes-entrenamientos/:id} : Partial updates given fields of an existing planesEntrenamiento, field will ignore if it is null
+     * {@code PATCH  /planes-entrenamiento/:id} : Partial updates given fields of an existing planesEntrenamiento, field will ignore if it is null
      *
      * @param id the id of the planesEntrenamiento to save.
      * @param planesEntrenamiento the planesEntrenamiento to update.
@@ -162,7 +162,7 @@ public class PlanesEntrenamientoResource {
      * or with status {@code 500 (Internal Server Error)} if the planesEntrenamiento couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PatchMapping(value = "/planes-entrenamientos/{id}", consumes = { "application/json", "application/merge-patch+json" })
+    @PatchMapping(value = "/planes-entrenamiento/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<PlanesEntrenamiento> partialUpdatePlanesEntrenamiento(
         @PathVariable(value = "id", required = false) final Long id,
         @RequestBody PlanesEntrenamiento planesEntrenamiento
@@ -206,11 +206,11 @@ public class PlanesEntrenamientoResource {
     }
 
     /**
-     * {@code GET  /planes-entrenamientos} : get all the planesEntrenamientos.
+     * {@code GET  /planes-entrenamiento} : get all the planesEntrenamientos.
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of planesEntrenamientos in body.
      */
-    @GetMapping("/planes-entrenamientos")
+    @GetMapping("/planes-entrenamiento")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<List<PlanesEntrenamientoDTO>> getAllPlanesEntrenamiento(@ParameterObject Pageable pageable, FilterHelper filterHelper) {
         log.debug("REST request to get all EmpresaDenuncia for an admin");
@@ -231,12 +231,12 @@ public class PlanesEntrenamientoResource {
     
 
     /**
-     * {@code GET  /planes-entrenamientos/:id} : get the "id" planesEntrenamiento.
+     * {@code GET  /planes-entrenamiento/:id} : get the "id" planesEntrenamiento.
      *
      * @param id the id of the planesEntrenamiento to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the planesEntrenamiento, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/planes-entrenamientos/{id}")
+    @GetMapping("/planes-entrenamiento/{id}")
     public ResponseEntity<PlanesEntrenamientoDTO> getPlanesEntrenamiento(@PathVariable String id) {
         log.debug("REST request to get PlanesEntrenamiento : {}", id);
         Long idDecodificado = hashids.decode(id)[0];
@@ -245,12 +245,12 @@ public class PlanesEntrenamientoResource {
     }
 
     /**
-     * {@code DELETE  /planes-entrenamientos/:id} : delete the "id" planesEntrenamiento.
+     * {@code DELETE  /planes-entrenamiento/:id} : delete the "id" planesEntrenamiento.
      *
      * @param id the id of the planesEntrenamiento to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
-    @DeleteMapping("/planes-entrenamientos/{id}")
+    @DeleteMapping("/planes-entrenamiento/{id}")
     public ResponseEntity<Void> deletePlanesEntrenamiento(@PathVariable String id) {
         log.debug("REST request to delete PlanesEntrenamiento : {}", id);
         Long idDecodificado = hashids.decode(id)[0];

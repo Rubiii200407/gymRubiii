@@ -1,48 +1,67 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
-    <div *ngIf="clasesOnline">
-      <h2 data-cy="clasesOnlineDetailsHeading"><span jhiTranslate="gymRubenApp.clasesOnline.detail.title">Clases Online</span></h2>
-
-      <hr />
-
-      <jhi-alert-error></jhi-alert-error>
-
-      <jhi-alert></jhi-alert>
-
-      <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
-          <span>{{ clasesOnline.id }}</span>
-        </dd>
-        <dt><span jhiTranslate="gymRubenApp.clasesOnline.nombreClase">Nombre Clase</span></dt>
-        <dd>
-          <span>{{ clasesOnline.nombreClase }}</span>
-        </dd>
-        <dt><span jhiTranslate="gymRubenApp.clasesOnline.descripcion">Descripcion</span></dt>
-        <dd>
-          <span>{{ clasesOnline.descripcion }}</span>
-        </dd>
-        <dt><span jhiTranslate="gymRubenApp.clasesOnline.horario">Horario</span></dt>
-        <dd>
-          <span>{{ clasesOnline.fechaClase }}</span>
-        </dd>
-        <dt><span jhiTranslate="gymRubenApp.clasesOnline.instructor">Instructor</span></dt>
-        <dd>
-          <span>{{ clasesOnline.instructor }}</span>
-        </dd>
-        <dt><span jhiTranslate="gymRubenApp.clasesOnline.participantesInscritos">Participantes Inscritos</span></dt>
-        <dd>
-          <span>{{ clasesOnline.horaClase }}</span>
-        </dd>
-      </dl>
-
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Volver</span>
-      </button>
-
-      <button type="button" [routerLink]="['/clases-online', clasesOnline.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
-      </button>
+<div class="contenido">
+  <div class="titulo">
+  </div>
+  <div *ngIf="clasesOnline">
+    <div class="row g-2">
+      <div class="col-9">
+        <div class="fondo-gris h-98 p-5px">
+          <h5 class="borde-bottom">
+            <strong>Denuncia nº {{ clasesOnline.codigo }}</strong>
+          </h5>
+          <p class="p-l-15"><strong>Titulo</strong></p>
+          <p class="p-l-15">{{ clasesOnline.nombreClase }}</p>
+          <p class="p-l-15"><strong>Descripción</strong></p>
+          <quill-view [content]="clasesOnline.descripcion"></quill-view>
+        </div>
+      </div>
+ 
+    </div>
+    <div class="row">
+      <div class="col-8">
+        <div class="fondo-gris">
+          <h5><strong>Comentarios</strong></h5>
+          <div class="chat" #divScroll (scroll)="onScroll($event)" *ngIf="comentariosBuscados && comentariosBuscados.length > 0">
+            <div
+              *ngFor="let comentario of comentariosBuscados"
+              [ngClass]="{ 'mb-3': comentario.descripcion}"
+            >
+              <div
+                class="gris"
+                *ngIf="comentario.descripcion !== null"
+                [ngClass]="{ enviado: comentario.creador !== 'ANÓNIMO', recibido: comentario.creador === 'ANÓNIMO' }"
+              >
+                {{ comentario.creador }}:{{ comentario.fechaCreacion?.fromNow() }}
+              </div>
+              <div
+                *ngIf="comentario.descripcion !== null"
+                [ngClass]="{ enviado: comentario.creador !== 'ANÓNIMO', recibido: comentario.creador === 'ANÓNIMO' }"
+              >
+                <div  [ngClass]="{ mensajeEnv: comentario.creador !== 'ANÓNIMO', mensajeRec: comentario.creador === 'ANÓNIMO' }">
+                  <quill-view [content]="comentario.descripcion"></quill-view>
+                </div>
+              </div>
+          
+            </div>
+            <div class="bajar" id="miBoton" *ngIf="!showBajar">
+              <button class="btn btn-chat" (click)="scroll()">
+                <fa-icon icon="arrow-down"></fa-icon>
+                bajar
+              </button>
+            </div>
+            <div id="scroll"></div>
+          </div>
+          <div>
+            <jhi-comentario-cadmin-update (guardado)="cargaDatos()"> </jhi-comentario-cadmin-update>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        
+        <div class="btn-salir">
+          <button class="btn btn-primary btn-volver" (click)="previousState()">volver</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+<div class="img-bottom"></div>

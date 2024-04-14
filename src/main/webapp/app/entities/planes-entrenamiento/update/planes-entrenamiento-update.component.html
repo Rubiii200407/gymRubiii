@@ -83,22 +83,7 @@
           [(ngModel)]="descripcionInstruccion"
         />
       </div>
-      <div class="row">
-        <div class="col-8">
-          <div class="fondo-gris">
-            <h5><strong>Comentarios</strong></h5>
-            <div class="chat"  *ngIf="planNutricionEntrenamiento && planNutricionEntrenamientos.length > 0">
-              <div
-                *ngFor="let planNutricionEntrenamiento of planNutricionEntrenamientos"
-                [ngClass]="{ 'mb-3': planNutricionEntrenamiento.instrucciones|| planNutricionEntrenamiento.video!.length > 0 }"
-              >
-               
-                 
-              </div> 
-            </div>
-          </div>
-        </div>
-      </div>
+    
 
 
       <div class="mt-4">

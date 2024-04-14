@@ -44,8 +44,11 @@ export class PlanesNutricionService {
     });
   }
 
-  find(id: number): Observable<EntityResponseType> {
-    return this.http.get<IPlanesNutricion>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+ 
+  find(id: string): Observable<EntityResponseType> {
+    return this.http
+      .get<RestPlanesNutricion>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+      .pipe(map(res => this.convertResponseFromServer(res)));
   }
   queryWithPagination(params?: any): Observable<HttpResponse<IPlanesNutricion[]>> {
     const options = createRequestOption(params);

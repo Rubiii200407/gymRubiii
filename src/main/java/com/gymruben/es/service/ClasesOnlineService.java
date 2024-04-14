@@ -20,6 +20,7 @@ import com.gymruben.es.repository.VideosClaseOnlineRepository;
 import com.gymruben.es.repository.specification.ClasesOnlineSpecification;
 import com.gymruben.es.service.helper.FilterHelper;
 import com.gymruben.es.service.mapper.ClasesOnlineMapper;
+import com.gymruben.es.web.rest.errors.BadRequestAlertException;
 
 @Service
 public class ClasesOnlineService {
@@ -48,7 +49,7 @@ public class ClasesOnlineService {
 
      public ClasesOnline createClasesOnline(ClasesOnline clasesOnline){
         if(clasesOnline.getId()!=null){
-         
+            throw new BadRequestAlertException("A new comentario cannot already have an ID", ENTITY_NAME, "idexists");
         }
         String uuid=UUID.randomUUID().toString();
         clasesOnline.setCodigo(uuid);

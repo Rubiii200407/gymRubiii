@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-center">
+    <div class="col-8">
+      <div *ngIf="comentario">
+        <h2 data-cy="comentarioDetailsHeading">
+          <span >Comentario</span>
+        </h2>
+  
+        <hr />
+  
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ comentario.id }}</span>
+          </dd>
+          <dt><span >Descripcion</span></dt>
+          <dd>
+            <span>{{ comentario.descripcion }}</span>
+          </dd>
+          <dt><span >Fecha Creacion</span></dt>
+          <dd>
+            <span>{{ comentario.fechaCreacion | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span >Creador</span></dt>
+          <dd>
+            <span>{{ comentario.creador }}</span>
+          </dd>
+        </dl>
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Volver</span>
+        </button>
+  
+        <button type="button" [routerLink]="['/comentario', comentario.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  

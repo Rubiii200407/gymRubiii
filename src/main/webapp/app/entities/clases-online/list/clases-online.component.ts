@@ -51,7 +51,7 @@ export class ClasesOnlineComponent implements OnInit {
     });
   }
 
-  delete(clasesOnline: IClasesOnline): void {
+  delete(clasesOnline: IClasesOnline,event:MouseEvent): void {
     const modalRef = this.modalService.open(ClasesOnlineDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.clasesOnline = clasesOnline;
     // unsubscribe not needed because closed completes on modal close
@@ -65,6 +65,10 @@ export class ClasesOnlineComponent implements OnInit {
           this.onResponseSuccess(res);
         },
       });
+      event?.stopPropagation();
+  }
+  verClasesOnline(id: number) {
+    this.router.navigate(['/clases-online/view'], { queryParams: { id: id } });
   }
 
   load(): void {

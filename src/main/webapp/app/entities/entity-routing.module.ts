@@ -44,6 +44,12 @@ import { RouterModule } from '@angular/router';
         loadChildren: () =>
           import('./videos-plan-entrenamiento/videos-plan-entrenamiento.module').then(m => m.VideosPlanEntrenamientoModule),
       },
+      {
+        path: 'comentario',
+        data: { pageTitle: 'gymRubenApp.comentario.home.title' },
+        loadChildren: () =>
+          import('./comentario/comentario.module').then(m => m.ComentarioModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

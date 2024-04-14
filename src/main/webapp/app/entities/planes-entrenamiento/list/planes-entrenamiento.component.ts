@@ -49,7 +49,7 @@ export class PlanesEntrenamientoComponent implements OnInit {
   });
   }
 
-  delete(planesEntrenamiento: IPlanesEntrenamiento): void {
+  delete(planesEntrenamiento: IPlanesEntrenamiento,event:MouseEvent): void {
     const modalRef = this.modalService.open(PlanesEntrenamientoDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.planesEntrenamiento = planesEntrenamiento;
     // unsubscribe not needed because closed completes on modal close
@@ -63,6 +63,7 @@ export class PlanesEntrenamientoComponent implements OnInit {
           this.onResponseSuccess(res);
         },
       });
+      event?.stopPropagation();
   }
 
   load(): void {
@@ -79,6 +80,9 @@ export class PlanesEntrenamientoComponent implements OnInit {
         this.onSuccess(res.body, res.headers);
         this.totalItems = Number(res.headers.get('X-Total-Count'));
       });
+  }
+  verPlan(id: number) {
+    this.router.navigate(['/planes-entrenamiento/view'], { queryParams: { id: id } });
   }
   set itemsPerPage(value: number) {
     if (value !== this._itemsPerPage) {

@@ -21,7 +21,7 @@ export type PartialUpdateRestClasesOnline = RestOf<PartialUpdateClasesOnline>;
 
 @Injectable({ providedIn: 'root' })
 export class ClasesOnlineService {
-  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/clases-onlines');
+  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/clases-online');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -52,9 +52,13 @@ export class ClasesOnlineService {
     });
   }
 
-  find(id: number): Observable<EntityResponseType> {
-    return this.http.get<IClasesOnline>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+
+  find(id: string): Observable<EntityResponseType> {
+    return this.http
+      .get<RestClasesOnline>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+      .pipe(map(res => this.convertResponseFromServer(res)));
   }
+  
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);

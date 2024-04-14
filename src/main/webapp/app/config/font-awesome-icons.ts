@@ -1,5 +1,5 @@
-import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import {
+  faArrowDown,
   faArrowLeft,
   faAsterisk,
   faBan,
@@ -11,13 +11,21 @@ import {
   faCloud,
   faCogs,
   faDatabase,
-  faEnvelope,
+  faDownload,
   faEye,
+  faFile,
+  faFileExcel,
+  faFileImage,
+  faFilePdf,
   faFlag,
   faHeart,
   faHome,
   faList,
   faLock,
+  faPaperPlane,
+  faPaperclip,
+  faPenToSquare,
+  // jhipster-needle-add-icon-import
   faPencilAlt,
   faPlus,
   faRoad,
@@ -34,11 +42,12 @@ import {
   faThList,
   faTimes,
   faTrashAlt,
+  faTrashCan,
   faUser,
   faUserPlus,
   faUsers,
   faUsersCog,
-  faWrench
+  faWrench,
 } from '@fortawesome/free-solid-svg-icons';
 
 export const fontAwesomeIcons = [
@@ -80,9 +89,17 @@ export const fontAwesomeIcons = [
   faUsers,
   faUsersCog,
   faWrench,
-  faFacebook,
-  faInstagram,
-  faTwitter,
-  faEnvelope
+  faPaperclip,
+  faPenToSquare,
+  faSave,
+  faTrashCan,
+  faPaperPlane,
+  faPaperclip,
+  faDownload,
+  faFile,
+  faFileImage,
+  faFilePdf,
+  faFileExcel,
+  faArrowDown,
   // jhipster-needle-add-icon-import
 ];

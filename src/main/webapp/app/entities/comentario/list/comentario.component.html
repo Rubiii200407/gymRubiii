@@ -1,0 +1,111 @@
+<div>
+    <h2>
+      <span>Comentarios</span>
+  
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+          <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+          <span>Refrescar lista</span>
+        </button>
+  
+        <button
+          id="jh-create-entity"
+          data-cy="entityCreateButton"
+          class="btn btn-primary jh-create-entity create-comentario"
+          [routerLink]="['/comentario/new']"
+        >
+          <fa-icon icon="plus"></fa-icon>
+          <span > Crear nuevo Comentario </span>
+        </button>
+      </div>
+    </h2>
+  
+    <jhi-alert-error></jhi-alert-error>
+  
+    <div class="alert alert-warning" id="no-result" *ngIf="comentarios?.length === 0">
+      <span >Ningún Comentario encontrado</span>
+    </div>
+  
+    <div class="table-responsive table-entities" id="entities" *ngIf="comentarios && comentarios.length > 0">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span>ID</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col">
+              <div class="d-flex">
+                <span >Descripcion</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+  
+            <th scope="col">
+              <div class="d-flex">
+                <span >Fecha Creacion</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col">
+              <div class="d-flex">
+                <span >Creador</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+  
+            <th scope="col">
+              <div class="d-flex">
+                <span >Empresa</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let comentario of comentarios; trackBy: trackId" data-cy="entityTable">
+            <td>
+              <a [routerLink]="['/comentario', comentario.id, 'view']">{{ comentario.id }}</a>
+            </td>
+            <td>{{ comentario.descripcion }}</td>
+            <td>{{ comentario.fechaCreacion | formatMediumDatetime }}</td>
+            <td>{{ comentario.creador }}</td>
+            <td>{{ comentario.deportes?.id }}</td>
+            <td>{{ comentario.clasesOnline?.id }}</td>
+            <td class="text-end">
+              <div class="btn-group">
+                <button
+                  type="submit"
+                  [routerLink]="['/comentario', comentario.id, 'view']"
+                  class="btn btn-info btn-sm"
+                  data-cy="entityDetailsButton"
+                >
+                  <fa-icon icon="eye"></fa-icon>
+                  <span class="d-none d-md-inline" >Vista</span>
+                </button>
+  
+                <button
+                  type="submit"
+                  [routerLink]="['/comentario', comentario.id, 'edit']"
+                  class="btn btn-primary btn-sm"
+                  data-cy="entityEditButton"
+                >
+                  <fa-icon icon="pencil-alt"></fa-icon>
+                  <span class="d-none d-md-inline">Editar</span>
+                </button>
+  
+                <button type="submit" (click)="delete(comentario)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                  <fa-icon></fa-icon>
+                  <span class="d-none d-md-inline" >Eliminar</span>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

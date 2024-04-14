@@ -31,6 +31,12 @@ const planesEntrenamientoRoute: Routes = [
     canActivate: [UserRouteAccessService],
   },
   {
+    path: 'view',
+    component: PlanesEntrenamientoDetailComponent,
+
+    canActivate: [UserRouteAccessService],
+  },
+  {
     path: 'new',
     component: PlanesEntrenamientoUpdateComponent,
     resolve: {

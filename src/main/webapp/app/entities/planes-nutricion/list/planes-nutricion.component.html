@@ -46,7 +46,7 @@
   </div>
 
   <div class="alert alert-warning" id="no-result" *ngIf="planesNutricions?.length === 0">
-    <span jhiTranslate="gymRubenApp.planesNutricion.home.notFound">Ningún Planes Nutricions encontrado</span>
+    <span jhiTranslate="gymRubenApp.planesNutricion.home.notFound">Ningún Planes Nutricion encontrado</span>
   </div>
 
   <div class="table-responsive table-entities" id="entities" *ngIf="planesNutricions && planesNutricions.length > 0">
@@ -88,10 +88,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let planesNutricion of planesNutricions; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/planes-nutricion', planesNutricion.id, 'view']">{{ planesNutricion.id }}</a>
-          </td>
+        <tr *ngFor="let planesNutricion of planesNutricions; trackBy: trackId" data-cy="entityTable"
+          (click)="verNutricion(planesNutricion.id)"
+          [ngClass]="['pointer-cursor']"
+        >
+        <td>{{ planesNutricion.id }}</td>
           <td>{{ planesNutricion.nombrePlan }}</td>
           <td>{{ planesNutricion.descripcion }}</td>
           <td>{{ planesNutricion.instrucciones }}</td>
@@ -99,27 +100,8 @@
   
           <td class="text-end">
             <div class="btn-group">
-              <button
-                type="submit"
-                [routerLink]="['/planes-nutricion', planesNutricion.id, 'view']"
-                class="btn btn-info btn-sm"
-                data-cy="entityDetailsButton"
-              >
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Vista</span>
-              </button>
-
-              <button
-                type="submit"
-                [routerLink]="['/planes-nutricion', planesNutricion.id, 'edit']"
-                class="btn btn-primary btn-sm"
-                data-cy="entityEditButton"
-              >
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
-              </button>
-
-              <button type="submit" (click)="delete(planesNutricion)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+             
+              <button type="submit" (click)="delete(planesNutricion,$event)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Eliminar</span>
               </button>
