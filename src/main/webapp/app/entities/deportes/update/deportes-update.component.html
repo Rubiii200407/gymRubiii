@@ -3,6 +3,15 @@
     <div *ngIf="!guardado; else elseBlockGuardado">   
       <h2 jhiTranslate="gymRubenApp.deportes.home.createLabel">Denuncia</h2>
       <div class="row g-2 align-items-center d-flex justify-content-end">
+        <div class="col-auto">
+          <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-dark btn-sm" [routerLink]="['/deportes', uuid, 'acceder']">
+            <fa-icon icon="search"></fa-icon>&nbsp;
+            <span jhiTranslate="entity.action.search">Buscar</span>
+          </button>
+        </div>
       </div>
       <form
         name="editForm"
@@ -153,8 +162,8 @@
         <div  class="button-section" >
           <button type="button">
             <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
-            <fa-icon [routerLink]="['/empresa-denuncia', uuid, 'viewDenunciante']"  icon="search"></fa-icon>
-            <span [routerLink]="['/empresa-denuncia', uuid, 'viewDenunciante']">Introduce tu denuncia</span>
+            <fa-icon [routerLink]="['/deportes', uuid, 'acceder']"  icon="search"></fa-icon>
+            <span [routerLink]="['/deportes', uuid, 'acceder']">Introduce tu denuncia</span>
           </button>
         </div>
       </div>

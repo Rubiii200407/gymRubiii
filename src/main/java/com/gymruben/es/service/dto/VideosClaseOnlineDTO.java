@@ -54,7 +54,7 @@ public class VideosClaseOnlineDTO {
     @Override
     public String toString() {
         return (
-            "EmpresaDenunciaDTO{" +
+            "VideosClaseDTO{" +
             "id=" +
             getId() +
             "'" +

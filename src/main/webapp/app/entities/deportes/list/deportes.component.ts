@@ -51,7 +51,7 @@ export class DeportesComponent implements OnInit {
 }
   
 
-  delete(deportes: IDeportes): void {
+  delete(deportes: IDeportes,event: MouseEvent): void {
     const modalRef = this.modalService.open(DeportesDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.deportes = deportes;
     // unsubscribe not needed because closed completes on modal close
@@ -65,6 +65,10 @@ export class DeportesComponent implements OnInit {
           this.onResponseSuccess(res);
         },
       });
+      event?.stopPropagation();
+  }
+  verDeportes(id: number) {
+    this.router.navigate(['/deportes/view'], { queryParams: { id: id } });
   }
 
   load(): void {

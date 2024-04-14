@@ -112,10 +112,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let deportes of deportes; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/deportes', deportes.id, 'view']">{{ deportes.id }}</a>
-          </td>
+        <tr *ngFor="let deportes of deportes; trackBy: trackId" data-cy="entityTable"
+          (click)="verDeportes(deportes.id)"
+          [ngClass]="['pointer-cursor']"
+        >
+           <td>{{ deportes.id }}</td>
           <td>{{ deportes.nombreDeporte }}</td>
           <td>{{ deportes.descripcion }}</td>
           <td>{{ deportes.horaDeporte }}</td>
@@ -125,28 +126,9 @@
           <td>{{ deportes.user}}</td>
           <td class="text-end">
             <div class="btn-group">
-              <button
-                type="submit"
-                [routerLink]="['/deportes', deportes.id, 'view']"
-                class="btn btn-info btn-sm"
-                data-cy="entityDetailsButton"
-              >
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Vista</span>
-              </button>
-
-              <button
-                type="submit"
-                [routerLink]="['/deportes', deportes.id, 'edit']"
-                class="btn btn-primary btn-sm"
-                data-cy="entityEditButton"
-              >
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
-              </button>
-
-              <button type="submit" (click)="delete(deportes)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon></fa-icon>
+           
+              <button type="submit" (click)="delete(deportes,$event)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Eliminar</span>
               </button>
             </div>

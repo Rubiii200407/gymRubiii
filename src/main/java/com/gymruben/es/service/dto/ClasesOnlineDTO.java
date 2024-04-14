@@ -12,6 +12,8 @@ public class ClasesOnlineDTO {
     private Date fechaClase;
     private String horaClase;
     private String videoId;
+    private String instructor;
+    private UserDTO user;
 
 
 
@@ -64,6 +66,19 @@ public class ClasesOnlineDTO {
     public void setVideoId(String videoId) {
         this.videoId = videoId;
     }
+    public String getInstructor() {
+        return this.instructor;
+    }
+    public void setInstructor(String instructor) {
+        this.instructor = instructor;
+    }
+     public UserDTO getUser() {
+        return this.user;
+    }
+
+    public void setUser(UserDTO userDTO) {
+        this.user = userDTO;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -88,7 +103,7 @@ public class ClasesOnlineDTO {
     @Override
     public String toString() {
         return (
-            "EmpresaDenunciaDTO{" +
+            "ClasesOnlineDTO{" +
             "id=" +
             getId() +
             "'" +

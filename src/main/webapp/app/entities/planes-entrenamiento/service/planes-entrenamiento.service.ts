@@ -20,7 +20,7 @@ export type EntityArrayResponseType = HttpResponse<IPlanesEntrenamiento[]>;
 
 @Injectable({ providedIn: 'root' })
 export class PlanesEntrenamientoService {
-  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/planes-entrenamientos');
+  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/planes-entrenamiento');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -44,8 +44,10 @@ export class PlanesEntrenamientoService {
     );
   }
 
-  find(id: number): Observable<EntityResponseType> {
-    return this.http.get<IPlanesEntrenamiento>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  find(id: string): Observable<EntityResponseType> {
+    return this.http
+      .get<RestPlanesEntrenamiento>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+      .pipe(map(res => this.convertResponseFromServer(res)));
   }
   findUUID(codigo: string): Observable<EntityResponseType> {
     return this.http

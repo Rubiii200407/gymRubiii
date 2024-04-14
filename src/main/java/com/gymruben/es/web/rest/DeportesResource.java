@@ -64,6 +64,7 @@ public class DeportesResource {
     private static final List<String> ALLOWED_ORDERED_PROPERTIES = Collections.unmodifiableList(
         Arrays.asList(
             "id",
+            
             "codigo",
             "nombre",
             "descripcion",

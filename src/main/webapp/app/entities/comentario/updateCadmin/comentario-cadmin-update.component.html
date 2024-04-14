@@ -1,0 +1,23 @@
+<div >
+    <form name="editForm" role="form" (ngSubmit)="save()" [formGroup]="editForm">
+      <div class="input-group p-5">
+        <div class="row" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id" jhiTranslate="global.field.id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+        <input placeholder="Comente aquí..." formControlName="descripcion" class="form-control" />
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="input-group-text"
+        >
+          <fa-icon icon="paper-plane"></fa-icon>
+        </button>
+       
+      </div>
+  
+    </form>
+  </div>
+  

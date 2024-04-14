@@ -1,16 +1,108 @@
-<div class="d-flex justify-content-center">
-    <div class="col-8">
-      <div *ngIf="planesEntrenamiento">
-       <h4>{{planesEntrenamiento.nombrePlan}}</h4>
-       <h4>{{planesEntrenamiento.descripcion}}</h4>
-       <h4>{{planesEntrenamiento.codigo}}</h4>
-        <iframe width="560" height="315" [src]="getVideoIframe(planesEntrenamiento.videoId)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  
-     
+
+
+  <div class="contenido">
+    <div class="titulo">
+      
+      <div class="button-section">
+        <button type="button">
+          <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
+          <fa-icon [routerLink]="['/planes-entrenamiento', uuid, 'acceder']" icon="search"></fa-icon>
+          <span [routerLink]="['/planes-entrenamiento', uuid, 'acceder']">Encuentra tu deporte</span>
+        </button>
       </div>
-      <div *ngIf="!planesEntrenamiento" class="alert alert-warning" id="no-result">
-        <span >Ningún Empresa Denuncias encontrado</span>
+    </div>
+    <div *ngIf="plan">
+      <h4>{{plan.nombrePlan}}</h4>
+      <h4>{{plan.descripcion}}</h4>
+      <h4>{{plan.codigo}}</h4>
+       <iframe width="560" height="315" [src]="getVideoIframe(plan.videoId)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="row g-2">
+        <div class="col-9">
+          <div class="fondo-gris h-98 p-5px">
+            <h5 class="borde-bottom">
+            
+         
+            
+              <strong>Denuncia nº {{ plan.codigo }}</strong>
+            </h5>
+            <p class="p-l-15"><strong>Titulo</strong></p>
+            <p class="p-l-15">{{ plan.nombrePlan }}</p>
+            <p class="p-l-15 mb-5px"><strong>Descripción</strong></p>
+            <quill-view [content]="plan.descripcion"></quill-view>
+          </div>
+        </div>
+        <div class="col-3">
+  
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8">
+          <div class="fondo-gris">
+            <h5><strong>Comentarios</strong></h5>
+            <div class="chat" #divScroll (scroll)="onScroll($event)" *ngIf="comentariosBuscados && comentariosBuscados.length > 0">
+              <div
+                *ngFor="let comentario of comentariosBuscados"
+                [ngClass]="{ 'mb-3': comentario.descripcion }"
+              >
+                <div
+                  class="gris"
+                  *ngIf="comentario.descripcion !== null"
+                  [ngClass]="{ enviado: comentario.creador === 'ANÓNIMO', recibido: comentario.creador !== 'ANÓNIMO' }"
+                >
+                  <label class="fs-sm"> {{ comentario.creador }}:{{ comentario.fechaCreacion?.fromNow() }} </label>
+                </div>
+                <div
+                  *ngIf="comentario.descripcion !== null"
+                  [ngClass]="{ enviado: comentario.creador === 'ANÓNIMO', recibido: comentario.creador !== 'ANÓNIMO' }"
+                >
+                  <div style="height: 45px; " [ngClass]="{ mensajeEnv: comentario.creador === 'ANÓNIMO', mensajeRec: comentario.creador !== 'ADMIN' }">
+                    <quill-view [content]="comentario.descripcion" style="height: 10px;"></quill-view>
+                  </div>
+                </div>
+              </div>
+              <div class="bajar" id="miBoton" *ngIf="!showBajar">
+                <button class="btn btn-chat" (click)="scroll()">
+                  <fa-icon icon="arrow-down"></fa-icon>
+                  bajar
+                </button>
+              </div>
+              <div id="scroll"></div>
+            </div>
+            <div>
+              <jhi-comentario-entrenamiento-update (guardado)="cargaDatos()"> </jhi-comentario-entrenamiento-update>
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+         
+          <div class="btn-salir">
+            <button class="btn btn-primary btn-volver" (click)="previousState()">volver</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <div class="img-bottom"></div>
+  <div *ngIf="!plan" class="alert alert-warning" id="no-result">
+    <span >Ningún Empresa Denuncias encontrado</span>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
   

@@ -1,42 +1,67 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
-    <div *ngIf="planesEntrenamiento">
-      <h2 data-cy="planesEntrenamientoDetailsHeading">
-        <span jhiTranslate="gymRubenApp.planesEntrenamiento.detail.title">Planes Entrenamiento</span>
-      </h2>
-
-      <hr />
-
-      <jhi-alert-error></jhi-alert-error>
-
-      <jhi-alert></jhi-alert>
-
-      <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
-          <span>{{ planesEntrenamiento.id }}</span>
-        </dd>
-        <dt><span jhiTranslate="gymRubenApp.planesEntrenamiento.nombrePlan">Nombre Plan</span></dt>
-        <dd>
-          <span>{{ planesEntrenamiento.nombrePlan }}</span>
-        </dd>
-        <dt><span jhiTranslate="gymRubenApp.planesEntrenamiento.descripcion">Descripcion</span></dt>
-        <dd>
-          <span>{{ planesEntrenamiento.descripcion }}</span>
-        </dd>
-        <dt><span jhiTranslate="gymRubenApp.planesEntrenamiento.instrucciones">Instrucciones</span></dt>
-        <dd>
-          <span>{{ planesEntrenamiento.instrucciones }}</span>
-        </dd>
-      </dl>
-
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Volver</span>
-      </button>
-
-      <button type="button" [routerLink]="['/planes-entrenamiento', planesEntrenamiento.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
-      </button>
+<div class="contenido">
+  <div class="titulo">
+  </div>
+  <div *ngIf="planesEntrenamiento">
+    <div class="row g-2">
+      <div class="col-9">
+        <div class="fondo-gris h-98 p-5px">
+          <h5 class="borde-bottom">
+            <strong>Denuncia nº {{ planesEntrenamiento.codigo }}</strong>
+          </h5>
+          <p class="p-l-15"><strong>Titulo</strong></p>
+          <p class="p-l-15">{{ planesEntrenamiento.nombrePlan }}</p>
+          <p class="p-l-15"><strong>Descripción</strong></p>
+          <quill-view [content]="planesEntrenamiento.descripcion"></quill-view>
+        </div>
+      </div>
+ 
+    </div>
+    <div class="row">
+      <div class="col-8">
+        <div class="fondo-gris">
+          <h5><strong>Comentarios</strong></h5>
+          <div class="chat" #divScroll (scroll)="onScroll($event)" *ngIf="comentariosBuscados && comentariosBuscados.length > 0">
+            <div
+              *ngFor="let comentario of comentariosBuscados"
+              [ngClass]="{ 'mb-3': comentario.descripcion}"
+            >
+              <div
+                class="gris"
+                *ngIf="comentario.descripcion !== null"
+                [ngClass]="{ enviado: comentario.creador !== 'ANÓNIMO', recibido: comentario.creador === 'ANÓNIMO' }"
+              >
+                {{ comentario.creador }}:{{ comentario.fechaCreacion?.fromNow() }}
+              </div>
+              <div
+                *ngIf="comentario.descripcion !== null"
+                [ngClass]="{ enviado: comentario.creador !== 'ANÓNIMO', recibido: comentario.creador === 'ANÓNIMO' }"
+              >
+                <div  [ngClass]="{ mensajeEnv: comentario.creador !== 'ANÓNIMO', mensajeRec: comentario.creador === 'ANÓNIMO' }">
+                  <quill-view [content]="comentario.descripcion"></quill-view>
+                </div>
+              </div>
+          
+            </div>
+            <div class="bajar" id="miBoton" *ngIf="!showBajar">
+              <button class="btn btn-chat" (click)="scroll()">
+                <fa-icon icon="arrow-down"></fa-icon>
+                bajar
+              </button>
+            </div>
+            <div id="scroll"></div>
+          </div>
+          <div>
+            <jhi-comentario-eadmin-update (guardado)="cargaDatos()"> </jhi-comentario-eadmin-update>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        
+        <div class="btn-salir">
+          <button class="btn btn-primary btn-volver" (click)="previousState()">volver</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+<div class="img-bottom"></div>

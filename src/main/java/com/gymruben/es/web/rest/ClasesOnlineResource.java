@@ -92,21 +92,21 @@ public class ClasesOnlineResource {
     }
 
     /**
-     * {@code POST  /clases-onlines} : Create a new clasesOnline.
+     * {@code POST  /clases-online} : Create a new clasesOnline.
      *
      * @param clasesOnline the clasesOnline to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new clasesOnline, or with status {@code 400 (Bad Request)} if the clasesOnline has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      * @throws NotFoundException 
      */
-    @PostMapping("/clases-onlines")
+    @PostMapping("/clases-online")
     public ResponseEntity<ClasesOnline> createClasesOnline(@RequestBody ClasesOnline clasesOnline) throws URISyntaxException {
         log.debug("REST request to save ClasesOnline: {}", clasesOnline);
        
         ClasesOnline result = clasesOnlineService.createClasesOnline(clasesOnline);
 
         return ResponseEntity
-                .created(new URI("/api/clases-onlines/" + result.getId()))
+                .created(new URI("/api/clases-online/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
                 .body(result);
     }
@@ -116,7 +116,7 @@ public class ClasesOnlineResource {
     
 
     /**
-     * {@code PUT  /clases-onlines/:id} : Updates an existing clasesOnline.
+     * {@code PUT  /clases-online/:id} : Updates an existing clasesOnline.
      *
      * @param id the id of the clasesOnline to save.
      * @param clasesOnline the clasesOnline to update.
@@ -125,7 +125,7 @@ public class ClasesOnlineResource {
      * or with status {@code 500 (Internal Server Error)} if the clasesOnline couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PutMapping("/clases-onlines/{id}")
+    @PutMapping("/clases-online/{id}")
     public ResponseEntity<ClasesOnline> updateClasesOnline(
         @PathVariable(value = "id", required = false) final Long id,
         @RequestBody ClasesOnline clasesOnline
@@ -148,7 +148,7 @@ public class ClasesOnlineResource {
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, clasesOnline.getId().toString()))
             .body(result);
     }
-    @GetMapping("/clases-onlines/UUID/{codigo}")
+    @GetMapping("/clases-online/UUID/{codigo}")
     public ResponseEntity<ClasesOnlineDTO> getClasesOnlineUUID(@PathVariable String codigo) {
         log.debug("REST request to get clasesOnline : {}", codigo);
         Optional<ClasesOnlineDTO> clasesOnline = clasesOnlineRepository
@@ -158,7 +158,7 @@ public class ClasesOnlineResource {
     }
 
     /**
-     * {@code PATCH  /clases-onlines/:id} : Partial updates given fields of an existing clasesOnline, field will ignore if it is null
+     * {@code PATCH  /clases-online/:id} : Partial updates given fields of an existing clasesOnline, field will ignore if it is null
      *
      * @param id the id of the clasesOnline to save.
      * @param clasesOnline the clasesOnline to update.
@@ -168,7 +168,7 @@ public class ClasesOnlineResource {
      * or with status {@code 500 (Internal Server Error)} if the clasesOnline couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PatchMapping(value = "/clases-onlines/{id}", consumes = { "application/json", "application/merge-patch+json" })
+    @PatchMapping(value = "/clases-online/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<ClasesOnline> partialUpdateClasesOnline(
         @PathVariable(value = "id", required = false) final Long id,
         @RequestBody ClasesOnline clasesOnline
@@ -221,11 +221,11 @@ public class ClasesOnlineResource {
     }
 
     /**
-     * {@code GET  /clases-onlines} : get all the clasesOnlines.
+     * {@code GET  /clases-online} : get all the clasesOnlines.
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of clasesOnlines in body.
      */
-    @GetMapping("/clases-onlines")
+    @GetMapping("/clases-online")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<List<ClasesOnlineDTO>> getAllClasesOnline(@ParameterObject Pageable pageable, FilterHelper filterHelper) {
         log.debug("REST request to get all EmpresaDenuncia for an admin");
@@ -244,12 +244,12 @@ public class ClasesOnlineResource {
 
 
     /**
-     * {@code GET  /clases-onlines/:id} : get the "id" clasesOnline.
+     * {@code GET  /clases-online/:id} : get the "id" clasesOnline.
      *
      * @param id the id of the clasesOnline to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the clasesOnline, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/clases-onlines/{id}")
+    @GetMapping("/clases-online/{id}")
     public ResponseEntity<ClasesOnlineDTO> getClasesOnline(@PathVariable String id) {
         log.debug("REST request to get EmpresaDenuncia : {}", id);
         Long idDecodificado = hashids.decode(id)[0];
@@ -257,12 +257,12 @@ public class ClasesOnlineResource {
         return ResponseUtil.wrapOrNotFound(clasesOnline);
     }
     /**
-     * {@code DELETE  /clases-onlines/:id} : delete the "id" clasesOnline.
+     * {@code DELETE  /clases-online/:id} : delete the "id" clasesOnline.
      *
      * @param id the id of the clasesOnline to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
-    @DeleteMapping("/clases-onlines/{id}")
+    @DeleteMapping("/clases-online/{id}")
     public ResponseEntity<Void> deleteClasesOnline(@PathVariable String id) {
         log.debug("REST request to delete ClasesOnline : {}", id);
         Long idDecodificado = hashids.decode(id)[0];

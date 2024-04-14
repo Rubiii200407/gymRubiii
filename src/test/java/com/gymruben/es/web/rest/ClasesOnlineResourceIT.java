@@ -54,7 +54,7 @@ class ClasesOnlineResourceIT {
     private static final String DEFAULT_VIDEO_ID = "AAAAAAAAAA";
     private static final String UPDATED_VIDEO_ID = "BBBBBBBBBB";
 
-    private static final String ENTITY_API_URL = "/api/clases-onlines";
+    private static final String ENTITY_API_URL = "/api/clases-online";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
