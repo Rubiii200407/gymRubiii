@@ -64,6 +64,8 @@ public interface ComentarioMapper extends EntityMapper<ComentarioDTO, Comentario
     @Mapping(target = "instrucciones", source = "instrucciones")
     @Mapping(target = "codigo", source = "codigo")
     @Mapping(target = "videoId", source = "videoId")
+    @Mapping(target = "videoNutricion", source = "videoNutricion")
+    @Mapping(target = "instruccionesNutricion", source = "instruccionesNutricion")
 
     PlanesEntrenamientoDTO toDtoPlanesEntrenamientoId(PlanesEntrenamiento planesEntrenamiento);
 
@@ -75,6 +77,8 @@ public interface ComentarioMapper extends EntityMapper<ComentarioDTO, Comentario
     @Mapping(target = "instrucciones", source = "instrucciones")
     @Mapping(target = "codigo", source = "codigo")
     @Mapping(target = "videoId", source = "videoId")
+    @Mapping(target = "videoNutricion", source = "videoNutricion")
+    @Mapping(target = "instruccionesNutricion", source = "instruccionesNutricion")
     PlanesEntrenamiento toEntityPlanesEntrenamientoId(PlanesEntrenamientoDTO planesEntrenamiento);
 
     @Named("clasesOnlineId")

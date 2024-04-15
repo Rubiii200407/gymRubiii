@@ -1,7 +1,10 @@
 package com.gymruben.es.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -39,6 +43,16 @@ public class PlanesEntrenamiento implements Serializable {
     private String codigo;
     @Column(name = "video_id")
     private String videoId;
+
+    @Column(name = "instrucciones_nutricion")
+    private String instruccionesNutricion;
+
+    @Column(name = "video_nutricion")
+    private String videoNutricion;
+
+    
+    @OneToMany(mappedBy = "planesEntrenamiento",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Comentario>comentarios=new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name ="usuario_id",referencedColumnName = "id")
@@ -111,6 +125,31 @@ public class PlanesEntrenamiento implements Serializable {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
+    
+    public String getInstruccionesNutricion() {
+        return this.instruccionesNutricion;
+    }
+
+    public PlanesEntrenamiento instruccionesNutricion(String instruccionesNutricion) {
+        this.setInstruccionesNutricion(instruccionesNutricion);
+        return this;
+    }
+
+    public void setInstruccionesNutricion(String instruccionesNutricion) {
+        this.instruccionesNutricion = instruccionesNutricion;
+    }
+    public String getVideoNutricion() {
+        return this.videoNutricion;
+    }
+
+    public PlanesEntrenamiento videoNutricion(String videoNutricion) {
+        this.setVideoNutricion(videoNutricion);
+        return this;
+    }
+
+    public void setVideoNutricion(String videoNutricion) {
+        this.videoNutricion = videoNutricion;
+    }
 
     public User getUser() {
         return this.user;
@@ -169,6 +208,8 @@ public class PlanesEntrenamiento implements Serializable {
             ", instrucciones='" + getInstrucciones() + "'" +
             ", codigo='" + getCodigo() + "'" +
             ", videoId='" + getVideoId() + "'" +
+            ", instruccionesNutricion='" + getInstruccionesNutricion() + "'" +
+            ", videoNutricion='" + getVideoNutricion() + "'" +
             ", user='" + getUser() + "'" +
             "}";
     }

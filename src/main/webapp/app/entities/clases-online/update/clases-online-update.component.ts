@@ -24,6 +24,7 @@ export class ClasesOnlineUpdateComponent implements OnInit {
   guardado=false;
   codigoNoExiste = false;
  claseBuscada: IClasesOnline | null = null;
+ fechaSeleccionada!:Date;
   codigoBusqueda = '';
   editForm: ClasesOnlineFormGroup = this.clasesOnlineFormService.createClasesOnlineFormGroup();
   detallesClases:Record<string,string>= {
@@ -175,7 +176,9 @@ buscarUUID(): void {
   actualizarHorasDisponibles(): void {
     const fechaSeleccionadaStr: Date | null = this.editForm.get('fechaClase')?.value || null;
     const fechaSeleccionada: Date | null = fechaSeleccionadaStr ? new Date(fechaSeleccionadaStr) : null;
-  
+    if(fechaSeleccionadaStr){
+      this.fechaSeleccionada=new Date(fechaSeleccionadaStr);
+    }
     if (fechaSeleccionada) {
       const diaSeleccionado = this.obtenerDiaSemana(fechaSeleccionada);
   
@@ -195,6 +198,44 @@ buscarUUID(): void {
       this.horasDisponibles = [];
     }
   }
+  getHorasDisponibles(fechaSeleccionada:Date):string[]{
+    const ahora=new Date();
+    const horaActual=ahora.getHours();
+    const minutosActual=ahora.getMinutes();
+
+    if(!this.fechaHoy(fechaSeleccionada)){
+      return this.horasDisponibles;
+    }else{
+      const horasFiltradas=this.horasDisponibles.filter(hora=>{
+        const[horaStr,minutoStr]=hora.split(":");
+        const horaDisponible=parseInt(horaStr,10);
+        const minutoDisponible=parseInt(minutoStr,10);
+        return horaDisponible>=horaActual||(horaDisponible===horaActual&&minutoDisponible>=minutosActual);
+      });
+      return horasFiltradas;
+    
+    }
+  }
+
+  private fechaHoy(fecha:Date):boolean{
+    const ahora=new Date();
+    return fecha.getFullYear()===ahora.getFullYear()&&fecha.getMonth()===ahora.getMonth()&&fecha.getDate()===ahora.getDate();
+  }
+  
+  minFecha():string{
+    const today=new Date();
+    const year=today.getFullYear();
+    let month:string|number = today.getMonth()+1;
+    let day:string|number=today.getDate();
+    if(month<10){
+      month="0"+month;
+    }
+    if(day<10){
+      day="0" +day;
+    }
+    return `${year}-${month}-${day}`;
+  }
+
   obtenerDiaSemana(fecha: Date | null | undefined): string | null {
     if (!fecha || !(fecha instanceof Date)) {
       return null;

@@ -3,7 +3,6 @@ package com.gymruben.es.domain;
 import java.io.Serializable;
 import java.time.Instant;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,19 +36,19 @@ public class Comentario implements Serializable {
     @Column(name = "creador")
     private String creador;
     
-    @ManyToOne(cascade=CascadeType.REMOVE)
+    @ManyToOne()
     @JoinColumn(name ="deportes_id",referencedColumnName = "id")
     private Deportes deportes;
    
-    @ManyToOne(cascade=CascadeType.REMOVE)
+    @ManyToOne()
     @JoinColumn(name ="clases_online_id",referencedColumnName = "id")
     private ClasesOnline clasesOnline;   
 
-    @ManyToOne(cascade=CascadeType.REMOVE)
+    @ManyToOne()
     @JoinColumn(name ="planes_nutricion_id",referencedColumnName = "id")
     private PlanesNutricion planesNutricion;   
 
-    @ManyToOne(cascade=CascadeType.REMOVE)
+    @ManyToOne()
     @JoinColumn(name ="planes_entrenamiento_id",referencedColumnName = "id")
     private PlanesEntrenamiento planesEntrenamiento;
     // jhipster-needle-entity-add-field - JHipster will add fields here

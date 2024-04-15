@@ -91,6 +91,9 @@
             data-cy="fechaClase"
             formControlName="fechaClase"
             (change)="actualizarHorasDisponibles()"
+            [min]="minFecha()"
+              
+
           />
         </div>
 
@@ -121,7 +124,7 @@
           />
         </div>
         <div *ngIf="horasDisponibles.length > 0">
-          <div *ngFor="let hora of horasDisponibles">
+          <div *ngFor="let hora of getHorasDisponibles(fechaSeleccionada)">
             <label>
               <input type="radio" name="horaDisponible" [value]="hora" (change)="seleccionarHora(hora)" />
               {{ hora }}
