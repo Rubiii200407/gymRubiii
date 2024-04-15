@@ -8,6 +8,8 @@ public class PlanesEntrenamientoDTO {
     private String nombrePlan;
     private String descripcion;
     private String instrucciones;
+    private String instruccionesNutricion;
+    private String videoNutricion;
     private String videoId;
 
 
@@ -52,6 +54,18 @@ public class PlanesEntrenamientoDTO {
     public void setVideoId(String videoId) {
         this.videoId = videoId;
     }
+    public String getInstruccionesNutricion() {
+        return this.instruccionesNutricion;
+    }
+    public void setInstruccionesNutricion(String instruccionesNutricion) {
+        this.instruccionesNutricion = instruccionesNutricion;
+    }
+    public String getVideoNutricion() {
+        return this.videoNutricion;
+    }
+    public void setVideoNutricion(String videoNutricion) {
+        this.videoNutricion = videoNutricion;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -94,6 +108,12 @@ public class PlanesEntrenamientoDTO {
             "" +
             ", videoId='" +
             getVideoId() +
+            "" +
+            ", instruccionesNutricion='" +
+            getInstruccionesNutricion() +
+            "" +
+            ", videoNutricion='" +
+            getVideoNutricion() +
             "" +
             "}"
             );

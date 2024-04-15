@@ -11,9 +11,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.gymruben.es.domain.PlanNutricionEntrenamiento;
 import com.gymruben.es.domain.PlanesEntrenamiento;
 import com.gymruben.es.domain.User;
 import com.gymruben.es.domain.VideosPlanEntrenamiento;
+import com.gymruben.es.repository.PlanNutricionEntrenamientoRepository;
 import com.gymruben.es.repository.PlanesEntrenamientoRepository;
 import com.gymruben.es.repository.UserRepository;
 import com.gymruben.es.repository.VideosPlanEntrenamientoRepository;
@@ -28,6 +30,9 @@ public class PlanesEntrenamientoService {
     private PlanesEntrenamientoRepository planesEntrenamientoRepository;
 
     @Autowired
+    private PlanNutricionEntrenamientoRepository planNutricionEntrenamientoRepository;
+
+    @Autowired
     private VideosPlanEntrenamientoRepository videosPlanEntrenamientoRepository;
 
     @Autowired
@@ -37,10 +42,11 @@ public class PlanesEntrenamientoService {
     private UserRepository userRepository;
 
     @Autowired
-    public PlanesEntrenamientoService(PlanesEntrenamientoRepository planesEntrenamientoRepository,VideosPlanEntrenamientoRepository videosPlanEntrenamientoRepository,UserRepository userRepository) {
+    public PlanesEntrenamientoService(PlanesEntrenamientoRepository planesEntrenamientoRepository,VideosPlanEntrenamientoRepository videosPlanEntrenamientoRepository,UserRepository userRepository,PlanNutricionEntrenamientoRepository planNutricionEntrenamientoRepository) {
         this.planesEntrenamientoRepository = planesEntrenamientoRepository;
         this.videosPlanEntrenamientoRepository = videosPlanEntrenamientoRepository;
         this.userRepository = userRepository;
+        this.planNutricionEntrenamientoRepository = planNutricionEntrenamientoRepository;
     }
     public Page<PlanesEntrenamiento> findAll(Pageable pageable, FilterHelper filterHelper) {
         return planesEntrenamientoRepository.findAll(PlanesEntrenamientoSpecification.busquedaPlanesEntrenamiento(filterHelper), pageable);
@@ -58,6 +64,18 @@ public class PlanesEntrenamientoService {
         if (videoPlanOptional.isPresent()) {
             VideosPlanEntrenamiento videoPlan = videoPlanOptional.get();
             planesEntrenamiento.setVideoId(videoPlan.getUrlVideo());
+        }
+        String nombrePlan= planesEntrenamiento.getNombrePlan();
+        Optional<PlanNutricionEntrenamiento>videoNutricionOptional=planNutricionEntrenamientoRepository.findByNombrePlan(nombrePlan);
+        if (videoNutricionOptional.isPresent()) {
+            PlanNutricionEntrenamiento videoNutricion = videoNutricionOptional.get();
+            planesEntrenamiento.setVideoNutricion(videoNutricion.getVideo());
+        }
+        String nombrePlanInstruccion= planesEntrenamiento.getNombrePlan();
+        Optional<PlanNutricionEntrenamiento>instruccionesOptional=planNutricionEntrenamientoRepository.findByNombrePlan(nombrePlanInstruccion);
+        if (instruccionesOptional.isPresent()) {
+            PlanNutricionEntrenamiento videoNutricion = instruccionesOptional.get();
+            planesEntrenamiento.setInstruccionesNutricion(videoNutricion.getInstrucciones());
         }
         Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
         String username= authentication.getName();

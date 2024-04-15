@@ -7,6 +7,8 @@ export interface IPlanesEntrenamiento {
   instrucciones?: string | null;
   codigo?:string|null
   videoId?:string|null
+  videoNutricion?:string|null
+  instruccionesNutricion?:string|null
   user?: Pick<IUser, 'id'> | null;
 }
 

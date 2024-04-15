@@ -194,6 +194,12 @@ public class PlanesEntrenamientoResource {
                 if (planesEntrenamiento.getVideoId() != null) {
                     existingPlanesEntrenamiento.setVideoId(planesEntrenamiento.getVideoId());
                 }
+                if (planesEntrenamiento.getVideoNutricion() != null) {
+                    existingPlanesEntrenamiento.setVideoNutricion(planesEntrenamiento.getVideoNutricion());
+                }
+                if (planesEntrenamiento.getInstruccionesNutricion() != null) {
+                    existingPlanesEntrenamiento.setInstruccionesNutricion(planesEntrenamiento.getInstruccionesNutricion());
+                }
 
                 return existingPlanesEntrenamiento;
             })

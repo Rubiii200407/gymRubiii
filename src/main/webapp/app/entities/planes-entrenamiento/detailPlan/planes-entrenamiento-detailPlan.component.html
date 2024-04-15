@@ -16,7 +16,9 @@
       <h4>{{plan.descripcion}}</h4>
       <h4>{{plan.codigo}}</h4>
        <iframe width="560" height="315" [src]="getVideoIframe(plan.videoId)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      <div class="row g-2">
+       <h4>{{plan.instruccionesNutricion}}</h4>
+       <iframe width="560" height="315" [src]="getVideoIframe(plan.videoNutricion)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+       <div class="row g-2">
         <div class="col-9">
           <div class="fondo-gris h-98 p-5px">
             <h5 class="borde-bottom">

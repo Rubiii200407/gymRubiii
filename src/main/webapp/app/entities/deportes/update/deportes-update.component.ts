@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { IDeportes } from '../deportes.model';
 import { DeportesService } from '../service/deportes.service';
 import { DeportesFormGroup, DeportesFormService } from './deportes-form.service';
@@ -22,10 +22,12 @@ export class DeportesUpdateComponent implements OnInit {
   horaDeporte: string = "";
   codigo?: string;
   nuevaConsulta=true;
-
+  fechaDeporteControl = new FormControl('');
   uuid?:string
   guardado=false;
   codigoNoExiste = false;
+  ahora:Date=new Date();
+  fechaSeleccionada:Date=new Date();
   codigoBusqueda = '';
   deporteBuscada: IDeportes | null = null;
   editForm: DeportesFormGroup = this.deportesFormService.createDeportesFormGroup();
@@ -197,6 +199,9 @@ pantallaCreacionDeportes(): void {
     const fechaSeleccionadaStr: Date | null = this.editForm.get('fechaDeporte')?.value || null;
     const fechaSeleccionada: Date | null = fechaSeleccionadaStr ? new Date(fechaSeleccionadaStr) : null;
   
+    if(fechaSeleccionadaStr){
+      this.fechaSeleccionada=new Date(fechaSeleccionadaStr);
+    }
     if (fechaSeleccionada) {
       const diaSeleccionado = this.obtenerDiaSemana(fechaSeleccionada);
   
@@ -216,6 +221,46 @@ pantallaCreacionDeportes(): void {
       this.horasDisponibles = [];
     }
   }
+  minFecha():string{
+    const today=new Date();
+    const year=today.getFullYear();
+    let month:string|number = today.getMonth()+1;
+    let day:string|number=today.getDate();
+    if(month<10){
+      month="0"+month;
+    }
+    if(day<10){
+      day="0" +day;
+    }
+    return `${year}-${month}-${day}`;
+  }
+
+  getHorasDisponibles(fechaSeleccionada:Date):string[]{
+    const ahora=new Date();
+    const horaActual=ahora.getHours();
+    const minutosActual=ahora.getMinutes();
+
+    if(!this.fechaHoy(fechaSeleccionada)){
+      return this.horasDisponibles;
+    }else{
+      const horasFiltradas=this.horasDisponibles.filter(hora=>{
+        const[horaStr,minutoStr]=hora.split(":");
+        const horaDisponible=parseInt(horaStr,10);
+        const minutoDisponible=parseInt(minutoStr,10);
+        return horaDisponible>=horaActual||(horaDisponible===horaActual&&minutoDisponible>=minutosActual);
+      });
+      return horasFiltradas;
+    
+    }
+  }
+
+  private fechaHoy(fecha:Date):boolean{
+    const ahora=new Date();
+    return fecha.getFullYear()===ahora.getFullYear()&&fecha.getMonth()===ahora.getMonth()&&fecha.getDate()===ahora.getDate();
+  }
+  
+  
+
   obtenerDiaSemana(fecha: Date | null | undefined): string | null {
     if (!fecha || !(fecha instanceof Date)) {
       return null;
