@@ -1,7 +1,5 @@
 package com.gymruben.es.config;
 
-import com.gymruben.es.security.*;
-import com.gymruben.es.security.jwt.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
@@ -16,6 +14,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter;
 import org.springframework.web.filter.CorsFilter;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
+
+import com.gymruben.es.security.AuthoritiesConstants;
+import com.gymruben.es.security.jwt.JWTConfigurer;
+import com.gymruben.es.security.jwt.TokenProvider;
+
 import tech.jhipster.config.JHipsterProperties;
 
 @EnableWebSecurity
@@ -76,6 +79,9 @@ public class SecurityConfiguration {
             .antMatchers("/i18n/**").permitAll()
             .antMatchers("/content/**").permitAll()
             .antMatchers("/swagger-ui/**").permitAll()
+            .antMatchers("/api/upload/**").permitAll()
+            .antMatchers("/api/download/**").permitAll()
+            .antMatchers("/api/fichero/**").permitAll()
             .antMatchers("/test/**").permitAll()
             .antMatchers("/api/authenticate").permitAll()
             .antMatchers("/api/register").permitAll()

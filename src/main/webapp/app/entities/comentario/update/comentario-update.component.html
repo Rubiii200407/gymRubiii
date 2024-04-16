@@ -1,10 +1,13 @@
-<div >
+<div (drop)="setFileDataDrag($event)" (dragover)="dragOverHandler($event)">
   <form name="editForm" role="form" (ngSubmit)="save()" [formGroup]="editForm">
     <div class="input-group p-5">
       <div class="row" *ngIf="editForm.controls.id.value !== null">
         <label class="form-label" for="field_id" jhiTranslate="global.field.id">ID</label>
         <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
       </div>
+      <button type="button" (click)="fileSubir.click()" class="input-group-text">
+        <fa-icon icon="paperclip"></fa-icon>
+      </button>
       <input placeholder="Comente aquí..." formControlName="descripcion" class="form-control" />
       <button
         type="submit"
@@ -15,8 +18,27 @@
       >
         <fa-icon icon="paper-plane"></fa-icon>
       </button>
-     
+      <form name="documentoForm" role="form" [formGroup]="documentoForm" novalidate style="display: none">
+        <input type="file" name="fichero" id="fichero" (change)="setFileData($event)" #fileSubir multiple />
+        <input type="hidden" name="documento" formControlName="documento" />
+        <input type="hidden" name="documentoContentType" formControlName="documentoContentType" />
+      </form>
     </div>
-
+    <div class="d-flex justify-content-start">
+      <div *ngFor="let file of files; index as i">
+        <button type="button" (click)="deleteFile(i)" [ngbTooltip]="file.fileName" placement="top">
+          <fa-icon *ngIf="file.contentType?.includes('image')" icon="file-image" class="fichero-logo img-col"> </fa-icon>
+          <fa-icon *ngIf="file.contentType?.includes('pdf')" icon="file-pdf" class="fichero-logo pdf-col"></fa-icon>
+          <fa-icon *ngIf="file.contentType?.includes('sheet')" icon="file-excel" class="fichero-logo sheet-col"> </fa-icon>
+          <fa-icon
+            *ngIf="!file.contentType?.includes('sheet') && !file.contentType?.includes('pdf') && !file.contentType?.includes('image')"
+            icon="file"
+            class="fichero-logo"
+          >
+          </fa-icon>
+          <fa-icon icon="xmark"></fa-icon>
+        </button>
+      </div>
+    </div>
   </form>
 </div>

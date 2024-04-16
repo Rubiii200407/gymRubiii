@@ -10,7 +10,26 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = false)
 public class ApplicationProperties {
+
     // jhipster-needle-application-properties-property
+    private final FileSavePath fileSavePath = new FileSavePath();
+
     // jhipster-needle-application-properties-property-getter
+    public FileSavePath getFileSavepath() {
+        return fileSavePath;
+    }
+
     // jhipster-needle-application-properties-property-class
+    public static class FileSavePath {
+
+        private String fileSavePathString = "";
+
+        public String getFileSavePathString() {
+            return fileSavePathString;
+        }
+
+        public void setFileSavePathString(String fileSavePathString) {
+            this.fileSavePathString = fileSavePathString;
+        }
+    }
 }

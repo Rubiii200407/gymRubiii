@@ -4,6 +4,10 @@ import { ActivatedRoute } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { IComentario } from "app/entities/comentario/comentario.model";
 import { ComentarioService } from "app/entities/comentario/service/comentario.service";
+import { IFichero } from "app/entities/fichero/fichero.model";
+import { FicheroUploadService } from "app/entities/fichero/service/fichero-upload.service";
+import { FicheroService } from "app/entities/fichero/service/fichero.service";
+import dayjs from "dayjs";
 import { IPlanesEntrenamiento } from "../planes-entrenamiento.model";
 import { PlanesEntrenamientoService } from "../service/planes-entrenamiento.service";
 
@@ -15,6 +19,7 @@ import { PlanesEntrenamientoService } from "../service/planes-entrenamiento.serv
 
   export class PlanesEntrenamientoDetailPlanComponent implements OnInit {
     @ViewChild('divScroll') divScroll!: ElementRef;
+    @ViewChild('divScrollFichero') divScrollFichero!: ElementRef
     plan: IPlanesEntrenamiento | null = null;
     uuid?: string | null;
     borrar = false;
@@ -24,6 +29,10 @@ import { PlanesEntrenamientoService } from "../service/planes-entrenamiento.serv
     cargandoChat = false;
     numComentarios = 10;
     comentariosBuscados: IComentario[] = [];
+    ficheros: IFichero[] = [];
+    numFicheros = 4;
+    totalFicheros = 0;
+
 
     constructor(
       protected activatedRoute: ActivatedRoute,
@@ -32,6 +41,8 @@ import { PlanesEntrenamientoService } from "../service/planes-entrenamiento.serv
       private cdr: ChangeDetectorRef,
       protected comentarioService: ComentarioService,
       private sanitizer: DomSanitizer,
+      private ficheroUploadService: FicheroUploadService,
+      private ficheroService: FicheroService,
     ) {}
   
     ngOnInit(): void {
@@ -78,15 +89,31 @@ import { PlanesEntrenamientoService } from "../service/planes-entrenamiento.serv
           }
         }
     )}
+    descargar(fichero: IFichero): void {
+      const nombre = fichero.nombre.substring(0, fichero.nombre.lastIndexOf('-'));
+      this.ficheroUploadService.getDownloadFile(fichero.id, nombre).subscribe();
+    }
+    cargarMasFicheros(): void {
+      this.numFicheros = this.numFicheros + 4;
+      if (this.plan?.id) {
+        this.ficheroService.getFicheroDenuncia(this.plan.id, { size: this.numFicheros, sort: ['id,desc'] }).subscribe(res => {
+          if (res.body) {
+            this.ficheros = res.body;
+          }
+          this.totalFicheros = Number(res.headers.get('X-Total-Count'));
+        });
+      }
+    }
     cargarMasComentarios(): void {
       this.numComentarios = this.numComentarios + 10;
       if (this.plan) {
         this.comentarioService
-          .queryPagePlan(this.plan.id, { size: this.numComentarios, sort: ['fechaCreacion,desc'] })
+          .queryPage(this.plan.id, { size: this.numComentarios, sort: ['fechaCreacion,desc'] })
           .subscribe(comentarios => {
             if (comentarios.body) {
               this.comentariosBuscados = comentarios.body.reverse();
             }
+          
             this.totalComentarios = Number(comentarios.headers.get('X-Total-Count'));
             Promise.resolve().then(() => {
               this.cdr.detectChanges();
@@ -128,5 +155,15 @@ import { PlanesEntrenamientoService } from "../service/planes-entrenamiento.serv
       }
       this.cargandoChat = true;
     }
-}
-  
+    @HostListener('window:scroll', ['$event'])
+    onScrollFichero(event: any): void {
+      if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight - 10 && this.numFicheros < this.totalFicheros) {
+        this.cargarMasFicheros();
+      }
+    }
+    restarDate(day1: dayjs.Dayjs | null | undefined, day2: dayjs.Dayjs | null | undefined): string {
+      if (!day1 || !day2) return '';
+      const day = day1.diff(day2, 'days');
+      return day + ' dias';
+    }
+  }

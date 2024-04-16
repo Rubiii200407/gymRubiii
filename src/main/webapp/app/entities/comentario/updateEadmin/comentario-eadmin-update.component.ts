@@ -11,6 +11,8 @@ import { DeportesService } from 'app/entities/deportes/service/deportes.service'
 import { DeportesFormService } from 'app/entities/deportes/update/deportes-form.service';
 
 
+import { FileVM, IFileVM } from 'app/entities/fichero/fichero.model';
+import { FicheroUploadService } from 'app/entities/fichero/service/fichero-upload.service';
 import { IPlanesEntrenamiento } from 'app/entities/planes-entrenamiento/planes-entrenamiento.model';
 import { PlanesEntrenamientoService } from 'app/entities/planes-entrenamiento/service/planes-entrenamiento.service';
 import { PlanesEntrenamientoFormGroup, PlanesEntrenamientoFormService } from 'app/entities/planes-entrenamiento/update/planes-entrenamiento-form.service';
@@ -49,6 +51,7 @@ export class ComentarioEADMINUpdateComponent implements OnInit {
   });
   fileName = '';
   file: any;
+  files: IFileVM[] = [];
 
   constructor(
     protected comentarioService: ComentarioService,
@@ -61,6 +64,7 @@ export class ComentarioEADMINUpdateComponent implements OnInit {
     protected fb: UntypedFormBuilder,
     private dataUtilService: DataUtils,
     private sanitizer: DomSanitizer,
+    private ficheroUploadService: FicheroUploadService
   ) {}
 
 
@@ -102,6 +106,50 @@ export class ComentarioEADMINUpdateComponent implements OnInit {
   cancel(): void {
     this.editForm.reset();
   }
+  setFileData(event: any): void {
+    const files: FileList = event.target.files;
+    if (files.length === 0) return;
+    this.construirArray(files);
+  }
+  setFileDataDrag(event: any): void {
+    event.preventDefault();
+    const files: FileList = event.dataTransfer.files;
+    if (files.length === 0) return;
+    this.construirArray(files);
+  }
+  dragOverHandler(ev: any): void {
+    ev.preventDefault();
+  }
+  construirArray(files: FileList): void {
+    Array.from(files).forEach(file => {
+      const reader = new FileReader();
+      reader.onload = (loadEvent: any) => {
+        this.files.push({
+          fileName: file.name,
+          contentType: file.type,
+          base64: loadEvent.target.result.split(',')[1].trim() as string,
+        });
+      };
+      reader.onerror = error => {
+        console.error('Error reading file:', error);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+  deleteFile(number: number): void {
+    this.files.splice(number, 1);
+  }
+  updateDocumentoForm(): IFileVM {
+    return {
+      ...new FileVM(),
+      fileName: this.fileName,
+      contentType: this.documentoForm.get('documentoContentType')!.value,
+      base64: this.documentoForm.get('documento')!.value,
+    };
+  }
+  construirImagen(file: IFileVM): void {
+    this.file = this.sanitizer.bypassSecurityTrustResourceUrl('data:' + file.contentType + ';base64,' + file.base64);
+  }
   
   
  
@@ -113,6 +161,16 @@ export class ComentarioEADMINUpdateComponent implements OnInit {
   }
 
   protected onSaveSuccess(res: HttpResponse<IComentario>): void {
+    if (this.files.length > 0) {
+      this.files.forEach(file => {
+        if (res.body) {
+          this.ficheroUploadService.saveFileComentarioPlan(file, res.body.id).subscribe({
+            complete: () => this.guardado.emit(),
+          });
+        }
+      });
+      this.files = [];
+    }
     this.guardado.emit();
     this.editForm.reset();
   }

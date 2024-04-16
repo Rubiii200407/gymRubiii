@@ -11,6 +11,10 @@ import { ActivatedRoute } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { IComentario } from "app/entities/comentario/comentario.model";
 import { ComentarioService } from 'app/entities/comentario/service/comentario.service';
+import { IFichero } from 'app/entities/fichero/fichero.model';
+import { FicheroUploadService } from 'app/entities/fichero/service/fichero-upload.service';
+import { FicheroService } from 'app/entities/fichero/service/fichero.service';
+import dayjs from 'dayjs';
 import { IPlanesNutricion } from '../planes-nutricion.model';
 import { PlanesNutricionService } from '../service/planes-nutricion.service';
   
@@ -23,6 +27,7 @@ import { PlanesNutricionService } from '../service/planes-nutricion.service';
   
     export class PlanesNutricionDetailNutricionComponent implements OnInit {
       @ViewChild('divScroll') divScroll!: ElementRef;
+      @ViewChild('divScrollFichero') divScrollFichero!: ElementRef;
       planesNutricion: IPlanesNutricion | null = null;
       uuid?: string | null;
       borrar = false;
@@ -32,6 +37,9 @@ import { PlanesNutricionService } from '../service/planes-nutricion.service';
       cargandoChat = false;
       numComentarios = 10;
       comentariosBuscados: IComentario[] = [];
+      ficheros: IFichero[] = [];
+      numFicheros = 4;
+      totalFicheros = 0;
   
       constructor(
         protected activatedRoute: ActivatedRoute,
@@ -39,6 +47,8 @@ import { PlanesNutricionService } from '../service/planes-nutricion.service';
         protected modalService: NgbModal,
         private cdr: ChangeDetectorRef,
         protected comentarioService: ComentarioService,
+        private ficheroUploadService: FicheroUploadService,
+        private ficheroService: FicheroService,
       ) {}
     
       ngOnInit(): void {
@@ -75,15 +85,31 @@ import { PlanesNutricionService } from '../service/planes-nutricion.service';
             }
           }
       )}
+      descargar(fichero: IFichero): void {
+        const nombre = fichero.nombre.substring(0, fichero.nombre.lastIndexOf('-'));
+        this.ficheroUploadService.getDownloadFile(fichero.id, nombre).subscribe();
+      }
+      cargarMasFicheros(): void {
+        this.numFicheros = this.numFicheros + 4;
+        if (this.planesNutricion?.id) {
+          this.ficheroService.getFicheroDenuncia(this.planesNutricion.id, { size: this.numFicheros, sort: ['id,desc'] }).subscribe(res => {
+            if (res.body) {
+              this.ficheros = res.body;
+            }
+            this.totalFicheros = Number(res.headers.get('X-Total-Count'));
+          });
+        }
+      }
       cargarMasComentarios(): void {
         this.numComentarios = this.numComentarios + 10;
         if (this.planesNutricion) {
           this.comentarioService
-            .queryPageNutricion(this.planesNutricion.id, { size: this.numComentarios, sort: ['fechaCreacion,desc'] })
+            .queryPage(this.planesNutricion.id, { size: this.numComentarios, sort: ['fechaCreacion,desc'] })
             .subscribe(comentarios => {
               if (comentarios.body) {
                 this.comentariosBuscados = comentarios.body.reverse();
               }
+            
               this.totalComentarios = Number(comentarios.headers.get('X-Total-Count'));
               Promise.resolve().then(() => {
                 this.cdr.detectChanges();
@@ -125,5 +151,15 @@ import { PlanesNutricionService } from '../service/planes-nutricion.service';
         }
         this.cargandoChat = true;
       }
-  }
-    
+      @HostListener('window:scroll', ['$event'])
+      onScrollFichero(event: any): void {
+        if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight - 10 && this.numFicheros < this.totalFicheros) {
+          this.cargarMasFicheros();
+        }
+      }
+      restarDate(day1: dayjs.Dayjs | null | undefined, day2: dayjs.Dayjs | null | undefined): string {
+        if (!day1 || !day2) return '';
+        const day = day1.diff(day2, 'days');
+        return day + ' dias';
+      }
+    }

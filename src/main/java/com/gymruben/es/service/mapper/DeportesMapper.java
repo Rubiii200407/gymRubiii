@@ -13,6 +13,10 @@ import com.gymruben.es.service.dto.DeportesDTO;
 public interface DeportesMapper extends EntityMapper<DeportesDTO, Deportes> {
     final Hashids hashids = Constants.HASHIDS;
 
+    
+    @Mapping(target = "id", expression = "java(decodeId(dto.getId()))")
+    Deportes toEntity(DeportesDTO dto);
+
     @Mapping(target = "id", expression = "java(encodeId(entity.getId()))")
     @Mapping(target = "codigoCompleto", source = "codigo", qualifiedByName = "codigoCompleto")
     @Mapping(target = "codigo", source = "codigo", qualifiedByName = "ultimosDigitos")

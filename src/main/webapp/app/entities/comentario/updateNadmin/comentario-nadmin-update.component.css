@@ -1,22 +1,21 @@
 .sheet-col {
-    color: green;
-  }
-  .pdf-col {
-    color: red;
-  }
-  .img-col {
-    color: purple;
-  }
-  .input-group-text {
-    border: 0;
-    background-color: white;
-  }
-  .p-5 {
-    padding: 10px !important;
-  }
-  .fichero-btn {
-    margin-left: 10px;
-    border: 0;
-    background-color: white;
-  }
-  
+  color: green;
+}
+.pdf-col {
+  color: red;
+}
+.img-col {
+  color: purple;
+}
+.input-group-text {
+  border: 0;
+  background-color: white;
+}
+.p-5 {
+  padding: 10px !important;
+}
+.fichero-btn {
+  margin-left: 10px;
+  border: 0;
+  background-color: white;
+}

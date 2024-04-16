@@ -2,6 +2,8 @@ package com.gymruben.es.domain;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * A Deportes.
@@ -51,6 +56,9 @@ public class Comentario implements Serializable {
     @ManyToOne()
     @JoinColumn(name ="planes_entrenamiento_id",referencedColumnName = "id")
     private PlanesEntrenamiento planesEntrenamiento;
+    @OneToMany(mappedBy = "comentario")
+    @JsonIgnoreProperties(value = { "comentario" }, allowSetters = true)
+    private Set<Fichero> ficheros = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -153,7 +161,19 @@ public class Comentario implements Serializable {
         this.setPlanesEntrenamiento(planesEntrenamiento);
         return this;
     }
+    public Set<Fichero> getFichero() {
+        return this.ficheros;
+    }
+    public Comentario fichero(Set<Fichero> ficheros) {
+        this.setFichero(ficheros);
+        return this;
+    }
 
+    public void setFichero(Set<Fichero> ficheros) {
+        this.ficheros = ficheros;
+    }
+
+ 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -185,6 +205,7 @@ public class Comentario implements Serializable {
             ", clasesOnline='" + getClasesOnline() + "'" +
             ", planEntrenamiento='" + getPlanesEntrenamiento() + "'" +
             ", planNutricion='" + getPlanesNutricion() + "'" +
+            ", fichero='"+getFichero()+"'"+
             "}";
     }
 }

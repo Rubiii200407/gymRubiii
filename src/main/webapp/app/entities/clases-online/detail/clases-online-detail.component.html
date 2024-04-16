@@ -1,46 +1,89 @@
 <div class="contenido">
   <div class="titulo">
+    <img class="img" src="content/images/melit.png" alt="imgemp" />
   </div>
   <div *ngIf="clasesOnline">
     <div class="row g-2">
-      <div class="col-9">
+      <div class="col-8">
         <div class="fondo-gris h-98 p-5px">
           <h5 class="borde-bottom">
             <strong>Denuncia nº {{ clasesOnline.codigo }}</strong>
           </h5>
-          <p class="p-l-15"><strong>Titulo</strong></p>
-          <p class="p-l-15">{{ clasesOnline.nombreClase }}</p>
-          <p class="p-l-15"><strong>Descripción</strong></p>
+          <p><strong>Titulo</strong></p>
+          <p>{{ clasesOnline.nombreClase }}</p>
+          <p><strong>Descripción</strong></p>
           <quill-view [content]="clasesOnline.descripcion"></quill-view>
         </div>
       </div>
- 
+      <div class="col-4">
+        <div class="fondo-gris p-5px">
+          <h5 class="borde-bottom"><strong>Detalle</strong></h5>
+        
+        
+          <p class="mb-5px"><strong>Fecha Creación</strong></p>
+         
+          <p class="mb-5px"><strong>Tipo Denuncia</strong></p>
+          <p class="mb-5px">Anónimo</p>
+          <p class="mb-5px"><strong>Días abierta</strong></p>
+
+        </div>
+      </div>
     </div>
     <div class="row">
-      <div class="col-8">
+      <div class="col-7">
         <div class="fondo-gris">
-          <h5><strong>Comentarios</strong></h5>
+          <h5 class="p-5px"><strong>Comentarios</strong></h5>
           <div class="chat" #divScroll (scroll)="onScroll($event)" *ngIf="comentariosBuscados && comentariosBuscados.length > 0">
-            <div
-              *ngFor="let comentario of comentariosBuscados"
-              [ngClass]="{ 'mb-3': comentario.descripcion}"
-            >
+            <div *ngFor="let comentario of comentariosBuscados" class="mb-3">
               <div
                 class="gris"
-                *ngIf="comentario.descripcion !== null"
+                *ngIf="comentario.descripcion !== null || comentario.ficheros?.length"
                 [ngClass]="{ enviado: comentario.creador !== 'ANÓNIMO', recibido: comentario.creador === 'ANÓNIMO' }"
               >
-                {{ comentario.creador }}:{{ comentario.fechaCreacion?.fromNow() }}
+                {{ comentario.creador }}:{{ comentario.fechaCreacion | formatMediumDatetime }}
               </div>
               <div
                 *ngIf="comentario.descripcion !== null"
                 [ngClass]="{ enviado: comentario.creador !== 'ANÓNIMO', recibido: comentario.creador === 'ANÓNIMO' }"
               >
-                <div  [ngClass]="{ mensajeEnv: comentario.creador !== 'ANÓNIMO', mensajeRec: comentario.creador === 'ANÓNIMO' }">
+                <div [ngClass]="{ mensajeEnv: comentario.creador !== 'ANÓNIMO', mensajeRec: comentario.creador === 'ANÓNIMO' }">
                   <quill-view [content]="comentario.descripcion"></quill-view>
                 </div>
               </div>
-          
+              <div
+                [ngClass]="{ enviado: comentario.creador !== 'ANÓNIMO', recibido: comentario.creador === 'ANÓNIMO' }"
+                *ngFor="let fichero of comentario.ficheros"
+                (mousedown)="descargar(fichero)"
+              >
+                <div
+                  class="fichero-div"
+                  [ngClass]="{ mensajeEnv: comentario.creador !== 'ANÓNIMO', mensajeRec: comentario.creador === 'ANÓNIMO' }"
+                >
+                  <div>
+                    <fa-icon *ngIf="fichero.contentType?.includes('image')" icon="file-image" class="fichero-logo img-col"> </fa-icon>
+                    <fa-icon *ngIf="fichero.contentType?.includes('pdf')" icon="file-pdf" class="fichero-logo pdf-col"></fa-icon>
+                    <fa-icon *ngIf="fichero.contentType?.includes('sheet')" icon="file-excel" class="fichero-logo sheet-col"> </fa-icon>
+                    <fa-icon
+                      *ngIf="
+                        !fichero.contentType?.includes('sheet') &&
+                        !fichero.contentType?.includes('pdf') &&
+                        !fichero.contentType?.includes('image')
+                      "
+                      icon="file"
+                      class="fichero-logo"
+                    >
+                    </fa-icon>
+                  </div>
+                  <div>
+                    {{ fichero.nombre.substring(0, fichero.nombre.lastIndexOf('-')) }}
+                    <br />
+                    tamaño
+                  </div>
+                  <div>
+                    <fa-icon icon="download" class="fa-descarga"></fa-icon>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="bajar" id="miBoton" *ngIf="!showBajar">
               <button class="btn btn-chat" (click)="scroll()">
@@ -50,13 +93,13 @@
             </div>
             <div id="scroll"></div>
           </div>
-          <div>
-            <jhi-comentario-cadmin-update (guardado)="cargaDatos()"> </jhi-comentario-cadmin-update>
+          <div>   
+  <jhi-comentario-cadmin-update (guardado)="cargaDatos()"> </jhi-comentario-cadmin-update>
           </div>
         </div>
       </div>
-      <div class="col-4">
-        
+      <div class="col-5">
+       
         <div class="btn-salir">
           <button class="btn btn-primary btn-volver" (click)="previousState()">volver</button>
         </div>
