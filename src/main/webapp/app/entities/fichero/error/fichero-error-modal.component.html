@@ -1,0 +1,16 @@
+<div class="modal-header btn-danger">
+    <h4 class="modal-title pdf-col" data-cy="empresaDenunciaDeleteDialogHeading">Error al subir un archivo</h4>
+    <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()"></button>
+  </div>
+  
+  <div class="modal-body">
+    <jhi-alert-error></jhi-alert-error>
+    <p>El fichero tiene más de 10MB.</p>
+  </div>
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cerrar</span>
+    </button>
+  </div>
+  

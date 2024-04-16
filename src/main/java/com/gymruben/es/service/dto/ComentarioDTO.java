@@ -1,7 +1,9 @@
 package com.gymruben.es.service.dto;
 
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class ComentarioDTO  {
     private Long id;
@@ -12,6 +14,8 @@ public class ComentarioDTO  {
     private ClasesOnlineDTO clasesOnline;
     private PlanesEntrenamientoDTO planesEntrenamiento;
     private PlanesNutricionDTO planesNutricion;
+
+    private Set<FicheroDTO> ficheros = new HashSet<>();
 
     public Long getId() {
         return this.id;
@@ -69,7 +73,13 @@ public class ComentarioDTO  {
     public void setPlanesEntrenamiento(PlanesEntrenamientoDTO planesEntrenamientoDTO) {
         this.planesEntrenamiento = planesEntrenamientoDTO;
     }
+    public Set<FicheroDTO> getFicheros() {
+        return this.ficheros;
+    }
 
+    public void setFicheros(Set<FicheroDTO> ficheros) {
+        this.ficheros = ficheros;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) {

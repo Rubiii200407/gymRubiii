@@ -116,6 +116,7 @@
 }
 .img-bottom {
   background: no-repeat center center;
+  background-image: url(../../../../content/images/mailbox.ico);
   background-size: contain;
   width: 20%;
   height: 36%;
@@ -210,7 +211,6 @@
 .gris {
   color: #9e9e9e;
 }
-
 .fs-sm {
   font-size: small;
 }

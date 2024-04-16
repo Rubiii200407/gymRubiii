@@ -24,11 +24,13 @@ public interface ComentarioMapper extends EntityMapper<ComentarioDTO, Comentario
     @Mapping(target = "planesEntrenamiento", source = "planesEntrenamiento", qualifiedByName = "planesEntrenamientoId")
     @Mapping(target = "clasesOnline", source = "clasesOnline", qualifiedByName = "clasesOnlineId")
     @Mapping(target = "planesNutricion", source = "planesNutricion", qualifiedByName = "planesNutricionId")
+    @Mapping(target = "ficheros", source = "fichero")
     ComentarioDTO toDto(Comentario s);
     @Mapping(target = "deportes", source = "deportes", qualifiedByName = "deportesDTOId")
     @Mapping(target = "planesEntrenamiento", source = "planesEntrenamiento", qualifiedByName = "planesEntrenamientoDTOId")
     @Mapping(target = "clasesOnline", source = "clasesOnline", qualifiedByName = "clasesOnlineDTOId")
     @Mapping(target = "planesNutricion", source = "planesNutricion", qualifiedByName = "planesNutricionDTOId")
+    @Mapping(target = "fichero", ignore = true)
     Comentario toEntity(ComentarioDTO s);
 
     @Named("deportesId")

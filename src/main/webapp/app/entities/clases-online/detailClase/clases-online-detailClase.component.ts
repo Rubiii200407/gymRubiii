@@ -12,6 +12,10 @@ import { ActivatedRoute } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { IComentario } from "app/entities/comentario/comentario.model";
 import { ComentarioService } from 'app/entities/comentario/service/comentario.service';
+import { IFichero } from 'app/entities/fichero/fichero.model';
+import { FicheroUploadService } from 'app/entities/fichero/service/fichero-upload.service';
+import { FicheroService } from 'app/entities/fichero/service/fichero.service';
+import dayjs from 'dayjs';
 import { IClasesOnline } from '../clases-online.model';
 import { ClasesOnlineService } from '../service/clases-online.service';
   
@@ -22,8 +26,9 @@ import { ClasesOnlineService } from '../service/clases-online.service';
       styleUrls: ['./clases-online-detailClase.component.css'],
     })
   
-    export class ClasesOnlinesDetailClaseComponent implements OnInit {
+    export class ClasesOnlineDetailClaseComponent implements OnInit {
       @ViewChild('divScroll') divScroll!: ElementRef;
+    @ViewChild('divScrollFichero') divScrollFichero!: ElementRef;
       clasesOnline: IClasesOnline | null = null;
       uuid?: string | null;
       borrar = false;
@@ -33,6 +38,9 @@ import { ClasesOnlineService } from '../service/clases-online.service';
       cargandoChat = false;
       numComentarios = 10;
       comentariosBuscados: IComentario[] = [];
+      ficheros: IFichero[] = [];
+    numFicheros = 4;
+    totalFicheros = 0;
   
       constructor(
         protected activatedRoute: ActivatedRoute,
@@ -40,7 +48,9 @@ import { ClasesOnlineService } from '../service/clases-online.service';
         protected modalService: NgbModal,
         private cdr: ChangeDetectorRef,
         protected comentarioService: ComentarioService,
-        protected sanitizer:DomSanitizer
+        protected sanitizer:DomSanitizer,
+        private ficheroUploadService: FicheroUploadService,
+        private ficheroService: FicheroService,
       ) {}
     
       ngOnInit(): void {
@@ -52,7 +62,7 @@ import { ClasesOnlineService } from '../service/clases-online.service';
         if (this.clasesOnline != null) {
           this.claseService.delete(this.clasesOnline?.id);
         }
-        const modalRef = this.modalService.open(ClasesOnlinesDetailClaseComponent, { size: 'lg', backdrop: 'static' });
+        const modalRef = this.modalService.open(ClasesOnlineDetailClaseComponent, { size: 'lg', backdrop: 'static' });
         modalRef.componentInstance.clasesonline = this.clasesOnline;
         modalRef.closed.subscribe({
           next: () => this.previousState(),
@@ -89,15 +99,27 @@ import { ClasesOnlineService } from '../service/clases-online.service';
             }
           }
       )}
+      cargarMasFicheros(): void {
+        this.numFicheros = this.numFicheros + 4;
+        if (this.clasesOnline?.id) {
+          this.ficheroService.getFicheroDenuncia(this.clasesOnline.id, { size: this.numFicheros, sort: ['id,desc'] }).subscribe(res => {
+            if (res.body) {
+              this.ficheros = res.body;
+            }
+            this.totalFicheros = Number(res.headers.get('X-Total-Count'));
+          });
+        }
+      }
       cargarMasComentarios(): void {
         this.numComentarios = this.numComentarios + 10;
         if (this.clasesOnline) {
           this.comentarioService
-            .queryPageClase(this.clasesOnline.id, { size: this.numComentarios, sort: ['fechaCreacion,desc'] })
+            .queryPage(this.clasesOnline.id, { size: this.numComentarios, sort: ['fechaCreacion,desc'] })
             .subscribe(comentarios => {
               if (comentarios.body) {
                 this.comentariosBuscados = comentarios.body.reverse();
               }
+             
               this.totalComentarios = Number(comentarios.headers.get('X-Total-Count'));
               Promise.resolve().then(() => {
                 this.cdr.detectChanges();
@@ -139,5 +161,19 @@ import { ClasesOnlineService } from '../service/clases-online.service';
         }
         this.cargandoChat = true;
       }
-  }
-    
+      @HostListener('window:scroll', ['$event'])
+      onScrollFichero(event: any): void {
+        if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight - 10 && this.numFicheros < this.totalFicheros) {
+          this.cargarMasFicheros();
+        }
+      }
+      restarDate(day1: dayjs.Dayjs | null | undefined, day2: dayjs.Dayjs | null | undefined): string {
+        if (!day1 || !day2) return '';
+        const day = day1.diff(day2, 'days');
+        return day + ' dias';
+      }
+      descargar(fichero: IFichero): void {
+        const nombre = fichero.nombre.substring(0, fichero.nombre.lastIndexOf('-'));
+        this.ficheroUploadService.getDownloadFile(fichero.id, nombre).subscribe();
+      }
+    }

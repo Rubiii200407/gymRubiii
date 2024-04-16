@@ -50,6 +50,10 @@ import { RouterModule } from '@angular/router';
         loadChildren: () =>
           import('./comentario/comentario.module').then(m => m.ComentarioModule),
       },
+      {
+        path: 'fichero',
+        loadChildren: () => import('./fichero/fichero.module').then(m => m.FicheroModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],
