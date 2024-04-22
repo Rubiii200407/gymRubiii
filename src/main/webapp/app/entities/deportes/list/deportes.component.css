@@ -13,6 +13,9 @@
     color: rgb(109, 108, 108);
     border-radius: 60%;
   }
+  .pointer-cursor {
+    cursor: pointer;
+  }
   
   .modern-pagination ::ng-deep .page-item {
     margin: 0;

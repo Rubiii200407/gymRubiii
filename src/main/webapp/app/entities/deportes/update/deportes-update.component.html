@@ -43,32 +43,32 @@
             />
           </div>
           <div style="display:flex;justify-content: space-around ; margin: 10px;">
-            <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Tenis')" (click)="mostrarDetalles('Tenis')" >
+            <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Tenis')" (click)="mostrarDetalles('Tenis')" (click)="mostrarInstructor('EntrenamientoFuncional')"  >
             <img src="../../content/tenis.png" style="width:170px;height: 130px;">
             <figcaption>Tenis</figcaption>
           </figure>
-          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Padel')" (click)="mostrarDetalles('Padel')">
+          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Padel')" (click)="mostrarDetalles('Padel')" (click)="mostrarInstructor('Padel')" >
             <img src="../../content/padel.png" style="width:170px;height: 130px;">
             <figcaption>Padel</figcaption>
           </figure>
-          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Baloncesto')" (click)="mostrarDetalles('Baloncesto')">
+          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Baloncesto')" (click)="mostrarDetalles('Baloncesto')" (click)="mostrarInstructor('Baloncesto')" >
             <img src="../../content/baloncesto.png" style="width:170px;height: 130px;">
             <figcaption>Baloncesto</figcaption>
           </figure>
-          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Spinning')" (click)="mostrarDetalles('Spinning')">
+          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Spinning')" (click)="mostrarDetalles('Spinning')" (click)="mostrarInstructor('Spinning')" >
             <img src="../../content/bici.jpg" style="width:170px;height: 130px;">
             <figcaption>Spinning</figcaption>
           </figure>
-            <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Crosfit')" (click)="mostrarDetalles('Crosfit')">
+            <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Crosfit')" (click)="mostrarDetalles('Crosfit')" (click)="mostrarInstructor('Crosfit')" >
             <img src="../../content/crosfit.jpg" style="width:170px;height: 130px;">
             <figcaption>Crosfit</figcaption>
           </figure>
-          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Zumba')" (click)="mostrarDetalles('Zumba')"> 
+          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Zumba')" (click)="mostrarDetalles('Zumba')" (click)="mostrarInstructor('Zumba')" > 
             <img src="../../content/zumba.png" style="width:170px;height: 130px;">
             <figcaption>Zumba</figcaption>
           </figure>
           </div>
-  
+         <div *ngIf="seleccionOpcion">
           <div class="row mb-3">
             <label class="form-label" jhiTranslate="gymRubenApp.deportes.descripcion" for="field_descripcion">Descripcion</label>
             <input
@@ -100,18 +100,45 @@
           <div class="row mb-3">
             <label class="form-label" for="field_instructor">Instructor</label>
             <input
-              type="text"
+              type="hidden"
               class="form-control"
               name="instructor"
               id="field_instructor"
               data-cy="instructor"
               formControlName="instructor"
+              [(ngModel)]="instructorSeleccionado"
               
             />
           </div>
+          <div  style="display:flex;justify-content: space-around ; margin: 10px;">
+            <figure style="text-align: center;margin-bottom: 10px;" *ngIf="deporteSeleccionado=='Tenis'" (click)="instructorElejir('Ruben')" >
+              <img src="../../content/persona1.png" style="width:130px;height: 130px; border-radius: 50%;">
+              <figcaption>Ruben</figcaption>
+            </figure>
+            <figure style="text-align: center;margin-bottom: 10px;" *ngIf="deporteSeleccionado=='Padel'" (click)="instructorElejir('Julio')" >
+              <img src="../../content/persona2.png" style="width:140px;height: 130px;border-radius: 50%">
+              <figcaption>Julio</figcaption>
+            </figure>
+            <figure style="text-align: center;margin-bottom: 10px;" *ngIf="deporteSeleccionado=='Baloncesto'" (click)="instructorElejir('Miriam')" >
+              <img src="../../content/persona3.png" style="width:130px;height: 130px;border-radius: 50%">
+              <figcaption>Miriam </figcaption>
+            </figure>
+              <figure style="text-align: center;margin-bottom: 10px;" *ngIf="deporteSeleccionado=='Spinning'" (click)="instructorElejir('Yeray')" >
+              <img src="../../content/persona4.png" style="width:130px;height: 130px;border-radius: 50%">
+              <figcaption>Yeray</figcaption>
+            </figure>
+            <figure style="text-align: center;margin-bottom: 10px;" *ngIf="deporteSeleccionado=='Crosfit'" (click)="instructorElejir('Inmaculada')" >
+              <img src="../../content/persona5.png" style="width:130px;height: 130px;border-radius: 50%">
+              <figcaption>Inmaculada</figcaption>
+            </figure>
+            <figure style="text-align: center;margin-bottom: 10px;" *ngIf="deporteSeleccionado=='Zumba'" (click)="instructorElejir('Ruben')" >
+              <img src="../../content/persona1.png" style="width:130px;height: 130px;border-radius: 50%">
+              <figcaption>Ruben</figcaption>
+            </figure>
+            </div>
   
   
-          <div class="row mb-3">
+          <div class="row mb-3" *ngIf="fechaSeleccionada">
             <label class="form-label" for="field_horaDeporte">Hora Disponibles</label>
             <input
               type="hidden"
@@ -132,7 +159,7 @@
 
     </div>
   </div>
-        </div>
+    
         
          
         <div class="mt-4">
@@ -149,6 +176,8 @@
             <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
           </button>
         </div>
+      </div>
+    </div>
       </form>
       <div *ngIf="!nuevaConsulta">
         <span jhiTranslate="gestorDenunciasApp.deportes.home.introducirCodigo">Código de seguimiento: </span>

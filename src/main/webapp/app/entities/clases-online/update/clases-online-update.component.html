@@ -42,34 +42,34 @@
           />
         </div>
         <div style="display:flex;justify-content: space-around ; margin: 10px;">
-          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('EntrenamientoFuncional')" (click)="mostrarDetalles('EntrenamientoFuncional')" >
+          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('EntrenamientoFuncional')" (click)="mostrarDetalles('EntrenamientoFuncional')" (click)="mostrarInstructor('EntrenamientoFuncional')"  >
           <img src="../../content/funcional.png" style="width:170px;height: 130px;">
           <figcaption>Entrenamiento Funcional</figcaption>
         </figure>
-        <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Yoga')" (click)="mostrarDetalles('Yoga')">
+        <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Yoga')" (click)="mostrarDetalles('Yoga')" (click)="mostrarInstructor('Yoga')">
           <img src="../../content/yoga.png" style="width:170px;height: 130px;">
           <figcaption>Yoga</figcaption>
         </figure>
-        <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('HIIT')" (click)="mostrarDetalles('HIIT')">
+        <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('HIIT')" (click)="mostrarDetalles('HIIT')" (click)="mostrarInstructor('HIIT')">
           <img src="../../content/hiit.png" style="width:170px;height: 130px;">
           <figcaption>HIIT</figcaption>
         </figure>
-        <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('BaileCardiovascular')" (click)="mostrarDetalles('BaileCardiovascular')">
+        <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('BaileCardiovascular')" (click)="mostrarDetalles('BaileCardiovascular')" (click)="mostrarInstructor('BaileCardiovascular')">
           <img src="../../content/baile.png" style="width:170px;height: 130px;">
           <figcaption> Baile Cardiovascular</figcaption>
         </figure>
-          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Pilates')" (click)="mostrarDetalles('Pilates')">
+          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Pilates')" (click)="mostrarDetalles('Pilates')" (click)="mostrarInstructor('Pilates')">
           <img src="../../content/pilates.png" style="width:170px;height: 130px;">
           <figcaption>Pilates</figcaption>
         </figure>
-        <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Boxeo')" (click)="mostrarDetalles('Boxeo')"> 
+        <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Boxeo')" (click)="mostrarDetalles('Boxeo')" (click)="mostrarInstructor('Boxeo')"> 
           <img src="../../content/boxeo.png" style="width:170px;height: 130px;">
           <figcaption>Boxeo</figcaption>
         </figure>
         </div>
 
-
-        <div class="row mb-3">
+         <div *ngIf="selecionOpcion" >
+        <div  class="row mb-3" >
           <label class="form-label" jhiTranslate="gymRubenApp.clasesOnline.descripcion" for="field_descripcion">Descripcion</label>
           <input
             type="text"
@@ -101,16 +101,45 @@
         <div class="row mb-3">
           <label class="form-label" jhiTranslate="gymRubenApp.clasesOnline.instructor" for="field_instructor">Instructor</label>
           <input
-            type="text"
+            type="hidden"
             class="form-control"
             name="instructor"
             id="field_instructor"
             data-cy="instructor"
             formControlName="instructor"
+            [(ngModel)]="instructorSeleccionado"
+        
+
           />
         </div>
+        <div  style="display:flex;justify-content: space-around ; margin: 10px;">
+        <figure style="text-align: center;margin-bottom: 10px;" *ngIf="claseSeleccionado=='EntrenamientoFuncional'" (click)="instructorElejir('Ruben')" >
+          <img src="../../content/persona1.png" style="width:130px;height: 130px; border-radius: 50%;">
+          <figcaption>Ruben</figcaption>
+        </figure>
+        <figure style="text-align: center;margin-bottom: 10px;" *ngIf="claseSeleccionado=='Yoga'" (click)="instructorElejir('Julio')" >
+          <img src="../../content/persona2.png" style="width:140px;height: 130px;border-radius: 50%">
+          <figcaption>Julio</figcaption>
+        </figure>
+        <figure style="text-align: center;margin-bottom: 10px;" *ngIf="claseSeleccionado=='HIIT'" (click)="instructorElejir('Miriam')" >
+          <img src="../../content/persona3.png" style="width:130px;height: 130px;border-radius: 50%">
+          <figcaption>Miriam </figcaption>
+        </figure>
+          <figure style="text-align: center;margin-bottom: 10px;" *ngIf="claseSeleccionado=='Pilates'" (click)="instructorElejir('Yeray')" >
+          <img src="../../content/persona4.png" style="width:130px;height: 130px;border-radius: 50%">
+          <figcaption>Yeray</figcaption>
+        </figure>
+        <figure style="text-align: center;margin-bottom: 10px;" *ngIf="claseSeleccionado=='Boxeo'" (click)="instructorElejir('Inmaculada')" >
+          <img src="../../content/persona5.png" style="width:130px;height: 130px;border-radius: 50%">
+          <figcaption>Inmaculada</figcaption>
+        </figure>
+        <figure style="text-align: center;margin-bottom: 10px;" *ngIf="claseSeleccionado=='BaileCardiovascular'" (click)="instructorElejir('Ruben')" >
+          <img src="../../content/persona1.png" style="width:130px;height: 130px;border-radius: 50%">
+          <figcaption>Ruben</figcaption>
+        </figure>
+        </div>
 
-        <div class="row mb-3">
+        <div class="row mb-3" *ngIf="fechaSeleccionada">
           <label class="form-label" for="field_horaClase"
             >Horas Disponibles</label
           >
@@ -121,6 +150,7 @@
             id="field_horaClase"
             data-cy="horaClase"
             formControlName="horaClase"
+
           />
         </div>
         <div *ngIf="horasDisponibles.length > 0">
@@ -131,7 +161,7 @@
             </label>
           </div>
         </div>
-      </div>
+ 
 
 
       
@@ -150,6 +180,8 @@
           <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
         </button>
       </div>
+    </div>
+  </div>
     </form>
     <div *ngIf="!nuevaConsulta">
       <span jhiTranslate="gestorDenunciasApp.clasesonline.home.introducirCodigo">Código de seguimiento: </span>
