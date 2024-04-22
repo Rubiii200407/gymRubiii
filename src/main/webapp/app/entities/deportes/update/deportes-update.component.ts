@@ -25,9 +25,11 @@ export class DeportesUpdateComponent implements OnInit {
   fechaDeporteControl = new FormControl('');
   uuid?:string
   guardado=false;
+  seleccionOpcion:boolean=false;
+  instructor?:string|null;
   codigoNoExiste = false;
   ahora:Date=new Date();
-  fechaSeleccionada:Date=new Date();
+  fechaSeleccionada!:Date;
   codigoBusqueda = '';
   deporteBuscada: IDeportes | null = null;
   editForm: DeportesFormGroup = this.deportesFormService.createDeportesFormGroup();
@@ -38,6 +40,14 @@ export class DeportesUpdateComponent implements OnInit {
     "Zumba":" Zumba,es un programa de ejercicio que se inspira en movimientos y pasos de los bailes latinos.",
     "Spinning": "El spinning es una actividad física generalmente “indoor” que se realiza sobre una bicicleta fija y que cuenta con la presencia de un instructor o monitor encargado de marcar las intensidades y cadencias de la sesión.",
     "Crosfit":"El crosfit es una técnica de entrenamiento que conecta movimientos de diferentes disciplinas, tales como la halterofilia, el entrenamiento metabólico o el gimnástico. Consiste en acometer un programa de ejercicios (flexiones, tracción, etc), en un tiempo determinado y con un número definido de veces.",
+  };
+  instructorDeporte:Record<string,string>= {
+    "Tenis": "Ruben",
+    "Padel": "Julio",
+    "Baloncesto":"Miriam",
+    "Spinning":"Yeray",
+    "Crosfit": "Inmaculada",
+    "Zumba":"Ruben",
   };
   horariosPorDiaYDeporte: Record<string, Record<string, string[]>> = {
     'Monday': {
@@ -101,7 +111,7 @@ export class DeportesUpdateComponent implements OnInit {
   };
   descripcionDeporte :string=""
 
-
+  instructorSeleccionado :string=""
 
   constructor(
     protected deportesService: DeportesService,
@@ -179,9 +189,15 @@ pantallaCreacionDeportes(): void {
   
   
 
- 
+  instructorElejir(clasesOnline: string) {
+    this.instructorSeleccionado = clasesOnline;
+    if(this.instructor){
+    this.instructorSeleccionado=this.instructor;
+    }
+  }
   seleccionarDeporte(deporte: string) {
     this.deporteSeleccionado = deporte;
+    this.seleccionOpcion=true;
     this.actualizarHorasDisponibles();
   }
   detallesDeporte(deportes:string){
@@ -189,6 +205,10 @@ pantallaCreacionDeportes(): void {
   }
   mostrarDetalles(deportes:string){
     this.descripcionDeporte=this.detallesDeportes[deportes];
+
+  }
+  mostrarInstructor(clasesOnline:string){
+    this.instructorSeleccionado=this.instructorDeporte[clasesOnline];
 
   }
   seleccionarHora(hora: string) {

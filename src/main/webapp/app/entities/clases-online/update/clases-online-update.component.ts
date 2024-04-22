@@ -11,17 +11,20 @@ import { ClasesOnlineFormGroup, ClasesOnlineFormService } from './clases-online-
 @Component({
   selector: 'jhi-clases-online-update',
   templateUrl: './clases-online-update.component.html',
+  styleUrls: ['./clases-online-update.component.css'],
 })
 export class ClasesOnlineUpdateComponent implements OnInit {
   isSaving = false;
   clasesOnline: IClasesOnline | null = null;
   claseSeleccionado?:string|null;
+  instructor?:string|null;
   horasDisponibles: string[] = [];
   horaClase: string = ""
   codigo?: string;
   nuevaConsulta = true;
   uuid?:string
   guardado=false;
+  selecionOpcion:boolean=false;
   codigoNoExiste = false;
  claseBuscada: IClasesOnline | null = null;
  fechaSeleccionada!:Date;
@@ -35,6 +38,15 @@ export class ClasesOnlineUpdateComponent implements OnInit {
     "Pilates": "Pilates es un método gimnástico que aúna el ejercicio corporal con el control mental, basado en la respiración y la relajación",
     "Boxeo":"El boxeo es un deporte que consiste en la lucha a puñetazos de dos contendientes, de conformidad con ciertas reglas y utilizando guantes especiales.",
   };
+  instructorClase:Record<string,string>= {
+    "EntrenamientoFuncional": "Ruben",
+    "Yoga": "Julio",
+    "HIIT":"Miriam",
+    "BaileCardiovascular":"Ruben",
+    "Pilates": "Yeray",
+    "Boxeo":"Inmaculada",
+  };
+ 
   horariosPorDiaYClase: Record<string, Record<string, string[]>> = {
     'Monday': {
       'EntrenamientoFuncional': ['08:00 AM', '10:00 AM', '14:00 PM'],
@@ -96,6 +108,7 @@ export class ClasesOnlineUpdateComponent implements OnInit {
   
   };
   descripcionClase :string=""
+  instructorSeleccionado :string=""
   constructor(
     protected clasesOnlineService: ClasesOnlineService,
     protected clasesOnlineFormService: ClasesOnlineFormService,
@@ -161,15 +174,25 @@ buscarUUID(): void {
 
   seleccionarDeporte(clasesOnline: string) {
     this.claseSeleccionado = clasesOnline;
+    this.selecionOpcion=true;
     this.actualizarHorasDisponibles();
   }
-  detallesDeporte(clasesOnline:string){
-    this.editForm.controls["descripcion"].setValue(this.detallesClases[clasesOnline])
+  instructorElejir(clasesOnline: string) {
+    this.instructorSeleccionado = clasesOnline;
+    if(this.instructor){
+    this.instructorSeleccionado=this.instructor;
+    }
   }
+ 
   mostrarDetalles(clasesOnline:string){
     this.descripcionClase=this.detallesClases[clasesOnline];
 
   }
+  mostrarInstructor(clasesOnline:string){
+    this.instructorSeleccionado=this.instructorClase[clasesOnline];
+
+  }
+
   seleccionarHora(hora: string) {
     this.editForm.get('horaClase')?.setValue(hora);
   }
