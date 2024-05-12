@@ -35,6 +35,7 @@ export class DeportesDetailComponent implements OnInit {
   altoScroll = 0;
   cargandoChat = false;
   ficheros: IFichero[] = [];
+  uuid?: string | null;
   constructor(protected activatedRoute: ActivatedRoute,
     protected comentarioService: ComentarioService,
     protected comentarioFormService: ComentarioFormService,
@@ -62,17 +63,8 @@ export class DeportesDetailComponent implements OnInit {
             }
           },
         });
-        this.ficheroService.getFicheroDenuncia(this.deportes.id, { size: this.numFicheros, sort: ['id,desc'] }).subscribe(res => {
-          if (res.body) {
-            this.ficheros = res.body;
-          }
-          this.totalFicheros = Number(res.headers.get('X-Total-Count'));
-          Promise.resolve().then(() => {
-            this.cdr.detectChanges();
-            setTimeout(() => this.scroll(), 100);
-          });
+  
           this.cargandoChat = true;
-        });
       }
     });
   }

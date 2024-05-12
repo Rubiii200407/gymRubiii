@@ -11,18 +11,22 @@ import { PlanesNutricionFormGroup, PlanesNutricionFormService } from './planes-n
 @Component({
   selector: 'jhi-planes-nutricion-update',
   templateUrl: './planes-nutricion-update.component.html',
+  styleUrls: ['./planes-nutricion-update.component.css'],
 })
 export class PlanesNutricionUpdateComponent implements OnInit {
   isSaving = false;
   sexo?:string;
   alimentos?:string;
   instrucciones?:string;
+  seleccionOpcion:boolean=false;
+  seleccionCalorias:boolean=false;
   edad?:number;
   peso?:string;
   actividadFisica?:string;
   altura?:string;
   objetivo?:string
   calorias?:number;
+  errorAlGuardar: boolean = false;
   neat?:number;
   planesNutricion: IPlanesNutricion | null = null;
   planSeleccionado?:string|null;
@@ -52,6 +56,7 @@ planBuscada: IPlanesNutricion | null = null;
     "ganarpeso":"pera",
     
   };
+
  
   descripcionPlan :string=""
   constructor(
@@ -87,9 +92,18 @@ planBuscada: IPlanesNutricion | null = null;
           this.codigo = plan.body?.codigo ?? '';
           this.descargarCodigo(this.codigo);
         },
+        
       );
+      
+      
     }
+    
  
+}
+pantallaAtras(): void {
+  this.guardado = false;
+  this.editForm.reset();
+  window.location.reload();
 }
 descargarCodigo(codigo: string): void {
   const blob = new Blob([codigo], { type: 'text/plain' });
@@ -164,29 +178,17 @@ buscarUUID(): void {
       return;
       
     }
+    this.seleccionCalorias=true;
   }
-  Enlaces(ruta:string){
-    switch(this.planSeleccionado){
-      case 'perdidapeso':
-      this.router.navigate(["clases-online/new"]);
-      this.router.navigate(["deportes/new"]);
-      this.router.navigate(["planes-entrenamiento/new"]);
-      break;
-      case 'mantenimiento':
-      this.router.navigate(["clases-online/new"]);
-      this.router.navigate(["deportes/new"]);
-      this.router.navigate(["planes-entrenamiento/new"]);
-      break;
-      case 'ganarpeso':
-      this.router.navigate(["planes-entrenamiento/new"]);
-      break;
+  Enlaces(ruta: string) {
+    this.router.navigate([ruta]).then(() => {
+    });
+}
 
-    }
-    
-  }
 
   seleccionarPlan(planesNutricion: string) {
     this.planSeleccionado = planesNutricion;
+    this.seleccionOpcion=true;
 
   }
   detallesPlanes(planesNutricion:string){

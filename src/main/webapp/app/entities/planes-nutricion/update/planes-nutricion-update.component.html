@@ -1,18 +1,37 @@
-<div class="d-flex justify-content-center">
-
+<div class="d-flex justify-content-center" style="background-color: rgb(231, 224, 224);">
+  <div *ngIf="!errorAlGuardar; else elseBlockError">
   <div *ngIf="!guardado; else elseBlockGuardado">   
-    <h2 >Apuntate a los planes de nutricion</h2>
-    <div class="row g-2 align-items-center d-flex justify-content-end">
-      <div class="col-auto">
+ 
+    <h2 style="margin-left-200px: center;color: rgb(45, 233, 233);">Bienvenido a la seccion de nutricion</h2>
+    <div class="button-section" style="margin-left: 800px; margin-top: -40px;">
+      <button type="button">
         <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
-      </div>
-      <div class="col-auto">
-        <button type="button" class="btn btn-dark btn-sm" [routerLink]="['/planes-nutricion', uuid, 'acceder']">
-          <fa-icon icon="search"></fa-icon>&nbsp;
-          <span jhiTranslate="entity.action.search">Buscar</span>
-        </button>
-      </div>
+        <fa-icon icon="search"  [routerLink]="['/planes-nutricion', uuid, 'acceder']"></fa-icon>&nbsp;
+        <span [routerLink]="['/planes-nutricion', uuid, 'acceder']" >Encuentra tu plan Nutricion</span>
+      </button>
     </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+      <div class="text-container">
+      <h2 style="font-size: 20px;">Un plan de alimentación o nutricional es una organización diaria de los alimentos que se deben incluir por tiempo de comida en cantidad y calidad. Este se diseña de acuerdo con las necesidades de cada persona para mantenerse sano.
+        La dieta de los deportistas se centra en tres objetivos principales: aportar la energía apropiada, otorgar nutrientes para la mantención y reparación de los tejidos especialmente del tejido muscular, y mantener y regular el metabolismo corporal
+       
+      </h2>
+    </div>
+    <div class="image-container">
+    <img src="../../content/nutricion.png" style="width: 300px;height: 200px; margin-left:400px; margin-top: -20px;">
+  </div>
+</div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <form
       name="editForm"
       role="form"
@@ -28,7 +47,7 @@
     </div>
 
     <div class="row mb-3">
-      <label class="form-label" for="field_nombrePlan">¿Cual es tu objetivo?</label>
+      <label class="form-label" for="field_nombrePlan" style="font-size: 30px;text-align: center;">¿Cual es tu objetivo?</label>
       <input
         type="hidden"
         class="form-control"
@@ -39,24 +58,29 @@
         [(ngModel)]="planSeleccionado"
       />
     </div>
+    <br> 
+    <br>
     <div style="display:flex;justify-content: space-around ; margin: 10px;">
       <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarPlan('perdidapeso')" (click)="mostrarDetalles('PerderGrasa')" >
-      <img src="../../content/perderpeso.png" style="width:170px;height: 130px;">
-      <figcaption>Perder Grasa</figcaption>
+      <img src="../../content/perderpeso.png" style="width:250px;height: 180px;">
+      <figcaption style="font-size:20px;">Perder Grasa</figcaption>
     </figure>
     <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarPlan('mantenimiento')" (click)="mostrarDetalles('Forma')">
-      <img src="../../content/forma.jpg" style="width:170px;height: 130px;">
-      <figcaption>Estar en forma</figcaption>
+      <img src="../../content/forma.jpg" style="width:250px;height: 180px;">
+      <figcaption style="font-size:20px;">Estar en forma</figcaption>
     </figure>
     <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarPlan('ganarpeso')" (click)="mostrarDetalles('GanarPeso')">
-      <img src="../../content/ganarpeso.png" style="width:170px;height: 130px;">
-      <figcaption>Ganar Peso</figcaption>
+      <img src="../../content/ganarpeso.png" style="width:250px;height: 180px;">
+      <figcaption style="font-size:20px;">Ganar Peso</figcaption>
     </figure>
     </div>
-
+    <br>
+   
+    <br>
+    <div *ngIf="seleccionOpcion">
     <div class="row mb-3">
       <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.descripcion" for="field_descripcion">Descripcion</label>
-      <input
+      <textarea
         type="text"
         class="form-control"
         name="descripcion"
@@ -64,28 +88,39 @@
         data-cy="descripcion"
         formControlName="descripcion"
         [(ngModel)]="descripcionPlan"
-      />
+        style="border: none; background-color: transparent;outline: none;
+        height: 100px;"
+        readonly>
+      </textarea>
     </div>
+   <div class="container mt4" style="margin-left: 370px;">
+    <div class="card" style="border-radius: 20px; width: 400px;">
+    <div class="card-body">
     <form (ngSubmit)="calcularCalorias()"class="form">
       <div class="form-group">
+        <h4>Calculador de calorias</h4>
         <label for="sexo">Sexo:</label>
         <select id="sexo" name="sexo" [(ngModel)]="sexo" class="form-control">
         <option value="masculino">Maculino</option>
         <option value="femenino">Femenino</option>
         </select>
       </div>
+      <br>
       <div class="form-group">
-        <label for="edad">Edad:</label>
-        <input type="number" id="edad" name="edad" [(ngModel)]="edad" class="form-group">
+        <label for="edad">Edad</label>
+        <input type="number" id="edad" name="edad" [(ngModel)]="edad" class="form-group" style="width: 100px;margin-left: 32px;">
       </div>
+      <br>
       <div class="form-group">
         <label for="peso">Peso(kg)</label>
-        <input type="number" id="peso" name="peso" [(ngModel)]="peso" class="form-group">
+        <input type="number" id="peso" name="peso" [(ngModel)]="peso" class="form-group"  style="width: 100px; margin-left: 12px;">
       </div>
+      <br>
       <div class="form-group">
         <label for="altura">Altura(cm)</label>
-        <input type="number" id="altura" name="altura" [(ngModel)]="altura" class="form-group">
+        <input type="number" id="altura" name="altura" [(ngModel)]="altura" class="form-group"  style="width: 100px;">
       </div>
+      <br>
       <div class="form-group">
         <label for="actividadFisica">Actividad Fisica:</label>
         <select id="actividadFisica" name="actividadFisica" [(ngModel)]="actividadFisica" class="form-control">
@@ -94,17 +129,21 @@
         <option value="6-7Dias">6 a 7 dias por semana</option>
         </select>
       </div>
+      <br>
       <button type="submit" class="btn-primary">Calcular Calorias</button>
     </form>
     <div *ngIf="calorias!==undefined" class="result">
-    <p>El numero de calorias requeridas que debes consumir es:{{calorias!= null?(calorias|number:'1.0-0'):'no'}}</p>
-
-
-  
-
+    <p>El numero de calorias requeridas que debes consumir es: {{calorias!= null?(calorias|number:'1.0-0'):'no'}} kilocalorias</p>
+  </div>
+</div>
+    </div>
+   </div>
+    </div>
+ 
+    <div *ngIf="seleccionCalorias">
     <div class="row mb-3">
       <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.instrucciones" for="field_instrucciones">Instrucciones</label>
-      <input
+      <textarea
       *ngIf="planSeleccionado!=null && planSeleccionado !==undefined && instruccionesPlan[planSeleccionado]"
         type="text"
         class="form-control"
@@ -113,11 +152,14 @@
         data-cy="instrucciones"
         formControlName="instrucciones"
         [(ngModel)]="instruccionesPlan[planSeleccionado]"
-      />
+        style="border: none; background-color: transparent;outline: none;
+        height: 100px;"
+        readonly>
+  </textarea>
     </div>
     <div class="row mb-3">
       <label class="form-label" for="field_instrucciones">Alimentos Recomendados</label>
-      <input
+      <textarea
         *ngIf="planSeleccionado!=null && planSeleccionado !==undefined && alimentosPlan[planSeleccionado]"
         type="text"
         class="form-control"
@@ -126,23 +168,14 @@
         data-cy="alimentosRecomendados"
         formControlName="alimentosRecomendados"
         [(ngModel)]="alimentosPlan[planSeleccionado]"
-        readonly="true"
-      />
+        style="border: none; background-color: transparent;outline: none;
+        height: 100px;"
+        readonly>
+</textarea>
     </div>
-    <div *ngIf="planSeleccionado=='perdidapeso'">
-    <button (click)="Enlaces('clases-online/new')">Apuntate a las clases online</button>
-    <button (click)="Enlaces('deportes/new')">Apuntate a lasdeportes</button>
-    <button (click)="Enlaces('planes-entrenamiento/new')">Apuntate a los planes entrenamiento</button>
-    </div>
-    <div *ngIf="planSeleccionado=='mantenimiento'">
-      <button (click)="Enlaces('clases-online/new')">Apuntate a las clases online</button>
-      <button (click)="Enlaces('deportes/new')">Apuntate a lasdeportes</button>
-      <button (click)="Enlaces('planes-entrenamiento/new')">Apuntate a los planes entrenamiento</button>
-      </div>
-      <div *ngIf="planSeleccionado=='ganarpeso'">
-        <button (click)="Enlaces('planes-entrenamiento/new')">Apuntate a los planes entrenamiento</button>
-        </div>
-      <div class="mt-4">
+    
+   
+      <div class="mt-4" style="margin-left: 80%;">
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
           <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
         </button>
@@ -156,6 +189,7 @@
           <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
         </button>
       </div>
+
     </div>
     </form>
     <div *ngIf="!nuevaConsulta">
@@ -166,14 +200,91 @@
       </button>
     </div>     
   </div>
-  <ng-template #elseBlockGuardado>
-    <div *ngIf="guardado" class="alert alert-success" role="alert">
-      <h4 class="alert-heading" jhiTranslate="gymRubenApp.clasesonline.creacionSolicitud">
-        La solicitud ha sido procesada con éxito, código de seguimiento:
-      </h4>
-      <p>{{ codigo }}</p>
-      <hr />
-    </div>
-  </ng-template>
 
+  <ng-template #elseBlockGuardado>
+    <h2 style="margin-left-200px: center;">Bienvenido a la seccion de nutricion</h2>
+    <div class="button-section" style="margin-left: 800px; margin-top: -40px;">
+      <button type="button">
+        <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
+        <fa-icon icon="search"  [routerLink]="['/planes-nutricion', uuid, 'acceder']"></fa-icon>&nbsp;
+        <span [routerLink]="['/planes-nutricion', uuid, 'acceder']" >Encuentra tu plan Nutricion</span>
+      </button>
+    </div>
+    <br>
+    <br>
+      <div *ngIf="guardado && !errorAlGuardar" class="confirmation-section">
+      <div class="circle-check" >
+        <fa-icon class="icon-ok" icon="check"></fa-icon>
+      </div>
+      <div class="line"></div>
+      <div class="line-small"></div>
+      <h4><strong > Plan Nutricion registrado correctamente</strong></h4>
+      <h5>El codigo del plan nutricion es:</h5>
+      <p>
+        <strong > {{ codigo }}</strong>
+      </p>
+      <p>Utiliza este codigo para consultar los detalles del plan de nutricion</p>
+     
+    </div>
+    <br>
+    <br>
+    <h2>Te recomiendo que para q el proceso sea mas rapido te apuntes a nuestros programas</h2>
+    <br>
+    <br>
+    <div *ngIf="planSeleccionado=='perdidapeso'">
+      <div style="display:flex;justify-content: space-around ; margin: 10px;">
+        <figure style="text-align: center;margin-bottom: 10px;">
+          <img src="../../content/claseonline.jpg"  (click)="Enlaces('clases-online/new');$event.stopPropagation()" style="cursor:pointer;width: 300px;height: 200px;margin-left: 4px;">
+        <figcaption style="font-size:20px;">Clases Online</figcaption>
+      </figure>
+      <figure style="text-align: center;margin-bottom: 10px;">
+        <img src="../../content/deportes1.jpg"  (click)="Enlaces('deportes/new');$event.stopPropagation()" style="cursor:pointer;width: 300px;height: 200px;margin-left: 4px;">
+        <figcaption style="font-size:20px;">Deportes</figcaption>
+      </figure>
+      <figure style="text-align: center;margin-bottom: 10px;">
+        <img src="../../content/entrenamiento.png"  (click)="Enlaces('planes-entrenamiento/new');$event.stopPropagation()" style="cursor:pointer;width: 300px;height: 200px;margin-left: 4px;">
+        <figcaption style="font-size:20px;">Planes Entrenamiento</figcaption>
+      </figure>
+      </div>
+    </div>
+    <div *ngIf="planSeleccionado=='mantenimiento'">
+      <div style="display:flex;justify-content: space-around ; margin: 10px;">
+        <figure style="text-align: center;margin-bottom: 10px;">
+          <img src="../../content/claseonline.jpg"  (click)="Enlaces('clases-online/new');$event.stopPropagation()" style="cursor:pointer;width: 300px;height: 200px;margin-left: 4px;">
+        <figcaption style="font-size:20px;">Clases Online</figcaption>
+      </figure>
+      <figure style="text-align: center;margin-bottom: 10px;">
+        <img src="../../content/deportes1.jpg"  (click)="Enlaces('deportes/new');$event.stopPropagation()" style="cursor:pointer;width: 300px;height: 200px;margin-left: 4px;">
+        <figcaption style="font-size:20px;">Deportes</figcaption>
+      </figure>
+      <figure style="text-align: center;margin-bottom: 10px;">
+        <img src="../../content/entrenamiento.png"  (click)="Enlaces('planes-entrenamiento/new');$event.stopPropagation()" style="cursor:pointer;width: 300px;height: 200px;margin-left: 4px;">
+        <figcaption style="font-size:20px;">Planes Entrenamiento</figcaption>
+      </figure>
+      </div>
+      </div>
+      <div *ngIf="planSeleccionado=='ganarpeso'">
+        <figure style="text-align: center;margin-bottom: 10px;">
+          <img src="../../content/entrenamiento.png"  (click)="Enlaces('planes-entrenamiento/new');$event.stopPropagation()" style="cursor:pointer;width: 300px;height: 200px;margin-left: -2px;">
+          <figcaption style="font-size:20px;">Planes Entrenamiento</figcaption>
+        </figure>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="confirmation-section">
+        <button  (click)="pantallaAtras()">Volver</button>
+      </div>
+  </ng-template>
 </div>
+
+<ng-template #elseBlockError>
+  <div *ngIf="errorAlGuardar" class="confirmation-error">
+    <div class="circle-red"></div>
+    <h4><strong> Se ha producido un error con el registro del plan de nutricion</strong></h4>
+    <button (click)="pantallaAtras()" >Volver</button>
+  </div>
+</ng-template>
+</div>
+
+

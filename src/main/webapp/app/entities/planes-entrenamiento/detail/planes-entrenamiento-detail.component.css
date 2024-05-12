@@ -127,10 +127,11 @@
   margin: 1.2em;
 }
 .btn-salir {
-  position: absolute;
+
   right: 0;
   bottom: 0;
-  margin: 1.2em;
+margin-left: 240px;
+  margin-top: 260px;
 }
 .btn-volver {
   color: white;

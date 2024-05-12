@@ -16,11 +16,6 @@ public interface ClasesOnlineMapper extends EntityMapper<ClasesOnlineDTO, Clases
     @Mapping(target = "id", expression = "java(decodeId(dto.getId()))")
     ClasesOnline toEntity(ClasesOnlineDTO dto);
 
-    @Mapping(target = "id", expression = "java(encodeId(entity.getId()))")
-    @Mapping(target = "codigoCompleto", source = "codigo", qualifiedByName = "codigoCompleto")
-    @Mapping(target = "codigo", source = "codigo", qualifiedByName = "ultimosDigitos")
-    ClasesOnlineDTO toDto(ClasesOnline entity);
-
     @Named("toDtoCodigo")
     @Mapping(target = "id", expression = "java(encodeId(entity.getId()))")
     @Mapping(target = "codigo", source = "codigo", qualifiedByName = "ultimosDigitos")
@@ -39,8 +34,4 @@ public interface ClasesOnlineMapper extends EntityMapper<ClasesOnlineDTO, Clases
         return codigo.substring(Math.max(0, codigo.length() - 6));
     }
 
-    @Named("codigoCompleto")
-    default String codigoCompleto(String codigo) {
-        return codigo;
-    }
 }

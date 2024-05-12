@@ -12,6 +12,7 @@ import { PlanesEntrenamientoFormGroup, PlanesEntrenamientoFormService } from './
 @Component({
   selector: 'jhi-planes-entrenamiento-update',
   templateUrl: './planes-entrenamiento-update.component.html',
+  styleUrls: ['./planes-entrenamiento-update.component.css'],
 })
 export class PlanesEntrenamientoUpdateComponent implements OnInit {
   isSaving = false;
@@ -20,7 +21,10 @@ export class PlanesEntrenamientoUpdateComponent implements OnInit {
   codigo?: string;
   nuevaConsulta = true;
   uuid?:string
+  errorAlGuardar:boolean=false;
+  
   guardado=false;
+  seleccionOpcion:boolean=false;
   codigoNoExiste = false;
   planBuscada: IPlanesEntrenamiento | null = null;
   codigoBusqueda = '';
@@ -76,6 +80,11 @@ export class PlanesEntrenamientoUpdateComponent implements OnInit {
     }
  
 }
+pantallaCreacionEntrenamiento(): void {
+  this.guardado = false;
+  this.editForm.reset();
+  window.location.reload();
+}
   descargarCodigo(codigo: string): void {
     const blob = new Blob([codigo], { type: 'text/plain' });
     const data = window.URL.createObjectURL(blob);
@@ -111,6 +120,7 @@ export class PlanesEntrenamientoUpdateComponent implements OnInit {
   }
   seleccionarPlan(planesEntrenamiento: string) {
     this.planSeleccionado = planesEntrenamiento;
+    this.seleccionOpcion=true;
 
   }
   detallesPlanes(planesEntrenamiento:string){

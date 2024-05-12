@@ -1,46 +1,56 @@
 <div class="contenido">
   <div class="titulo">
-    <img class="img" src="content/images/melit.png" alt="imgemp" />
+    <h2 style="color: rgb(119, 138, 250);">Clases Online</h2>
     <div class="button-section">
       <button type="button">
-        <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
-        <fa-icon [routerLink]="['/clases-online', uuid, 'acceder']" icon="search"></fa-icon>
-        <span [routerLink]="['/clases-online', uuid, 'acceder']">Encuentra tu denuncia</span>
+        <input type="text" placeholder="{{ clasesOnline?.codigo }}" [(ngModel)]="uuid"  />
+        <fa-icon  icon="search"></fa-icon>
+        <span >Encuentra tu Clase</span>
       </button>
     </div>
   </div>
+  <br>
+  <br>
   <div *ngIf="clasesOnline">
-    <div class="row g-2">
-      <div class="col-9">
-        <div class="fondo-gris h-98 p-5px">
+    <div class="row g-2" style="width: 1910px;">
+      <div class="col-8">
+        <div class="fondo-gris h-98 p-5px">  
           <h5 class="borde-bottom">
-            <strong>Denuncia nº {{ clasesOnline.codigo }}</strong>
+            <strong>Clase nº {{ clasesOnline.codigo }}</strong>
           </h5>
-          <p class="p-l-15"><strong>Titulo</strong></p>
-          <p class="p-l-15">{{ clasesOnline.nombreClase }}</p>
-          <p class="p-l-15 mb-5px"><strong>Descripción</strong></p>
+          <h5>
+            <strong>Para acceder a la clase online accede a este link de youtube para que te lleve al canal y puedas conectarte a la clase online</strong>
+          </h5>
+          <button onclick="window.open('https://www.youtube.com/channel/UCYRjKaICeBYAFop_DsG5nog','_blank');" style="text-decoration: none;border: none;background-color:#03748320;border-radius: 10%;color: rgb(119, 138, 250);">Canal Youtube</button>
+          <br>
+          <br>
+          <h5><strong>Titulo</strong></h5>
+          <p>{{ clasesOnline.nombreClase }}</p>
+          <h5><strong>Descripción</strong></h5>
           <quill-view [content]="clasesOnline.descripcion"></quill-view>
+          <h5><strong>Fecha Clase</strong></h5>
+          <quill-view [content]="clasesOnline.fechaClase"></quill-view>
+          <h5><strong>Hora Clase</strong></h5>
+          <quill-view [content]="clasesOnline.horaClase"></quill-view>
         </div>
       </div>
-      <div class="col-3">
-        <div class="fondo-gris p-5px">
-          <h5 class="borde-bottom"><strong>Detalle</strong></h5>
-         
-          <p class="mb-5px p-l-15"><strong>Estado</strong></p>
-        
-          <p class="mb-5px p-l-15"><strong>Fecha Creación</strong></p>
-         
-          <p class="mb-5px p-l-15"><strong>Tipo Denuncia</strong></p>
-          <p class="mb-5px p-l-15">Anónimo</p>
-          <p class="mb-5px p-l-15"><strong>Días abierta</strong></p>
-        
-        </div>
-      </div>
+   
     </div>
+    <br>
+    <br>
+    <div>
+      <h2 style="text-align: center;">Por si al final no puedes conectarte a la clase online aqui<br> te deamos videos para q puedas hacer en tu casa </h2>
+      <br>
+    <iframe width="560" height="315" [src]="getVideoIframe(clasesOnline.videoId)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="margin-left: 350px;"></iframe>
+  </div>
+  <br>
+<br>
+<br>
+<br>
     <div class="row">
       <div class="col-8">
         <div class="fondo-gris">
-          <h5><strong>Comentarios</strong></h5>
+          <h5><strong>Chat</strong></h5>
           <div class="chat" #divScroll (scroll)="onScroll($event)" *ngIf="comentariosBuscados && comentariosBuscados.length > 0">
             <div
               *ngFor="let comentario of comentariosBuscados"
@@ -109,8 +119,9 @@
           </div>
         </div>
       </div>
+      
       <div class="col-4">
-       
+        
         <div class="btn-salir">
           <button class="btn btn-primary btn-volver" (click)="previousState()">volver</button>
         </div>
@@ -118,4 +129,47 @@
     </div>
   </div>
 </div>
-<div class="img-bottom"></div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+

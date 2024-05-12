@@ -1,5 +1,6 @@
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center" style="background-color: rgb(249, 255, 255); width: 1335px;margin-left: -20px;margin-top: -20px;margin-bottom: -4px;">
   <div class="col-8">
+    <br>
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <h2 id="myUserLabel" jhiTranslate="userManagement.home.createOrEditLabel">Crear o editar un usuario</h2>
 
@@ -34,37 +35,8 @@
         </div>
       </div>
 
-      <div class="mb-3">
-        <label class="form-label" jhiTranslate="userManagement.firstName">Nombre</label>
-        <input type="text" class="form-control" name="firstName" formControlName="firstName" />
+      
 
-        <div *ngIf="editForm.get('firstName')!.invalid && (editForm.get('firstName')!.dirty || editForm.get('firstName')!.touched)">
-          <small
-            class="form-text text-danger"
-            *ngIf="editForm.get('firstName')?.errors?.maxlength"
-            jhiTranslate="entity.validation.maxlength"
-            [translateValues]="{ max: 50 }"
-          >
-            Este campo no puede superar más de 50 caracteres.
-          </small>
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label jhiTranslate="userManagement.lastName">Apellidos</label>
-        <input type="text" class="form-control" name="lastName" formControlName="lastName" />
-
-        <div *ngIf="editForm.get('lastName')!.invalid && (editForm.get('lastName')!.dirty || editForm.get('lastName')!.touched)">
-          <small
-            class="form-text text-danger"
-            *ngIf="editForm.get('lastName')?.errors?.maxlength"
-            jhiTranslate="entity.validation.maxlength"
-            [translateValues]="{ max: 50 }"
-          >
-            Este campo no puede superar más de 50 caracteres.
-          </small>
-        </div>
-      </div>
 
       <div class="mb-3">
         <label class="form-label" jhiTranslate="userManagement.email">Email</label>

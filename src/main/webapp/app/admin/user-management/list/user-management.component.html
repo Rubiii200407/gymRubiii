@@ -1,12 +1,18 @@
 <div>
   <h2>
-    <span id="user-management-page-heading" jhiTranslate="userManagement.home.title" data-cy="userManagementPageHeading">Usuarios</span>
-
+    <span id="user-management-page-heading"  data-cy="userManagementPageHeading">Usuarios</span>
+<br>
+<br>
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span jhiTranslate="userManagement.home.refreshListLabel">Refrescar lista</span>
-      </button>
+      <div >
+        <div style="margin-left: -975px; font-size: 16px;">
+          <label for="itemsPerPage" style="font-weight: bold; margin-left: -100px;">Mostrar: </label>
+          <select id="itemsPerPage" [(ngModel)]="itemsPerPage" style="background-color: transparent; border: none; font-weight: bold">
+            <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+          </select>
+          <span style="font-weight: bold"> registros</span>
+        </div>
+      </div>
       <button class="btn btn-primary jh-create-entity" [routerLink]="['./new']">
         <fa-icon icon="plus"></fa-icon> <span jhiTranslate="userManagement.home.createLabel">Crear un nuevo usuario</span>
       </button>
@@ -42,7 +48,7 @@
       <tbody *ngIf="users">
         <tr *ngFor="let user of users; trackBy: trackIdentity">
           <td>
-            <a [routerLink]="['./', user.login, 'view']">{{ user.id }}</a>
+            {{ user.id }}
           </td>
           <td>{{ user.login }}</td>
           <td>{{ user.email }}</td>
@@ -76,10 +82,7 @@
           <td>{{ user.lastModifiedDate | date: 'dd/MM/yy HH:mm' }}</td>
           <td class="text-end">
             <div class="btn-group">
-              <button type="submit" [routerLink]="['./', user.login, 'view']" class="btn btn-info btn-sm">
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Vista</span>
-              </button>
+           
 
               <button type="submit" [routerLink]="['./', user.login, 'edit']" queryParamsHandling="merge" class="btn btn-primary btn-sm">
                 <fa-icon icon="pencil-alt"></fa-icon>
@@ -103,20 +106,22 @@
   </div>
 
   <div *ngIf="users">
-    <div class="d-flex justify-content-center">
-      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    <div class="d-flex justify-content-between">
+      <div class="d-flex">
+        <div style="margin-left: -1px">
+          <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }" class="bold-text"></jhi-item-count>
+        </div>
+      </div>
+      <div class="modern-pagination">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [(page)]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="loadAll()"
+        ></ngb-pagination>
+      </div>
     </div>
-
-    <div class="d-flex justify-content-center">
-      <ngb-pagination
-        [collectionSize]="totalItems"
-        [(page)]="page"
-        [pageSize]="itemsPerPage"
-        [maxSize]="5"
-        [rotate]="true"
-        [boundaryLinks]="true"
-        (pageChange)="transition()"
-      ></ngb-pagination>
-    </div>
-  </div>
 </div>

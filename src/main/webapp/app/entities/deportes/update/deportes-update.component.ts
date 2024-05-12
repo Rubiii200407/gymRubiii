@@ -21,6 +21,7 @@ export class DeportesUpdateComponent implements OnInit {
   horasDisponibles: string[] = [];
   horaDeporte: string = "";
   codigo?: string;
+  errorAlGuardar:boolean=false;
   nuevaConsulta=true;
   fechaDeporteControl = new FormControl('');
   uuid?:string
@@ -61,15 +62,15 @@ export class DeportesUpdateComponent implements OnInit {
     },
     'Tuesday': {
       'Tenis': ['09:00 AM', '11:00 AM', '15:00 PM'],
-      'Baloncesto': ['10:00 AM', '12:00 PM', '16:00 PM'],
+      'Baloncesto': ['10:00 AM', '12:00 AM', '16:00 PM'],
       'Crosfit': ['11:00 AM', '14:00 AM', '18:00 PM'],
       'Spinning': ['09:30 AM', '10:00 AM', '17:00 PM'],
       'Zumba': ['08:00 AM', '10:00 AM', '19:00 PM'],
-      'Padel': ['12:00 AM', '15:00 AM', '20:00 PM'],
+      'Padel': ['12:00 AM', '15:00 PM', '20:00 PM'],
     },
     'Wednesday': {
-      'Tenis': ['10:00 AM', '12:00 PM', '16:00 PM'],
-      'Baloncesto': ['11:00 AM', '13:00 PM', '17:00 PM'],
+      'Tenis': ['10:00 AM', '12:00 AM', '16:00 PM'],
+      'Baloncesto': ['11:00 AM', '13:00 AM', '17:00 PM'],
       'Crosfit': ['08:30 AM', '10:00 AM', '19:00 PM'],
       'Spinning': ['10:00 AM', '11:30 AM', '20:00 PM'],
       'Zumba': ['08:00 AM', '10:30 AM', '20:00 PM'],
@@ -77,34 +78,34 @@ export class DeportesUpdateComponent implements OnInit {
     },
     'Thursday': {
       'Tenis': ['11:00 AM', '17:00 PM', '20:00 PM'],
-      'Baloncesto': ['12:00 PM', '14:00 PM', '18:00 PM'],
+      'Baloncesto': ['12:00 AM', '14:00 PM', '18:00 PM'],
       'Crosfit': ['08:00 AM', '11:00 AM', '16:00 PM'],
       'Spinning': ['09:00 AM', '11:00 AM', '15:00 PM'],
       'Zumba': ['08:30 AM', '10:30 AM', '14:00 PM'],
       'Padel': ['09:30 AM', '11:30 AM', '19:00 PM'],
     },
     'Friday': {
-      'Tenis': ['12:00 PM', '14:00 PM', '18:00 PM'],
-      'Baloncesto': ['13:00 PM', '15:30 PM', '19:00 PM'],
+      'Tenis': ['12:00 AM', '14:00 PM', '18:00 PM'],
+      'Baloncesto': ['13:00 AM', '15:30 PM', '19:00 PM'],
       'Crosfit': ['08:30 AM', '11:00 AM', '17:00 PM'],
       'Spinning': ['09:00 AM', '12:00 AM', '16:00 PM'],
       'Zumba': ['08:00 AM', '10:30 AM', '20:00 PM'],
       'Padel': ['09:30 AM', '11:30 AM', '21:00 PM'],
     },
     'Saturday': {
-      'Tenis': ['10:00 PM', '14:00 PM', '18:00 PM'],
-      'Baloncesto': ['9:00 PM', '15:30 PM', '19:00 PM'],
+      'Tenis': ['10:00 AM', '14:00 PM', '18:00 PM'],
+      'Baloncesto': ['9:00 AM', '15:30 PM', '19:00 PM'],
       'Crosfit': ['08:30 AM', '11:00 AM', '17:00 PM'],
       'Spinning': ['09:30 AM', '12:00 AM', '16:00 PM'],
       'Zumba': ['10:30 AM', '14:30 AM', '20:00 PM'],
-      'Padel': ['11:30 AM', '11:30 AM', '18:00 PM'],
+      'Padel': ['11:30 AM', '12:30 AM', '18:00 PM'],
     },
     'Sunday': {
-      'Tenis': ['12:00 PM', '14:00 PM'],
-      'Baloncesto': ['10:00 PM'],
+      'Tenis': ['12:00 AM', '14:00 PM'],
+      'Baloncesto': ['10:00 AM'],
       'Crosfit': ['08:30 AM', '13:00 AM'],
       'Spinning': ['11:00 AM',],
-      'Zumba': ['08:00 AM', '10:30 AM', ],
+      'Zumba': ['08:00 AM', '10:30 AM' ],
       'Padel': ['09:30 AM', '11:30 AM'],
     },
   
@@ -254,6 +255,7 @@ pantallaCreacionDeportes(): void {
     }
     return `${year}-${month}-${day}`;
   }
+
 
   getHorasDisponibles(fechaSeleccionada:Date):string[]{
     const ahora=new Date();

@@ -4,10 +4,12 @@
 
 
   </h2>
+  <br>
+  
   <div class="d-flex">
     <div style="margin-left: 32px">
       <div>
-        <label for="itemsPerPage" style="font-weight: bold">Mostrar: </label>
+        <label for="itemsPerPage" style="font-weight: bold; margin-left: -30px;">Mostrar: </label>
         <select id="itemsPerPage" [(ngModel)]="itemsPerPage" style="background-color: transparent; border: none; font-weight: bold">
           <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
         </select>
@@ -52,6 +54,7 @@
   <jhi-alert-error></jhi-alert-error>
 
   <jhi-alert></jhi-alert>
+<br>
 
   <div class="alert alert-warning" id="no-result" *ngIf="deportes?.length === 0">
     <span jhiTranslate="gymRubenApp.deportes.home.notFound">Ningún Deportes encontrado</span>

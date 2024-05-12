@@ -1,13 +1,22 @@
 <div class="contenido">
   <div class="titulo">
-    <img class="img" src="content/images/melit.png" alt="imgemp" />
+    <h2 style="color: rgb(119, 138, 250);">Planes Entrenamiento</h2>
+    <div class="button-section">
+      <button type="button">
+        <input type="text" placeholder="{{ planesEntrenamiento?.codigo }}" [(ngModel)]="uuid"  />
+        <fa-icon  icon="search"></fa-icon>
+        <span >Encuentra tu Plan</span>
+      </button>
+    </div>
   </div>
+<br>
+<br>
   <div *ngIf="planesEntrenamiento">
-    <div class="row g-2">
+    <div class="row g-2" style="width: 1910px;">
       <div class="col-8">
         <div class="fondo-gris h-98 p-5px">
           <h5 class="borde-bottom">
-            <strong>Denuncia nº {{ planesEntrenamiento.codigo }}</strong>
+            <strong>Deporte nº {{ planesEntrenamiento.codigo?.slice(-6) }}</strong>
           </h5>
           <p><strong>Titulo</strong></p>
           <p>{{ planesEntrenamiento.nombrePlan }}</p>
@@ -15,19 +24,7 @@
           <quill-view [content]="planesEntrenamiento.descripcion"></quill-view>
         </div>
       </div>
-      <div class="col-4">
-        <div class="fondo-gris p-5px">
-          <h5 class="borde-bottom"><strong>Detalle</strong></h5>
-        
-        
-          <p class="mb-5px"><strong>Fecha Creación</strong></p>
-         
-          <p class="mb-5px"><strong>Tipo Denuncia</strong></p>
-          <p class="mb-5px">Anónimo</p>
-          <p class="mb-5px"><strong>Días abierta</strong></p>
-
-        </div>
-      </div>
+     
     </div>
     <div class="row">
       <div class="col-7">
@@ -101,10 +98,14 @@
       <div class="col-5">
        
         <div class="btn-salir">
-          <button class="btn btn-primary btn-volver" (click)="previousState()">volver</button>
+          <button class="btn btn-primary btn-volver" (click)="previousState()" style="margin-left: 100px;">volver</button>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="img-bottom"></div>
+<br>
+<br>
+<br>
+<br>
+

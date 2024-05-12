@@ -1,42 +1,50 @@
 <div class="contenido">
   <div class="titulo">
-    <img class="img" src="content/images/melit.png" alt="imgemp" />
+    <h2 style="color: rgb(119, 138, 250);">Planes Entrenamiento</h2>
     <div class="button-section">
       <button type="button">
-        <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
-        <fa-icon [routerLink]="['/planes-entrenamiento', uuid, 'acceder']" icon="search"></fa-icon>
-        <span [routerLink]="['/planes-entrenamiento', uuid, 'acceder']">Encuentra tu denuncia</span>
+        <input type="text" placeholder="{{ plan?.codigo }}" [(ngModel)]="uuid"  />
+        <fa-icon  icon="search"></fa-icon>
+        <span >Encuentra tu Plan</span>
       </button>
     </div>
   </div>
+  <br>
+  <br>
   <div *ngIf="plan">
-    <div class="row g-2">
+    <div class="row g-2" style="width: 1695px;">
       <div class="col-9">
         <div class="fondo-gris h-98 p-5px">
           <h5 class="borde-bottom">
-            <strong>Denuncia nº {{ plan.codigo }}</strong>
+            <strong>Deporte nº {{ plan.codigo?.slice(-6) }}</strong>
           </h5>
-          <p class="p-l-15"><strong>Titulo</strong></p>
+          <p><strong>Titulo</strong></p>
           <p class="p-l-15">{{ plan.nombrePlan }}</p>
           <p class="p-l-15 mb-5px"><strong>Descripción</strong></p>
           <quill-view [content]="plan.descripcion"></quill-view>
+          <p class="p-l-15"><strong>Instrucciones Nutricion</strong></p>
+          <p class="p-l-15">{{ plan.instruccionesNutricion }}</p>
         </div>
       </div>
-      <div class="col-3">
-        <div class="fondo-gris p-5px">
-          <h5 class="borde-bottom"><strong>Detalle</strong></h5>
-         
-          <p class="mb-5px p-l-15"><strong>Estado</strong></p>
-        
-          <p class="mb-5px p-l-15"><strong>Fecha Creación</strong></p>
-         
-          <p class="mb-5px p-l-15"><strong>Tipo Denuncia</strong></p>
-          <p class="mb-5px p-l-15">Anónimo</p>
-          <p class="mb-5px p-l-15"><strong>Días abierta</strong></p>
-        
-        </div>
-      </div>
+   
     </div>
+    <br>
+    <br>
+    <div>
+      <h2 style="text-align: center;">Videos de planes de entrenamiento </h2>
+      <br>
+    <iframe width="560" height="315" [src]="getVideoIframe(plan.videoId)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="margin-left: 350px;"></iframe>
+  </div>
+  <br>
+  <br>
+  <div>
+    <h2 style="text-align: center;">Videos de planes de nutricion para los planes entrenamiento </h2>
+    <br>
+  <iframe width="560" height="315" [src]="getVideoIframe(plan.videoNutricion)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="margin-left: 350px;"></iframe>
+</div>
+<br>
+<br>
+<br>
     <div class="row">
       <div class="col-8">
         <div class="fondo-gris">
@@ -118,4 +126,51 @@
     </div>
   </div>
 </div>
-<div class="img-bottom"></div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br><br>
+<br>
+<br>
+<br>
+<br>
+<br><br>
+<br>
+<br>
+<br>
+<br>
+<br><br>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+

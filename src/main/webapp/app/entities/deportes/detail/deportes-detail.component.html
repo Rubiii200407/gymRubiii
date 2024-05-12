@@ -1,38 +1,44 @@
 <div class="contenido">
   <div class="titulo">
-    <img class="img" src="content/images/melit.png" alt="imgemp" />
+    <h2  style="color: rgb(119, 138, 250);">Deportes</h2>
+ 
+  <div class="button-section">
+    <button type="button">
+      <input type="text" placeholder="{{ deportes?.codigo }}" [(ngModel)]="uuid"  />
+      <fa-icon  icon="search"></fa-icon>
+      <span >Encuentra tu Deporte</span>
+    </button>
   </div>
+</div>
+  <br>
+  <br>
   <div *ngIf="deportes">
-    <div class="row g-2">
+    <div class="row g-2" style="width: 1910px;">
       <div class="col-8">
         <div class="fondo-gris h-98 p-5px">
           <h5 class="borde-bottom">
-            <strong>Denuncia nº {{ deportes.codigo }}</strong>
+            <strong>Deporte nº {{ deportes.codigo?.slice(-6) }}</strong>
           </h5>
-          <p><strong>Titulo</strong></p>
+          <h5><strong>Titulo</strong></h5>
           <p>{{ deportes.nombreDeporte }}</p>
-          <p><strong>Descripción</strong></p>
+          <h5><strong>Descripción</strong></h5>
           <quill-view [content]="deportes.descripcion"></quill-view>
-        </div>
-      </div>
-      <div class="col-4">
-        <div class="fondo-gris p-5px">
-          <h5 class="borde-bottom"><strong>Detalle</strong></h5>
-        
-        
-          <p class="mb-5px"><strong>Fecha Creación</strong></p>
-         
-          <p class="mb-5px"><strong>Tipo Denuncia</strong></p>
-          <p class="mb-5px">Anónimo</p>
-          <p class="mb-5px"><strong>Días abierta</strong></p>
-
+          <h5><strong>Fecha Deporte</strong></h5>
+          <quill-view [content]="deportes.fechaDeporte"></quill-view>
+          <h5><strong>Hora Deporte</strong></h5>
+          <quill-view [content]="deportes.horaDeporte"></quill-view>
+          <h5><strong> Instructor</strong></h5>
+          <quill-view [content]="deportes.instructor"></quill-view>
+      
         </div>
       </div>
     </div>
+    <br>
+    <br>
     <div class="row">
       <div class="col-7">
         <div class="fondo-gris">
-          <h5 class="p-5px"><strong>Comentarios</strong></h5>
+          <h5 class="p-5px"><strong>Chat</strong></h5>
           <div class="chat" #divScroll (scroll)="onScroll($event)" *ngIf="comentariosBuscados && comentariosBuscados.length > 0">
             <div *ngFor="let comentario of comentariosBuscados" class="mb-3">
               <div
@@ -101,10 +107,28 @@
       <div class="col-5">
        
         <div class="btn-salir">
-          <button class="btn btn-primary btn-volver" (click)="previousState()">volver</button>
+          <button class="btn btn-primary btn-volver" (click)="previousState()" >volver</button>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="img-bottom"></div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

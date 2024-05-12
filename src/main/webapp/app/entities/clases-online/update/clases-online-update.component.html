@@ -1,18 +1,43 @@
-<div class="d-flex justify-content-center">
-
+<div class="d-flex justify-content-center"  style="background-color: rgb(231, 224, 224);">
+<div *ngIf="!errorAlGuardar; else elseBlockError">
   <div *ngIf="!guardado; else elseBlockGuardado">   
-    <h2 >Apuntate a las clases online</h2>
-    <div class="row g-2 align-items-center d-flex justify-content-end">
-      <div class="col-auto">
+   
+    <h2 style="margin-left-200px: center;color:white;">Bienvenido a la seccion de clasesOnline</h2>
+    <div class="button-section" style="margin-left: 800px; margin-top: -40px;">
+      <button type="button">
         <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
-      </div>
-      <div class="col-auto">
-        <button type="button" class="btn btn-dark btn-sm" [routerLink]="['/clases-online', uuid, 'acceder']">
-          <fa-icon icon="search"></fa-icon>&nbsp;
-          <span jhiTranslate="entity.action.search">Buscar</span>
-        </button>
-      </div>
+        <fa-icon icon="search"  [routerLink]="['/clases-online', uuid, 'acceder']"></fa-icon>&nbsp;
+        <span [routerLink]="['/clases-online', uuid, 'acceder']" >Encuentra tu deporte</span>
+      </button>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    <div class="container">
+      <div class="text-container">
+      <h2 style="font-size: 20px;">El entrenamiento online es que el utiliza dispositivos electrónicos y conexión a Internet para desarrollar la sesión, que puede ser en directo o en diferido. El entrenador y tú no estaréis en el mismo espacio físico, y puede que tampoco estéis haciendo ejercicio al mismo tiempo.
+        Ventajas: Calmar la ansiedad,
+        Mejora la calidad del sueño,
+        Fortalecimiento de huesos y músculos,
+        Es una actividad divertida,
+        Mejora tu aspecto físico,
+        Mayor fuerza de voluntad,
+        Más cuidado con la alimentación.
+       
+      </h2>
+    </div>
+    <div class="image-container">
+    <img src="../../content/claseonline.jpg" style="width: 300px;height: 200px; margin-left:400px; margin-top: -20px;">
+  </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
     <form
       name="editForm"
       role="form"
@@ -30,7 +55,7 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gymRubenApp.clasesOnline.nombreClase" for="field_nombreClase">Nombre Clase</label>
+          <label class="form-label" jhiTranslate="gymRubenApp.clasesOnline.nombreClase" for="field_nombreClase" style="font-size: 30px;text-align: center;">Nombre Clase</label>
           <input
             type="hidden"
             class="form-control"
@@ -43,35 +68,41 @@
         </div>
         <div style="display:flex;justify-content: space-around ; margin: 10px;">
           <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('EntrenamientoFuncional')" (click)="mostrarDetalles('EntrenamientoFuncional')" (click)="mostrarInstructor('EntrenamientoFuncional')"  >
-          <img src="../../content/funcional.png" style="width:170px;height: 130px;">
-          <figcaption>Entrenamiento Funcional</figcaption>
+          <img src="../../content/funcional.png" style="width:270px;height: 200px;">
+          <figcaption  style="font-size:20px;">Entrenamiento Funcional</figcaption>
         </figure>
-        <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Yoga')" (click)="mostrarDetalles('Yoga')" (click)="mostrarInstructor('Yoga')">
-          <img src="../../content/yoga.png" style="width:170px;height: 130px;">
-          <figcaption>Yoga</figcaption>
+        <figure style="text-align: center;margin-bottom: 10px;margin-left: 100px;" (click)="seleccionarDeporte('Yoga')" (click)="mostrarDetalles('Yoga')" (click)="mostrarInstructor('Yoga')">
+          <img src="../../content/yoga.png" style="width:270px;height: 200px;">
+          <figcaption  style="font-size:20px;">Yoga</figcaption>
         </figure>
-        <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('HIIT')" (click)="mostrarDetalles('HIIT')" (click)="mostrarInstructor('HIIT')">
-          <img src="../../content/hiit.png" style="width:170px;height: 130px;">
-          <figcaption>HIIT</figcaption>
+        <figure style="text-align: center;margin-bottom: 10px;margin-left: 100px;" (click)="seleccionarDeporte('HIIT')" (click)="mostrarDetalles('HIIT')" (click)="mostrarInstructor('HIIT')">
+          <img src="../../content/hiit.png" style="width:270px;height: 200px;">
+          <figcaption  style="font-size:20px;">HIIT</figcaption>
         </figure>
-        <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('BaileCardiovascular')" (click)="mostrarDetalles('BaileCardiovascular')" (click)="mostrarInstructor('BaileCardiovascular')">
-          <img src="../../content/baile.png" style="width:170px;height: 130px;">
-          <figcaption> Baile Cardiovascular</figcaption>
+
+        </div>
+        <br>
+        <br>
+        <div style="display:flex;justify-content: space-around ; margin: 10px;margin-left: -90px;">
+        <figure style="text-align: center;margin-bottom: 10px; margin-left: 100px;" (click)="seleccionarDeporte('BaileCardiovascular')" (click)="mostrarDetalles('BaileCardiovascular')" (click)="mostrarInstructor('BaileCardiovascular')">
+          <img src="../../content/baile.png" style="width:270px;height: 200px;">
+          <figcaption style="font-size:20px;"> Baile Cardiovascular</figcaption>
         </figure>
-          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Pilates')" (click)="mostrarDetalles('Pilates')" (click)="mostrarInstructor('Pilates')">
-          <img src="../../content/pilates.png" style="width:170px;height: 130px;">
-          <figcaption>Pilates</figcaption>
+          <figure style="text-align: center;margin-bottom: 10px; margin-left: 100px;" (click)="seleccionarDeporte('Pilates')" (click)="mostrarDetalles('Pilates')" (click)="mostrarInstructor('Pilates')">
+          <img src="../../content/pilates.png" style="width:270px;height: 200px;">
+          <figcaption style="font-size:20px;">Pilates</figcaption>
         </figure>
-        <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Boxeo')" (click)="mostrarDetalles('Boxeo')" (click)="mostrarInstructor('Boxeo')"> 
-          <img src="../../content/boxeo.png" style="width:170px;height: 130px;">
-          <figcaption>Boxeo</figcaption>
+        <figure style="text-align: center;margin-bottom: 10px; margin-left: 100px;" (click)="seleccionarDeporte('Boxeo')" (click)="mostrarDetalles('Boxeo')" (click)="mostrarInstructor('Boxeo')"> 
+          <img src="../../content/boxeo.png" style="width:270px;height: 200px;">
+          <figcaption style="font-size:20px;">Boxeo</figcaption>
         </figure>
         </div>
-
+        <br>
+        <br>
          <div *ngIf="selecionOpcion" >
         <div  class="row mb-3" >
           <label class="form-label" jhiTranslate="gymRubenApp.clasesOnline.descripcion" for="field_descripcion">Descripcion</label>
-          <input
+          <textarea
             type="text"
             class="form-control"
             name="descripcion"
@@ -79,27 +110,13 @@
             data-cy="descripcion"
             formControlName="descripcion"
             [(ngModel)]="descripcionClase"
-          />
+            style="border: none; background-color: transparent;outline: none;
+            height: 100px;"
+            readonly>
+          ></textarea>
         </div>
         <div class="row mb-3">
-          <label class="form-label"  for="field_fechaClase">Fecha</label>
-          <input
-            type="date"
-            class="form-control"
-            name="fechaClase"
-            id="field_fechaClase"
-            data-cy="fechaClase"
-            formControlName="fechaClase"
-            (change)="actualizarHorasDisponibles()"
-            [min]="minFecha()"
-              
-
-          />
-        </div>
-
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gymRubenApp.clasesOnline.instructor" for="field_instructor">Instructor</label>
+          <label  style="font-size: 18px;margin-left: 90px;" class="form-label" jhiTranslate="gymRubenApp.clasesOnline.instructor" for="field_instructor">Instructor</label>
           <input
             type="hidden"
             class="form-control"
@@ -113,6 +130,7 @@
           />
         </div>
         <div  style="display:flex;justify-content: space-around ; margin: 10px;">
+        <div style="margin-left: -380px;">
         <figure style="text-align: center;margin-bottom: 10px;" *ngIf="claseSeleccionado=='EntrenamientoFuncional'" (click)="instructorElejir('Ruben')" >
           <img src="../../content/persona1.png" style="width:130px;height: 130px; border-radius: 50%;">
           <figcaption>Ruben</figcaption>
@@ -138,8 +156,28 @@
           <figcaption>Ruben</figcaption>
         </figure>
         </div>
+        <div style="margin-left: -500px;margin-top: -50px;">
+        <div class="row mb-3">
+          <label class="form-label"  for="field_fechaClase">Fecha</label>
+          <input
+            type="date"
+            style="width: 200px;"
+            class="form-control"
+            name="fechaClase"
+            id="field_fechaClase"
+            data-cy="fechaClase"
+            formControlName="fechaClase"
+            (change)="actualizarHorasDisponibles()"
+            [min]="minFecha()"
+              
 
-        <div class="row mb-3" *ngIf="fechaSeleccionada">
+          />
+        </div>
+        </div>
+        </div>
+      </div>
+
+        <div class="row mb-3" *ngIf="fechaSeleccionada" style="margin-left: 1000px; margin-top: -225px;">
           <label class="form-label" for="field_horaClase"
             >Horas Disponibles</label
           >
@@ -153,20 +191,25 @@
 
           />
         </div>
-        <div *ngIf="horasDisponibles.length > 0">
-          <div *ngFor="let hora of getHorasDisponibles(fechaSeleccionada)">
-            <label>
+        <div *ngIf="horasDisponibles.length > 0" style="margin-left: 950px;">
+          <ng-container *ngFor="let hora of getHorasDisponibles(fechaSeleccionada)">
+            <label style="margin-right: 10px;" >
               <input type="radio" name="horaDisponible" [value]="hora" (change)="seleccionarHora(hora)" />
               {{ hora }}
             </label>
-          </div>
+          </ng-container>
         </div>
  
-
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
 
       
        
-      <div class="mt-4">
+      <div class="mt-4" style="margin-left: 80%;">
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
           <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
         </button>
@@ -180,7 +223,7 @@
           <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
         </button>
       </div>
-    </div>
+ 
   </div>
     </form>
     <div *ngIf="!nuevaConsulta">
@@ -192,12 +235,44 @@
     </div>     
   </div>
   <ng-template #elseBlockGuardado>
-    <div *ngIf="guardado" class="alert alert-success" role="alert">
-      <h4 class="alert-heading" jhiTranslate="gymRubenApp.clasesonline.creacionSolicitud">
-        La solicitud ha sido procesada con éxito, código de seguimiento:
-      </h4>
-      <p>{{ codigo }}</p>
-      <hr />
+    <h2 style="margin-left-200px: center;color:white;">Bienvenido a la seccion de clasesOnline</h2>
+    <div class="button-section" style="margin-left: 800px; margin-top: -40px;">
+      <button type="button">
+        <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
+        <fa-icon icon="search"  [routerLink]="['/clases-online', uuid, 'acceder']"></fa-icon>&nbsp;
+        <span [routerLink]="['/clases-online', uuid, 'acceder']" >Encuentra tu clase online</span>
+      </button>
+      <br>
+    </div>
+<br>
+<br>
+      <div *ngIf="guardado && !errorAlGuardar" class="confirmation-section">
+        <div class="circle-check" >
+          <fa-icon class="icon-ok" icon="check"></fa-icon>
+        </div>
+        <div class="line"></div>
+        <div class="line-small"></div>
+         <h4><strong>
+         Clase Online registrado Correctamente</strong></h4>
+          <h5>
+           El codigo es:</h5>
+         <p><strong >
+           {{ codigo }}</strong></p>
+           <p>Utiliza este codigo para consultar los detalles de la clase online</p>
+           <br>
+           <br>
+           <br>
+         <button  (click)="pantallaCreacionOnline()" >
+           Volver</button>
+       </div>     
+
+    </ng-template>
+  </div>
+  <ng-template #elseBlockError>
+    <div *ngIf="errorAlGuardar" class="confirmation-error">
+      <div class="circle-red"></div>
+      <h4><strong> Se ha producido un error con el registro de la clase online</strong></h4>
+      <button (click)="pantallaCreacionOnline()" >Volver</button>
     </div>
   </ng-template>
 

@@ -33,6 +33,7 @@ export class ClasesOnlineDetailComponent implements OnInit {
   totalFicheros = 0;
   totalComentarios = 0;
   showBajar = false;
+  uuid?: string | null;
   altoScroll = 0;
   cargandoChat = false;
   ficheros: IFichero[] = [];

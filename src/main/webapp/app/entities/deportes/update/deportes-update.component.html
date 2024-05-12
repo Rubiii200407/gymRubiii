@@ -1,18 +1,44 @@
-<div class="d-flex justify-content-center">
-
+<div class="d-flex justify-content-center" style="background-color: rgb(231, 224, 224);">
+  <div *ngIf="!errorAlGuardar; else elseBlockError">
     <div *ngIf="!guardado; else elseBlockGuardado">   
-      <h2 jhiTranslate="gymRubenApp.deportes.home.createLabel">Denuncia</h2>
-      <div class="row g-2 align-items-center d-flex justify-content-end">
-        <div class="col-auto">
+
+      <h2 style="margin-left-200px: center;color: rgb(201, 224, 224);">Bienvenido a la seccion de deportes</h2>
+      <div class="button-section" style="margin-left: 800px; margin-top: -40px;">
+        <button type="button">
           <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
-        </div>
-        <div class="col-auto">
-          <button type="button" class="btn btn-dark btn-sm" [routerLink]="['/deportes', uuid, 'acceder']">
-            <fa-icon icon="search"></fa-icon>&nbsp;
-            <span jhiTranslate="entity.action.search">Buscar</span>
-          </button>
-        </div>
+          <fa-icon icon="search"  [routerLink]="['/deportes', uuid, 'acceder']"></fa-icon>&nbsp;
+          <span [routerLink]="['/deportes', uuid, 'acceder']" >Encuentra tu deporte</span>
+        </button>
       </div>
+
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <div class="container">
+        <div class="text-container">
+        <h2 style="font-size: 20px;">El deporte es toda aquella actividad
+           física que involucra una serie de reglas o normas a desempeñar 
+          dentro de un espacio o área determinada (campo de juego, cancha, pista, etc) 
+          a menudo asociada a la competitividad deportiva.
+          Hacer actividad física regularmente puede ayudarte a mantener fuertes
+           tus habilidades para pensar, aprender y tener buen juicio con el pasar de los años. 
+           También puede reducir tu riesgo de depresión y ansiedad, al igual que ayudarte a dormir mejor.
+         
+        </h2>
+      </div>
+      <div class="image-container">
+      <img src="../../content/deportes1.jpg" style="width: 300px;height: 200px; margin-left:400px; margin-top: -20px;">
+    </div>
+  </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+   
       <form
         name="editForm"
         role="form"
@@ -30,7 +56,8 @@
           </div>
   
           <div class="row mb-3">
-            <label class="form-label "for="field_nombreDeporte">Escoge el deporte q quieras</label>
+            <label class="form-label "for="field_nombreDeporte" style="font-size: 30px;text-align: center;">Estos son los deportes a los q te pudes apuntar, 
+              <br>escoja el que mas te guste</label>
             <input
               type="hidden"
               class="form-control"
@@ -44,61 +71,57 @@
           </div>
           <div style="display:flex;justify-content: space-around ; margin: 10px;">
             <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Tenis')" (click)="mostrarDetalles('Tenis')" (click)="mostrarInstructor('EntrenamientoFuncional')"  >
-            <img src="../../content/tenis.png" style="width:170px;height: 130px;">
-            <figcaption>Tenis</figcaption>
+            <img src="../../content/tenis.png" style="width:270px;height: 200px;">
+            <figcaption style="font-size:20px;" >Tenis</figcaption>
           </figure>
-          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Padel')" (click)="mostrarDetalles('Padel')" (click)="mostrarInstructor('Padel')" >
-            <img src="../../content/padel.png" style="width:170px;height: 130px;">
-            <figcaption>Padel</figcaption>
+
+          <figure style="text-align: center;margin-bottom: 10; margin-left: 100px;" (click)="seleccionarDeporte('Padel')" (click)="mostrarDetalles('Padel')" (click)="mostrarInstructor('Padel')" >
+            <img src="../../content/padel.png" style="width:270px;height: 200px;">
+            <figcaption style="font-size:20px;">Padel</figcaption>
           </figure>
-          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Baloncesto')" (click)="mostrarDetalles('Baloncesto')" (click)="mostrarInstructor('Baloncesto')" >
-            <img src="../../content/baloncesto.png" style="width:170px;height: 130px;">
-            <figcaption>Baloncesto</figcaption>
+          <figure style="text-align: center;margin-bottom: 10px;  margin-left: 100px;" (click)="seleccionarDeporte('Baloncesto')" (click)="mostrarDetalles('Baloncesto')" (click)="mostrarInstructor('Baloncesto')" >
+            <img src="../../content/baloncesto.png" style="width:270px;height: 200px;">
+            <figcaption style="font-size:20px;">Baloncesto</figcaption>
           </figure>
-          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Spinning')" (click)="mostrarDetalles('Spinning')" (click)="mostrarInstructor('Spinning')" >
-            <img src="../../content/bici.jpg" style="width:170px;height: 130px;">
-            <figcaption>Spinning</figcaption>
+     
+        </div>
+
+   
+        <div style="display:flex;justify-content: space-around ; margin: 10px;margin-left: -90px;">
+          <figure style="text-align: center;margin-bottom: 10px;  margin-left: 100px;" (click)="seleccionarDeporte('Spinning')" (click)="mostrarDetalles('Spinning')" (click)="mostrarInstructor('Spinning')" >
+            <img src="../../content/bici.jpg" style="width:270px;height: 200px;">
+            <figcaption style="font-size:20px;">Spinning</figcaption>
           </figure>
-            <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Crosfit')" (click)="mostrarDetalles('Crosfit')" (click)="mostrarInstructor('Crosfit')" >
-            <img src="../../content/crosfit.jpg" style="width:170px;height: 130px;">
-            <figcaption>Crosfit</figcaption>
+            <figure style="text-align: center;margin-bottom: 10px;  margin-left: 100px;" (click)="seleccionarDeporte('Crosfit')" (click)="mostrarDetalles('Crosfit')" (click)="mostrarInstructor('Crosfit')" >
+            <img src="../../content/crosfit.jpg" style="width:270px;height: 200px;">
+            <figcaption style="font-size:20px;">Crosfit</figcaption>
           </figure>
-          <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Zumba')" (click)="mostrarDetalles('Zumba')" (click)="mostrarInstructor('Zumba')" > 
-            <img src="../../content/zumba.png" style="width:170px;height: 130px;">
-            <figcaption>Zumba</figcaption>
+          <figure style="text-align: center;margin-bottom: 10px;  margin-left: 100px;" (click)="seleccionarDeporte('Zumba')" (click)="mostrarDetalles('Zumba')" (click)="mostrarInstructor('Zumba')" > 
+            <img src="../../content/zumba.png" style="width:270px;height: 200px;">
+            <figcaption style="font-size:20px;" >Zumba</figcaption>
           </figure>
           </div>
+          <br>
+          <br>
+          <br>
          <div *ngIf="seleccionOpcion">
           <div class="row mb-3">
-            <label class="form-label" jhiTranslate="gymRubenApp.deportes.descripcion" for="field_descripcion">Descripcion</label>
-            <input
-              type="text"
+            <label class="form-label" for="field_descripcion">Descripcion del deporte</label>
+            <textarea
+              type="textarea"
               class="form-control"
               name="descripcion"
               id="field_descripcion"
               data-cy="descripcion"
               formControlName="descripcion"
               [(ngModel)]="descripcionDeporte"
-            />
-          </div>
-  
-          <div class="row mb-3">
-            <label class="form-label" for="field_fechaDeporte">Fecha Deporte</label>
-            <input
-              type="date"
-              style="width: 200px;"
-              class="form-control"
-              name="fechaDeporte"
-              id="field_fechaDeporte"
-              data-cy="fechaDeporte"
-              formControlName="fechaDeporte"
-              (change)="actualizarHorasDisponibles()"
-              [min]="minFecha()"
-       
-            />
+              style="border: none; background-color: transparent;outline: none;
+              height: 100px;"
+              readonly>
+          </textarea>
           </div>
           <div class="row mb-3">
-            <label class="form-label" for="field_instructor">Instructor</label>
+            <label class="form-label" for="field_instructor" style="font-size: 18px;margin-left: 28px;">Instructor de la clase</label>
             <input
               type="hidden"
               class="form-control"
@@ -110,8 +133,10 @@
               
             />
           </div>
+
           <div  style="display:flex;justify-content: space-around ; margin: 10px;">
-            <figure style="text-align: center;margin-bottom: 10px;" *ngIf="deporteSeleccionado=='Tenis'" (click)="instructorElejir('Ruben')" >
+            <div style="margin-left: -380px;">
+            <figure style=" text-align: center;margin-bottom: 10px;" *ngIf="deporteSeleccionado=='Tenis'" (click)="instructorElejir('Ruben')" >
               <img src="../../content/persona1.png" style="width:130px;height: 130px; border-radius: 50%;">
               <figcaption>Ruben</figcaption>
             </figure>
@@ -135,11 +160,31 @@
               <img src="../../content/persona1.png" style="width:130px;height: 130px;border-radius: 50%">
               <figcaption>Ruben</figcaption>
             </figure>
-            </div>
+     
+          </div>
+          <div style="margin-left: -500px;margin-top: -50px;">
+          <div class="row mb-3">
+            <label class="form-label" for="field_fechaDeporte">Elije una fecha</label>
+            <input
+              type="date"
+              style="width: 200px;"
+              class="form-control"
+              name="fechaDeporte"
+              id="field_fechaDeporte"
+              data-cy="fechaDeporte"
+              formControlName="fechaDeporte"
+              (change)="actualizarHorasDisponibles()"
+              [min]="minFecha()"
+       
+            />
+          </div>
+        </div>
+        </div>
+        </div>
   
   
-          <div class="row mb-3" *ngIf="fechaSeleccionada">
-            <label class="form-label" for="field_horaDeporte">Hora Disponibles</label>
+          <div style="margin-left: 1000px; margin-top: -225px;" class="row mb-3" *ngIf="fechaSeleccionada">
+            <label class="form-label" for="field_horaDeporte">Horas disponibles</label>
             <input
               type="hidden"
               class="form-control"
@@ -149,20 +194,23 @@
               formControlName="horaDeporte"
             />
           </div>
-          <div *ngIf="horasDisponibles.length > 0">
-         <div *ngFor="let hora of getHorasDisponibles(fechaSeleccionada)">
-     
-      <label>
+          <div style="margin-left: 950px;" *ngIf="horasDisponibles.length > 0">
+         <ng-container *ngFor="let hora of getHorasDisponibles(fechaSeleccionada)">
+      <label style="margin-right: 10px;" >
         <input type="radio" name="horaDisponible" [value]="hora" (change)="seleccionarHora(hora)" />
         {{ hora }}
       </label>
-
-    </div>
+ 
+  </ng-container>
   </div>
-    
-        
-         
-        <div class="mt-4">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+      
+        <div class="mt-4" style="margin-left: 80%;">
           <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
             <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
           </button>
@@ -176,7 +224,7 @@
             <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
           </button>
         </div>
-      </div>
+     
     </div>
       </form>
       <div *ngIf="!nuevaConsulta">
@@ -189,31 +237,44 @@
     </div>
     <ng-template #elseBlockGuardado >
 
-      <div class="conteiner-guardado">  
-        <div class="conteiner-guardado-text">
-          <h1><strong>Deportes</strong></h1> 
+      <h2 style="margin-left-200px: center">Bienvenido a la seccion de deportes</h2>
+      <div class="button-section" style="margin-left: 800px; margin-top: -40px;">
+        <button type="button">
+          <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
+          <fa-icon icon="search"  [routerLink]="['/deportes', uuid, 'acceder']"></fa-icon>&nbsp;
+          <span [routerLink]="['/deportes', uuid, 'acceder']" >Encuentra tu deporte</span>
+        </button>
       </div>
-        <div  class="button-section" >
-          <button type="button">
-            <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
-            <fa-icon [routerLink]="['/deportes', uuid, 'acceder']"  icon="search"></fa-icon>
-            <span [routerLink]="['/deportes', uuid, 'acceder']">Introduce tu denuncia</span>
-          </button>
+<br>
+<br>
+<br>
+      <div *ngIf="guardado && !errorAlGuardar" class="confirmation-section">
+        <div class="circle-check" >
+          <fa-icon class="icon-ok" icon="check"></fa-icon>
         </div>
-      </div>
-      <div *ngIf="guardado " class="confirmation-section" >
-        <div class="circle-check "></div>
- 
+        <div class="line"></div>
+        <div class="line-small"></div>
          <h4><strong>
-         Te has registrado Correctamente</strong></h4>
+         Deporte  registrado Correctamente</strong></h4>
           <h5>
            El codigo es:</h5>
          <p><strong >
            {{ codigo }}</strong></p>
+           <p>Utiliza este codigo para consultar los detalles del deporte</p>
+           <br>
+           <br>
+           <br>
          <button  (click)="pantallaCreacionDeportes()" >
            Volver</button>
        </div>     
 
     </ng-template>
-    
+  </div>
+  <ng-template #elseBlockError>
+    <div *ngIf="errorAlGuardar" class="confirmation-error">
+      <div class="circle-red"></div>
+      <h4><strong> Se ha producido un error con el registro del deporte</strong></h4>
+      <button (click)="pantallaCreacionDeportes()" >Volver</button>
+    </div>
+  </ng-template>
 </div>
