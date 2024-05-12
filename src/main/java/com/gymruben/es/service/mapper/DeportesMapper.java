@@ -17,10 +17,7 @@ public interface DeportesMapper extends EntityMapper<DeportesDTO, Deportes> {
     @Mapping(target = "id", expression = "java(decodeId(dto.getId()))")
     Deportes toEntity(DeportesDTO dto);
 
-    @Mapping(target = "id", expression = "java(encodeId(entity.getId()))")
-    @Mapping(target = "codigoCompleto", source = "codigo", qualifiedByName = "codigoCompleto")
-    @Mapping(target = "codigo", source = "codigo", qualifiedByName = "ultimosDigitos")
-    DeportesDTO toDto(Deportes entity);
+
 
     @Named("toDtoCodigo")
     @Mapping(target = "id", expression = "java(encodeId(entity.getId()))")
@@ -38,11 +35,6 @@ public interface DeportesMapper extends EntityMapper<DeportesDTO, Deportes> {
     @Named("ultimosDigitos")
     default String ultimosDigitos(String codigo) {
         return codigo.substring(Math.max(0, codigo.length() - 6));
-    }
-
-    @Named("codigoCompleto")
-    default String codigoCompleto(String codigo) {
-        return codigo;
     }
 }
 

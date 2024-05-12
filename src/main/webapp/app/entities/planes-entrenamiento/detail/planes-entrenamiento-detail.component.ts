@@ -33,6 +33,7 @@ export class PlanesEntrenamientoDetailComponent implements OnInit {
   totalComentarios = 0;
   showBajar = false;
   altoScroll = 0;
+  uuid?: string | null;
   cargandoChat = false;
   ficheros: IFichero[] = [];
   constructor(protected activatedRoute: ActivatedRoute,

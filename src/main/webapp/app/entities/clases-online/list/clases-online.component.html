@@ -2,14 +2,14 @@
   <h2 id="page-heading" data-cy="ClasesOnlineHeading">
     <span jhiTranslate="gymRubenApp.clasesOnline.home.title">Clases Onlines</span>
   </h2>
-
+<br>
   <jhi-alert-error></jhi-alert-error>
 
   <jhi-alert></jhi-alert>
   <div class="d-flex">
     <div style="margin-left: 32px">
       <div>
-        <label for="itemsPerPage" style="font-weight: bold">Mostrar: </label>
+        <label for="itemsPerPage" style="font-weight: bold; margin-left: -30px;">Mostrar: </label>
         <select id="itemsPerPage" [(ngModel)]="itemsPerPage" style="background-color: transparent; border: none; font-weight: bold">
           <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
         </select>
@@ -54,7 +54,7 @@
   <div class="alert alert-warning" id="no-result" *ngIf="clasesOnlines?.length === 0">
     <span jhiTranslate="gymRubenApp.clasesOnline.home.notFound">Ningún Clases Onlines encontrado</span>
   </div>
-
+  <br>
   <div class="table-responsive table-entities" id="entities" *ngIf="clasesOnlines && clasesOnlines.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>

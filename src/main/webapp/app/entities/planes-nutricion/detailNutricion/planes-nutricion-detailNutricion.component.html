@@ -1,20 +1,24 @@
 <div class="contenido">
   <div class="titulo">
-    <img class="img" src="content/images/melit.png" alt="imgemp" />
+    <h2 style="color: rgb(119, 138, 250);">Planes Nutricion</h2>
     <div class="button-section">
       <button type="button">
-        <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
-        <fa-icon [routerLink]="['/planes-nutricion', uuid, 'acceder']" icon="search"></fa-icon>
-        <span [routerLink]="['/planes-nutricion', uuid, 'acceder']">Encuentra tu denuncia</span>
+        <input type="text" placeholder="{{ planesNutricion?.codigo }}" [(ngModel)]="uuid"  />
+        <fa-icon  icon="search"></fa-icon>
+        <span >Encuentra tu Plan</span>
       </button>
     </div>
   </div>
+  <br>
+  
+  <br>
+  <br>
   <div *ngIf="planesNutricion">
-    <div class="row g-2">
+    <div class="row g-2" style="width: 1695px;">
       <div class="col-9">
         <div class="fondo-gris h-98 p-5px">
           <h5 class="borde-bottom">
-            <strong>Denuncia nº {{ planesNutricion.codigo }}</strong>
+            <strong>Plan Nutricion nº {{ planesNutricion.codigo?.slice(-6) }}</strong>
           </h5>
           <p class="p-l-15"><strong>Titulo</strong></p>
           <p class="p-l-15">{{ planesNutricion.nombrePlan }}</p>
@@ -22,20 +26,7 @@
           <quill-view [content]="planesNutricion.descripcion"></quill-view>
         </div>
       </div>
-      <div class="col-3">
-        <div class="fondo-gris p-5px">
-          <h5 class="borde-bottom"><strong>Detalle</strong></h5>
-         
-          <p class="mb-5px p-l-15"><strong>Estado</strong></p>
-        
-          <p class="mb-5px p-l-15"><strong>Fecha Creación</strong></p>
-         
-          <p class="mb-5px p-l-15"><strong>Tipo Denuncia</strong></p>
-          <p class="mb-5px p-l-15">Anónimo</p>
-          <p class="mb-5px p-l-15"><strong>Días abierta</strong></p>
-        
-        </div>
-      </div>
+     
     </div>
     <div class="row">
       <div class="col-8">
@@ -118,4 +109,6 @@
     </div>
   </div>
 </div>
-<div class="img-bottom"></div>
+<br>
+<br>
+

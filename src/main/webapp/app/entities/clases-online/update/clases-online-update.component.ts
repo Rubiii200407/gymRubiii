@@ -21,6 +21,7 @@ export class ClasesOnlineUpdateComponent implements OnInit {
   horasDisponibles: string[] = [];
   horaClase: string = ""
   codigo?: string;
+  errorAlGuardar:boolean=false;
   nuevaConsulta = true;
   uuid?:string
   guardado=false;
@@ -59,15 +60,15 @@ export class ClasesOnlineUpdateComponent implements OnInit {
     },
     'Tuesday': {
       'EntrenamientoFuncional': ['09:00 AM', '11:00 AM', '15:00 PM'],
-      'Yoga': ['10:00 AM', '12:00 PM', '16:00 PM'],
-      'HIIT': ['11:00 AM', '14:00 AM', '18:00 PM'],
+      'Yoga': ['10:00 AM', '12:00 AM', '16:00 PM'],
+      'HIIT': ['11:00 AM', '14:00 PM', '18:00 PM'],
       'BaileCardiovascular': ['09:30 AM', '10:00 AM', '17:00 PM'],
       'Pilates': ['08:00 AM', '10:00 AM', '19:00 PM'],
-      'Boxeo': ['12:00 AM', '15:00 AM', '20:00 PM'],
+      'Boxeo': ['12:00 AM', '15:00 PM', '20:00 PM'],
     },
     'Wednesday': {
-      'EntrenamientoFuncional': ['10:00 AM', '12:00 PM', '16:00 PM'],
-      'Yoga': ['11:00 AM', '13:00 PM', '17:00 PM'],
+      'EntrenamientoFuncional': ['10:00 AM', '12:00 AM', '16:00 PM'],
+      'Yoga': ['11:00 AM', '13:00 AM', '17:00 PM'],
       'HIIT': ['08:30 AM', '10:00 AM', '19:00 PM'],
       'BaileCardiovascular': ['10:00 AM', '11:30 AM', '20:00 PM'],
       'Pilates': ['08:00 AM', '10:30 AM', '20:00 PM'],
@@ -75,35 +76,35 @@ export class ClasesOnlineUpdateComponent implements OnInit {
     },
     'Thursday': {
       'EntrenamientoFuncional': ['11:00 AM', '17:00 PM', '20:00 PM'],
-      'Yoga': ['12:00 PM', '14:00 PM', '18:00 PM'],
+      'Yoga': ['12:00 AM', '14:00 PM', '18:00 PM'],
       'HIIT': ['08:00 AM', '11:00 AM', '16:00 PM'],
       'BaileCardiovascular': ['09:00 AM', '11:00 AM', '15:00 PM'],
       'Pilates': ['08:30 AM', '10:30 AM', '14:00 PM'],
       'Boxeo': ['09:30 AM', '11:30 AM', '19:00 PM'],
     },
     'Friday': {
-      'EntrenamientoFuncional': ['12:00 PM', '14:00 PM', '18:00 PM'],
-      'Yoga': ['13:00 PM', '15:30 PM', '19:00 PM'],
+      'EntrenamientoFuncional': ['12:00 AM', '14:00 PM', '18:00 PM'],
+      'Yoga': ['13:00 AM', '15:30 PM', '19:00 PM'],
       'HIIT': ['08:30 AM', '11:00 AM', '17:00 PM'],
       'BaileCardiovascular': ['09:00 AM', '12:00 AM', '16:00 PM'],
       'Pilates': ['08:00 AM', '10:30 AM', '20:00 PM'],
       'Boxeo': ['09:30 AM', '11:30 AM', '21:00 PM'],
     },
     'Saturday': {
-      'EntrenamientoFuncional': ['9:00 PM', '13:00 PM', '18:00 PM'],
-      'Yoga': ['11:00 PM', '15:30 PM', '17:00 PM'],
+      'EntrenamientoFuncional': ['9:00 AM', '13:00 AM', '18:00 PM'],
+      'Yoga': ['11:00 AM', '15:30 PM', '17:00 PM'],
       'HIIT': ['08:30 AM', '11:00 AM', '19:00 PM'],
       'BaileCardiovascular': ['10:00 AM', '12:00 AM', '16:00 PM'],
       'Pilates': ['09:00 AM', '11:30 AM', '19:00 PM'],
       'Boxeo': ['09:30 AM', '12:30 AM', '16:00 PM'],
     },
     'Sunday': {
-      'EntrenamientoFuncional': ['9:00 PM', '14:00 PM'],
-      'Yoga': ['8:00 PM', '13:0 PM',],
+      'EntrenamientoFuncional': ['9:00 AM', '14:00 PM'],
+      'Yoga': ['8:00 AM', '13:00 AM',],
       'HIIT': ['08:30 AM', '11:00 AM', ],
       'BaileCardiovascular': ['09:30 AM','11:00 AM' ],
       'Pilates': ['10:00 AM', '13:30 AM', ],
-      'Boxeo': [ '12:30 AM',],
+      'Boxeo': [ '12:30 AM'],
     },
   
   };
@@ -144,6 +145,11 @@ export class ClasesOnlineUpdateComponent implements OnInit {
       );
     }
  
+}
+pantallaCreacionOnline(): void {
+  this.guardado = false;
+  this.editForm.reset();
+  window.location.reload();
 }
 descargarCodigo(codigo: string): void {
   const blob = new Blob([codigo], { type: 'text/plain' });

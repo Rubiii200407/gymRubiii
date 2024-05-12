@@ -44,7 +44,7 @@
 }
 .chat {
   display: flex;
-  height: 25vh;
+  height: 30vh;
   overflow: auto;
   flex-direction: column;
   padding: 10px;
@@ -127,10 +127,11 @@
   margin: 1.2em;
 }
 .btn-salir {
-  position: absolute;
+
   right: 0;
   bottom: 0;
-  margin: 1.2em;
+margin-left: 240px;
+  margin-top: 260px;
 }
 .btn-volver {
   color: white;
@@ -210,16 +211,4 @@
 }
 .gris {
   color: #9e9e9e;
-}
-.fs-sm {
-  font-size: small;
-}
-h5 {
-  padding: 10px;
-}
-.p-l-15 {
-  padding-left: 15px;
-}
-.p-r-15 {
-  padding-right: 15px;
 }

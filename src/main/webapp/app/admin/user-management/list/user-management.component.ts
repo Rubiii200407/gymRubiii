@@ -1,31 +1,32 @@
+import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { HttpResponse, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { combineLatest } from 'rxjs';
 
-import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
 import { ASC, DESC, SORT } from 'app/config/navigation.constants';
-import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
+import { UserManagementDeleteDialogComponent } from '../delete/user-management-delete-dialog.component';
 import { UserManagementService } from '../service/user-management.service';
 import { User } from '../user-management.model';
-import { UserManagementDeleteDialogComponent } from '../delete/user-management-delete-dialog.component';
 
 @Component({
   selector: 'jhi-user-mgmt',
   templateUrl: './user-management.component.html',
+  styleUrls: ['./user-management.component.css'],
 })
 export class UserManagementComponent implements OnInit {
   currentAccount: Account | null = null;
   users: User[] | null = null;
   isLoading = false;
   totalItems = 0;
-  itemsPerPage = ITEMS_PER_PAGE;
   page!: number;
+  itemsPerPageOptions = [10, 20, 50, 100];
   predicate!: string;
   ascending!: boolean;
-
+  
+  private _itemsPerPage = 10;
   constructor(
     private userService: UserManagementService,
     private accountService: AccountService,
@@ -57,7 +58,15 @@ export class UserManagementComponent implements OnInit {
       }
     });
   }
-
+  set itemsPerPage(value: number) {
+    if (value !== this._itemsPerPage) {
+      this._itemsPerPage = value;
+      this.loadAll();
+    }
+  }
+  get itemsPerPage(): number {
+    return this._itemsPerPage;
+  }
   loadAll(): void {
     this.isLoading = true;
     this.userService

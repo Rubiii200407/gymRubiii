@@ -1,6 +1,7 @@
-<div>
+<div style="background-color: rgb(249, 255, 255);width: 1335px;margin-left: -20px;margin-top: -20px;margin-bottom: -4px;">
   <div class="d-flex justify-content-center">
     <div class="col-lg-6 col-md-8 col-sm-10">
+     <br> 
       <h1 jhiTranslate="login.title" data-cy="loginTitle">Iniciar la sesión</h1>
       <div class="alert alert-danger" *ngIf="authenticationError" jhiTranslate="login.messages.error.authentication" data-cy="loginError">
         <strong>¡El inicio de sesión ha fallado!</strong> Por favor, revise las credenciales e intente de nuevo.
@@ -33,20 +34,11 @@
           />
         </div>
 
-        <div class="form-check">
-          <label class="form-check-label" for="rememberMe">
-            <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" formControlName="rememberMe" />
-            <span jhiTranslate="login.form.rememberme">Iniciar la sesión automáticamente</span>
-          </label>
-        </div>
+    
 
         <button type="submit" class="btn btn-primary" jhiTranslate="login.form.button" data-cy="submit">Iniciar sesión</button>
       </form>
-      <div class="mt-3 alert alert-warning">
-        <a class="alert-link" routerLink="/account/reset/request" jhiTranslate="login.password.forgot" data-cy="forgetYourPasswordSelector"
-          >¿Ha olvidado su contraseña?</a
-        >
-      </div>
+     <br>
 
       <div class="alert alert-warning">
         <span jhiTranslate="global.messages.info.register.noaccount">¿Aún no tienes una cuenta?</span>

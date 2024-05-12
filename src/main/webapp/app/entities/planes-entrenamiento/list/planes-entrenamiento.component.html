@@ -3,14 +3,14 @@
     <span jhiTranslate="gymRubenApp.planesEntrenamiento.home.title">Planes Entrenamientos</span>
 
   </h2>
-
+<br>
   <jhi-alert-error></jhi-alert-error>
 
   <jhi-alert></jhi-alert>
   <div class="d-flex">
     <div style="margin-left: 32px">
       <div>
-        <label for="itemsPerPage" style="font-weight: bold">Mostrar: </label>
+        <label for="itemsPerPage" style="font-weight: bold; margin-left: -30px;">Mostrar: </label>
         <select id="itemsPerPage" [(ngModel)]="itemsPerPage" style="background-color: transparent; border: none; font-weight: bold">
           <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
         </select>
@@ -46,7 +46,7 @@
   <div class="alert alert-warning" id="no-result" *ngIf="planesEntrenamientos?.length === 0">
     <span jhiTranslate="gymRubenApp.planesEntrenamiento.home.notFound">Ningún Planes Entrenamientos encontrado</span>
   </div>
-
+  <br>
   <div class="table-responsive table-entities" id="entities" *ngIf="planesEntrenamientos && planesEntrenamientos.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
@@ -75,6 +75,12 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="codigo">
+            <div class="d-flex">
+              <span>Codigo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
     
         </tr>
       </thead>
@@ -87,6 +93,7 @@
           <td>{{ planesEntrenamiento.nombrePlan }}</td>
           <td>{{ planesEntrenamiento.descripcion }}</td>
           <td>{{ planesEntrenamiento.instrucciones }}</td>
+          <td>{{ planesEntrenamiento.codigo }}</td>
 
           <td class="text-end">
             <div class="btn-group">

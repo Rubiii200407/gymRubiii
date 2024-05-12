@@ -131,6 +131,8 @@
   right: 0;
   bottom: 0;
   margin: 1.2em;
+  margin-bottom: -20px;
+
 }
 .btn-volver {
   color: white;
