@@ -32,6 +32,7 @@ import { PlanesEntrenamientoService } from "../service/planes-entrenamiento.serv
     ficheros: IFichero[] = [];
     numFicheros = 4;
     totalFicheros = 0;
+    codigoNoExiste:boolean=false;
 
 
     constructor(
@@ -44,7 +45,12 @@ import { PlanesEntrenamientoService } from "../service/planes-entrenamiento.serv
       private ficheroUploadService: FicheroUploadService,
       private ficheroService: FicheroService,
     ) {}
-  
+    planes = [
+      { videoId: '7NbcQ7V_CEk' },
+      { videoId: 'C7x8ysnB3aA' },
+      { videoId: 'QGrL0VjnW_M' },
+      { videoId: 'Iu07XvWuoMY' }
+    ];
     ngOnInit(): void {
       this.uuid = this.activatedRoute.snapshot.paramMap.get('uuid') ?? '';
       this.cargaDatos();
@@ -104,6 +110,15 @@ import { PlanesEntrenamientoService } from "../service/planes-entrenamiento.serv
         });
       }
     }
+    buscarUUID(): void {
+      
+      if (this.uuid) {
+          this.codigoNoExiste = true; // Establecer a true si el UUID no existe
+      } else {
+          this.codigoNoExiste = false; // Establecer a false si el UUID existe
+      }
+  }
+  
     cargarMasComentarios(): void {
       this.numComentarios = this.numComentarios + 10;
       if (this.plan) {

@@ -1,7 +1,9 @@
-<div class="d-flex justify-content-center" style="background-color: rgb(231, 224, 224);">
+<div style="background-color:#adadad; width: 1335px;margin-left: -20px;margin-top: -20px;margin-bottom: -20px;">
+<div class="d-flex justify-content-center">
+  <div *ngIf="!errorAlBuscarCodigo; else elseBlockErrorBuscarCodigo">
   <div *ngIf="!errorAlGuardar; else elseBlockError">
   <div *ngIf="!guardado; else elseBlockGuardado">   
-    <h2 style="margin-left-200px: center;color: rgb(9, 201, 201);">Bienvenido a la seccion de planes de entrenamiento</h2>
+    <h2 style="margin-left-200px: center;color: rgb(255, 255, 255);font-style: italic">Bienvenido a la seccion de planes entrenamiento</h2>
     <div class="button-section" style="margin-left: 800px; margin-top: -40px;">
       <button type="button">
         <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
@@ -9,13 +11,14 @@
         <span [routerLink]="['/planes-entrenamiento', uuid, 'acceder']" >Encuentra tu plan</span>
       </button>
     </div>
+    
     <br>
     <br>
     <br>
     <br>
     <div class="container">
       <div class="text-container">
-      <h2 style="font-size: 20px;">El deporte es toda aquella actividad
+      <h2 style="font-size: 20px;color: white;font-style: italic;">El deporte es toda aquella actividad
          física que involucra una serie de reglas o normas a desempeñar 
         dentro de un espacio o área determinada (campo de juego, cancha, pista, etc) 
         a menudo asociada a la competitividad deportiva.
@@ -53,8 +56,8 @@
       </div>
 
       <div class="row mb-3">
-        <label class="form-label"  style="font-size: 30px;text-align: center;" for="field_nombrePlan">Estos son los planes a los q te pudes apuntar, 
-          <br>escoja el que mas te guste</label>
+        <label class="form-label"  style="font-size: 30px;text-align: center;color: white;font-weight: bold;font-style: italic;" for="field_nombrePlan" >Estos son los planes a los que te puedes apuntar, 
+          escoja el que mas te guste</label>
         
           
         <input
@@ -72,21 +75,21 @@
       <br>
       <div style="display:flex;justify-content: space-around ; margin: 10px;">
         <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarPlan('Definicion')" (click)="mostrarDetalles('Definicion')"  (click)="mostrarDetallesIntrucciones('Definicion')"  >
-        <img src="../../content/definicion.png" style="width:270px;height: 200px;">
-        <figcaption style="font-size:20px;">Definicion</figcaption>
+        <img src="../../content/definicion.png" style="width:230px;height: 180px;">
+        <figcaption style="font-size:20px;color: white;font-style: italic">Definicion</figcaption>
       </figure>
       <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarPlan('RecomposicionCorporal')" (click)="mostrarDetalles('RecomposicionCorporal')" (click)="mostrarDetallesIntrucciones('RecomposicionCorporal')">
-        <img src="../../content/corporal.png" style="width:270px;height: 200px;">
-        <figcaption style="font-size:20px;">RecomposicionCorporal</figcaption>
+        <img src="../../content/corporal.png"style="width:230px;height: 180px;">
+        <figcaption style="font-size:20px;color: white;font-style: italic">RecomposicionCorporal</figcaption>
       </figure>
       <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarPlan('Volumen')" (click)="mostrarDetalles('Volumen')"(click)="mostrarDetallesIntrucciones('Volumen')">
-        <img src="../../content/volumen.png" style="width:270px;height: 200px;">
-        <figcaption style="font-size:20px;">Volumen</figcaption>
+        <img src="../../content/volumen.png"style="width:230px;height: 180px;">
+        <figcaption style="font-size:20px;color: white;font-style: italic">Volumen</figcaption>
       </figure>
       </div>
       <div *ngIf="seleccionOpcion">
       <div class="row mb-3">
-        <label class="form-label" jhiTranslate="gymRubenApp.planesEntrenamiento.descripcion" for="field_descripcion">Descripcion</label>
+        <label class="form-label" jhiTranslate="gymRubenApp.planesEntrenamiento.descripcion" for="field_descripcion" style="color: white;font-weight: bold;">Descripcion</label>
         <textarea
           type="text"
           class="form-control"
@@ -96,14 +99,14 @@
           formControlName="descripcion"
           [(ngModel)]="descripcionPlan"
           style="border: none; background-color: transparent;outline: none;
-          height: 100px;"
+          height: 100px;color: white;"
           readonly>
         </textarea>
         
       </div>
       <div class="row mb-3">
         <label class="form-label" jhiTranslate="gymRubenApp.planesEntrenamiento.instrucciones" for="field_instrucciones"
-          >Instrucciones</label
+        style="color: white;font-weight: bold;">Instrucciones</label
         >
         <textarea
           type="text"
@@ -114,7 +117,7 @@
           formControlName="instrucciones"
           [(ngModel)]="descripcionInstruccion"
           style="border: none; background-color: transparent;outline: none;
-          height: 100px;"
+          height: 100px;color: white;"
           readonly>
         </textarea>
       </div>
@@ -138,21 +141,16 @@
     </div>
     </div>
     </form>
-    <div *ngIf="!nuevaConsulta">
-      <span jhiTranslate="gestorDenunciasApp.clasesonline.home.introducirCodigo">Código de seguimiento: </span>
-      <input type="text" [(ngModel)]="codigoBusqueda" />
-      <button class="btn btn-secondary btn-sm" jhiTranslate="gestorDenunciasApp.clasesonline.home.buscar" (click)="buscarUUID()">
-        Buscar
-      </button>
-    </div>     
+   
   </div>
   <ng-template #elseBlockGuardado>
-    <h2 style="margin-left-200px: center;">Bienvenido a la seccion de planes entrenamiento</h2>
-    <div class="button-section" style="margin-left: 800px; margin-top: -40px;">
+    <div style="background-color: rgb(243, 250, 250); width: 1335px;margin-top: 0px; margin-bottom: -30px;">
+      <h2 style="margin-left:100px;font-style: italic;color: #467f8e;font-size: 40px;"><strong> Sección Planes Entrenamiento</strong></h2>
+      <div class="button-section" style="margin-left: 900px; margin-top: -40px;">
       <button type="button">
         <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
-        <fa-icon icon="search"  [routerLink]="['/deportes', uuid, 'acceder']"></fa-icon>&nbsp;
-        <span [routerLink]="['/deportes', uuid, 'acceder']" >Encuentra tu plan entrenamiento</span>
+        <fa-icon icon="search"  [routerLink]="['/planes-entrenamiento', uuid, 'acceder']"></fa-icon>&nbsp;
+        <span [routerLink]="['/planes-entrenamiento', uuid, 'acceder']" >Encuentra tu plan entrenamiento</span>
       </button>
     </div>
     <br>
@@ -173,10 +171,10 @@
          <br>
          <br>
          <br>
-       <button  (click)="pantallaCreacionEntrenamiento()" >
+         <button style="margin-left: 1000px;"   (click)="pantallaCreacionEntrenamiento()" >
          Volver</button>
      </div>     
-
+    </div>
   </ng-template>
 </div>
 <ng-template #elseBlockError>
@@ -187,4 +185,27 @@
   </div>
 </ng-template>
 </div>
+</div>
+<ng-template #elseBlockErrorBuscarCodigo>
+<div *ngIf="errorAlBuscarCodigo" class="error-message">
+  <div class="button-section" style="margin-left: 800px; margin-top: -40px;">
+    <button type="button">
+      <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
+      <fa-icon icon="search"  [routerLink]="['/planes-entrenamiento', uuid, 'acceder']"></fa-icon>&nbsp;
+      <span [routerLink]="['/planes-entrenamiento', uuid, 'acceder']" >Encuentra tu plan</span>
+    </button>
+  </div>
+  <div  class="confirmation-section" >
+    <div class="circle-red"></div>
+   
+    <div class="col-md-8">
+     <h1 class="error-title" jhiTranslate="error.title">¡Página de error!</h1>
+   
+   </div>
+   <button  (click)="previousState()" >
+     Volver</button>
+   </div>
+</div>
+</ng-template>
 
+</div>

@@ -22,7 +22,7 @@ export class PlanesEntrenamientoUpdateComponent implements OnInit {
   nuevaConsulta = true;
   uuid?:string
   errorAlGuardar:boolean=false;
-  
+  errorAlBuscarCodigo:boolean=false;
   guardado=false;
   seleccionOpcion:boolean=false;
   codigoNoExiste = false;
@@ -30,15 +30,15 @@ export class PlanesEntrenamientoUpdateComponent implements OnInit {
   codigoBusqueda = '';
   editForm: PlanesEntrenamientoFormGroup = this.planesEntrenamientoFormService.createPlanesEntrenamientoFormGroup();
   detallesPlan:Record<string,string>= {
-    "Definicion": "La definicion  significa perder la mayor cantidad de grasa posible sin perder músculo",
+    "Definicion": "La definicion  significa perder la mayor cantidad de grasa posible sin perder músculo, ",
     "RecomposicionCorporal": "Una mejora de la composición corporal que busca la pérdida de grasa y la ganancia de masa muscular al mismo tiempo",
     "Volumen":"Aumentar volumen significa aumentar la masa muscular y hacer que los músculos sean más grandes",
     
   };
   instruccionesPlan:Record<string,string>= {
-    "Definicion": "pepe",
-    "RecomposicionCorporal": "ggg",
-    "Volumen":"rhlo",
+    "Definicion": "Para hacer una definicion es importante que te mantengas activos ya sea haciendo deporte o yendo a gimnasio,pulse guardar para saber mas informacion de como hacerlo bien",
+    "RecomposicionCorporal": "Para hacer una reocmposicion corparal es importante hacer un pequeño deficit calorico y hacer ejercicio ya sea gimnasio o deporte,pulse guardar para saber mas informacion de como hacerlo bien",
+    "Volumen":"Es muy importante el tema de la comida tienes que comer mas de lo habitual y apuntarte al gimansio y hacer entrenmientos de fuerza,pulse guardar para saber mas informacion de como hacerlo bien",
     
   };
   descripcionPlan :string=""
@@ -95,6 +95,7 @@ pantallaCreacionEntrenamiento(): void {
     window.URL.revokeObjectURL(data);
   }
   buscarUUID(): void {
+   this.errorAlBuscarCodigo=false;
       this.planesEntrenamientoService.findUUID(this.codigoBusqueda).subscribe(
         plan => {
           if (plan !== null) {
@@ -103,9 +104,11 @@ pantallaCreacionEntrenamiento(): void {
           } else {
             this.planBuscada = null;
             this.codigoNoExiste = true;
+     
           }
         },
         error => {
+          this.errorAlBuscarCodigo=true;
           this.planBuscada = null;
           this.codigoNoExiste = true;
         }

@@ -1,6 +1,7 @@
-<div class="contenido">
-  <div class="titulo">
-    <h2 style="color: rgb(119, 138, 250);">Clases Online</h2>
+<div style="color: rgb(119, 138, 250);background-color: #ffffff ; width: 1330px;margin-left: -20px;margin-top: -25px;margin-bottom: -20px;">
+  <div class="contenido">
+    <div class="titulo" style="width: 1320px;margin-left: -10px;margin-top:-0px;">
+      <h2 style="color: rgb(119, 138, 250);">Clases Online</h2>
     <div class="button-section">
       <button type="button">
         <input type="text" placeholder="{{ clasesOnline?.codigo }}" [(ngModel)]="uuid"  />
@@ -18,13 +19,13 @@
           <h5 class="borde-bottom">
             <strong>Clase nº {{ clasesOnline.codigo?.slice(-6) }}</strong>
           </h5>
-          <h5><strong>Titulo</strong></h5>
+          <h6><strong>Titulo</strong></h6>
           <p>{{ clasesOnline.nombreClase }}</p>
-          <h5><strong>Descripción</strong></h5>
+          <h6><strong>Descripción</strong></h6>
           <quill-view [content]="clasesOnline.descripcion"></quill-view>
-          <h5><strong>Fecha Clase</strong></h5>
+          <h6><strong>Fecha Clase</strong></h6>
           <quill-view [content]="clasesOnline.fechaClase"></quill-view>
-          <h5><strong>Hora Clase</strong></h5>
+          <h6><strong>Hora Clase</strong></h6>
           <quill-view [content]="clasesOnline.horaClase"></quill-view>
         </div>
       </div>
@@ -120,4 +121,4 @@
 <br>
 <br>
 <br>
-
+</div>

@@ -1,8 +1,10 @@
-<div class="d-flex justify-content-center" style="background-color: rgb(231, 224, 224);">
+
+<div style="background-color:#adadad; width: 1335px;margin-left: -20px;margin-top: -20px;margin-bottom: -20px;">
+<div class="d-flex justify-content-center">
   <div *ngIf="!errorAlGuardar; else elseBlockError">
     <div *ngIf="!guardado; else elseBlockGuardado">   
 
-      <h2 style="margin-left-200px: center;color: rgb(201, 224, 224);">Bienvenido a la seccion de deportes</h2>
+      <h2 style="margin-left-200px: center;color: rgb(255, 255, 255);font-style: italic">Bienvenido a la seccion de deportes</h2>
       <div class="button-section" style="margin-left: 800px; margin-top: -40px;">
         <button type="button">
           <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
@@ -18,7 +20,7 @@
 
       <div class="container">
         <div class="text-container">
-        <h2 style="font-size: 20px;">El deporte es toda aquella actividad
+        <h2 style="font-size: 20px; color: white;font-style: italic;">El deporte es toda aquella actividad
            física que involucra una serie de reglas o normas a desempeñar 
           dentro de un espacio o área determinada (campo de juego, cancha, pista, etc) 
           a menudo asociada a la competitividad deportiva.
@@ -56,8 +58,9 @@
           </div>
   
           <div class="row mb-3">
-            <label class="form-label "for="field_nombreDeporte" style="font-size: 30px;text-align: center;">Estos son los deportes a los q te pudes apuntar, 
-              <br>escoja el que mas te guste</label>
+            <label class="form-label "for="field_nombreDeporte" style="font-size: 30px;text-align: center;color: white;font-weight: bold;font-style: italic;">Escoja un deporte 
+  </label>
+          
             <input
               type="hidden"
               class="form-control"
@@ -69,19 +72,21 @@
               
             />
           </div>
+          <br>
+          <br>
           <div style="display:flex;justify-content: space-around ; margin: 10px;">
             <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarDeporte('Tenis')" (click)="mostrarDetalles('Tenis')" (click)="mostrarInstructor('EntrenamientoFuncional')"  >
-            <img src="../../content/tenis.png" style="width:270px;height: 200px;">
-            <figcaption style="font-size:20px;" >Tenis</figcaption>
+            <img src="../../content/tenis.png" style="width:230px;height: 180px;">
+            <figcaption style="font-size:20px; color: white;font-style: italic" >Tenis</figcaption>
           </figure>
 
           <figure style="text-align: center;margin-bottom: 10; margin-left: 100px;" (click)="seleccionarDeporte('Padel')" (click)="mostrarDetalles('Padel')" (click)="mostrarInstructor('Padel')" >
-            <img src="../../content/padel.png" style="width:270px;height: 200px;">
-            <figcaption style="font-size:20px;">Padel</figcaption>
+            <img src="../../content/padel.png" style="width:230px;height: 180px;">
+            <figcaption style="font-size:20px;color: white;font-style: italic">Padel</figcaption>
           </figure>
           <figure style="text-align: center;margin-bottom: 10px;  margin-left: 100px;" (click)="seleccionarDeporte('Baloncesto')" (click)="mostrarDetalles('Baloncesto')" (click)="mostrarInstructor('Baloncesto')" >
-            <img src="../../content/baloncesto.png" style="width:270px;height: 200px;">
-            <figcaption style="font-size:20px;">Baloncesto</figcaption>
+            <img src="../../content/baloncesto.png" style="width:230px;height: 180px;">
+            <figcaption style="font-size:20px; color: white;font-style: italic">Baloncesto</figcaption>
           </figure>
      
         </div>
@@ -89,16 +94,16 @@
    
         <div style="display:flex;justify-content: space-around ; margin: 10px;margin-left: -90px;">
           <figure style="text-align: center;margin-bottom: 10px;  margin-left: 100px;" (click)="seleccionarDeporte('Spinning')" (click)="mostrarDetalles('Spinning')" (click)="mostrarInstructor('Spinning')" >
-            <img src="../../content/bici.jpg" style="width:270px;height: 200px;">
-            <figcaption style="font-size:20px;">Spinning</figcaption>
+            <img src="../../content/bici.jpg"style="width:230px;height: 180px;">
+            <figcaption style="font-size:20px;color: white;font-style: italic">Spinning</figcaption>
           </figure>
             <figure style="text-align: center;margin-bottom: 10px;  margin-left: 100px;" (click)="seleccionarDeporte('Crosfit')" (click)="mostrarDetalles('Crosfit')" (click)="mostrarInstructor('Crosfit')" >
-            <img src="../../content/crosfit.jpg" style="width:270px;height: 200px;">
-            <figcaption style="font-size:20px;">Crosfit</figcaption>
+            <img src="../../content/crosfit.jpg" style="width:230px;height: 180px;">
+            <figcaption style="font-size:20px;color: white;font-style: italic">Crosfit</figcaption>
           </figure>
           <figure style="text-align: center;margin-bottom: 10px;  margin-left: 100px;" (click)="seleccionarDeporte('Zumba')" (click)="mostrarDetalles('Zumba')" (click)="mostrarInstructor('Zumba')" > 
-            <img src="../../content/zumba.png" style="width:270px;height: 200px;">
-            <figcaption style="font-size:20px;" >Zumba</figcaption>
+            <img src="../../content/zumba.png" style="width:230px;height: 180px;">
+            <figcaption style="font-size:20px;color: white;font-style: italic" >Zumba</figcaption>
           </figure>
           </div>
           <br>
@@ -106,7 +111,7 @@
           <br>
          <div *ngIf="seleccionOpcion">
           <div class="row mb-3">
-            <label class="form-label" for="field_descripcion">Descripcion del deporte</label>
+            <label class="form-label" for="field_descripcion" style="color: white;font-weight: bold;">Descripcion del deporte</label>
             <textarea
               type="textarea"
               class="form-control"
@@ -116,12 +121,13 @@
               formControlName="descripcion"
               [(ngModel)]="descripcionDeporte"
               style="border: none; background-color: transparent;outline: none;
-              height: 100px;"
+              height: 100px;color: white;"
               readonly>
+              
           </textarea>
           </div>
           <div class="row mb-3">
-            <label class="form-label" for="field_instructor" style="font-size: 18px;margin-left: 28px;">Instructor de la clase</label>
+            <label class="form-label" for="field_instructor" style="font-size: 18px;margin-left: 28px;color: white;font-weight: bold;">Instructor de la clase</label>
             <input
               type="hidden"
               class="form-control"
@@ -138,33 +144,33 @@
             <div style="margin-left: -380px;">
             <figure style=" text-align: center;margin-bottom: 10px;" *ngIf="deporteSeleccionado=='Tenis'" (click)="instructorElejir('Ruben')" >
               <img src="../../content/persona1.png" style="width:130px;height: 130px; border-radius: 50%;">
-              <figcaption>Ruben</figcaption>
+              <figcaption style="color: white;font-weight: bold;">Ruben</figcaption>
             </figure>
             <figure style="text-align: center;margin-bottom: 10px;" *ngIf="deporteSeleccionado=='Padel'" (click)="instructorElejir('Julio')" >
               <img src="../../content/persona2.png" style="width:140px;height: 130px;border-radius: 50%">
-              <figcaption>Julio</figcaption>
+              <figcaption style="color: white;font-weight: bold;">Julio</figcaption>
             </figure>
             <figure style="text-align: center;margin-bottom: 10px;" *ngIf="deporteSeleccionado=='Baloncesto'" (click)="instructorElejir('Miriam')" >
               <img src="../../content/persona3.png" style="width:130px;height: 130px;border-radius: 50%">
-              <figcaption>Miriam </figcaption>
+              <figcaption style="color: white;font-weight: bold;">Miriam </figcaption>
             </figure>
               <figure style="text-align: center;margin-bottom: 10px;" *ngIf="deporteSeleccionado=='Spinning'" (click)="instructorElejir('Yeray')" >
               <img src="../../content/persona4.png" style="width:130px;height: 130px;border-radius: 50%">
-              <figcaption>Yeray</figcaption>
+              <figcaption style="color: white;font-weight: bold;">Yeray</figcaption>
             </figure>
             <figure style="text-align: center;margin-bottom: 10px;" *ngIf="deporteSeleccionado=='Crosfit'" (click)="instructorElejir('Inmaculada')" >
               <img src="../../content/persona5.png" style="width:130px;height: 130px;border-radius: 50%">
-              <figcaption>Inmaculada</figcaption>
+              <figcaption style="color: white;font-weight: bold;">Inmaculada</figcaption>
             </figure>
             <figure style="text-align: center;margin-bottom: 10px;" *ngIf="deporteSeleccionado=='Zumba'" (click)="instructorElejir('Ruben')" >
               <img src="../../content/persona1.png" style="width:130px;height: 130px;border-radius: 50%">
-              <figcaption>Ruben</figcaption>
+              <figcaption style="color: white;font-weight: bold;">Ruben</figcaption>
             </figure>
      
           </div>
           <div style="margin-left: -500px;margin-top: -50px;">
           <div class="row mb-3">
-            <label class="form-label" for="field_fechaDeporte">Elije una fecha</label>
+            <label class="form-label" for="field_fechaDeporte" style="color: white;font-weight: bold;">Elije una fecha</label>
             <input
               type="date"
               style="width: 200px;"
@@ -184,7 +190,7 @@
   
   
           <div style="margin-left: 1000px; margin-top: -225px;" class="row mb-3" *ngIf="fechaSeleccionada">
-            <label class="form-label" for="field_horaDeporte">Horas disponibles</label>
+            <label class="form-label" for="field_horaDeporte" style="color: white;font-weight: bold;">Horas disponibles</label>
             <input
               type="hidden"
               class="form-control"
@@ -196,12 +202,16 @@
           </div>
           <div style="margin-left: 950px;" *ngIf="horasDisponibles.length > 0">
          <ng-container *ngFor="let hora of getHorasDisponibles(fechaSeleccionada)">
-      <label style="margin-right: 10px;" >
-        <input type="radio" name="horaDisponible" [value]="hora" (change)="seleccionarHora(hora)" />
+      <label style="margin-right: 10px;color: white;" >
+        <input type="radio" name="horaDisponible" [value]="hora" (change)="seleccionarHora(hora)"  style="color: white;" />
         {{ hora }}
       </label>
+     
  
   </ng-container>
+  <div *ngIf="horasDisponibles.length===0">
+    <p style="font-size: 30px;">Hola</p>
+  </div>
   </div>
     <br>
     <br>
@@ -236,9 +246,9 @@
       </div>     
     </div>
     <ng-template #elseBlockGuardado >
-
-      <h2 style="margin-left-200px: center">Bienvenido a la seccion de deportes</h2>
-      <div class="button-section" style="margin-left: 800px; margin-top: -40px;">
+<div style="background-color: rgb(243, 250, 250); width: 1335px;margin-top: 0px; margin-bottom: -30px;">
+      <h2 style="margin-left:100px;font-style: italic;color: #467f8e;font-size: 40px;"><strong> Sección Deportes</strong></h2>
+      <div class="button-section" style="margin-left: 900px; margin-top: -40px;">
         <button type="button">
           <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
           <fa-icon icon="search"  [routerLink]="['/deportes', uuid, 'acceder']"></fa-icon>&nbsp;
@@ -264,10 +274,10 @@
            <br>
            <br>
            <br>
-         <button  (click)="pantallaCreacionDeportes()" >
+         <button style="margin-left: 1000px;"  (click)="pantallaCreacionDeportes()" >
            Volver</button>
        </div>     
-
+      </div>
     </ng-template>
   </div>
   <ng-template #elseBlockError>
@@ -277,4 +287,5 @@
       <button (click)="pantallaCreacionDeportes()" >Volver</button>
     </div>
   </ng-template>
+</div>
 </div>

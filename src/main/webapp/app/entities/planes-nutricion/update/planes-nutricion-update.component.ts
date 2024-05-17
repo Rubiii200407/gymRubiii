@@ -45,15 +45,15 @@ planBuscada: IPlanesNutricion | null = null;
     
   };
   instruccionesPlan:Record<string,string>= {
-    "perdidapeso": "hols",
-    "mantenimiento": "f",
-    "ganarpeso":"r",
+    "perdidapeso": "1. Asegúrate de estar listo, ya que requiere tiempo y esfuerzo a largo plazo, 2.Encuentra tu motivación interior nadie más puede hacerte perder peso. Debes hacer cambios en la alimentación y actividad física para lograrlo,3.Fija metas realistas,4.Consume alimentos más saludables,5.Ponte en actividad y mantente activo,6. Cambia tu punto de vista estos hábitos deben convertirse en un estilo de vida nuevo",
+    "mantenimiento": "1.Comer más alimentos ricos en nutrientes, como aquellos con muchas vitaminas, minerales y fibra,2.Comer y beber menos alimentos y bebidas que tienen muchas calorías, sal, azúcar y grasa,3.Limitar el alcohol.4 mantenerse activo y hacer deporte ",
+    "ganarpeso":"1.Come con más frecuencia. Empieza poco a poco a hacer de 5 a 6 comidas más pequeñas durante el día, 2.Elige alimentos con muchos nutrientes, 3.Agrega aderezos,4.Prueba licuados y batidos de frutas,5.Controla qué bebes y cuándo,6.Haz ejercicio    ",
     
   };
     alimentosPlan:Record<string,string>= {
-    "perdidapeso": "platano",
-    "mantenimiento": "manzana",
-    "ganarpeso":"pera",
+    "perdidapeso": "Pepino,Pomelo,Avena,Nueces,Platana,Huevos,Pollo, Atun,Verduras,Frutas,Legumbres",
+    "mantenimiento": "En cuanta a la alimentacion puedes seguir llevando la que estas utlizando pero te recomiendo mucha proteina y menos grasas para asegurar el mantenimiento de peso",
+    "ganarpeso":"1.Granos enteros: alimentos como el arroz integral, la quinoa y la avena son una de las mejores opciones que tienes para aumentar el consumo de carbohidratos,2.Legumbres,3.Frutas y verduras,4.Frutas y verduras",
     
   };
 

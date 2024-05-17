@@ -63,7 +63,7 @@ public class ComentarioService {
             (comentario.getClasesOnline() !=null?comentario.getClasesOnline():"")+
             (comentario.getPlanesEntrenamiento() !=null?comentario.getPlanesEntrenamiento():"")+
             (comentario.getPlanesNutricion() !=null?comentario.getPlanesNutricion():"");
-            this.mailService.sendEmail("ruben.barba@melit.es", "Nuevo Comentario", contenidoEmail, false, false);
+            this.mailService.sendEmail("ruben04bv@gmail.com", "Nuevo Comentario", contenidoEmail, false, false);
         }
 
         Comentario comentarioGuardado = comentarioRepository.save(comentario);
