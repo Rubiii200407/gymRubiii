@@ -1,6 +1,7 @@
-<div class="contenido">
-  <div class="titulo">
-    <h2 style="color: rgb(119, 138, 250);">Planes Nutricion</h2>
+<div style="color: rgb(119, 138, 250);background-color: #ffffff ; width: 1330px;margin-left: -20px;margin-top: -25px;margin-bottom: -20px;">
+  <div class="contenido">
+    <div class="titulo" style="width: 1320px;margin-left: -10px;margin-top:-0px;">
+      <h2 style="color: rgb(119, 138, 250);">Planes Nutricion</h2>
     <div class="button-section">
       <button type="button">
         <input type="text" placeholder="{{ planesNutricion?.codigo }}" [(ngModel)]="uuid"  />
@@ -17,10 +18,14 @@
           <h5 class="borde-bottom">
             <strong>Plan Nutricion nº {{ planesNutricion.codigo?.slice(-6) }}</strong>
           </h5>
-          <p><strong>Titulo</strong></p>
+          <h6><strong>Titulo</strong></h6>
           <p>{{ planesNutricion.nombrePlan }}</p>
-          <p><strong>Descripción</strong></p>
+          <h6><strong>Descripción</strong></h6>
           <quill-view [content]="planesNutricion.descripcion"></quill-view>
+          <h6><strong>Instrucciones</strong></h6>
+          <p>{{ planesNutricion.instrucciones }}</p>
+          <h6><strong>Alimentos Recomendados</strong></h6>
+          <p>{{ planesNutricion.alimentosRecomendados }}</p>
         </div>
       </div>
     
@@ -104,6 +109,16 @@
   </div>
 </div>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</div>
+
 
 
 

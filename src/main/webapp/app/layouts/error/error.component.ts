@@ -1,11 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'jhi-error',
   templateUrl: './error.component.html',
+  styleUrls: ['./error.component.css'],
 })
 export class ErrorComponent implements OnInit, OnDestroy {
   errorMessage?: string;
@@ -22,6 +23,9 @@ export class ErrorComponent implements OnInit, OnDestroy {
         this.langChangeSubscription = this.translateService.onLangChange.subscribe(() => this.getErrorMessageTranslation());
       }
     });
+  }
+  previousState(): void {
+    window.history.back();
   }
 
   ngOnDestroy(): void {

@@ -228,9 +228,10 @@ buscarUUID(): void {
     }
   }
   getHorasDisponibles(fechaSeleccionada:Date):string[]{
-    const ahora=new Date();
-    const horaActual=ahora.getHours();
-    const minutosActual=ahora.getMinutes();
+    const ahoraUTC=new Date();
+    const ahoraCet=new Date(ahoraUTC.getTime()+this.getUTCOffsetInMilliseconds());
+    const horaActual=ahoraCet.getHours();
+    const minutosActual=ahoraCet.getMinutes();
 
     if(!this.fechaHoy(fechaSeleccionada)){
       return this.horasDisponibles;
@@ -245,11 +246,20 @@ buscarUUID(): void {
     
     }
   }
-
-  private fechaHoy(fecha:Date):boolean{
-    const ahora=new Date();
-    return fecha.getFullYear()===ahora.getFullYear()&&fecha.getMonth()===ahora.getMonth()&&fecha.getDate()===ahora.getDate();
+  getUTCOffsetInMilliseconds():number{
+    const ahoraUTC=new Date();
+    const enero=new Date(ahoraUTC.getFullYear(),0,1)
+    const julio=new Date(ahoraUTC.getFullYear(),6,1)
+    const esHorarioVerano=Math.max(enero.getTimezoneOffset(),julio.getTimezoneOffset())!== ahoraUTC.getTimezoneOffset();
+  
+    return (esHorarioVerano?2:1)*60*60*1000;
   }
+
+  fechaHoy(fechaSeleccionada:Date):boolean{
+    const hoy=new Date();
+    return fechaSeleccionada.setHours(0,0,0,0)=== hoy.setHours(0,0,0,0)
+  }
+  
   
   minFecha():string{
     const today=new Date();

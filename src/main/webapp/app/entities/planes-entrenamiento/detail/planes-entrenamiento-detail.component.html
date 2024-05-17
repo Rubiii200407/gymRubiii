@@ -1,6 +1,7 @@
-<div class="contenido">
-  <div class="titulo">
-    <h2 style="color: rgb(119, 138, 250);">Planes Entrenamiento</h2>
+<div style="color: rgb(119, 138, 250);background-color: #ffffff ; width: 1330px;margin-left: -20px;margin-top: -25px;margin-bottom: -20px;">
+  <div class="contenido">
+    <div class="titulo" style="width: 1320px;margin-left: -10px;margin-top:-0px;">
+      <h2 style="color: rgb(119, 138, 250);">Planes Entrenamiento</h2>
     <div class="button-section">
       <button type="button">
         <input type="text" placeholder="{{ planesEntrenamiento?.codigo }}" [(ngModel)]="uuid"  />
@@ -16,12 +17,14 @@
       <div class="col-8">
         <div class="fondo-gris h-98 p-5px">
           <h5 class="borde-bottom">
-            <strong>Deporte nº {{ planesEntrenamiento.codigo?.slice(-6) }}</strong>
+            <strong>Plan nº {{ planesEntrenamiento.codigo?.slice(-6) }}</strong>
           </h5>
-          <p><strong>Titulo</strong></p>
+          <h6><strong>Titulo</strong></h6>
           <p>{{ planesEntrenamiento.nombrePlan }}</p>
-          <p><strong>Descripción</strong></p>
+          <h6><strong>Descripción</strong></h6>
           <quill-view [content]="planesEntrenamiento.descripcion"></quill-view>
+          <h6><strong>Instrucciones Nutricion</strong></h6>
+        <p>{{ planesEntrenamiento.instruccionesNutricion }}</p>
         </div>
       </div>
      
@@ -108,4 +111,7 @@
 <br>
 <br>
 <br>
-
+<br>
+<br>
+<br>
+</div>

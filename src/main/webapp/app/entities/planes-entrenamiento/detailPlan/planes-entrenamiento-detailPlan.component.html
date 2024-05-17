@@ -1,5 +1,6 @@
+<div style="color: rgb(119, 138, 250);background-color: #ffffff ; width: 1330px;margin-left: -20px;margin-top: -25px;margin-bottom: -20px;">
 <div class="contenido">
-  <div class="titulo">
+  <div class="titulo" style="width: 1320px;margin-left: -10px;margin-top:-0px;">
     <h2 style="color: rgb(119, 138, 250);">Planes Entrenamiento</h2>
     <div class="button-section">
       <button type="button">
@@ -16,29 +17,49 @@
       <div class="col-9">
         <div class="fondo-gris h-98 p-5px">
           <h5 class="borde-bottom">
-            <strong>Deporte nº {{ plan.codigo?.slice(-6) }}</strong>
+            <strong>Plan nº {{ plan.codigo?.slice(-6) }}</strong>
           </h5>
-          <p><strong>Titulo</strong></p>
+          <h6><strong>Titulo</strong></h6>
           <p class="p-l-15">{{ plan.nombrePlan }}</p>
-          <p class="p-l-15 mb-5px"><strong>Descripción</strong></p>
+          <h6><strong>Descripción</strong></h6>
           <quill-view [content]="plan.descripcion"></quill-view>
-          <p class="p-l-15"><strong>Instrucciones Nutricion</strong></p>
-          <p class="p-l-15">{{ plan.instruccionesNutricion }}</p>
+          
         </div>
       </div>
    
     </div>
     <br>
     <br>
-    <div>
-      <h2 style="text-align: center;">Videos de planes de entrenamiento </h2>
-      <br>
-    <iframe width="560" height="315" [src]="getVideoIframe(plan.videoId)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="margin-left: 350px;"></iframe>
+    <br>
+    <br>
+    
+    <h2 style="text-align: center;color: rgb(119, 138, 250);">Videos de rutina entrenamiento</h2>
+    <div style="display: flex; flex-wrap: nowrap; overflow-x: auto;">
+  <div *ngFor="let plan of planes" style="margin-right: 10px;">
+    <iframe width="300" height="200" [src]="getVideoIframe(plan.videoId)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="row g-2" style="width: 1695px;">
+    <div class="col-9">
+      <div class="fondo-gris h-98 p-5px">
+        <h5 class="borde-bottom">
+          <strong>Plan nº {{ plan.codigo?.slice(-6) }}</strong>
+        </h5>
+        <h6><strong>Instrucciones Nutricion</strong></h6>
+        <p class="p-l-15">{{ plan.instruccionesNutricion }}</p>
+        
+      </div>
+    </div>
+ 
   </div>
   <br>
   <br>
   <div>
-    <h2 style="text-align: center;">Videos de planes de nutricion para los planes entrenamiento </h2>
+    <h2 style="text-align: center;color: rgb(119, 138, 250);">Videos de planes de nutricion para los planes entrenamiento </h2>
     <br>
   <iframe width="560" height="315" [src]="getVideoIframe(plan.videoNutricion)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="margin-left: 350px;"></iframe>
 </div>
@@ -174,3 +195,4 @@
 <br>
 <br>
 
+</div>

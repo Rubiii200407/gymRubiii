@@ -1,0 +1,85 @@
+.conteiner{
+    background-color: #d4d4d4; 
+    width: 1250px;
+     margin-left: 30px; 
+     height: 150px; 
+     margin-top: 2%; 
+     border-radius: 25px 25px 0 0;
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      padding-left: 20px;
+      margin: 10px;
+  
+  }
+  .confirmation-section{
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+ 
+  .confirmation-section button{
+    margin-left:1050px;
+    width: 170px;
+    height: 40px;
+    background: #467F8E;
+    border-radius: 7.44px;
+    color: white;
+    margin-top: 60px;
+  }
+  
+
+  .circle-red {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 10px;
+    position: relative;
+    border: 5px solid #FF647C;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .circle-red::before {
+    content: '';
+    width: 60%;
+    height: 5px;
+    background-color: #FF647C;
+    position: absolute;
+    transform: rotate(43deg);
+  }
+  
+  .circle-red::after {
+    content: '';
+    width: 5px;
+    height: 60%;
+    background-color: #FF647C;
+    transform: rotate(43deg);
+    position: absolute;
+  }
+  .alert-danger{
+    font-size: 22px;
+    
+  }
+  .error-title{
+    font-weight: bold;
+     margin-top: 20px;
+
+  }
+  .title{
+    margin-top: -7%;
+  }
+  .title strong{
+    font-size: 40px;
+    margin-top: 3;
+  }
+  .img{
+    width: 250px;
+    height: 230px;
+    margin-left: 1%;
+  }
+  

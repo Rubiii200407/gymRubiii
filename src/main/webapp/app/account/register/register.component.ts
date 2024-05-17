@@ -27,21 +27,22 @@ export class RegisterComponent implements AfterViewInit {
       validators: [
         Validators.required,
         Validators.minLength(1),
-        Validators.maxLength(50),
+        Validators.maxLength(25),
         Validators.pattern('^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$|^[_.@A-Za-z0-9-]+$'),
       ],
     }),
     email: new FormControl('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email],
+      validators: [Validators.required, Validators.minLength(5), Validators.maxLength(100), Validators.email],
     }),
     password: new FormControl('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.minLength(4), Validators.maxLength(50)],
+      validators: [Validators.required, Validators.minLength(4), Validators.maxLength(30),Validators.pattern('^(?=.*[A-Z])(?=.*\\d).+$'),],
+
     }),
     confirmPassword: new FormControl('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.minLength(4), Validators.maxLength(50)],
+      validators: [Validators.required, Validators.minLength(4), Validators.maxLength(30)],
     }),
   });
 

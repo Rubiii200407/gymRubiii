@@ -181,6 +181,12 @@
             >
               Su contraseña no puede tener más de 50 caracteres
             </small>
+            <small
+            class="form-text text-danger"
+            *ngIf="registerForm.get('password')?.errors?.pattern"
+          >
+            Su contraseña debe tener una mayuscula y un numero
+          </small>
           </div>
 
           <jhi-password-strength-bar [passwordToCheck]="registerForm.get('password')!.value"></jhi-password-strength-bar>

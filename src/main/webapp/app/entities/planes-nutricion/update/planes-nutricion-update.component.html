@@ -1,8 +1,9 @@
-<div class="d-flex justify-content-center" style="background-color: rgb(231, 224, 224);">
+<div style="background-color:#adadad; width: 1335px;margin-left: -20px;margin-top: -20px;margin-bottom: -20px;">
+<div class="d-flex justify-content-center">
   <div *ngIf="!errorAlGuardar; else elseBlockError">
   <div *ngIf="!guardado; else elseBlockGuardado">   
  
-    <h2 style="margin-left-200px: center;color: rgb(45, 233, 233);">Bienvenido a la seccion de nutricion</h2>
+    <h2 style="margin-left-200px: center;color: rgb(255, 255, 255);font-style: italic">Bienvenido a la seccion de planes nutricion</h2>
     <div class="button-section" style="margin-left: 800px; margin-top: -40px;">
       <button type="button">
         <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
@@ -17,7 +18,7 @@
     <br>
     <div class="container">
       <div class="text-container">
-      <h2 style="font-size: 20px;">Un plan de alimentación o nutricional es una organización diaria de los alimentos que se deben incluir por tiempo de comida en cantidad y calidad. Este se diseña de acuerdo con las necesidades de cada persona para mantenerse sano.
+      <h2 style="font-size: 20px;color: white;font-style: italic;">Un plan de alimentación o nutricional es una organización diaria de los alimentos que se deben incluir por tiempo de comida en cantidad y calidad. Este se diseña de acuerdo con las necesidades de cada persona para mantenerse sano.
         La dieta de los deportistas se centra en tres objetivos principales: aportar la energía apropiada, otorgar nutrientes para la mantención y reparación de los tejidos especialmente del tejido muscular, y mantener y regular el metabolismo corporal
        
       </h2>
@@ -47,7 +48,7 @@
     </div>
 
     <div class="row mb-3">
-      <label class="form-label" for="field_nombrePlan" style="font-size: 30px;text-align: center;">¿Cual es tu objetivo?</label>
+      <label class="form-label" for="field_nombrePlan" style="font-size: 30px;text-align: center;color: white;font-weight: bold;font-style: italic;">¿Cual es tu objetivo?</label>
       <input
         type="hidden"
         class="form-control"
@@ -62,16 +63,16 @@
     <br>
     <div style="display:flex;justify-content: space-around ; margin: 10px;">
       <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarPlan('perdidapeso')" (click)="mostrarDetalles('PerderGrasa')" >
-      <img src="../../content/perderpeso.png" style="width:250px;height: 180px;">
-      <figcaption style="font-size:20px;">Perder Grasa</figcaption>
+      <img src="../../content/perderpeso.png" style="width:230px;height: 180px;">
+      <figcaption style="font-size:20px;color: white;font-style: italic">Perder Peso</figcaption>
     </figure>
     <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarPlan('mantenimiento')" (click)="mostrarDetalles('Forma')">
-      <img src="../../content/forma.jpg" style="width:250px;height: 180px;">
-      <figcaption style="font-size:20px;">Estar en forma</figcaption>
+      <img src="../../content/forma.jpg" style="width:230px;height: 180px;">
+      <figcaption style="font-size:20px;color: white;font-style: italic">Estar en forma</figcaption>
     </figure>
     <figure style="text-align: center;margin-bottom: 10px;" (click)="seleccionarPlan('ganarpeso')" (click)="mostrarDetalles('GanarPeso')">
-      <img src="../../content/ganarpeso.png" style="width:250px;height: 180px;">
-      <figcaption style="font-size:20px;">Ganar Peso</figcaption>
+      <img src="../../content/ganarpeso.png" style="width:230px;height: 180px;">
+      <figcaption style="font-size:20px;color: white;font-style: italic">Ganar Peso</figcaption>
     </figure>
     </div>
     <br>
@@ -79,7 +80,7 @@
     <br>
     <div *ngIf="seleccionOpcion">
     <div class="row mb-3">
-      <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.descripcion" for="field_descripcion">Descripcion</label>
+      <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.descripcion" for="field_descripcion" style="color: white;font-weight: bold;">Descripcion</label>
       <textarea
         type="text"
         class="form-control"
@@ -89,7 +90,7 @@
         formControlName="descripcion"
         [(ngModel)]="descripcionPlan"
         style="border: none; background-color: transparent;outline: none;
-        height: 100px;"
+        height: 100px;color: white;"
         readonly>
       </textarea>
     </div>
@@ -132,8 +133,9 @@
       <br>
       <button type="submit" class="btn-primary">Calcular Calorias</button>
     </form>
+    <br>
     <div *ngIf="calorias!==undefined" class="result">
-    <p>El numero de calorias requeridas que debes consumir es: {{calorias!= null?(calorias|number:'1.0-0'):'no'}} kilocalorias</p>
+    <p style="font-weight: bold;">El numero de calorias requeridas que debes consumir es: {{calorias!= null?(calorias|number:'1.0-0'):'no'}} kilocalorias</p>
   </div>
 </div>
     </div>
@@ -142,7 +144,7 @@
  
     <div *ngIf="seleccionCalorias">
     <div class="row mb-3">
-      <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.instrucciones" for="field_instrucciones">Instrucciones</label>
+      <label class="form-label" jhiTranslate="gymRubenApp.planesNutricion.instrucciones" for="field_instrucciones" style="color: white;font-weight: bold;">Instrucciones</label>
       <textarea
       *ngIf="planSeleccionado!=null && planSeleccionado !==undefined && instruccionesPlan[planSeleccionado]"
         type="text"
@@ -153,12 +155,12 @@
         formControlName="instrucciones"
         [(ngModel)]="instruccionesPlan[planSeleccionado]"
         style="border: none; background-color: transparent;outline: none;
-        height: 100px;"
+        height: 100px; color: white;"
         readonly>
   </textarea>
     </div>
     <div class="row mb-3">
-      <label class="form-label" for="field_instrucciones">Alimentos Recomendados</label>
+      <label class="form-label" for="field_instrucciones" style="color: white;font-weight: bold;">Alimentos Recomendados</label>
       <textarea
         *ngIf="planSeleccionado!=null && planSeleccionado !==undefined && alimentosPlan[planSeleccionado]"
         type="text"
@@ -169,7 +171,7 @@
         formControlName="alimentosRecomendados"
         [(ngModel)]="alimentosPlan[planSeleccionado]"
         style="border: none; background-color: transparent;outline: none;
-        height: 100px;"
+        height: 100px; color: white;"
         readonly>
 </textarea>
     </div>
@@ -202,8 +204,9 @@
   </div>
 
   <ng-template #elseBlockGuardado>
-    <h2 style="margin-left-200px: center;">Bienvenido a la seccion de nutricion</h2>
-    <div class="button-section" style="margin-left: 800px; margin-top: -40px;">
+    <div style="background-color: rgb(243, 250, 250); width: 1335px;margin-top: 0px; margin-bottom: -30px;">
+      <h2 style="margin-left:100px;font-style: italic;color: #467f8e;font-size: 40px;"><strong> Sección Planes Nutricion</strong></h2>
+      <div class="button-section" style="margin-left: 900px; margin-top: -40px;">
       <button type="button">
         <input type="text" placeholder="Código de seguimiento" [(ngModel)]="uuid" />
         <fa-icon icon="search"  [routerLink]="['/planes-nutricion', uuid, 'acceder']"></fa-icon>&nbsp;
@@ -228,53 +231,54 @@
     </div>
     <br>
     <br>
-    <h2>Te recomiendo que para q el proceso sea mas rapido te apuntes a nuestros programas</h2>
+    <h2 style="color: #467f8e;text-align: center;">Te recomiendo que para q el proceso sea mas rapido te apuntes a nuestros programas</h2>
     <br>
     <br>
     <div *ngIf="planSeleccionado=='perdidapeso'">
       <div style="display:flex;justify-content: space-around ; margin: 10px;">
         <figure style="text-align: center;margin-bottom: 10px;">
-          <img src="../../content/claseonline.jpg"  (click)="Enlaces('clases-online/new');$event.stopPropagation()" style="cursor:pointer;width: 300px;height: 200px;margin-left: 4px;">
-        <figcaption style="font-size:20px;">Clases Online</figcaption>
+          <img src="../../content/claseonline.jpg"  (click)="Enlaces('clases-online/new');$event.stopPropagation()" style="cursor:pointer;width: 230px;height: 180px;margin-left: 4px;">
+        <figcaption  style="font-size:20px; color: #467f8e;font-style: italic">Clases Online</figcaption>
       </figure>
       <figure style="text-align: center;margin-bottom: 10px;">
-        <img src="../../content/deportes1.jpg"  (click)="Enlaces('deportes/new');$event.stopPropagation()" style="cursor:pointer;width: 300px;height: 200px;margin-left: 4px;">
-        <figcaption style="font-size:20px;">Deportes</figcaption>
+        <img src="../../content/deportes1.jpg"  (click)="Enlaces('deportes/new');$event.stopPropagation()" style="cursor:pointer;width: 230px;height: 180px;margin-left: 4px;">
+        <figcaption style="font-size:20px; color: #467f8e;font-style: italic">Deportes</figcaption>
       </figure>
       <figure style="text-align: center;margin-bottom: 10px;">
-        <img src="../../content/entrenamiento.png"  (click)="Enlaces('planes-entrenamiento/new');$event.stopPropagation()" style="cursor:pointer;width: 300px;height: 200px;margin-left: 4px;">
-        <figcaption style="font-size:20px;">Planes Entrenamiento</figcaption>
+        <img src="../../content/entrenamiento.png"  (click)="Enlaces('planes-entrenamiento/new');$event.stopPropagation()" style="cursor:pointer;width: 230px;height: 180px;margin-left: 4px;">
+        <figcaption  style="font-size:20px; color: #467f8e;font-style: italic">Planes Entrenamiento</figcaption>
       </figure>
       </div>
     </div>
     <div *ngIf="planSeleccionado=='mantenimiento'">
       <div style="display:flex;justify-content: space-around ; margin: 10px;">
         <figure style="text-align: center;margin-bottom: 10px;">
-          <img src="../../content/claseonline.jpg"  (click)="Enlaces('clases-online/new');$event.stopPropagation()" style="cursor:pointer;width: 300px;height: 200px;margin-left: 4px;">
-        <figcaption style="font-size:20px;">Clases Online</figcaption>
+          <img src="../../content/claseonline.jpg"  (click)="Enlaces('clases-online/new');$event.stopPropagation()" style="cursor:pointer;width: 230px;height: 180px;margin-left: 4px;">
+        <figcaption  style="font-size:20px; color: #467f8e;font-style: italic">Clases Online</figcaption>
       </figure>
       <figure style="text-align: center;margin-bottom: 10px;">
-        <img src="../../content/deportes1.jpg"  (click)="Enlaces('deportes/new');$event.stopPropagation()" style="cursor:pointer;width: 300px;height: 200px;margin-left: 4px;">
-        <figcaption style="font-size:20px;">Deportes</figcaption>
+        <img src="../../content/deportes1.jpg"  (click)="Enlaces('deportes/new');$event.stopPropagation()" style="cursor:pointer;width: 230px;height: 180px;margin-left: 4px;">
+        <figcaption style="font-size:20px; color: #467f8e;font-style: italic">Deportes</figcaption>
       </figure>
       <figure style="text-align: center;margin-bottom: 10px;">
-        <img src="../../content/entrenamiento.png"  (click)="Enlaces('planes-entrenamiento/new');$event.stopPropagation()" style="cursor:pointer;width: 300px;height: 200px;margin-left: 4px;">
-        <figcaption style="font-size:20px;">Planes Entrenamiento</figcaption>
+        <img src="../../content/entrenamiento.png"  (click)="Enlaces('planes-entrenamiento/new');$event.stopPropagation()" style="cursor:pointer;width: 230px;height: 180px;margin-left: 4px;">
+        <figcaption  style="font-size:20px; color: #467f8e;font-style: italic">Planes Entrenamiento</figcaption>
       </figure>
       </div>
       </div>
       <div *ngIf="planSeleccionado=='ganarpeso'">
         <figure style="text-align: center;margin-bottom: 10px;">
-          <img src="../../content/entrenamiento.png"  (click)="Enlaces('planes-entrenamiento/new');$event.stopPropagation()" style="cursor:pointer;width: 300px;height: 200px;margin-left: -2px;">
-          <figcaption style="font-size:20px;">Planes Entrenamiento</figcaption>
+          <img src="../../content/entrenamiento.png"  (click)="Enlaces('planes-entrenamiento/new');$event.stopPropagation()" style="cursor:pointer;width: 230px;height: 200px;margin-left: -2px;">
+          <figcaption style="font-size:20px; color: #467f8e;font-style: italic">Planes Entrenamiento</figcaption>
         </figure>
         </div>
         <br>
         <br>
         <br>
         <div class="confirmation-section">
-        <button  (click)="pantallaAtras()">Volver</button>
+          <button style="margin-left: 1000px;"   (click)="pantallaAtras()">Volver</button>
       </div>
+    </div>
   </ng-template>
 </div>
 
@@ -288,3 +292,4 @@
 </div>
 
 
+</div>

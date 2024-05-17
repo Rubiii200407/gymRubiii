@@ -1,15 +1,23 @@
-<div>
-  <div class="row">
-    <div class="col-md-4">
-      <span class="hipster img-fluid rounded"></span>
-    </div>
-
-    <div class="col-md-8">
-      <h1 jhiTranslate="error.title">¡Página de error!</h1>
-
-      <div *ngIf="errorMessage">
-        <div class="alert alert-danger">{{ errorMessage }}</div>
-      </div>
-    </div>
+<div class="conteiner">  
+  <div class="title">
+    <h1 style="margin-top: 80px;color: white;"><strong >Ruben Gym</strong></h1> 
+  </div>  
+  <div>
+    <img src="../../content/mano.png" style="width: 150px;height: 100px; margin-left: 200px;" class="img" />
   </div>
+</div>
+<br>
+<br>
+<div  class="confirmation-section" >
+ <div class="circle-red"></div>
+
+ <div class="col-md-8">
+  <h1 class="error-title" jhiTranslate="error.title">¡Página de error!</h1>
+
+  <div *ngIf="errorMessage">
+    <div class="alert alert-danger">{{ errorMessage }}</div>
+  </div>
+</div>
+<button  (click)="previousState()" >
+  Volver</button>
 </div>
