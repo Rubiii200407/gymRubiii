@@ -11,6 +11,8 @@ public class PlanesEntrenamientoDTO {
     private String instruccionesNutricion;
     private String videoNutricion;
     private String videoId;
+    private UserDTO user;
+
 
 
 
@@ -65,6 +67,13 @@ public class PlanesEntrenamientoDTO {
     }
     public void setVideoNutricion(String videoNutricion) {
         this.videoNutricion = videoNutricion;
+    }
+    public UserDTO getUser() {
+        return this.user;
+    }
+
+    public void setUser(UserDTO userDTO) {
+        this.user = userDTO;
     }
 
     @Override

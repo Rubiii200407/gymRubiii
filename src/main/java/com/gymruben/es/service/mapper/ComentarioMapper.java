@@ -68,7 +68,7 @@ public interface ComentarioMapper extends EntityMapper<ComentarioDTO, Comentario
     @Mapping(target = "videoId", source = "videoId")
     @Mapping(target = "videoNutricion", source = "videoNutricion")
     @Mapping(target = "instruccionesNutricion", source = "instruccionesNutricion")
-
+    @Mapping(target = "user", source = "user")
     PlanesEntrenamientoDTO toDtoPlanesEntrenamientoId(PlanesEntrenamiento planesEntrenamiento);
 
     @Named("planesEntrenamientoDTOId")
@@ -81,6 +81,7 @@ public interface ComentarioMapper extends EntityMapper<ComentarioDTO, Comentario
     @Mapping(target = "videoId", source = "videoId")
     @Mapping(target = "videoNutricion", source = "videoNutricion")
     @Mapping(target = "instruccionesNutricion", source = "instruccionesNutricion")
+    @Mapping(target = "user", source = "user")
     PlanesEntrenamiento toEntityPlanesEntrenamientoId(PlanesEntrenamientoDTO planesEntrenamiento);
 
     @Named("clasesOnlineId")
@@ -118,7 +119,7 @@ public interface ComentarioMapper extends EntityMapper<ComentarioDTO, Comentario
     @Mapping(target = "instrucciones", source = "instrucciones")
     @Mapping(target = "codigo", source = "codigo")
     @Mapping(target = "alimentosRecomendados", source = "alimentosRecomendados")
-
+    @Mapping(target = "user", source = "user")
     PlanesNutricionDTO toDtoPlanesNutricionId(PlanesNutricion planesNutricion);
 
     @Named("planesNutricionDTOId")
@@ -129,6 +130,7 @@ public interface ComentarioMapper extends EntityMapper<ComentarioDTO, Comentario
     @Mapping(target = "instrucciones", source = "instrucciones")
     @Mapping(target = "codigo", source = "codigo")
     @Mapping(target = "alimentosRecomendados", source = "alimentosRecomendados")
+    @Mapping(target = "user", source = "user")
     PlanesNutricion toEntityPlanesNutricionId(PlanesNutricionDTO planesNutricion);
     default Long decodeId(String id) {
         return hashids.decode(id)[0];

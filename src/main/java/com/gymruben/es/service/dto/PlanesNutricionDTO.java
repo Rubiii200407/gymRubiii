@@ -9,6 +9,7 @@ public class PlanesNutricionDTO {
     private String descripcion;
     private String instrucciones;
     private String alimentosRecomendados;
+    private UserDTO user;
 
 
 
@@ -51,7 +52,13 @@ public class PlanesNutricionDTO {
     public void setAlimentosRecomendados(String alimentosRecomendados) {
         this.alimentosRecomendados = alimentosRecomendados;
     }
+    public UserDTO getUser() {
+        return this.user;
+    }
 
+    public void setUser(UserDTO userDTO) {
+        this.user = userDTO;
+    }
 
     @Override
     public boolean equals(Object o) {

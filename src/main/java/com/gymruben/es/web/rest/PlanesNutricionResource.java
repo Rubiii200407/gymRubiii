@@ -66,10 +66,11 @@ public class PlanesNutricionResource {
     private static final List<String> ALLOWED_ORDERED_PROPERTIES = Collections.unmodifiableList(
         Arrays.asList(
             "id",
+            "nombrePlan",
             "codigo",
-            "nombre",
+            "instrucciones",
             "descripcion",
-            "instructor"
+            "alimentosRecomendados"
          
         )
     );

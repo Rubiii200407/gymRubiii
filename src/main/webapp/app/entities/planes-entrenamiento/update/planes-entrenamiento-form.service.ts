@@ -25,6 +25,8 @@ type PlanesEntrenamientoFormGroupContent = {
   videoId: FormControl<IPlanesEntrenamiento['videoId']>;
   videoNutricion: FormControl<IPlanesEntrenamiento['videoNutricion']>;
   instruccionesNutricion: FormControl<IPlanesEntrenamiento['instruccionesNutricion']>;
+  user: FormControl<IPlanesEntrenamiento['user']>;
+  
 };
 
 export type PlanesEntrenamientoFormGroup = FormGroup<PlanesEntrenamientoFormGroupContent>;
@@ -51,6 +53,7 @@ export class PlanesEntrenamientoFormService {
       videoId: new FormControl(planesEntrenamientoRawValue.videoId),
       videoNutricion: new FormControl(planesEntrenamientoRawValue.videoNutricion),
       instruccionesNutricion: new FormControl(planesEntrenamientoRawValue.instruccionesNutricion),
+      user: new FormControl(planesEntrenamientoRawValue.user),
 
     });
   }
