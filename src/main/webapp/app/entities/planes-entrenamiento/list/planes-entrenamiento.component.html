@@ -81,6 +81,18 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="instruccionesNutricion">
+            <div class="d-flex">
+              <span>Instrucciones Nutricion</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="user">
+            <div class="d-flex">
+              <span >usuarioId</span>
+             
+            </div>
+          </th>
     
         </tr>
       </thead>
@@ -89,11 +101,13 @@
           (click)="verPlan(planesEntrenamiento.id)"
         [ngClass]="['pointer-cursor']"
       >
-      <td>{{ planesEntrenamiento.id }}</td>
+          <td>{{ planesEntrenamiento.id }}</td>
           <td>{{ planesEntrenamiento.nombrePlan }}</td>
           <td>{{ planesEntrenamiento.descripcion }}</td>
           <td>{{ planesEntrenamiento.instrucciones }}</td>
-          <td>{{ planesEntrenamiento.codigo }}</td>
+          <td>{{ planesEntrenamiento.codigo?.slice(-6) }}</td>
+          <td>{{ planesEntrenamiento.instruccionesNutricion }}</td>
+          <td>{{ planesEntrenamiento.user?.id}}</td>
 
           <td class="text-end">
             <div class="btn-group">

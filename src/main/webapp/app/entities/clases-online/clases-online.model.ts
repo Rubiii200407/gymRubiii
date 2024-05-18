@@ -1,3 +1,5 @@
+import { IUser } from "../user/user.model";
+
 export interface IClasesOnline {
   id: number;
   nombreClase?: string | null;
@@ -7,6 +9,7 @@ export interface IClasesOnline {
   horaClase?: string | null;
   codigo?:string|null;
   videoId?:string|null;
+  user?: Pick<IUser, 'id'> | null;
 
 }
 

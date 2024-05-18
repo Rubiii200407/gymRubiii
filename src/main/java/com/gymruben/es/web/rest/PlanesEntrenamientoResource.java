@@ -62,9 +62,10 @@ public class PlanesEntrenamientoResource {
         Arrays.asList(
             "id",
             "codigo",
-            "nombre",
+            "nombrePlan",
             "descripcion",
-            "instructor"
+            "instrucciones",
+            "instruccionesNutricion"
          
         )
     );

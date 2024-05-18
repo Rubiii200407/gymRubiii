@@ -64,7 +64,7 @@ public class ClasesOnlineResource {
         Arrays.asList(
             "id",
             "codigo",
-            "nombre",
+            "nombreClase",
             "descripcion",
             "fechaClase",
             "horaClase",

@@ -103,13 +103,18 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="">
+          <th scope="col" jhiSortBy="videoId">
             <div class="d-flex">
               <span >Video</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
+            
             </div>
           </th>
-          
+          <th scope="col" jhiSortBy="user">
+            <div class="d-flex">
+              <span >usuarioId</span>
+       
+            </div>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -117,7 +122,7 @@
         (click)="verClasesOnline(clasesOnline.id)"
         [ngClass]="['pointer-cursor']"
       >
-      <td>{{ clasesOnline.id }}</td>
+          <td>{{ clasesOnline.id }}</td>
           <td>{{ clasesOnline.nombreClase }}</td>
           <td>{{ clasesOnline.descripcion }}</td>
           <td>{{ clasesOnline.fechaClase }}</td>
@@ -125,6 +130,7 @@
           <td>{{ clasesOnline.horaClase }}</td>
           <td>{{ clasesOnline.codigo?.slice(-6) }}</td>
           <td>{{ clasesOnline.videoId }}</td>
+          <td>{{ clasesOnline.user?.id}}</td>
       
           <td class="text-end">
             <div class="btn-group">

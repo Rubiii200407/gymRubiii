@@ -22,6 +22,7 @@ type PlanesNutricionFormGroupContent = {
   descripcion: FormControl<IPlanesNutricion['descripcion']>;
   instrucciones: FormControl<IPlanesNutricion['instrucciones']>;
   alimentosRecomendados: FormControl<IPlanesNutricion['alimentosRecomendados']>;
+  user: FormControl<IPlanesNutricion['user']>;
 
 };
 
@@ -46,6 +47,7 @@ export class PlanesNutricionFormService {
       descripcion: new FormControl(planesNutricionRawValue.descripcion),
       instrucciones: new FormControl(planesNutricionRawValue.instrucciones),
       alimentosRecomendados: new FormControl(planesNutricionRawValue.alimentosRecomendados),
+      user: new FormControl(planesNutricionRawValue.user),
     });
   }
 

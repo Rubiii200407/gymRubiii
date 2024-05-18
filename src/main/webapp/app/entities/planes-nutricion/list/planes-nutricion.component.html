@@ -90,7 +90,13 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col"></th>
+          <th scope="col" jhiSortBy="user">
+            <div class="d-flex">
+              <span >usuarioId</span>
+             
+            </div>
+          </th>
+          
         </tr>
       </thead>
       <tbody>
@@ -103,7 +109,8 @@
           <td>{{ planesNutricion.descripcion }}</td>
           <td>{{ planesNutricion.instrucciones }}</td>
           <td>{{ planesNutricion.alimentosRecomendados }}</td>
-          <td>{{ planesNutricion.codigo }}</td>
+          <td>{{ planesNutricion.codigo?.slice(-6) }}</td>
+          <td>{{ planesNutricion.user?.id }}</td>
   
           <td class="text-end">
             <div class="btn-group">
