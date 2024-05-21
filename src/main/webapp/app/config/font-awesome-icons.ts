@@ -1,3 +1,4 @@
+import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import {
   faArrowDown,
   faArrowLeft,
@@ -12,6 +13,7 @@ import {
   faCogs,
   faDatabase,
   faDownload,
+  faEnvelope,
   faEye,
   faFile,
   faFileExcel,
@@ -99,7 +101,11 @@ export const fontAwesomeIcons = [
   faFileImage,
   faFilePdf,
   faFileExcel,
+  faEnvelope,
   faArrowDown,
+  faFacebook,
+  faInstagram,
+  faTwitter,
 
   // jhipster-needle-add-icon-import
 ];
